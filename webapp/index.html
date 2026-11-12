@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Oliy Algebra Kalkulyatori</title>
+    <!-- Telegram WebApp SDK -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <!-- KaTeX CSS & JS for Math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="header">
+        <h1>📐 Oliy Algebra Solver</h1>
+        <p>Qadamma-qadam aniq yechimlar va tushuntirishlar</p>
+    </header>
+
+    <nav class="tabs-scroll">
+        <button class="tab-btn active" data-tab="matrices">📊 Matritsalar</button>
+        <button class="tab-btn" data-tab="det_inv">🔢 Det & Teskari</button>
+        <button class="tab-btn" data-tab="sle">⚖️ Tenglamalar (ChTS)</button>
+        <button class="tab-btn" data-tab="complex">🔮 Kompleks sonlar</button>
+        <button class="tab-btn" data-tab="poly">📈 Ko'phadlar</button>
+    </nav>
+
+    <main class="container">
+        <!-- 1. MATRITSALAR AMALLARI -->
+        <section id="tab-matrices" class="tab-content active">
+            <div class="card">
+                <div class="card-title">
+                    <span>A Matritsa</span>
+                    <div class="controls-row" style="margin-bottom: 0;">
+                        <span class="badge-label">O'lcham:</span>
+                        <div class="size-btn-group">
+                            <button class="size-btn" onclick="app.changeMatrixSize('A', -1, 0)">-</button>
+                            <span class="size-display" id="size-A-r">2</span>
+                            <button class="size-btn" onclick="app.changeMatrixSize('A', 1, 0)">+</button>
+                        </div>
+                        <span>x</span>
+                        <div class="size-btn-group">
+                            <button class="size-btn" onclick="app.changeMatrixSize('A', 0, -1)">-</button>
+                            <span class="size-display" id="size-A-c">2</span>
+                            <button class="size-btn" onclick="app.changeMatrixSize('A', 0, 1)">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="matrix-grid-wrap">
+                    <div class="matrix-grid" id="grid-A"></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">
+                    <span>Bajariladigan amal</span>
+                </div>
+                <select id="op-matrices" class="op-select" onchange="app.onMatrixOpChange()">
+                    <option value="det">Determinant |A|</option>
+                    <option value="inv">Teskari matritsa A⁻¹</option>
+                    <option value="rank">Matritsa rangi rang(A)</option>
+                    <option value="transpose">Transponirlash Aᵀ</option>
+                    <option value="scalar">Songa ko'paytirish (k · A)</option>
+                    <option value="add">Qo'shish (A + B)</option>
+                    <option value="sub">Ayirish (A - B)</option>
+                    <option value="mul">Ko'paytirish (A · B)</option>
+                </select>
+
+                <div id="scalar-input-wrap" style="display: none; margin-bottom: 12px;">
+                    <label class="badge-label">k koeffitsienti:</label>
+                    <input type="text" id="matrix-scalar-k" class="text-input" placeholder="Masalan: 3 yoki -1/2" value="2">
+                </div>
+
+                <div id="card-B" class="card" style="display: none; padding: 10px; background: rgba(0,0,0,0.2);">
+                    <div class="card-title">
+                        <span>B Matritsa</span>
+                        <div class="controls-row" style="margin-bottom: 0;">
+                            <span class="badge-label">O'lcham:</span>
+                            <div class="size-btn-group">
+                                <button class="size-btn" onclick="app.changeMatrixSize('B', -1, 0)">-</button>
+                                <span class="size-display" id="size-B-r">2</span>
+                                <button class="size-btn" onclick="app.changeMatrixSize('B', 1, 0)">+</button>
+                            </div>
+                            <span>x</span>
+                            <div class="size-btn-group">
+                                <button class="size-btn" onclick="app.changeMatrixSize('B', 0, -1)">-</button>
+                                <span class="size-display" id="size-B-c">2</span>
+                                <button class="size-btn" onclick="app.changeMatrixSize('B', 0, 1)">+</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="matrix-grid-wrap">
+                        <div class="matrix-grid" id="grid-B"></div>
+                    </div>
+                </div>
+
+                <button class="btn-primary" onclick="app.solveMatrices()">⚡ Hisoblash</button>
+            </div>
+        </section>
+
+        <!-- 2. DETERMINANT & TESKARI MATRITSA -->
+        <section id="tab-det_inv" class="tab-content">
+            <div class="card">
+                <div class="card-title">
+                    <span>Kvadrat matritsa (n × n)</span>
+                    <div class="controls-row" style="margin-bottom: 0;">
+                        <span class="badge-label">O'lcham (n):</span>
+                        <div class="size-btn-group">
+                            <button class="size-btn" onclick="app.changeSquareMatrixSize(-1)">-</button>
+                            <span class="size-display" id="size-sq-n">3</span>
+                            <button class="size-btn" onclick="app.changeSquareMatrixSize(1)">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="matrix-grid-wrap">
+                    <div class="matrix-grid" id="grid-sq"></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div style="display: flex; gap: 8px;">
+                    <button class="btn-primary" style="flex: 1;" onclick="app.solveSquareMatrix('det')">📊 Determinant |A|</button>
+                    <button class="btn-primary" style="flex: 1; background: var(--accent);" onclick="app.solveSquareMatrix('inv')">🔄 Teskari A⁻¹</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. CHIZIQLI TENGLAMALAR SISTEMASI (ChTS) -->
+        <section id="tab-sle" class="tab-content">
+            <div class="card">
+                <div class="card-title">
+                    <span>Sistema o'lchami</span>
+                    <div class="controls-row" style="margin-bottom: 0;">
+                        <span class="badge-label">Tenglamalar soni:</span>
+                        <div class="size-btn-group">
+                            <button class="size-btn" onclick="app.changeSLESize(-1, 0)">-</button>
+                            <span class="size-display" id="size-sle-eq">3</span>
+                            <button class="size-btn" onclick="app.changeSLESize(1, 0)">+</button>
+                        </div>
+                        <span class="badge-label" style="margin-left: 6px;">Noma'lumlar:</span>
+                        <div class="size-btn-group">
+                            <button class="size-btn" onclick="app.changeSLESize(0, -1)">-</button>
+                            <span class="size-display" id="size-sle-var">3</span>
+                            <button class="size-btn" onclick="app.changeSLESize(0, 1)">+</button>
+                        </div>
+                    </div>
+                </div>
+                <p class="badge-label" style="margin-bottom: 8px;">Koeffitsientlar matritsasi [A] va ozod hadlar [B]:</p>
+                <div class="matrix-grid-wrap">
+                    <div class="matrix-grid" id="grid-sle"></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">
+                    <span>Yechish usuli</span>
+                </div>
+                <div style="display: flex; gap: 8px;">
+                    <button class="btn-primary" style="flex: 1;" onclick="app.solveSLE('cramer')">📐 Kramer usuli</button>
+                    <button class="btn-primary" style="flex: 1; background: var(--accent);" onclick="app.solveSLE('gauss')">🔻 Gauss usuli</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. KOMPLEKS SONLAR -->
+        <section id="tab-complex" class="tab-content">
+            <div class="card">
+                <div class="card-title">
+                    <span>Kompleks sonlar amallari</span>
+                </div>
+                <label class="badge-label">z₁ soni (a + bi):</label>
+                <input type="text" id="complex-z1" class="text-input" placeholder="Masalan: 2 + 3i yoki -1 - 4i" value="2 + 3i">
+
+                <div id="complex-z2-wrap">
+                    <label class="badge-label">z₂ soni (a + bi):</label>
+                    <input type="text" id="complex-z2" class="text-input" placeholder="Masalan: 1 - 2i" value="1 - 2i">
+                </div>
+
+                <div id="complex-n-wrap" style="display: none;">
+                    <label class="badge-label">Daraja / Ildiz ko'rsatkichi (n):</label>
+                    <input type="number" id="complex-n" class="text-input" placeholder="Masalan: 4" value="3">
+                </div>
+
+                <select id="op-complex" class="op-select" onchange="app.onComplexOpChange()">
+                    <option value="add">Qo'shish (z₁ + z₂)</option>
+                    <option value="sub">Ayirish (z₁ - z₂)</option>
+                    <option value="mul">Ko'paytirish (z₁ · z₂)</option>
+                    <option value="div">Bo'lish (z₁ / z₂)</option>
+                    <option value="trig">Modul, Argument va Trigonometrik shakli</option>
+                    <option value="moivre">Muavr formulasi (z₁ⁿ)</option>
+                    <option value="roots">n-darajali ildizlar (ⁿ√z₁)</option>
+                </select>
+
+                <button class="btn-primary" onclick="app.solveComplex()">🔮 Hisoblash</button>
+            </div>
+        </section>
+
+        <!-- 5. KO'PHADLAR -->
+        <section id="tab-poly" class="tab-content">
+            <div class="card">
+                <div class="card-title">
+                    <span>Ko'phadlar ustida amallar</span>
+                </div>
+                <label class="badge-label">P(x) ko'phad:</label>
+                <input type="text" id="poly-P" class="text-input" placeholder="Masalan: 2x^3 - 4x^2 + 3x - 5" value="x^3 - 3x^2 + 5x - 7">
+
+                <div id="poly-c-wrap">
+                    <label class="badge-label">c soni (x - c):</label>
+                    <input type="text" id="poly-c" class="text-input" placeholder="Masalan: 2 yoki -1/2" value="2">
+                </div>
+
+                <div id="poly-Q-wrap" style="display: none;">
+                    <label class="badge-label">Q(x) ko'phad:</label>
+                    <input type="text" id="poly-Q" class="text-input" placeholder="Masalan: x - 2 yoki x^2 + 1" value="x - 2">
+                </div>
+
+                <select id="op-poly" class="op-select" onchange="app.onPolyOpChange()">
+                    <option value="horner">Gorner sxemasi (P(x) / (x - c))</option>
+                    <option value="divide">Qoldiqli bo'lish (P(x) / Q(x))</option>
+                    <option value="gcd">EKUB - Yevklid algoritmi (gcd(P, Q))</option>
+                </select>
+
+                <button class="btn-primary" onclick="app.solvePolynomial()">📈 Hisoblash</button>
+            </div>
+        </section>
+
+        <!-- YECHIM CONTAINER -->
+        <div id="solution-container" class="solution-container">
+            <div class="card">
+                <div class="card-title">
+                    <span>📝 Qadamma-qadam yechim</span>
+                    <button class="btn-secondary" onclick="app.copySolution()">📋 Nusxalash</button>
+                </div>
+                <div id="solution-box" class="solution-box"></div>
+                <button id="btn-send-bot" class="btn-send-bot" onclick="app.sendToBot()">
+                    ✈️ Yechimni Telegramga yuborish
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Skriptlar -->
+    <script src="js/fraction.js"></script>
+    <script src="js/matrix.js"></script>
+    <script src="js/complex.js"></script>
+    <script src="js/polynomial.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

@@ -515,6 +515,167 @@ class MatrixSolver {
 
         return { result: aug, steps };
     }
+
+    // 11. Laplas yoyilmasi (Satr yoki Ustun bo'yicha determinant hisoblash)
+    static laplaceExpansion(A, type = 'row', idx = 0) {
+        const n = A.length;
+        if (n !== A[0].length) throw new Error("Laplas yoyilmasi faqat kvadrat matritsalar uchun!");
+        const steps = [];
+        let det = Fraction.zero();
+
+        if (type === 'row') {
+            steps.push(`<b>Determinantni ${idx + 1}-satr bo'yicha Laplas yoyilmasi orqali hisoblash:</b>`);
+            steps.push(`Formula: $|A| = \\sum_{j=1}^{${n}} a_{${idx+1}j} \\cdot A_{${idx+1}j} = \\sum_{j=1}^{${n}} a_{${idx+1}j} (-1)^{${idx+1}+j} M_{${idx+1}j}$`);
+            const terms = [];
+
+            for (let j = 0; j < n; j++) {
+                const aVal = Fraction.parse(A[idx][j]);
+                // Minor
+                const sub = [];
+                for (let r = 0; r < n; r++) {
+                    if (r === idx) continue;
+                    const row = [];
+                    for (let c = 0; c < n; c++) {
+                        if (c === j) continue;
+                        row.push(A[r][c]);
+                    }
+                    sub.push(row);
+                }
+                const subDet = MatrixSolver.determinant(sub).result;
+                const sign = ((idx + j) % 2 === 0) ? 1n : -1n;
+                const cofactor = subDet.mul(new Fraction(sign, 1n));
+                const prod = aVal.mul(cofactor);
+                det = det.add(prod);
+
+                steps.push(`$a_{${idx+1}${j+1}} = ${aVal.toString()}$, $\\quad M_{${idx+1}${j+1}} = ${subDet.toString()}$, $\\quad A_{${idx+1}${j+1}} = (-1)^{${idx+1}+${j+1}} M = <b>${cofactor.toString()}</b>$`);
+                steps.push(`Had: $a_{${idx+1}${j+1}} \\cdot A_{${idx+1}${j+1}} = (${aVal.toString()})(${cofactor.toString()}) = <b>${prod.toString()}</b>$`);
+                terms.push(prod.toString());
+            }
+
+            steps.push(`$|A| = ${terms.join(' + ')} = <b>${det.toString()}</b>$`);
+        } else {
+            steps.push(`<b>Determinantni ${idx + 1}-ustun bo'yicha Laplas yoyilmasi orqali hisoblash:</b>`);
+            steps.push(`Formula: $|A| = \\sum_{i=1}^{${n}} a_{i${idx+1}} \\cdot A_{i${idx+1}}$`);
+            const terms = [];
+
+            for (let i = 0; i < n; i++) {
+                const aVal = Fraction.parse(A[i][idx]);
+                const sub = [];
+                for (let r = 0; r < n; r++) {
+                    if (r === i) continue;
+                    const row = [];
+                    for (let c = 0; c < n; c++) {
+                        if (c === idx) continue;
+                        row.push(A[r][c]);
+                    }
+                    sub.push(row);
+                }
+                const subDet = MatrixSolver.determinant(sub).result;
+                const sign = ((i + idx) % 2 === 0) ? 1n : -1n;
+                const cofactor = subDet.mul(new Fraction(sign, 1n));
+                const prod = aVal.mul(cofactor);
+                det = det.add(prod);
+
+                steps.push(`$a_{${i+1}${idx+1}} = ${aVal.toString()}$, $\\quad A_{${i+1}${idx+1}} = <b>${cofactor.toString()}</b>$`);
+                terms.push(prod.toString());
+            }
+
+            steps.push(`$|A| = ${terms.join(' + ')} = <b>${det.toString()}</b>$`);
+        }
+
+        return { result: det, steps };
+    }
+
+    // 12. Bir jinsli sistema (AX = 0) va FYET (Fundamental Yechimlar Tizimi)
+    static solveHomogeneous(A) {
+        const m = A.length;
+        const n = A[0].length;
+        const steps = [];
+        steps.push(`<b>Bir jinsli chiziqli tenglamalar sistemasi ($AX = 0$):</b>`);
+        steps.push(`Tenglamalar soni: $m = ${m}$, noma'lumlar soni: $n = ${n}$`);
+
+        // Gauss-Jordan almashtirishlari
+        const M = MatrixSolver.clone(A);
+        let rank = 0;
+        let leadCol = 0;
+        const pivotCols = [];
+
+        for (let r = 0; r < m; r++) {
+            if (leadCol >= n) break;
+            let pivot = -1;
+            for (let i = r; i < m; i++) {
+                if (!M[i][leadCol].isZero()) {
+                    pivot = i;
+                    break;
+                }
+            }
+            if (pivot === -1) {
+                leadCol++;
+                r--;
+                continue;
+            }
+            if (pivot !== r) {
+                const tmp = M[r];
+                M[r] = M[pivot];
+                M[pivot] = tmp;
+            }
+            // Pivot elementni 1 ga keltirish
+            const pivotVal = M[r][leadCol];
+            for (let c = 0; c < n; c++) {
+                M[r][c] = M[r][c].div(pivotVal);
+            }
+            // Boshqa satrlarni 0 ga aylantirish
+            for (let i = 0; i < m; i++) {
+                if (i !== r && !M[i][leadCol].isZero()) {
+                    const factor = M[i][leadCol];
+                    for (let c = 0; c < n; c++) {
+                        M[i][c] = M[i][c].sub(factor.mul(M[r][c]));
+                    }
+                }
+            }
+            pivotCols.push(leadCol);
+            leadCol++;
+            rank++;
+        }
+
+        steps.push(`Keltirilgan qadamli ko'rinish:`);
+        steps.push(MatrixSolver.toHTML(M));
+        steps.push(`Matritsa rangi: $\\operatorname{rang}(A) = <b>${rank}</b>$`);
+
+        if (rank === n) {
+            steps.push(`$\\operatorname{rang}(A) = n$ bo'lgani sababli, bir jinsli sistema <b>faqat trivial (nol) yechimga ega:</b>`);
+            steps.push(`$(x_1, x_2, \\dots, x_n) = (0, 0, \\dots, 0)$`);
+            return { result: 'trivial', steps };
+        }
+
+        const k = n - rank;
+        steps.push(`$\\operatorname{rang}(A) < n$ bo'lgani sababli sistema cheksiz ko'p noldan farqli yechimlarga ega.`);
+        steps.push(`Fundamental yechimlar tizimi (FYET) dagi bazis vektorlar soni: $k = n - \\operatorname{rang}(A) = ${n} - ${rank} = <b>${k}</b>$ ta.`);
+
+        const isPivot = new Array(n).fill(false);
+        pivotCols.forEach(c => isPivot[c] = true);
+
+        const freeCols = [];
+        for (let c = 0; c < n; c++) {
+            if (!isPivot[c]) freeCols.push(c);
+        }
+
+        // FYET vektorlarini tuzish
+        const fsr = [];
+        for (let i = 0; i < k; i++) {
+            const vec = new Array(n).fill(Fraction.zero());
+            vec[freeCols[i]] = Fraction.one();
+            for (let r = 0; r < rank; r++) {
+                vec[pivotCols[r]] = M[r][freeCols[i]].neg();
+            }
+            fsr.push(vec);
+            const vecStr = vec.map(v => v.toString()).join(', ');
+            steps.push(`$e_{${i+1}} = (${vecStr})^T$`);
+        }
+
+        steps.push(`<b>Umumiy yechim:</b> $X = c_1 e_1 + c_2 e_2 + \\dots + c_{${k}} e_{${k}}$, bu yerda $c_i \\in \\mathbb{R}$ erkin parametrlar.`);
+        return { result: fsr, steps };
+    }
 }
 
 if (typeof module !== 'undefined' && module.exports) {

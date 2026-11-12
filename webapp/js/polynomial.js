@@ -234,6 +234,78 @@ class Polynomial {
         steps.push(`<b>EKUB(P, Q) = ${resGcd.toString()}</b>`);
         return { result: resGcd, steps };
     }
+
+    // Ratsional ildizlarni nomzodlar orqali topish (Bezu va Gorner)
+    static findRationalRoots(poly) {
+        const steps = [];
+        steps.push(`<b>Ko'phadning barcha ratsional ildizlarini topish:</b>`);
+        steps.push(`$P(x) = ${poly.toString()}$`);
+
+        // Koeffitsientlar butun ekanligini ta'minlash
+        const deg = poly.degree;
+        if (deg <= 0) {
+            steps.push(`O'zgarmas son uchun ildiz mavjud emas.`);
+            return { result: [], steps };
+        }
+
+        const an = poly.coeffs[0];
+        const a0 = poly.coeffs[deg];
+
+        if (a0.isZero()) {
+            steps.push(`Ozod had $a_0 = 0$ bo'lgani uchun $x = 0$ ildiz hisoblanadi.`);
+        }
+
+        steps.push(`Bosh koeffitsient: $a_n = ${an.toString()}$, ozod had: $a_0 = ${a0.toString()}$`);
+        steps.push(`Ratsional ildizlar haqidagi teoremaga ko'ra, har qanday $\\frac{p}{q}$ qisqarmas kasr ildiz uchun:`);
+        steps.push(`• $p$ soni $a_0$ ning bo'luvchisi bo'lishi shart`);
+        steps.push(`• $q$ soni $a_n$ ning bo'luvchisi bo'lishi shart`);
+
+        const pNum = Math.abs(Number(a0.num));
+        const qNum = Math.abs(Number(an.num));
+
+        const getDivisors = (val) => {
+            if (val === 0) return [1];
+            const divs = [];
+            for (let i = 1; i <= val; i++) {
+                if (val % i === 0) divs.push(i);
+            }
+            return divs;
+        };
+
+        const pDivs = getDivisors(pNum);
+        const qDivs = getDivisors(qNum);
+
+        const candidates = new Set();
+        pDivs.forEach(p => {
+            qDivs.forEach(q => {
+                const frac1 = `${p}/${q}`;
+                const frac2 = `-${p}/${q}`;
+                candidates.add(new Fraction(BigInt(p), BigInt(q)).toString());
+                candidates.add(new Fraction(-BigInt(p), BigInt(q)).toString());
+            });
+        });
+
+        const candList = Array.from(candidates);
+        steps.push(`Nomzodlar to'plami: $\\{${candList.join(', ')}\\}$`);
+
+        const foundRoots = [];
+        candList.forEach(cand => {
+            const cFrac = Fraction.fromString(cand);
+            const hornerRes = Polynomial.horner(poly, cFrac);
+            if (hornerRes.remainder.isZero()) {
+                foundRoots.push(cand);
+                steps.push(`✅ $c = ${cand}$ tekshirildi: $P(${cand}) = 0$ bo'ldi. <b>${cand} - ILDIZ!</b>`);
+            }
+        });
+
+        if (foundRoots.length === 0) {
+            steps.push(`Berilgan ko'phadning ratsional ildizlari mavjud emas.`);
+        } else {
+            steps.push(`<b>Topilgan barcha ratsional ildizlar:</b> $\\{${foundRoots.join(', ')}\\}$`);
+        }
+
+        return { result: foundRoots, steps };
+    }
 }
 
 if (typeof module !== 'undefined' && module.exports) {

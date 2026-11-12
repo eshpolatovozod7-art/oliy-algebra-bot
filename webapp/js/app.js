@@ -37,6 +37,79 @@ const app = {
 
         // Standart boshlang'ich namunalar
         this.loadSample(1);
+        this.onAmaliyFileChange("1");
+        this.switchMode('files');
+    },
+
+    // --- MODE SWITCHER (FAYLLAR / MAVZULAR) ---
+    switchMode(mode) {
+        const btnFiles = document.getElementById('btn-mode-files');
+        const btnTopics = document.getElementById('btn-mode-topics');
+        const secFiles = document.getElementById('sec-files-category');
+        const secTopics = document.getElementById('sec-topics-category');
+
+        if (mode === 'files') {
+            btnFiles.classList.add('active');
+            btnTopics.classList.remove('active');
+            secFiles.classList.add('active');
+            secTopics.classList.remove('active');
+        } else {
+            btnTopics.classList.add('active');
+            btnFiles.classList.remove('active');
+            secTopics.classList.add('active');
+            secFiles.classList.remove('active');
+            this.onTopicSelect(document.getElementById('main-topic-select').value || '1');
+        }
+    },
+
+    onAmaliyFileChange(fileId) {
+        if (typeof AMALIY_DATABASE === 'undefined') return;
+        const data = AMALIY_DATABASE[fileId];
+        if (!data) return;
+
+        const pdfEl = document.getElementById('amaliy-pdf-name');
+        if (pdfEl) pdfEl.innerText = `📄 Fayl: ${data.file}`;
+
+        const taskSelect = document.getElementById('amaliy-task-select');
+        if (!taskSelect) return;
+        taskSelect.innerHTML = '';
+
+        data.tasks.forEach((t) => {
+            const opt = document.createElement('option');
+            opt.value = t.id;
+            opt.innerText = t.name;
+            taskSelect.appendChild(opt);
+        });
+
+        if (data.tasks.length > 0) {
+            this.onAmaliyTaskChange(data.tasks[0].id);
+        }
+    },
+
+    onAmaliyTaskChange(taskId) {
+        if (typeof AMALIY_DATABASE === 'undefined') return;
+        const fileId = document.getElementById('amaliy-file-select').value;
+        const data = AMALIY_DATABASE[fileId];
+        if (!data) return;
+
+        const task = data.tasks.find(t => t.id === taskId);
+        if (!task) return;
+
+        const shartEl = document.getElementById('amaliy-shart-text');
+        if (shartEl) shartEl.innerText = task.shart;
+    },
+
+    solveAmaliyTask() {
+        if (typeof AMALIY_DATABASE === 'undefined') return;
+        const fileId = document.getElementById('amaliy-file-select').value;
+        const data = AMALIY_DATABASE[fileId];
+        if (!data) return;
+
+        const taskId = document.getElementById('amaliy-task-select').value;
+        const task = data.tasks.find(t => t.id === taskId);
+        if (!task || !task.solve) return;
+
+        task.solve();
     },
 
     // --- MAVZU TANLASH ---

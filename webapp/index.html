@@ -18,30 +18,85 @@
     </header>
 
     <main class="container">
-        <!-- TOPIC PICKER -->
-        <div class="topic-picker-card">
-            <div class="topic-picker-label">
-                <span>📚 16 ta Mavzudan birini tanlang:</span>
-            </div>
-            <select id="main-topic-select" class="topic-select" onchange="app.onTopicSelect(this.value)">
-                <option value="1">1-Mavzu: Matritsalar ustida amallar (A+B, A-B, k·A, A·B, Aᵀ)</option>
-                <option value="2">2-Mavzu: O‘rin almashtirishlar va inversiyalar (Juft/toqlik, tsikllar)</option>
-                <option value="3">3-Mavzu: n-tartibli determinantlar (Sarryus va Gauss)</option>
-                <option value="4">4-Mavzu: Minor va algebraik to‘ldiruvchi (Laplas yoyilmasi)</option>
-                <option value="5">5-Mavzu: Teskari matritsa (Algebraik to'ldiruvchi usuli)</option>
-                <option value="6">6-Mavzu: Chiziqli tenglamalar sistemasi (Kramer va Gauss)</option>
-                <option value="7">7-Mavzu: Matritsa rangi (Elementar almashtirishlar)</option>
-                <option value="8">8-Mavzu: Bir jinsli sistema va FYET (Fundamental yechimlar)</option>
-                <option value="9">9-Mavzu: Kompleks sonlar va amallar (Shakllari, modul, argument)</option>
-                <option value="10">10-Mavzu: Kompleks sonni darajaga ko‘tarish va ildizlar (Muavr)</option>
-                <option value="11">11-Mavzu: Ko‘phadlar va qoldiqli bo‘linish (Burchakli bo'lish)</option>
-                <option value="12">12-Mavzu: Ko‘phadlarning EKUBi (Yevklid algoritmi)</option>
-                <option value="13">13-Mavzu: Bezu teoremasi, Gorner sxemasi va ratsional ildizlar</option>
-                <option value="14">14-Mavzu: Ratsional kasrlarni sodda kasrlarga yoyish</option>
-                <option value="15">15-Mavzu: 3- va 4-darajali tenglamalar (Kardano formulasi)</option>
-                <option value="16">16-Mavzu: Darslikdagi namunalar to'plami (Namuna misollar)</option>
-            </select>
+        <!-- MODE SWITCHER (FAYLLAR / MAVZULAR) -->
+        <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+            <button id="btn-mode-files" class="tab-btn active" style="flex: 1; justify-content: center; padding: 10px;" onclick="app.switchMode('files')">
+                📁 Amaliy Fayllar (1-15)
+            </button>
+            <button id="btn-mode-topics" class="tab-btn" style="flex: 1; justify-content: center; padding: 10px;" onclick="app.switchMode('topics')">
+                🧮 16 ta Mavzu Kalkulyatori
+            </button>
         </div>
+
+        <!-- 1. FAYLLARDAGI AMALIY MISOLLAR BO'LIMI -->
+        <section id="sec-files-category" class="topic-section active">
+            <div class="card" style="border: 2px solid var(--link-color);">
+                <div class="card-title">
+                    <span class="badge-topic" style="background: rgba(56, 189, 248, 0.2); border-color: var(--link-color); color: var(--link-color);">📁 FAYLLARDAN YECHISH</span>
+                    <span>Amaliy Topshiriqlar</span>
+                </div>
+                <label class="badge-label">1. Amaliy mashg'ulot faylini tanlang:</label>
+                <select id="amaliy-file-select" class="topic-select" onchange="app.onAmaliyFileChange(this.value)">
+                    <option value="1">1-Amaliy: Matritsalar va ular ustida amallar</option>
+                    <option value="2">2-Amaliy: O‘rinlashtirish va o‘rin almashtirish</option>
+                    <option value="3">3-Amaliy: n-tartibli determinantlar va ularning xossalari</option>
+                    <option value="4">4-Amaliy: Minor va algebraik to‘ldiruvchi</option>
+                    <option value="5">5-Amaliy: Teskari matritsa</option>
+                    <option value="6">6-Amaliy: Chiziqli tenglamalar sistemalarini yechish</option>
+                    <option value="7">7-Amaliy: Matritsa rangi</option>
+                    <option value="8">8-Amaliy: Bir jinsli sistema va FYET</option>
+                    <option value="9">9-Amaliy: Kompleks sonlar va amallar</option>
+                    <option value="10">10-Amaliy: Muavr formulasi va ildiz chiqarish</option>
+                    <option value="11">11-Amaliy: Ko‘phadlar va qoldiqli bo'linish</option>
+                    <option value="12">12-Amaliy: Ko‘phadlarning EKUBi (Yevklid)</option>
+                    <option value="13">13-Amaliy: Bezu teoremasi va Gorner sxemasi</option>
+                    <option value="14">14-Amaliy: Ratsional kasrlar</option>
+                    <option value="15">15-Amaliy: 3- va 4-darajali tenglamalar</option>
+                </select>
+
+                <label class="badge-label" style="margin-top: 12px;">2. Ushbu fayldagi topshiriqni tanlang:</label>
+                <select id="amaliy-task-select" class="topic-select" onchange="app.onAmaliyTaskChange(this.value)">
+                    <!-- JS orqali to'ldiriladi -->
+                </select>
+
+                <div id="amaliy-shart-box" style="margin-top: 12px; padding: 12px; background: rgba(0,0,0,0.25); border-radius: 10px; border-left: 3px solid var(--warning);">
+                    <div style="font-size: 0.75rem; color: var(--hint-color); margin-bottom: 4px;" id="amaliy-pdf-name">📄 Fayl: Amaliy 1.pdf</div>
+                    <div style="font-weight: 600; color: var(--text-color);" id="amaliy-shart-text">Shart yuklanmoqda...</div>
+                </div>
+
+                <div style="display: flex; gap: 8px; margin-top: 14px;">
+                    <button class="btn-primary" style="flex: 1;" onclick="app.solveAmaliyTask()">
+                        ⚡ Ushbu misolni yechish
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. MAVZULAR BO'YICHA ERKIN KALKULYATOR BO'LIMI -->
+        <section id="sec-topics-category" class="topic-section">
+            <div class="topic-picker-card">
+                <div class="topic-picker-label">
+                    <span>📚 16 ta Mavzudan birini tanlang:</span>
+                </div>
+                <select id="main-topic-select" class="topic-select" onchange="app.onTopicSelect(this.value)">
+                    <option value="1">1-Mavzu: Matritsalar ustida amallar (A+B, A-B, k·A, A·B, Aᵀ)</option>
+                    <option value="2">2-Mavzu: O‘rin almashtirishlar va inversiyalar (Juft/toqlik, tsikllar)</option>
+                    <option value="3">3-Mavzu: n-tartibli determinantlar (Sarryus va Gauss)</option>
+                    <option value="4">4-Mavzu: Minor va algebraik to‘ldiruvchi (Laplas yoyilmasi)</option>
+                    <option value="5">5-Mavzu: Teskari matritsa (Algebraik to'ldiruvchi usuli)</option>
+                    <option value="6">6-Mavzu: Chiziqli tenglamalar sistemasi (Kramer va Gauss)</option>
+                    <option value="7">7-Mavzu: Matritsa rangi (Elementar almashtirishlar)</option>
+                    <option value="8">8-Mavzu: Bir jinsli sistema va FYET (Fundamental yechimlar)</option>
+                    <option value="9">9-Mavzu: Kompleks sonlar va amallar (Shakllari, modul, argument)</option>
+                    <option value="10">10-Mavzu: Kompleks sonni darajaga ko‘tarish va ildizlar (Muavr)</option>
+                    <option value="11">11-Mavzu: Ko‘phadlar va qoldiqli bo‘linish (Burchakli bo'lish)</option>
+                    <option value="12">12-Mavzu: Ko‘phadlarning EKUBi (Yevklid algoritmi)</option>
+                    <option value="13">13-Mavzu: Bezu teoremasi, Gorner sxemasi va ratsional ildizlar</option>
+                    <option value="14">14-Mavzu: Ratsional kasrlarni sodda kasrlarga yoyish</option>
+                    <option value="15">15-Mavzu: 3- va 4-darajali tenglamalar (Kardano formulasi)</option>
+                    <option value="16">16-Mavzu: Darslikdagi namunalar to'plami (Namuna misollar)</option>
+                </select>
+            </div>
 
         <!-- 1-MAVZU: MATRITSALAR -->
         <section id="sec-topic-1" class="topic-section active">
@@ -453,6 +508,7 @@
                 </div>
             </div>
         </section>
+        </section> <!-- /sec-topics-category -->
 
         <!-- YECHIM CONTAINER -->
         <div id="solution-container" class="solution-container">
@@ -477,6 +533,7 @@
     <script src="js/permutation.js"></script>
     <script src="js/higher_degree.js"></script>
     <script src="js/rational_fractions.js"></script>
+    <script src="js/amaliy_tasks.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>

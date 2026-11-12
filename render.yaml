@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: oliy-algebra-bot
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python bot/main.py
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: BOT_TOKEN
+        sync: false
+      - key: WEBAPP_URL
+        value: https://eshpolatovozod7-art.github.io/oliy-algebra-bot

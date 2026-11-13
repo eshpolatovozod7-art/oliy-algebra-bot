@@ -308,6 +308,12 @@ class Polynomial {
     }
 }
 
+const PolynomialSolver = Polynomial;
+if (typeof window !== 'undefined') {
+    window.Polynomial = Polynomial;
+    window.PolynomialSolver = Polynomial;
+}
+
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = Polynomial;
 }

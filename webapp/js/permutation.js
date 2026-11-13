@@ -86,6 +86,30 @@ class PermutationSolver {
 
         return { invCount, isEven, cycleStr, invP, steps };
     }
+
+    static multiply(p1, p2) {
+        if (p1.length !== p2.length) {
+            throw new Error("O'rin almashtirishlar darajalari teng bo'lishi kerak!");
+        }
+        const n = p1.length;
+        const res = new Array(n);
+        const steps = [];
+        steps.push(`<b>O'rniga qo'yishlar ko'paytmasi:</b> $\\sigma_1 \\circ \\sigma_2$`);
+        steps.push(`$\\sigma_1 = \\begin{pmatrix} 1 & 2 & \\dots & ${n} \\\\ ${p1.join(' & ')} \\end{pmatrix}, \\quad \\sigma_2 = \\begin{pmatrix} 1 & 2 & \\dots & ${n} \\\\ ${p2.join(' & ')} \\end{pmatrix}$`);
+        steps.push(`Amal tartibi: $(\\sigma_1 \\circ \\sigma_2)(i) = \\sigma_1(\\sigma_2(i))$`);
+
+        const calcLines = [];
+        for (let i = 0; i < n; i++) {
+            const mid = p2[i];
+            const fin = p1[mid - 1];
+            res[i] = fin;
+            calcLines.push(`$i = ${i + 1} \\xrightarrow{\\sigma_2} ${mid} \\xrightarrow{\\sigma_1} ${fin}$`);
+        }
+        steps.push(calcLines.join('<br>'));
+        steps.push(`<b>Natija:</b> $\\sigma_1 \\circ \\sigma_2 = \\begin{pmatrix} 1 & 2 & \\dots & ${n} \\\\ ${res.join(' & ')} \\end{pmatrix}$`);
+
+        return { result: res, steps };
+    }
 }
 
 if (typeof module !== 'undefined' && module.exports) {

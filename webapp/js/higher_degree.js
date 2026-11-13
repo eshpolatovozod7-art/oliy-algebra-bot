@@ -130,6 +130,113 @@ class HigherDegreeSolver {
 
         return { roots, steps };
     }
+
+    // 4-darajali tenglamani Ferrari usulida yechish: ax^4 + bx^3 + cx^2 + dx + e = 0
+    static solveFerrari(a, b, c, d, e) {
+        if (Math.abs(a) < 1e-12) {
+            return HigherDegreeSolver.solveCubic(b, c, d, e);
+        }
+
+        const steps = [];
+        steps.push(`<b>4-darajali tenglamani Ferrari usulida yechish:</b>`);
+        steps.push(`$(${a})x^4 + (${b})x^3 + (${c})x^2 + (${d})x + (${e}) = 0$`);
+
+        // 1-qadam: Normallashtirish
+        const a3 = b / a;
+        const a2 = c / a;
+        const a1 = d / a;
+        const a0 = e / a;
+        steps.push(`1-qadam: Bosh koeffitsient $a = ${a}$ ga bo'lamiz:`);
+        steps.push(`$x^4 + (${a3.toFixed(4)})x^3 + (${a2.toFixed(4)})x^2 + (${a1.toFixed(4)})x + (${a0.toFixed(4)}) = 0$`);
+
+        // 2-qadam: Chirnxauz almashtirishi x = y - a3/4
+        const shift = a3 / 4.0;
+        const p = a2 - (3.0 * a3 * a3) / 8.0;
+        const q = a1 - (a3 * a2) / 2.0 + (a3 * a3 * a3) / 8.0;
+        const r = a0 - (a3 * a1) / 4.0 + (a3 * a3 * a2) / 16.0 - (3.0 * a3 * a3 * a3 * a3) / 256.0;
+
+        steps.push(`2-qadam: $x = y - (${shift.toFixed(4)})$ almashtirishi bilan keltirilgan 4-darajali tenglama:`);
+        steps.push(`$y^4 + py^2 + qy + r = 0$, bu yerda:`);
+        steps.push(`$p = ${p.toFixed(4)}, \\quad q = ${q.toFixed(4)}, \\quad r = ${r.toFixed(4)}$`);
+
+        let allRoots = [];
+
+        if (Math.abs(q) < 1e-9) {
+            steps.push(`$q = 0$ bo'lgani uchun tenglama bikvadrat shaklga keladi: $y^4 + (${p.toFixed(4)})y^2 + (${r.toFixed(4)}) = 0$`);
+            steps.push(`$z = y^2$ deb olib, $z^2 + (${p.toFixed(4)})z + (${r.toFixed(4)}) = 0$ tenglamani yechamiz:`);
+            const qz = HigherDegreeSolver.solveQuadratic(1, p, r);
+            steps.push(...qz.steps);
+            // Ildizlardan y va x ni topamiz
+            for (const zStr of qz.roots) {
+                const zVal = parseFloat(zStr);
+                if (!isNaN(zVal)) {
+                    if (zVal >= 0) {
+                        const sq = Math.sqrt(zVal);
+                        allRoots.push((sq - shift).toFixed(4), (-sq - shift).toFixed(4));
+                    } else {
+                        const sq = Math.sqrt(-zVal);
+                        allRoots.push(`${(-shift).toFixed(4)} + ${sq.toFixed(4)}i`, `${(-shift).toFixed(4)} - ${sq.toFixed(4)}i`);
+                    }
+                }
+            }
+        } else {
+            steps.push(`3-qadam: Ferrari rezolventasi (3-darajali tenglama) tuziladi:`);
+            steps.push(`$8m^3 + 8pm^2 + (2p^2 - 8r)m - q^2 = 0$`);
+            const cA = 8;
+            const cB = 8 * p;
+            const cC = 2 * p * p - 8 * r;
+            const cD = -q * q;
+
+            const cubicRes = HigherDegreeSolver.solveCubic(cA, cB, cC, cD);
+            steps.push(`Rezolventa ildizlarini topamiz:`);
+            steps.push(...cubicRes.steps);
+
+            // Real musbat ildizni tanlaymiz
+            let mVal = 0.5;
+            for (const rStr of cubicRes.roots) {
+                const num = parseFloat(rStr);
+                if (!isNaN(num) && num > 1e-8) {
+                    mVal = num;
+                    break;
+                }
+            }
+            if (mVal <= 0) mVal = Math.abs(parseFloat(cubicRes.roots[0])) || 1.0;
+
+            steps.push(`Rezolventaning haqiqiy ildizi tanlanadi: $m = <b>${mVal.toFixed(4)}</b>$`);
+
+            const sqrt2m = Math.sqrt(2 * mVal);
+            const term = q / (2 * sqrt2m);
+
+            steps.push(`4-qadam: Tenglama ikkita kvadrat tenglamaga ajraladi:`);
+            steps.push(`1) $y^2 - \\sqrt{2m}y + \\left(\\frac{p}{2} + m + \\frac{q}{2\\sqrt{2m}}\\right) = 0$`);
+            steps.push(`2) $y^2 + \\sqrt{2m}y + \\left(\\frac{p}{2} + m - \\frac{q}{2\\sqrt{2m}}\\right) = 0$`);
+
+            const q1 = HigherDegreeSolver.solveQuadratic(1, -sqrt2m, (p / 2) + mVal + term);
+            const q2 = HigherDegreeSolver.solveQuadratic(1, sqrt2m, (p / 2) + mVal - term);
+
+            steps.push(`<b>1-kvadrat tenglama yechimlari:</b>`);
+            steps.push(...q1.steps);
+            steps.push(`<b>2-kvadrat tenglama yechimlari:</b>`);
+            steps.push(...q2.steps);
+
+            // Shift qilib x larni hisoblaymiz
+            const formatX = (rStr) => {
+                if (rStr.includes('i')) {
+                    const parts = rStr.split(' ');
+                    const re = parseFloat(parts[0]) - shift;
+                    return `${re.toFixed(4)} ${parts[1]} ${parts[2]}`;
+                } else {
+                    return (parseFloat(rStr) - shift).toFixed(4);
+                }
+            };
+
+            const xRoots = [...q1.roots.map(formatX), ...q2.roots.map(formatX)];
+            allRoots = xRoots;
+            steps.push(`<div class="result-badge"><b>4 ta ildiz:</b> $x_1 = ${xRoots[0]}, \\quad x_2 = ${xRoots[1]}, \\quad x_3 = ${xRoots[2]}, \\quad x_4 = ${xRoots[3]}$</div>`);
+        }
+
+        return { roots: allRoots, steps };
+    }
 }
 
 if (typeof module !== 'undefined' && module.exports) {

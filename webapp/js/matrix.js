@@ -16,7 +16,9 @@ class MatrixSolver {
             html += '<tr>';
             for (let j = 0; j < mat[i].length; j++) {
                 const hl = (i === highlightRow || j === highlightCol) ? ' class="hl"' : '';
-                html += `<td${hl}>${mat[i][j].toHTML()}</td>`;
+                const cell = mat[i][j];
+                const cellHTML = (cell && typeof cell.toHTML === 'function') ? cell.toHTML() : (cell !== undefined ? cell : '0');
+                html += `<td${hl}>${cellHTML}</td>`;
             }
             html += '</tr>';
         }
@@ -31,7 +33,9 @@ class MatrixSolver {
             html += '<tr>';
             for (let j = 0; j < mat[i].length; j++) {
                 const border = (j === splitCol - 1) ? ' class="sep-right"' : '';
-                html += `<td${border}>${mat[i][j].toHTML()}</td>`;
+                const cell = mat[i][j];
+                const cellHTML = (cell && typeof cell.toHTML === 'function') ? cell.toHTML() : (cell !== undefined ? cell : '0');
+                html += `<td${border}>${cellHTML}</td>`;
             }
             html += '</tr>';
         }

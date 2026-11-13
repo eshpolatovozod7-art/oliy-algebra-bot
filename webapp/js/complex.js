@@ -255,6 +255,14 @@ class ComplexNumber {
     }
 }
 
+const Complex = ComplexNumber;
+const ComplexSolver = ComplexNumber;
+if (typeof window !== 'undefined') {
+    window.Complex = ComplexNumber;
+    window.ComplexNumber = ComplexNumber;
+    window.ComplexSolver = ComplexNumber;
+}
+
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = ComplexNumber;
 }

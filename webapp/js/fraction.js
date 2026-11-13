@@ -181,6 +181,10 @@ class Fraction {
     }
 }
 
+if (typeof window !== 'undefined') {
+    window.Fraction = Fraction;
+}
+
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = Fraction;
 }

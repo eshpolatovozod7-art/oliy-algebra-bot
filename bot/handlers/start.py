@@ -7,6 +7,7 @@ from bot.keyboards.menu import (
     get_main_reply_keyboard,
     get_inline_webapp_keyboard,
     get_topics_keyboard,
+    get_topic_detail_keyboard,
     get_amaliy_files_keyboard,
     get_amaliy_tasks_keyboard,
     get_task_solution_keyboard
@@ -82,9 +83,9 @@ async def cmd_amaliy_files(message: Message):
 @router.message(Command("topics"))
 async def cmd_topics(message: Message):
     await message.answer(
-        "📚 <b>16 ta Mavzu bo'yicha ma'lumotlar:</b>\nKerakli mavzuni tanlang:",
+        "📚 <b>16 ta Mavzu bo'yicha kalkulyator va ma'lumotlar:</b>\nKerakli mavzuni tanlang yoki kalkulyatorni oching:",
         parse_mode="HTML",
-        reply_markup=get_topics_keyboard()
+        reply_markup=get_topics_keyboard(WEBAPP_URL)
     )
 
 @router.callback_query(F.data == "amaliy_files_menu")
@@ -163,24 +164,25 @@ async def cb_solve_task(callback: CallbackQuery):
 @router.callback_query(F.data == "topics_menu")
 async def cb_topics_menu(callback: CallbackQuery):
     await callback.message.edit_text(
-        "📚 <b>16 ta Mavzu ro'yxati:</b>\nKerakli mavzuni tanlang:",
+        "📚 <b>16 ta Mavzu bo'yicha kalkulyator va ma'lumotlar:</b>\nKerakli mavzuni tanlang yoki kalkulyatorni oching:",
         parse_mode="HTML",
-        reply_markup=get_topics_keyboard()
+        reply_markup=get_topics_keyboard(WEBAPP_URL)
     )
     await callback.answer()
 
 @router.callback_query(F.data.startswith("t_"))
 async def cb_topic_item(callback: CallbackQuery):
+    topic_num = callback.data.replace("t_", "")
     desc = TOPIC_DESCRIPTIONS.get(callback.data, "Mavzu ma'lumoti topilmadi.")
     text = (
         f"{desc}\n\n"
         f"<i>Ushbu mavzu bo'yicha istalgan misolni qadamma-qadam yechish uchun "
-        f"pastdagi Mini Appni oching:</i>"
+        f"pastdagi kalkulyator tugmasini bosing:</i>"
     )
     await callback.message.edit_text(
         text,
         parse_mode="HTML",
-        reply_markup=get_inline_webapp_keyboard(WEBAPP_URL)
+        reply_markup=get_topic_detail_keyboard(topic_num, WEBAPP_URL)
     )
     await callback.answer()
 

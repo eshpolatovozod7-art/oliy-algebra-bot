@@ -35,10 +35,41 @@ const app = {
         this.renderRankGrid();
         this.renderHomogGrid();
 
-        // Standart boshlang'ich namunalar
-        this.loadSample(1);
+        // Barcha 15 ta mavzu uchun namunaviy qiymatlarni dastlabki yuklash
+        for (let i = 1; i <= 15; i++) {
+            this.loadSample(i);
+        }
+
         this.onAmaliyFileChange("1");
-        this.switchMode('files');
+
+        // URL parametrlari bo'yicha rejimni tanlash (?mode=topics&topic=3)
+        let modeParam = null;
+        let topicParam = null;
+        let fileParam = null;
+        try {
+            if (window.location && window.location.search) {
+                const urlParams = new URLSearchParams(window.location.search);
+                modeParam = urlParams.get('mode');
+                topicParam = urlParams.get('topic');
+                fileParam = urlParams.get('file');
+            }
+        } catch (e) {}
+
+        if (modeParam === 'topics' || (window.location && window.location.hash === '#topics')) {
+            this.switchMode('topics');
+            if (topicParam) {
+                this.onTopicSelect(topicParam);
+            }
+        } else {
+            this.switchMode('files');
+            if (fileParam) {
+                const fSel = document.getElementById('amaliy-file-select');
+                if (fSel) {
+                    fSel.value = fileParam;
+                    this.onAmaliyFileChange(fileParam);
+                }
+            }
+        }
     },
 
     // --- MODE SWITCHER (FAYLLAR / MAVZULAR) ---
@@ -49,16 +80,18 @@ const app = {
         const secTopics = document.getElementById('sec-topics-category');
 
         if (mode === 'files') {
-            btnFiles.classList.add('active');
-            btnTopics.classList.remove('active');
-            secFiles.style.display = 'block';
-            secTopics.style.display = 'none';
+            if (btnFiles) btnFiles.classList.add('active');
+            if (btnTopics) btnTopics.classList.remove('active');
+            if (secFiles) secFiles.style.display = 'block';
+            if (secTopics) secTopics.style.display = 'none';
         } else {
-            btnTopics.classList.add('active');
-            btnFiles.classList.remove('active');
-            secTopics.style.display = 'block';
-            secFiles.style.display = 'none';
-            this.onTopicSelect(document.getElementById('main-topic-select').value || '1');
+            if (btnTopics) btnTopics.classList.add('active');
+            if (btnFiles) btnFiles.classList.remove('active');
+            if (secTopics) secTopics.style.display = 'block';
+            if (secFiles) secFiles.style.display = 'none';
+            const selEl = document.getElementById('main-topic-select');
+            const topicVal = selEl ? selEl.value : '1';
+            this.onTopicSelect(topicVal || '1');
         }
     },
 
@@ -127,6 +160,10 @@ const app = {
 
     // --- MAVZU TANLASH ---
     onTopicSelect(topicNum) {
+        const sel = document.getElementById('main-topic-select');
+        if (sel && sel.value !== String(topicNum)) {
+            sel.value = String(topicNum);
+        }
         document.querySelectorAll('#sec-topics-category .topic-section').forEach(sec => sec.classList.remove('active'));
         const target = document.getElementById(`sec-topic-${topicNum}`);
         if (target) {
@@ -136,7 +173,9 @@ const app = {
     },
 
     quickSample(topicNum) {
-        document.getElementById('main-topic-select').value = topicNum;
+        this.switchMode('topics');
+        const sel = document.getElementById('main-topic-select');
+        if (sel) sel.value = String(topicNum);
         this.onTopicSelect(topicNum);
         this.loadSample(topicNum);
 
@@ -272,7 +311,7 @@ const app = {
             mat[i] = [];
             for (let j = 0; j < c; j++) {
                 const el = document.getElementById(`cell-${name}-${i}-${j}`);
-                mat[i][j] = el ? el.value.trim() : '0';
+                mat[i][j] = (el && el.value !== undefined && el.value !== null) ? String(el.value).trim() : '0';
             }
         }
         return mat;
@@ -284,7 +323,7 @@ const app = {
         for (let i = 0; i < mat.length; i++) {
             for (let j = 0; j < mat[i].length; j++) {
                 const el = document.getElementById(`cell-${name}-${i}-${j}`);
-                if (el) el.value = mat[i][j];
+                if (el) el.value = String(mat[i][j]);
             }
         }
     },
@@ -403,7 +442,7 @@ const app = {
             mat[i] = [];
             for (let j = 0; j < n; j++) {
                 const el = document.getElementById(`cell-${prefix}-${i}-${j}`);
-                mat[i][j] = el ? el.value.trim() : '0';
+                mat[i][j] = (el && el.value !== undefined && el.value !== null) ? String(el.value).trim() : '0';
             }
         }
         return mat;
@@ -455,7 +494,7 @@ const app = {
             A[i] = [];
             for (let j = 0; j < vars; j++) {
                 const el = document.getElementById(`cell-sle-A-${i}-${j}`);
-                A[i][j] = el ? el.value.trim() : '0';
+                A[i][j] = (el && el.value !== undefined && el.value !== null) ? String(el.value).trim() : '0';
             }
         }
         return A;
@@ -466,7 +505,7 @@ const app = {
         const B = [];
         for (let i = 0; i < eq; i++) {
             const el = document.getElementById(`cell-sle-B-${i}`);
-            B[i] = el ? el.value.trim() : '0';
+            B[i] = (el && el.value !== undefined && el.value !== null) ? String(el.value).trim() : '0';
         }
         return B;
     },
@@ -566,7 +605,7 @@ const app = {
             mat[i] = [];
             for (let j = 0; j < c; j++) {
                 const el = document.getElementById(`cell-${prefix}-${i}-${j}`);
-                mat[i][j] = el ? el.value.trim() : '0';
+                mat[i][j] = (el && el.value !== undefined && el.value !== null) ? String(el.value).trim() : '0';
             }
         }
         return mat;
@@ -600,7 +639,8 @@ const app = {
                 res.steps.push(MatrixSolver.toHTML(res.result));
             } else if (op === 'scalar') {
                 title = "1-Mavzu: Songa ko'paytirish (k · A)";
-                const k = document.getElementById('matrix-scalar-k').value.trim();
+                const kEl = document.getElementById('matrix-scalar-k');
+                const k = kEl ? String(kEl.value).trim() : '1';
                 res = MatrixSolver.multiplyScalar(k, A);
                 res.steps.push(MatrixSolver.toHTML(res.result));
             } else {
@@ -615,6 +655,7 @@ const app = {
                     title = "1-Mavzu: Matritsalar ko'paytmasi (A · B)";
                     res = MatrixSolver.multiply(A, B);
                 }
+                if (!res) throw new Error("Hisoblash uchun amal noto'g'ri tanlandi!");
                 res.steps.push(`<div class="result-badge">Natija:</div>`);
                 res.steps.push(MatrixSolver.toHTML(res.result));
             }
@@ -647,7 +688,9 @@ const app = {
         try {
             const mat = this.getGenericSquareValues('lap', this.sizes.lap);
             const type = document.getElementById('laplace-type').value;
-            const idx = parseInt(document.getElementById('laplace-idx').value, 10) - 1;
+            let idx = parseInt(document.getElementById('laplace-idx').value, 10) - 1;
+            if (isNaN(idx) || idx < 0) idx = 0;
+            if (idx >= this.sizes.lap) idx = this.sizes.lap - 1;
             const res = MatrixSolver.laplaceExpansion(mat, type, idx);
             res.steps.push(`<div class="result-badge">|A| = ${res.result.toString()}</div>`);
             this.showSolution("4-Mavzu: Minor va Laplas yoyilmasi", res.steps);
@@ -724,6 +767,9 @@ const app = {
                 else if (op === 'mul') { title = "9-Mavzu: Ko'paytirish"; res = ComplexNumber.mul(z1, z2); }
                 else if (op === 'div') { title = "9-Mavzu: Bo'lish"; res = ComplexNumber.div(z1, z2); }
             }
+            if (!res || !res.steps) {
+                throw new Error("Hisoblash uchun amal noto'g'ri tanlandi!");
+            }
             this.showSolution(title, res.steps);
         } catch (e) { alert("Xatolik: " + e.message); }
     },
@@ -733,6 +779,7 @@ const app = {
         try {
             const z = ComplexNumber.parse(document.getElementById('complex10-z').value);
             const n = parseInt(document.getElementById('complex10-n').value, 10);
+            if (isNaN(n) || n < 1) throw new Error("Daraja/ildiz ko'rsatkichi kamida 1 bo'lishi kerak!");
             let res, title;
             if (type === 'moivre') {
                 title = `10-Mavzu: Muavr formulasi (z^${n})`;
@@ -860,6 +907,10 @@ const app = {
         }
     }
 };
+
+if (typeof window !== 'undefined') {
+    window.app = app;
+}
 
 window.addEventListener('DOMContentLoaded', () => {
     app.init();

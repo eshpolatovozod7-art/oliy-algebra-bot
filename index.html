@@ -20,11 +20,11 @@
 
     <main class="container">
         <!-- MODE SWITCHER (FAYLLAR / MAVZULAR) -->
-        <div style="display: flex; gap: 8px; margin-bottom: 12px;">
-            <button id="btn-mode-files" class="tab-btn active" style="flex: 1; justify-content: center; padding: 10px;" onclick="app.switchMode('files')">
+        <div class="mode-switch-wrap">
+            <button id="btn-mode-files" class="tab-btn active" onclick="app.switchMode('files')">
                 📁 Amaliy Fayllar (1-15)
             </button>
-            <button id="btn-mode-topics" class="tab-btn" style="flex: 1; justify-content: center; padding: 10px;" onclick="app.switchMode('topics')">
+            <button id="btn-mode-topics" class="tab-btn" onclick="app.switchMode('topics')">
                 🧮 16 ta Mavzu Kalkulyatori
             </button>
         </div>

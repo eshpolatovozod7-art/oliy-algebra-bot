@@ -78,6 +78,10 @@ class RationalFractionSolver {
     }
 }
 
+if (typeof window !== 'undefined') {
+    window.RationalFractionSolver = RationalFractionSolver;
+}
+
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = RationalFractionSolver;
 }

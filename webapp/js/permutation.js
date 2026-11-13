@@ -112,6 +112,10 @@ class PermutationSolver {
     }
 }
 
+if (typeof window !== 'undefined') {
+    window.PermutationSolver = PermutationSolver;
+}
+
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = PermutationSolver;
 }

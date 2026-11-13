@@ -682,6 +682,10 @@ class MatrixSolver {
     }
 }
 
+if (typeof window !== 'undefined') {
+    window.MatrixSolver = MatrixSolver;
+}
+
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = MatrixSolver;
 }

@@ -239,6 +239,10 @@ class HigherDegreeSolver {
     }
 }
 
+if (typeof window !== 'undefined') {
+    window.HigherDegreeSolver = HigherDegreeSolver;
+}
+
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = HigherDegreeSolver;
 }

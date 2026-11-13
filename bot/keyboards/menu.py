@@ -90,9 +90,17 @@ def get_task_solution_keyboard(file_id: int, webapp_url: str) -> InlineKeyboardM
     ]
     return InlineKeyboardMarkup(inline_keyboard=buttons)
 
-def get_topics_keyboard() -> InlineKeyboardMarkup:
+def get_topics_keyboard(webapp_url: str = "") -> InlineKeyboardMarkup:
     """16 ta Mavzu bo'yicha navigatsiya tugmalari"""
-    buttons = [
+    buttons = []
+    if webapp_url:
+        buttons.append([
+            InlineKeyboardButton(
+                text="🧮 16 ta Mavzu Kalkulyatori (Mini App)",
+                web_app=WebAppInfo(url=f"{webapp_url}?mode=topics")
+            )
+        ])
+    buttons.extend([
         [
             InlineKeyboardButton(text="1. Matritsalar", callback_data="t_1"),
             InlineKeyboardButton(text="2. O'rin almashtirish", callback_data="t_2")
@@ -127,6 +135,22 @@ def get_topics_keyboard() -> InlineKeyboardMarkup:
         ],
         [
             InlineKeyboardButton(text="◀️ Asosiy menyuga qaytish", callback_data="back_to_main")
+        ]
+    ])
+    return InlineKeyboardMarkup(inline_keyboard=buttons)
+
+def get_topic_detail_keyboard(topic_num: str, webapp_url: str) -> InlineKeyboardMarkup:
+    """Alohida mavzu sahifasi ostidagi tugmalar"""
+    buttons = [
+        [
+            InlineKeyboardButton(
+                text="🧮 Ushbu mavzu kalkulyatorini ochish",
+                web_app=WebAppInfo(url=f"{webapp_url}?mode=topics&topic={topic_num}")
+            )
+        ],
+        [
+            InlineKeyboardButton(text="📚 Barcha 16 ta mavzu", callback_data="topics_menu"),
+            InlineKeyboardButton(text="📁 Amaliy fayllar", callback_data="amaliy_files_menu")
         ]
     ]
     return InlineKeyboardMarkup(inline_keyboard=buttons)

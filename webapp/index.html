@@ -66,14 +66,18 @@
 
                 <div style="display: flex; gap: 8px; margin-top: 14px;">
                     <button class="btn-primary" style="flex: 1;" onclick="app.solveAmaliyTask()">
-                        ⚡ Ushbu misolni yechish
+                        ⚡ Tanlangan misolni yechish
                     </button>
+                </div>
+
+                <div id="amaliy-tasks-summary" style="margin-top: 14px; font-size: 0.85rem; color: var(--hint-color);">
+                    <!-- Barcha misollar ro'yxati chiqadi -->
                 </div>
             </div>
         </section>
 
         <!-- 2. MAVZULAR BO'YICHA ERKIN KALKULYATOR BO'LIMI -->
-        <section id="sec-topics-category" class="topic-section">
+        <div id="sec-topics-category" style="display: none;">
             <div class="topic-picker-card">
                 <div class="topic-picker-label">
                     <span>📚 16 ta Mavzudan birini tanlang:</span>
@@ -508,7 +512,7 @@
                 </div>
             </div>
         </section>
-        </section> <!-- /sec-topics-category -->
+        </div> <!-- /sec-topics-category -->
 
         <!-- YECHIM CONTAINER -->
         <div id="solution-container" class="solution-container">

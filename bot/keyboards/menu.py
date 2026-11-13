@@ -56,6 +56,40 @@ def get_amaliy_files_keyboard() -> InlineKeyboardMarkup:
     ]
     return InlineKeyboardMarkup(inline_keyboard=buttons)
 
+def get_amaliy_tasks_keyboard(file_id: int, tasks: list, webapp_url: str) -> InlineKeyboardMarkup:
+    """Amaliy fayl ichidagi misollarni yechish tugmalari"""
+    buttons = []
+    for t in tasks:
+        buttons.append([
+            InlineKeyboardButton(text=f"⚡ {t['name']}", callback_data=f"solvetask_{t['id']}")
+        ])
+    buttons.append([
+        InlineKeyboardButton(
+            text="🚀 Mini Appda interaktiv yechish",
+            web_app=WebAppInfo(url=webapp_url)
+        )
+    ])
+    buttons.append([
+        InlineKeyboardButton(text="◀️ Barcha amaliy fayllar", callback_data="amaliy_files_menu")
+    ])
+    return InlineKeyboardMarkup(inline_keyboard=buttons)
+
+def get_task_solution_keyboard(file_id: int, webapp_url: str) -> InlineKeyboardMarkup:
+    """Misol yechimi ostidagi navigatsiya tugmalari"""
+    buttons = [
+        [
+            InlineKeyboardButton(
+                text="🚀 Mini Appda o'z misolingizni yechish",
+                web_app=WebAppInfo(url=webapp_url)
+            )
+        ],
+        [
+            InlineKeyboardButton(text=f"◀️ {file_id}-Amaliy misollariga qaytish", callback_data=f"af_{file_id}"),
+            InlineKeyboardButton(text="📁 Barcha amaliylar", callback_data="amaliy_files_menu")
+        ]
+    ]
+    return InlineKeyboardMarkup(inline_keyboard=buttons)
+
 def get_topics_keyboard() -> InlineKeyboardMarkup:
     """16 ta Mavzu bo'yicha navigatsiya tugmalari"""
     buttons = [

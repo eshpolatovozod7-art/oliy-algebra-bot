@@ -51,13 +51,13 @@ const app = {
         if (mode === 'files') {
             btnFiles.classList.add('active');
             btnTopics.classList.remove('active');
-            secFiles.classList.add('active');
-            secTopics.classList.remove('active');
+            secFiles.style.display = 'block';
+            secTopics.style.display = 'none';
         } else {
             btnTopics.classList.add('active');
             btnFiles.classList.remove('active');
-            secTopics.classList.add('active');
-            secFiles.classList.remove('active');
+            secTopics.style.display = 'block';
+            secFiles.style.display = 'none';
             this.onTopicSelect(document.getElementById('main-topic-select').value || '1');
         }
     },
@@ -81,6 +81,17 @@ const app = {
             taskSelect.appendChild(opt);
         });
 
+        // Barcha misollar ro'yxatini chiqarish
+        const summaryEl = document.getElementById('amaliy-tasks-summary');
+        if (summaryEl) {
+            let listHtml = `<div style="font-weight: 600; margin-bottom: 6px; color: var(--text-color);">📋 Hujjatdagi barcha misollar (${data.tasks.length} ta):</div><ul style="padding-left: 18px; margin: 0;">`;
+            data.tasks.forEach((t) => {
+                listHtml += `<li style="margin-bottom: 4px;"><b>${t.name}:</b> ${this.renderMathText(t.shart)}</li>`;
+            });
+            listHtml += '</ul>';
+            summaryEl.innerHTML = listHtml;
+        }
+
         if (data.tasks.length > 0) {
             this.onAmaliyTaskChange(data.tasks[0].id);
         }
@@ -96,7 +107,9 @@ const app = {
         if (!task) return;
 
         const shartEl = document.getElementById('amaliy-shart-text');
-        if (shartEl) shartEl.innerText = task.shart;
+        if (shartEl) {
+            shartEl.innerHTML = this.renderMathText(task.shart);
+        }
     },
 
     solveAmaliyTask() {
@@ -114,7 +127,7 @@ const app = {
 
     // --- MAVZU TANLASH ---
     onTopicSelect(topicNum) {
-        document.querySelectorAll('.topic-section').forEach(sec => sec.classList.remove('active'));
+        document.querySelectorAll('#sec-topics-category .topic-section').forEach(sec => sec.classList.remove('active'));
         const target = document.getElementById(`sec-topic-${topicNum}`);
         if (target) {
             target.classList.add('active');

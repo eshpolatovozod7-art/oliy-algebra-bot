@@ -128,6 +128,16 @@ const AMALIY_DATABASE = {
         file: "Amaliy 3  n-tartibli determinantlar va ularning xossalari.pdf",
         tasks: [
             {
+                id: "3_1",
+                name: "1-topshiriq: 2-tartibli determinant",
+                shart: "det [[5, 2], [7, 3]] = 5 · 3 - 2 · 7",
+                solve: () => {
+                    const res = MatrixSolver.determinant([[5, 2], [7, 3]]);
+                    res.steps.push(`<div class="result-badge">Natija: |A| = ${res.result.toString()}</div>`);
+                    app.showSolution("3-Amaliy, 1-topshiriq (2x2 Determinant)", res.steps);
+                }
+            },
+            {
                 id: "3_2",
                 name: "2-topshiriq: 3x3 Determinant (Sarryus qoidasi)",
                 shart: "det [[2, 1, 1], [1, 3, 2], [1, 0, 0]]",

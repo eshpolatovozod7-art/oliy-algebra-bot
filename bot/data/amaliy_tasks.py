@@ -261,22 +261,28 @@ AMALIY_DATA = {
                 "solution": "📝 <b>7-Amaliy, 1-topshiriq yechimi:</b>\n\nA = [[1, 2, 3, 4], [2, 4, 6, 8], [3, 6, 9, 12]]\nElementar almashtirishlar:\n• 2-satrdan 2 · (1-satr)ni ayiramiz -> [0, 0, 0, 0]\n• 3-satrdan 3 · (1-satr)ni ayiramiz -> [0, 0, 0, 0]\n\nPog'onasimon shakli:\n[[1, 2, 3, 4], [0, 0, 0, 0], [0, 0, 0, 0]]\nNolmas satrlar soni 1 ta bo'lgani uchun:\n<b>rank(A) = 1</b>\n\n✅ <b>Javob:</b> rank(A) = <b>1</b>"
             },
             {
-                "id": 'af7_t2',
-                "name": '2-topshiriq: 4x4 Matritsa rangi',
-                "shart": 'A = [[1, 3, 5, -1], [2, -1, -3, 4], [5, 1, -1, 7], [7, 7, 9, 1]]',
-                "solution": "📝 <b>7-Amaliy, 2-topshiriq yechimi:</b>\n\nA = [[1, 3, 5, -1], [2, -1, -3, 4], [5, 1, -1, 7], [7, 7, 9, 1]]\n1-qadam: 1-ustunni nollaymiz:\n[[1, 3, 5, -1], [0, -7, -13, 6], [0, -14, -26, 12], [0, -14, -26, 8]]\n\n2-qadam: 3-satr 2-satrning 2 barobari bo'lgani uchun nolga aylanadi:\n[[1, 3, 5, -1], [0, -7, -13, 6], [0, 0, 0, 0], [0, 0, 0, -4]]\n\n3 ta nolmas satr hosil bo'ladi. Demak:\n<b>rank(A) = 3</b>\n\n✅ <b>Javob:</b> rank(A) = <b>3</b>"
+                "id": 'af7_6a',
+                "name": '6-topshiriq (a): 4x4 Matritsa rangi',
+                "shart": 'A = [[0, 4, 10, 1], [4, 8, 18, 7], [10, 18, 40, 17], [1, 7, 17, 3]]',
+                "solution": "📝 <b>7-Amaliy, 6-topshiriq (a) yechimi:</b>\n\nA = [[0, 4, 10, 1], [4, 8, 18, 7], [10, 18, 40, 17], [1, 7, 17, 3]]\nElementar satr almashtirishlari (Gauss usuli):\n1) 1- va 4-satrlar o'rnini almashtiramiz: S1 <-> S4\n2) 2-satrdan 4·S1, 3-satrdan 10·S1 ayiramiz.\n3) Pog'onasimon ko'rinishga keltirilganda 2 ta nolmas satr qoladi.\n\n✅ <b>Javob:</b> rank(A) = <b>2</b>"
             },
             {
-                "id": 'af7_t3',
-                "name": "3-topshiriq: O'ralgan minorlar usuli",
-                "shart": 'A = [[2, 1, 1], [3, 1, 2], [1, 0, 1]]',
-                "solution": "📝 <b>7-Amaliy, 3-topshiriq yechimi:</b>\n\nA = [[2, 1, 1], [3, 1, 2], [1, 0, 1]]\nO'ralgan minorlar usuli:\n1) 1-tartibli minor: M_1 = |2| = 2 ≠ 0\n2) Uni o'rovchi 2-tartibli minor: M_2 = |[2, 1], [3, 1]| = 2 - 3 = -1 ≠ 0\n3) 3-tartibli yagona minor (matritsaning o'zi determinanti):\n   |A| = 2(1 - 0) - 1(3 - 2) + 1(0 - 1) = 2 - 1 - 1 = 0\n\nBarcha 3-tartibli minorlar 0 ga teng, noldan farqli eng katta minor 2-tartibli bo'lgani uchun:\n<b>rank(A) = 2</b>\n\n✅ <b>Javob:</b> rank(A) = <b>2</b>"
+                "id": 'af7_6b',
+                "name": '6-topshiriq (b): 4x4 Matritsa rangi',
+                "shart": 'A = [[2, 1, 11, 2], [1, 0, 4, -1], [11, 4, 56, 5], [2, -1, 5, -6]]',
+                "solution": "📝 <b>7-Amaliy, 6-topshiriq (b) yechimi:</b>\n\nA = [[2, 1, 11, 2], [1, 0, 4, -1], [11, 4, 56, 5], [2, -1, 5, -6]]\n1) 1- va 2-satrlar o'rnini almashtiramiz: S1 <-> S2\n2) Elementar almashtirishlar natijasida:\n• 3- va 4-satrlar dastlabki satrlarning chiziqli kombinatsiyasidan iborat bo'lib, nolga aylanadi.\n• Faqat 2 ta chiziqli erkli satr qoladi.\n\n✅ <b>Javob:</b> rank(A) = <b>2</b>"
+            },
+            {
+                "id": 'af7_7a',
+                "name": "7-topshiriq (a): O'ralgan minorlar usuli (3x5)",
+                "shart": 'A = [[2, -1, 3, -2, 4], [4, -2, 5, 1, 7], [2, -1, 1, 8, 2]]',
+                "solution": "📝 <b>7-Amaliy, 7-topshiriq (a) yechimi:</b>\n\nA = [[2, -1, 3, -2, 4], [4, -2, 5, 1, 7], [2, -1, 1, 8, 2]]\nO'ralgan minorlar usuli:\n1) M_2 = |[-1, 3], [-2, 5]| = -5 - (-6) = 1 ≠ 0 (2-tartibli noldan farqli minor).\n2) Ushbu minorni o'rovchi barcha 3-tartibli minorlarni hisoblaymiz:\n• M_3^(1) = 0\n• M_3^(2) = 0\n• M_3^(3) = 0\nBarcha o'rovchi 3-tartibli minorlar 0 ga teng.\n\n✅ <b>Javob:</b> rank(A) = <b>2</b>"
             },
             {
                 "id": 'af7_var5',
-                "name": '⭐ 5-Variant: Matritsa rangi',
-                "shart": 'A = [[1, 2, 1, 3], [2, 4, 2, 6], [3, 6, 3, 9], [1, 1, 1, 1]]',
-                "solution": "📝 <b>7-Amaliy, 5-Variant yechimi:</b>\n\nA = [[1, 2, 1, 3], [2, 4, 2, 6], [3, 6, 3, 9], [1, 1, 1, 1]]\n2-satr va 3-satr 1-satrga proporsional bo'lgani uchun nollanadi:\n[[1, 2, 1, 3], [1, 1, 1, 1], [0, 0, 0, 0], [0, 0, 0, 0]]\n\n1-satrdan 2-satrni ayirsak: [0, 1, 0, 2]\nNolmas satrlar soni 2 ta. Demak:\n<b>rank(A) = 2</b>\n\n✅ <b>Javob:</b> rank(A) = <b>2</b>"
+                "name": '⭐ 5-Variant: 6-topshiriq (e) 5x5 Matritsa rangi',
+                "shart": 'A = [[1, 0, 1, 0, 0], [1, 1, 0, 0, 0], [0, 1, 1, 0, 0], [0, 0, 1, 1, 0], [0, 1, 0, 1, 1]]',
+                "solution": "📝 <b>7-Amaliy, 5-Variant yechimi:</b>\n\n5x5 matritsa rangi elementar almashtirishlar yordamida hisoblanadi.\nPog'onasimon ko'rinishga keltirilganda 4 ta chiziqli erkli satr mavjud bo'ladi.\n\n✅ <b>Javob:</b> rank(A) = <b>4</b>"
             },
         ]
     },
@@ -285,22 +291,52 @@ AMALIY_DATA = {
         "file": 'Amaliy_8_Bir_jinsli_chiziqli_tenglamalar_sistemasi_Kroneker_Kopelli.pdf',
         "tasks": [
             {
-                "id": 'af8_t1',
-                "name": '1-topshiriq: AX = 0 bir jinsli sistema FYET',
-                "shart": '2x1 - 4x2 + 5x3 + 3x4 = 0\n3x1 - 6x2 + 4x3 + 2x4 = 0',
-                "solution": "📝 <b>8-Amaliy, 1-topshiriq yechimi:</b>\n\nSistema koeffitsientlar matritsasi:\nA = [[2, -4, 5, 3], [3, -6, 4, 2]]\nPog'onasimon shaklga keltiramiz:\n• rank(A) = 2, noma'lumlar soni n = 4\n• Fundamental yechimlar tizimi o'lchami: k = n - r = 4 - 2 = 2 ta vektor\n\nErkin noma'lumlar: x2 va x4 deb olsak:\n1) x2 = 1, x4 = 0 => e1 = (2, 1, 0, 0)^T\n2) x2 = 0, x4 = 1 => e2 = (-2/7, 0, -5/7, 1)^T\n\nUmumiy yechim: X = c1 · e1 + c2 · e2 (c1, c2 ∈ ℝ)\n\n✅ <b>Javob:</b> FYET 2 ta vektordan iborat: e1 va e2."
+                "id": 'af8_1c',
+                "name": '1-topshiriq (c): 4x3 Bir jinsli sistema (Nolmas yechim)',
+                "shart": 'x1 + 3x2 + 2x3 = 0\n2x1 - x2 + 3x3 = 0\n3x1 - 5x2 + 4x3 = 0\nx1 + 17x2 + 4x3 = 0',
+                "solution": "📝 <b>8-Amaliy, 1-topshiriq (c) yechimi:</b>\n\nKoeffitsientlar matritsasi:\nA = [[1, 3, 2], [2, -1, 3], [3, -5, 4], [1, 17, 4]]\nElementar satr almashtirishlari orqali:\n• S2 - 2·S1 => [0, -7, -1]\n• S3 - 3·S1 => [0, -14, -2] (2-satrga proporsional)\n• S4 - S1 => [0, 14, 2] (2-satrga proporsional)\n\nNatijada oxirgi ikki satr to'liq nolga aylanadi.\n• rank(A) = 2, noma'lumlar n = 3\n• rank(A) < n bo'lgani sababli sistema <b>nolmas (cheksiz ko'p) yechimlarga ega!</b>\n\nFundamental yechimlar tizimi (k = 3 - 2 = 1 ta vektor):\nx3 = 7 deb olsak, x2 = -1, x1 = -11.\nBazis vektor: <b>e1 = (-11, -1, 7)^T</b>\n\n✅ <b>Umumiy yechim:</b> X = c · (-11, -1, 7)^T, c ∈ ℝ"
             },
             {
-                "id": 'af8_t2',
-                "name": '2-topshiriq: Kroneker-Kapelli teoremasi',
-                "shart": "Sistema birgalikda bo'lish shartini tekshirish: rank(A) = rank(A|B)",
-                "solution": "📝 <b>8-Amaliy, 2-topshiriq yechimi:</b>\n\n<b>Kroneker-Kapelli teoremasi:</b>\nChiziqli tenglamalar sistemasi birgalikda (kamida bitta yechimga ega) bo'lishi uchun asosiy matritsa rangi kengaytirilgan matritsa rangiga teng bo'lishi zarur va yetarlidir:\n<b>rank(A) = rank(A|B)</b>\n\n• Agar rank(A) < rank(A|B) bo'lsa -> Sistema birgalikda emas (yechim yo'q).\n• Agar rank(A) = rank(A|B) = n bo'lsa -> Yagona yechim mavjud.\n• Agar rank(A) = rank(A|B) < n bo'lsa -> Cheksiz ko'p yechim mavjud (n - r ta erkin parametr).\n\n✅ <b>Xulosa:</b> Birgalikda bo'lish sharti: <code>rank(A) == rank(A|B)</code>."
+                "id": 'af8_1d',
+                "name": '1-topshiriq (d): 4x3 Bir jinsli sistema (Trivial yechim)',
+                "shart": '3x1 + 5x2 + 2x3 = 0\n4x1 + 7x2 + 5x3 = 0\nx1 + x2 - 4x3 = 0\n2x1 + 9x2 + 6x3 = 0',
+                "solution": "📝 <b>8-Amaliy, 1-topshiriq (d) yechimi:</b>\n\nKoeffitsientlar matritsasi:\nA = [[3, 5, 2], [4, 7, 5], [1, 1, -4], [2, 9, 6]]\nGauss almashtirishlari orqali tekshiramiz:\n• rank(A) = 3\n• Noma'lumlar soni n = 3\n\nrank(A) = n bo'lganligi sababli, bir jinsli sistema faqat <b>yagona nol (trivial) yechimga ega:</b>\n\n✅ <b>Javob:</b> x1 = 0, x2 = 0, x3 = 0"
+            },
+            {
+                "id": 'af8_2a',
+                "name": '2-topshiriq (a): 3x4 FYET va umumiy yechim',
+                "shart": '2x1 - 4x2 + 5x3 + 3x4 = 0\n3x1 - 6x2 + 4x3 + 2x4 = 0\n4x1 - 8x2 + 17x3 + 11x4 = 0',
+                "solution": "📝 <b>8-Amaliy, 2-topshiriq (a) yechimi:</b>\n\nA = [[2, -4, 5, 3], [3, -6, 4, 2], [4, -8, 17, 11]]\nPog'onasimon shaklga keltirish:\n• 1-satrni 3 ga, 2-satrni 2 ga ko'paytirib ayirsak: [0, 0, -7, -5]\n• 3-satr 2-satr bilan chiziqli bog'liq bo'lib nolga aylanadi.\n• rank(A) = 2, n = 4 => FYET o'lchami: k = 4 - 2 = 2 ta bazis vektor.\n\nErkin noma'lumlar: x2 va x4:\n1) x2 = 1, x4 = 0 => x3 = 0, x1 = 2 => <b>e1 = (2, 1, 0, 0)^T</b>\n2) x2 = 0, x4 = 7 => x3 = -5, x1 = 2 => <b>e2 = (2, 0, -5, 7)^T</b>\n\n✅ <b>Umumiy yechim:</b> X = c1 · (2, 1, 0, 0)^T + c2 · (2, 0, -5, 7)^T, c1, c2 ∈ ℝ"
+            },
+            {
+                "id": 'af8_2b',
+                "name": '2-topshiriq (b): 4x4 FYET va umumiy yechim',
+                "shart": 'x1 + 2x2 + 4x3 - 3x4 = 0\n3x1 + 5x2 + 6x3 - 4x4 = 0\n4x1 + 5x2 - 2x3 + 3x4 = 0\n3x1 + 8x2 + 24x3 - 19x4 = 0',
+                "solution": "📝 <b>8-Amaliy, 2-topshiriq (b) yechimi:</b>\n\nA = [[1, 2, 4, -3], [3, 5, 6, -4], [4, 5, -2, 3], [3, 8, 24, -19]]\nElementar satr almashtirishlari:\n• S2 - 3S1 => [0, -1, -6, 5]\n• S3 - 4S1 => [0, -3, -18, 15] = 3·S2 (nol satr)\n• S4 - 3S1 => [0, 2, 12, -10] = -2·S2 (nol satr)\n\n• rank(A) = 2, noma'lumlar n = 4 => k = 4 - 2 = 2 ta vektor.\nErkin noma'lumlar: x3 va x4 deb olamiz:\n1) x3 = 1, x4 = 0 => x2 = -6, x1 = 8 => <b>e1 = (8, -6, 1, 0)^T</b>\n2) x3 = 0, x4 = 1 => x2 = 5, x1 = -7 => <b>e2 = (-7, 5, 0, 1)^T</b>\n\n✅ <b>Umumiy yechim:</b> X = c1 · (8, -6, 1, 0)^T + c2 · (-7, 5, 0, 1)^T"
+            },
+            {
+                "id": 'af8_2c',
+                "name": '2-topshiriq (c): 4x5 FYET va umumiy yechim',
+                "shart": '6x1 - 2x2 + 2x3 + 5x4 + 7x5 = 0\n9x1 - 3x2 + 4x3 + 8x4 + 9x5 = 0\n6x1 - 2x2 + 6x3 + 7x4 + x5 = 0\n3x1 - x2 + 4x3 + 4x4 - x5 = 0',
+                "solution": "📝 <b>8-Amaliy, 2-topshiriq (c) yechimi:</b>\n\n• rank(A) = 2, n = 5 ta noma'lum.\n• FYET o'lchami: k = 5 - 2 = 3 ta bazis vektor.\nErkin noma'lumlar: x2, x4, x5.\n\nBazis vektorlar:\n1) x2 = 3 => <b>e1 = (1, 3, 0, 0, 0)^T</b>\n2) x4 = 6 => <b>e2 = (-4, 0, -3, 6, 0)^T</b>\n3) x5 = 6 => <b>e3 = (-10, 0, 9, 0, 6)^T</b>\n\n✅ <b>Umumiy yechim:</b> X = c1·e1 + c2·e2 + c3·e3, c1, c2, c3 ∈ ℝ"
+            },
+            {
+                "id": 'af8_2d',
+                "name": '2-topshiriq (d): 6x6 Bir jinsli sistema FYET',
+                "shart": 'x1 - x3 = 0\nx2 - x4 = 0\n-x1 + x3 - x5 = 0\n-x2 + x4 - x6 = 0\n-x3 + x5 = 0\n-x4 + x6 = 0',
+                "solution": "📝 <b>8-Amaliy, 2-topshiriq (d) yechimi:</b>\n\nTenglamalarni tahlil qilamiz:\n• (x1 - x3) + (-x1 + x3 - x5) = -x5 = 0 => x5 = 0\n• -x3 + x5 = 0 => x3 = 0\n• x1 - x3 = 0 => x1 = 0\n• Xuddi shuningdek juft indekslar uchun: x6 = 0, x4 = 0, x2 = 0.\n\nAsosiy matritsaning rangi: rank(A) = 6 = n.\n\n✅ <b>Javob:</b> Sistema faqat trivial (nol) yechimga ega: x1=x2=x3=x4=x5=x6 = 0"
+            },
+            {
+                "id": 'af8_2e',
+                "name": '2-topshiriq (e): 5x6 FYET va umumiy yechim',
+                "shart": 'x1 - x3 + x5 = 0\nx2 - x4 + x6 = 0\nx1 - x2 + x5 - x6 = 0\nx2 - x3 + x6 = 0\nx1 - x4 + x5 = 0',
+                "solution": "📝 <b>8-Amaliy, 2-topshiriq (e) yechimi:</b>\n\nMatritsa rangi: rank(A) = 3, noma'lumlar n = 6.\nFYET o'lchami: k = n - r = 6 - 3 = 3 ta fundamental vektor.\n\nBazis vektorlar:\n• <b>e1 = (1, 1, 1, 1, 0, 0)^T</b>\n• <b>e2 = (-1, 0, 0, 0, 1, 0)^T</b>\n• <b>e3 = (0, -1, 0, 0, 0, 1)^T</b>\n\n✅ <b>Umumiy yechim:</b> X = c1·e1 + c2·e2 + c3·e3, c1, c2, c3 ∈ ℝ"
             },
             {
                 "id": 'af8_var5',
-                "name": '⭐ 5-Variant: FYET (Fundamental Yechimlar Tizimi)',
-                "shart": 'x1 + 2x2 - x3 + 2x4 = 0\n2x1 - x2 + 3x3 - x4 = 0',
-                "solution": "📝 <b>8-Amaliy, 5-Variant yechimi:</b>\n\nA = [[1, 2, -1, 2], [2, -1, 3, -1]]\n2-satrdan 2 · (1-satr)ni ayiramiz:\n[[1, 2, -1, 2], [0, -5, 5, -5]] => 2-satrni -5 ga bo'lamiz: [0, 1, -1, 1]\n1-satr: x1 + 2(x3 - x4) - x3 + 2x4 = x1 + x3 = 0 => x1 = -x3\n\nrank(A) = 2, n = 4 => k = 4 - 2 = 2 ta erkin o'zgaruvchi (x3, x4):\n• x3 = 1, x4 = 0 => e1 = (-1, 1, 1, 0)^T\n• x3 = 0, x4 = 1 => e2 = (0, -1, 0, 1)^T\n\nUmumiy yechim: X = c1 · e1 + c2 · e2\n\n✅ <b>Javob:</b> e1 = (-1, 1, 1, 0)^T, e2 = (0, -1, 0, 1)^T"
+                "name": '⭐ 5-Variant: 2.b topshiriq bo\'yicha FYET',
+                "shart": 'x1 + 2x2 + 4x3 - 3x4 = 0\n3x1 + 5x2 + 6x3 - 4x4 = 0\n4x1 + 5x2 - 2x3 + 3x4 = 0\n3x1 + 8x2 + 24x3 - 19x4 = 0',
+                "solution": "📝 <b>8-Amaliy, 5-Variant yechimi (2-topshiriq b-bandi):</b>\n\nA = [[1, 2, 4, -3], [3, 5, 6, -4], [4, 5, -2, 3], [3, 8, 24, -19]]\n• rank(A) = 2, n = 4 => k = 2 ta bazis vektor.\n• e1 = (8, -6, 1, 0)^T\n• e2 = (-7, 5, 0, 1)^T\n\n✅ <b>Umumiy yechim:</b> X = c1 · (8, -6, 1, 0)^T + c2 · (-7, 5, 0, 1)^T"
             },
         ]
     },

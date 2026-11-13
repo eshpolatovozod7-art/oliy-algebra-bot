@@ -872,7 +872,9 @@ const app = {
             rawSteps: steps
         };
 
-        container.scrollIntoView({ behavior: 'smooth' });
+        if (container && typeof container.scrollIntoView === 'function') {
+            container.scrollIntoView({ behavior: 'smooth' });
+        }
     },
 
     renderMathText(str) {

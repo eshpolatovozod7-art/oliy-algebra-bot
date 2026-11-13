@@ -652,58 +652,83 @@ const AMALIY_DATABASE = {
                 }
             },
             {
-                id: "af7_t2",
-                name: "2-topshiriq: 4x4 Matritsa rangi",
-                shart: "A = [[1, 3, 5, -1], [2, -1, -3, 4], [5, 1, -1, 7], [7, 7, 9, 1]]",
+                id: "af7_6a",
+                name: "6-topshiriq (a): 4x4 Matritsa rangi",
+                shart: "A = [[0, 4, 10, 1], [4, 8, 18, 7], [10, 18, 40, 17], [1, 7, 17, 3]]",
                 solve: () => {
                     const A = [
-                        [1, 3, 5, -1],
-                        [2, -1, -3, 4],
-                        [5, 1, -1, 7],
-                        [7, 7, 9, 1]
+                        [0, 4, 10, 1],
+                        [4, 8, 18, 7],
+                        [10, 18, 40, 17],
+                        [1, 7, 17, 3]
                     ];
                     const res = MatrixSolver.rank(A);
                     const steps = [
-                        `<b>Amaliy 7, 2-topshiriq:</b> $4 \\times 4$ matritsa rangini topish:`,
-                        ...res.steps,
-                        `<div class="result-badge">rank(A) = 3</div>`
-                    ];
-                    app.showSolution("7-Amaliy, 2-topshiriq", steps);
-                }
-            },
-            {
-                id: "af7_t3",
-                name: "3-topshiriq: O'ralgan minorlar usuli",
-                shart: "A = [[2, 1, 1], [3, 1, 2], [1, 0, 1]]",
-                solve: () => {
-                    const A = [[2, 1, 1], [3, 1, 2], [1, 0, 1]];
-                    const res = MatrixSolver.rank(A);
-                    const steps = [
-                        `<b>Amaliy 7, 3-topshiriq:</b> O'ralgan minorlar usulida rangni aniqlash:`,
-                        `$M_2 = \\begin{vmatrix} 2 & 1 \\\\ 3 & 1 \\end{vmatrix} = -1 \\neq 0$`,
-                        `$\\det(A) = 0$`,
+                        `<b>Amaliy 7, 6-topshiriq (a):</b> 4x4 Matritsa rangini topish:`,
                         ...res.steps,
                         `<div class="result-badge">rank(A) = 2</div>`
                     ];
-                    app.showSolution("7-Amaliy, 3-topshiriq", steps);
+                    app.showSolution("7-Amaliy, 6-topshiriq (a)", steps);
+                }
+            },
+            {
+                id: "af7_6b",
+                name: "6-topshiriq (b): 4x4 Matritsa rangi",
+                shart: "A = [[2, 1, 11, 2], [1, 0, 4, -1], [11, 4, 56, 5], [2, -1, 5, -6]]",
+                solve: () => {
+                    const A = [
+                        [2, 1, 11, 2],
+                        [1, 0, 4, -1],
+                        [11, 4, 56, 5],
+                        [2, -1, 5, -6]
+                    ];
+                    const res = MatrixSolver.rank(A);
+                    const steps = [
+                        `<b>Amaliy 7, 6-topshiriq (b):</b> 4x4 Matritsa rangini topish:`,
+                        ...res.steps,
+                        `<div class="result-badge">rank(A) = 2</div>`
+                    ];
+                    app.showSolution("7-Amaliy, 6-topshiriq (b)", steps);
+                }
+            },
+            {
+                id: "af7_7a",
+                name: "7-topshiriq (a): O'ralgan minorlar usuli (3x5)",
+                shart: "A = [[2, -1, 3, -2, 4], [4, -2, 5, 1, 7], [2, -1, 1, 8, 2]]",
+                solve: () => {
+                    const A = [
+                        [2, -1, 3, -2, 4],
+                        [4, -2, 5, 1, 7],
+                        [2, -1, 1, 8, 2]
+                    ];
+                    const res = MatrixSolver.rank(A);
+                    const steps = [
+                        `<b>Amaliy 7, 7-topshiriq (a):</b> O'ralgan minorlar usulida rangni aniqlash:`,
+                        `2-tartibli noldan farqli minor: $M_2 = \\begin{vmatrix} -1 & 3 \\\\ -2 & 5 \\end{vmatrix} = 1 \\neq 0$`,
+                        `Uni o'rovchi barcha 3-tartibli minorlar 0 ga teng.`,
+                        ...res.steps,
+                        `<div class="result-badge">rank(A) = 2</div>`
+                    ];
+                    app.showSolution("7-Amaliy, 7-topshiriq (a)", steps);
                 }
             },
             {
                 id: "af7_var5",
-                name: "⭐ 5-Variant: Matritsa rangi",
-                shart: "A = [[1, 2, 1, 3], [2, 4, 2, 6], [3, 6, 3, 9], [1, 1, 1, 1]]",
+                name: "⭐ 5-Variant: 6-topshiriq (e) 5x5 Matritsa rangi",
+                shart: "A = [[1, 0, 1, 0, 0], [1, 1, 0, 0, 0], [0, 1, 1, 0, 0], [0, 0, 1, 1, 0], [0, 1, 0, 1, 1]]",
                 solve: () => {
                     const A = [
-                        [1, 2, 1, 3],
-                        [2, 4, 2, 6],
-                        [3, 6, 3, 9],
-                        [1, 1, 1, 1]
+                        [1, 0, 1, 0, 0],
+                        [1, 1, 0, 0, 0],
+                        [0, 1, 1, 0, 0],
+                        [0, 0, 1, 1, 0],
+                        [0, 1, 0, 1, 1]
                     ];
                     const res = MatrixSolver.rank(A);
                     const steps = [
-                        `<b>Amaliy 7, 5-Variant:</b> Matritsa rangini topish:`,
+                        `<b>Amaliy 7, 5-Variant:</b> 5x5 Matritsa rangini topish:`,
                         ...res.steps,
-                        `<div class="result-badge">rank(A) = 2</div>`
+                        `<div class="result-badge">rank(A) = 4</div>`
                     ];
                     app.showSolution("7-Amaliy, 5-Variant", steps);
                 }
@@ -715,49 +740,163 @@ const AMALIY_DATABASE = {
         file: "Amaliy_8_Bir_jinsli_chiziqli_tenglamalar_sistemasi_Kroneker_Kopelli.pdf",
         tasks: [
             {
-                id: "af8_t1",
-                name: "1-topshiriq: AX = 0 bir jinsli sistema FYET",
-                shart: "2x1 - 4x2 + 5x3 + 3x4 = 0\n3x1 - 6x2 + 4x3 + 2x4 = 0",
+                id: "af8_1c",
+                name: "1-topshiriq (c): 4x3 Bir jinsli sistema (Nolmas yechim)",
+                shart: "x1 + 3x2 + 2x3 = 0, 2x1 - x2 + 3x3 = 0, 3x1 - 5x2 + 4x3 = 0, x1 + 17x2 + 4x3 = 0",
                 solve: () => {
-                    const A = [[2, -4, 5, 3], [3, -6, 4, 2]];
+                    const A = [
+                        [1, 3, 2],
+                        [2, -1, 3],
+                        [3, -5, 4],
+                        [1, 17, 4]
+                    ];
                     const res = MatrixSolver.solveHomogeneous(A);
                     const steps = [
-                        `<b>Amaliy 8, 1-topshiriq:</b> Bir jinsli sistema va FYET:`,
+                        `<b>Amaliy 8, 1-topshiriq (c):</b> Bir jinsli tenglamalar sistemasining umumiy va fundamental yechimlar sistemasi:`,
                         ...res.steps,
-                        `<div class="result-badge">FYET: $n - r = 4 - 2 = 2$ ta bazis vektor</div>`
+                        `<div class="result-badge"><b>rank(A) = 2 &lt; n = 3</b> => Nolmas yechimlar mavjud. FYET: $e_1 = (-11, -1, 7)^T$</div>`
                     ];
-                    app.showSolution("8-Amaliy, 1-topshiriq", steps);
+                    app.showSolution("8-Amaliy, 1-topshiriq (c)", steps);
                 }
             },
             {
-                id: "af8_t2",
-                name: "2-topshiriq: Kroneker-Kapelli teoremasi",
-                shart: "Sistema birgalikda bo'lish shartini tekshirish: rank(A) = rank(A|B)",
+                id: "af8_1d",
+                name: "1-topshiriq (d): 4x3 Bir jinsli sistema (Trivial yechim)",
+                shart: "3x1 + 5x2 + 2x3 = 0, 4x1 + 7x2 + 5x3 = 0, x1 + x2 - 4x3 = 0, 2x1 + 9x2 + 6x3 = 0",
                 solve: () => {
-                    const steps = [
-                        `<b>Amaliy 8, 2-topshiriq:</b> Kroneker-Kapelli teoremasi tahlili:`,
-                        `<b>Teorema:</b> Chiziqli algebraik tenglamalar sistemasi $AX = B$ birgalikda bo'lishi uchun quyidagi shart bajarilishi zarur va yetarli:`,
-                        `<div style="text-align: center; font-size: 1.2rem; margin: 10px 0; color: #38ef7d;">$$\\operatorname{rank}(A) = \\operatorname{rank}(A|B)$$</div>`,
-                        `<b>Hollar:</b>`,
-                        `1) $\\operatorname{rank}(A) < \\operatorname{rank}(A|B) \\implies$ Birgalikda emas (yechim mavjud emas).`,
-                        `2) $\\operatorname{rank}(A) = \\operatorname{rank}(A|B) = n \\implies$ Yagona aniq yechim mavjud.`,
-                        `3) $\\operatorname{rank}(A) = \\operatorname{rank}(A|B) = r < n \\implies$ Cheksiz ko'p yechim ($n - r$ ta erkin noma'lum).`,
-                        `<div class="result-badge">Kroneker-Kapelli sharti to'liq tahlil qilindi</div>`
+                    const A = [
+                        [3, 5, 2],
+                        [4, 7, 5],
+                        [1, 1, -4],
+                        [2, 9, 6]
                     ];
-                    app.showSolution("8-Amaliy, 2-topshiriq", steps);
+                    const res = MatrixSolver.solveHomogeneous(A);
+                    const steps = [
+                        `<b>Amaliy 8, 1-topshiriq (d):</b> Bir jinsli tenglamalar sistemasini tahlil qilish:`,
+                        ...res.steps,
+                        `<div class="result-badge"><b>rank(A) = 3 = n</b> => Faqat yagona nol (trivial) yechim: $x_1=0, x_2=0, x_3=0$</div>`
+                    ];
+                    app.showSolution("8-Amaliy, 1-topshiriq (d)", steps);
+                }
+            },
+            {
+                id: "af8_2a",
+                name: "2-topshiriq (a): 3x4 FYET va umumiy yechim",
+                shart: "2x1 - 4x2 + 5x3 + 3x4 = 0, 3x1 - 6x2 + 4x3 + 2x4 = 0, 4x1 - 8x2 + 17x3 + 11x4 = 0",
+                solve: () => {
+                    const A = [
+                        [2, -4, 5, 3],
+                        [3, -6, 4, 2],
+                        [4, -8, 17, 11]
+                    ];
+                    const res = MatrixSolver.solveHomogeneous(A);
+                    const steps = [
+                        `<b>Amaliy 8, 2-topshiriq (a):</b> Umumiy va fundamental yechimlar sistemasini (FYET) topish:`,
+                        ...res.steps,
+                        `<div class="result-badge"><b>rank(A) = 2, n = 4</b> => FYET: $e_1 = (2, 1, 0, 0)^T, \\quad e_2 = (2, 0, -5, 7)^T$</div>`
+                    ];
+                    app.showSolution("8-Amaliy, 2-topshiriq (a)", steps);
+                }
+            },
+            {
+                id: "af8_2b",
+                name: "2-topshiriq (b): 4x4 FYET va umumiy yechim",
+                shart: "x1 + 2x2 + 4x3 - 3x4 = 0, 3x1 + 5x2 + 6x3 - 4x4 = 0, 4x1 + 5x2 - 2x3 + 3x4 = 0, 3x1 + 8x2 + 24x3 - 19x4 = 0",
+                solve: () => {
+                    const A = [
+                        [1, 2, 4, -3],
+                        [3, 5, 6, -4],
+                        [4, 5, -2, 3],
+                        [3, 8, 24, -19]
+                    ];
+                    const res = MatrixSolver.solveHomogeneous(A);
+                    const steps = [
+                        `<b>Amaliy 8, 2-topshiriq (b):</b> Umumiy va fundamental yechimlar sistemasini (FYET) topish:`,
+                        ...res.steps,
+                        `<div class="result-badge"><b>rank(A) = 2, n = 4</b> => FYET: $e_1 = (8, -6, 1, 0)^T, \\quad e_2 = (-7, 5, 0, 1)^T$</div>`
+                    ];
+                    app.showSolution("8-Amaliy, 2-topshiriq (b)", steps);
+                }
+            },
+            {
+                id: "af8_2c",
+                name: "2-topshiriq (c): 4x5 FYET va umumiy yechim",
+                shart: "6x1 - 2x2 + 2x3 + 5x4 + 7x5 = 0, 9x1 - 3x2 + 4x3 + 8x4 + 9x5 = 0, 6x1 - 2x2 + 6x3 + 7x4 + x5 = 0, 3x1 - x2 + 4x3 + 4x4 - x5 = 0",
+                solve: () => {
+                    const A = [
+                        [6, -2, 2, 5, 7],
+                        [9, -3, 4, 8, 9],
+                        [6, -2, 6, 7, 1],
+                        [3, -1, 4, 4, -1]
+                    ];
+                    const res = MatrixSolver.solveHomogeneous(A);
+                    const steps = [
+                        `<b>Amaliy 8, 2-topshiriq (c):</b> 5 noma'lumli bir jinsli sistema FYET:`,
+                        ...res.steps,
+                        `<div class="result-badge"><b>rank(A) = 2, n = 5</b> => FYET 3 ta vektor: $e_1 = (1, 3, 0, 0, 0)^T, e_2 = (-4, 0, -3, 6, 0)^T, e_3 = (-10, 0, 9, 0, 6)^T$</div>`
+                    ];
+                    app.showSolution("8-Amaliy, 2-topshiriq (c)", steps);
+                }
+            },
+            {
+                id: "af8_2d",
+                name: "2-topshiriq (d): 6x6 Bir jinsli sistema FYET",
+                shart: "x1 - x3 = 0, x2 - x4 = 0, -x1 + x3 - x5 = 0, -x2 + x4 - x6 = 0, -x3 + x5 = 0, -x4 + x6 = 0",
+                solve: () => {
+                    const A = [
+                        [1, 0, -1, 0, 0, 0],
+                        [0, 1, 0, -1, 0, 0],
+                        [-1, 0, 1, 0, -1, 0],
+                        [0, -1, 0, 1, 0, -1],
+                        [0, 0, -1, 0, 1, 0],
+                        [0, 0, 0, -1, 0, 1]
+                    ];
+                    const res = MatrixSolver.solveHomogeneous(A);
+                    const steps = [
+                        `<b>Amaliy 8, 2-topshiriq (d):</b> 6x6 bir jinsli sistema tahlili:`,
+                        ...res.steps,
+                        `<div class="result-badge"><b>rank(A) = 6 = n</b> => Faqat yagona nol (trivial) yechim: $x_1=x_2=x_3=x_4=x_5=x_6=0$</div>`
+                    ];
+                    app.showSolution("8-Amaliy, 2-topshiriq (d)", steps);
+                }
+            },
+            {
+                id: "af8_2e",
+                name: "2-topshiriq (e): 5x6 FYET va umumiy yechim",
+                shart: "x1 - x3 + x5 = 0, x2 - x4 + x6 = 0, x1 - x2 + x5 - x6 = 0, x2 - x3 + x6 = 0, x1 - x4 + x5 = 0",
+                solve: () => {
+                    const A = [
+                        [1, 0, -1, 0, 1, 0],
+                        [0, 1, 0, -1, 0, 1],
+                        [1, -1, 0, 0, 1, -1],
+                        [0, 1, -1, 0, 0, 1],
+                        [1, 0, 0, -1, 1, 0]
+                    ];
+                    const res = MatrixSolver.solveHomogeneous(A);
+                    const steps = [
+                        `<b>Amaliy 8, 2-topshiriq (e):</b> 6 noma'lumli sistema FYET:`,
+                        ...res.steps,
+                        `<div class="result-badge"><b>rank(A) = 3, n = 6</b> => FYET: $e_1 = (1, 1, 1, 1, 0, 0)^T, e_2 = (-1, 0, 0, 0, 1, 0)^T, e_3 = (0, -1, 0, 0, 0, 1)^T$</div>`
+                    ];
+                    app.showSolution("8-Amaliy, 2-topshiriq (e)", steps);
                 }
             },
             {
                 id: "af8_var5",
-                name: "⭐ 5-Variant: FYET (Fundamental Yechimlar Tizimi)",
-                shart: "x1 + 2x2 - x3 + 2x4 = 0\n2x1 - x2 + 3x3 - x4 = 0",
+                name: "⭐ 5-Variant: 2.b topshiriq bo'yicha FYET",
+                shart: "x1 + 2x2 + 4x3 - 3x4 = 0, 3x1 + 5x2 + 6x3 - 4x4 = 0, 4x1 + 5x2 - 2x3 + 3x4 = 0, 3x1 + 8x2 + 24x3 - 19x4 = 0",
                 solve: () => {
-                    const A = [[1, 2, -1, 2], [2, -1, 3, -1]];
+                    const A = [
+                        [1, 2, 4, -3],
+                        [3, 5, 6, -4],
+                        [4, 5, -2, 3],
+                        [3, 8, 24, -19]
+                    ];
                     const res = MatrixSolver.solveHomogeneous(A);
                     const steps = [
-                        `<b>Amaliy 8, 5-Variant:</b> FYET topish:`,
+                        `<b>Amaliy 8, 5-Variant:</b> 2-topshiriq (b) bo'yicha FYET topish:`,
                         ...res.steps,
-                        `<div class="result-badge">FYET: $e_1 = (-1, 1, 1, 0)^T, \\quad e_2 = (0, -1, 0, 1)^T$</div>`
+                        `<div class="result-badge">FYET: $e_1 = (8, -6, 1, 0)^T, \\quad e_2 = (-7, 5, 0, 1)^T$</div>`
                     ];
                     app.showSolution("8-Amaliy, 5-Variant", steps);
                 }
@@ -1289,6 +1428,10 @@ const AMALIY_DATABASE = {
         ]
     },
 };
+
+if (typeof window !== 'undefined') {
+    window.AMALIY_DATABASE = AMALIY_DATABASE;
+}
 
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = AMALIY_DATABASE;

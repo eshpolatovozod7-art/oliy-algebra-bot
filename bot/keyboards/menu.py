@@ -80,11 +80,15 @@ def get_task_solution_keyboard(file_id: int, webapp_url: str) -> InlineKeyboardM
         [
             InlineKeyboardButton(
                 text="🚀 Mini Appda o'z misolingizni yechish",
-                web_app=WebAppInfo(url=webapp_url)
+                web_app=WebAppInfo(url=f"{webapp_url}?mode=topics&topic={file_id}")
             )
         ],
         [
-            InlineKeyboardButton(text=f"◀️ {file_id}-Amaliy misollariga qaytish", callback_data=f"af_{file_id}"),
+            InlineKeyboardButton(text=f"◀️ {file_id}-Mavzu misollari", callback_data=f"t_{file_id}"),
+            InlineKeyboardButton(text=f"📁 {file_id}-Amaliy", callback_data=f"af_{file_id}")
+        ],
+        [
+            InlineKeyboardButton(text="📚 16 ta Mavzu", callback_data="topics_menu"),
             InlineKeyboardButton(text="📁 Barcha amaliylar", callback_data="amaliy_files_menu")
         ]
     ]
@@ -139,18 +143,21 @@ def get_topics_keyboard(webapp_url: str = "") -> InlineKeyboardMarkup:
     ])
     return InlineKeyboardMarkup(inline_keyboard=buttons)
 
-def get_topic_detail_keyboard(topic_num: str, webapp_url: str) -> InlineKeyboardMarkup:
-    """Alohida mavzu sahifasi ostidagi tugmalar"""
-    buttons = [
-        [
-            InlineKeyboardButton(
-                text="🧮 Ushbu mavzu kalkulyatorini ochish",
-                web_app=WebAppInfo(url=f"{webapp_url}?mode=topics&topic={topic_num}")
-            )
-        ],
-        [
-            InlineKeyboardButton(text="📚 Barcha 16 ta mavzu", callback_data="topics_menu"),
-            InlineKeyboardButton(text="📁 Amaliy fayllar", callback_data="amaliy_files_menu")
-        ]
-    ]
+def get_topic_detail_keyboard(topic_num: str, tasks: list, webapp_url: str) -> InlineKeyboardMarkup:
+    """Alohida mavzu sahifasi ostidagi tugmalar va misollarni yechish"""
+    buttons = []
+    for t in tasks:
+        buttons.append([
+            InlineKeyboardButton(text=f"⚡ {t['name']}", callback_data=f"solvetask_{t['id']}")
+        ])
+    buttons.append([
+        InlineKeyboardButton(
+            text="🧮 Ushbu mavzu kalkulyatorini ochish (Mini App)",
+            web_app=WebAppInfo(url=f"{webapp_url}?mode=topics&topic={topic_num}")
+        )
+    ])
+    buttons.append([
+        InlineKeyboardButton(text="📚 Barcha 16 ta mavzu", callback_data="topics_menu"),
+        InlineKeyboardButton(text="📁 Amaliy fayllar", callback_data="amaliy_files_menu")
+    ])
     return InlineKeyboardMarkup(inline_keyboard=buttons)

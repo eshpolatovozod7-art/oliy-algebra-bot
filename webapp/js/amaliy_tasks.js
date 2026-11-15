@@ -1427,6 +1427,242 @@ const AMALIY_DATABASE = {
             },
         ]
     },
+    16: {
+        title: "16-Mavzu: Darslikdagi namunalar to'plami",
+        file: "1-15 Mavzular asosiy darslik misollari",
+        tasks: [
+            {
+                id: "af16_t1",
+                name: "1-Mavzu Namunasi: 3x3 Matritsalar ko'paytmasi",
+                shart: "[[1, 2, 1], [0, 1, 2], [3, 1, 1]] · [[1, 0, 1], [2, 1, 0], [1, 1, 2]]",
+                solve: () => {
+                    const A = [[1, 2, 1], [0, 1, 2], [3, 1, 1]];
+                    const B = [[1, 0, 1], [2, 1, 0], [1, 1, 2]];
+                    const res = MatrixSolver.multiply(A, B);
+                    const steps = [
+                        `<b>16-Mavzu (1-Mavzu namunasi):</b> $3 \\times 3$ matritsalar ko'paytmasi $A \\cdot B$:`,
+                        ...res.steps,
+                        `<div class="result-badge">Natija:</div>`,
+                        MatrixSolver.toHTML(res.result)
+                    ];
+                    app.showSolution("16-Mavzu: 1-Mavzu namunasi", steps);
+                }
+            },
+            {
+                id: "af16_t2",
+                name: "2-Mavzu Namunasi: Inversiyalar soni va juft-toqligi",
+                shart: "p = (3, 5, 1, 4, 2) inversiyalari soni va juft/toqligi",
+                solve: () => {
+                    const arr = [3, 5, 1, 4, 2];
+                    const res = PermutationSolver.analyze(arr);
+                    const steps = [
+                        `<b>16-Mavzu (2-Mavzu namunasi):</b> $p = (3, 5, 1, 4, 2)$ o'rin almashtirish:`,
+                        ...res.steps,
+                        `<div class="result-badge">Inversiyalar soni: $I(p) = ${res.invCount}$, Tartib: <b>${res.isEven ? "JUFT" : "TOQ"}</b></div>`
+                    ];
+                    app.showSolution("16-Mavzu: 2-Mavzu namunasi", steps);
+                }
+            },
+            {
+                id: "af16_t3",
+                name: "3-Mavzu Namunasi: 3x3 Sarryus determinant",
+                shart: "det [[2, 1, 3], [5, 3, 2], [1, 4, 3]]",
+                solve: () => {
+                    const A = [[2, 1, 3], [5, 3, 2], [1, 4, 3]];
+                    const res = MatrixSolver.determinant(A);
+                    const steps = [
+                        `<b>16-Mavzu (3-Mavzu namunasi):</b> Sarryus usuli bilan determinant:`,
+                        ...res.steps,
+                        `<div class="result-badge">Determinant: $\\det(A) = ${res.result.toString()}$</div>`
+                    ];
+                    app.showSolution("16-Mavzu: 3-Mavzu namunasi", steps);
+                }
+            },
+            {
+                id: "af16_t4",
+                name: "4-Mavzu Namunasi: Satr bo'yicha Laplas yoyilmasi",
+                shart: "A = [[1, 2, 3], [0, 4, 5], [1, 0, 6]] ni 1-satr bo'yicha yoyish",
+                solve: () => {
+                    const A = [[1, 2, 3], [0, 4, 5], [1, 0, 6]];
+                    const res = MatrixSolver.laplaceExpansion(A, 'row', 0);
+                    const steps = [
+                        `<b>16-Mavzu (4-Mavzu namunasi):</b> 1-satr bo'yicha Laplas yoyilmasi:`,
+                        ...res.steps,
+                        `<div class="result-badge">Natija: $|A| = ${res.result.toString()}$</div>`
+                    ];
+                    app.showSolution("16-Mavzu: 4-Mavzu namunasi", steps);
+                }
+            },
+            {
+                id: "af16_t5",
+                name: "5-Mavzu Namunasi: 3x3 Teskari matritsa (A⁻¹)",
+                shart: "A = [[1, 2, 3], [0, 1, 4], [5, 6, 0]] ning teskarisini topish",
+                solve: () => {
+                    const A = [[1, 2, 3], [0, 1, 4], [5, 6, 0]];
+                    const res = MatrixSolver.inverse(A);
+                    const steps = [
+                        `<b>16-Mavzu (5-Mavzu namunasi):</b> $3 \\times 3$ teskari matritsa $A^{-1}$:`,
+                        ...res.steps,
+                        `<div class="result-badge">Teskari matritsa $A^{-1}$:</div>`,
+                        MatrixSolver.toHTML(res.result)
+                    ];
+                    app.showSolution("16-Mavzu: 5-Mavzu namunasi", steps);
+                }
+            },
+            {
+                id: "af16_t6",
+                name: "6-Mavzu Namunasi: ChTS (Kramer va Gauss)",
+                shart: "x + y - z = 2, 2x - y + z = 1, x + 2y - z = 4",
+                solve: () => {
+                    const A = [[1, 1, -1], [2, -1, 1], [1, 2, -1]];
+                    const B = [2, 1, 4];
+                    const res = MatrixSolver.solveCramer(A, B);
+                    const steps = [
+                        `<b>16-Mavzu (6-Mavzu namunasi):</b> Kramer usulida sistema yechimi:`,
+                        ...res.steps,
+                        `<div class="result-badge">Yechim: $x_1 = 1, \\quad x_2 = 2, \\quad x_3 = 1$</div>`
+                    ];
+                    app.showSolution("16-Mavzu: 6-Mavzu namunasi", steps);
+                }
+            },
+            {
+                id: "af16_t7",
+                name: "7-Mavzu Namunasi: 4x4 Matritsa rangi",
+                shart: "A = [[0, 4, 10, 1], [4, 8, 18, 7], [10, 18, 40, 17], [1, 7, 17, 3]]",
+                solve: () => {
+                    const A = [[0, 4, 10, 1], [4, 8, 18, 7], [10, 18, 40, 17], [1, 7, 17, 3]];
+                    const res = MatrixSolver.rank(A);
+                    const steps = [
+                        `<b>16-Mavzu (7-Mavzu namunasi):</b> Matritsa rangi (Gauss pog'onasimon ko'rinishi):`,
+                        ...res.steps,
+                        `<div class="result-badge">Natija: $\\operatorname{rank}(A) = ${res.result}$</div>`
+                    ];
+                    app.showSolution("16-Mavzu: 7-Mavzu namunasi", steps);
+                }
+            },
+            {
+                id: "af16_t8",
+                name: "8-Mavzu Namunasi: Bir jinsli sistema va FYET",
+                shart: "x1 + 3x2 + 2x3 = 0, 2x1 - x2 + 3x3 = 0, 3x1 - 5x2 + 4x3 = 0, x1 + 17x2 + 4x3 = 0",
+                solve: () => {
+                    const A = [[1, 3, 2], [2, -1, 3], [3, -5, 4], [1, 17, 4]];
+                    const res = MatrixSolver.solveHomogeneous(A);
+                    const steps = [
+                        `<b>16-Mavzu (8-Mavzu namunasi):</b> $AX = 0$ bir jinsli sistema va FYET:`,
+                        ...res.steps,
+                        `<div class="result-badge">FYET: $e_1 = (-11, -1, 7)^T$</div>`
+                    ];
+                    app.showSolution("16-Mavzu: 8-Mavzu namunasi", steps);
+                }
+            },
+            {
+                id: "af16_t9",
+                name: "9-Mavzu Namunasi: Kompleks son shakllari va Eyler",
+                shart: "z = 1 + i√3 ning moduli, argumenti va trigonometrik shakli",
+                solve: () => {
+                    const z = new Complex(1, Math.sqrt(3));
+                    const res = ComplexSolver.analyze(z);
+                    const steps = [
+                        `<b>16-Mavzu (9-Mavzu namunasi):</b> $z = 1 + i\\sqrt{3}$ tahlili:`,
+                        ...res.steps,
+                        `<div class="result-badge">Natija: $r = 2, \\quad \\varphi = \\frac{\\pi}{3}$</div>`
+                    ];
+                    app.showSolution("16-Mavzu: 9-Mavzu namunasi", steps);
+                }
+            },
+            {
+                id: "af16_t10",
+                name: "10-Mavzu Namunasi: Muavr formulasi bilan daraja",
+                shart: "(1 + i)^25 ifodaning qiymati",
+                solve: () => {
+                    const z = new Complex(1, 1);
+                    const res = ComplexSolver.powerMoivre(z, 25);
+                    const steps = [
+                        `<b>16-Mavzu (10-Mavzu namunasi):</b> $(1 + i)^{25}$ darajasi:`,
+                        ...res.steps,
+                        `<div class="result-badge">Natija: $(1 + i)^{25} = 4096 + 4096i$</div>`
+                    ];
+                    app.showSolution("16-Mavzu: 10-Mavzu namunasi", steps);
+                }
+            },
+            {
+                id: "af16_t11",
+                name: "11-Mavzu Namunasi: Ko'phadlarni qoldiqli bo'lish",
+                shart: "f(x) = 2x^4 - 3x^3 + 4x^2 - 5x + 6 ni g(x) = x^2 - 3x + 1 ga bo'lish",
+                solve: () => {
+                    const P = Polynomial.parse("2x^4 - 3x^3 + 4x^2 - 5x + 6");
+                    const Q = Polynomial.parse("x^2 - 3x + 1");
+                    const res = PolynomialSolver.divide(P, Q);
+                    const steps = [
+                        `<b>16-Mavzu (11-Mavzu namunasi):</b> Burchakli qoldiqli bo'lish:`,
+                        ...res.steps,
+                        `<div class="result-badge">Bo'linma: $Q(x) = 2x^2 + 3x + 11$, Qoldiq: $R(x) = 25x - 5$</div>`
+                    ];
+                    app.showSolution("16-Mavzu: 11-Mavzu namunasi", steps);
+                }
+            },
+            {
+                id: "af16_t12",
+                name: "12-Mavzu Namunasi: Yevklid algoritmi bilan EKUB",
+                shart: "f(x) = x^4 + x^3 - 3x^2 - 4x - 1 va g(x) = x^3 + x^2 - x - 1",
+                solve: () => {
+                    const P = Polynomial.parse("x^4 + x^3 - 3x^2 - 4x - 1");
+                    const Q = Polynomial.parse("x^3 + x^2 - x - 1");
+                    const res = PolynomialSolver.gcd(P, Q);
+                    const steps = [
+                        `<b>16-Mavzu (12-Mavzu namunasi):</b> Ko'phadlar EKUBi (Yevklid algoritmi):`,
+                        ...res.steps,
+                        `<div class="result-badge">EKUB: $d(x) = x + 1$</div>`
+                    ];
+                    app.showSolution("16-Mavzu: 12-Mavzu namunasi", steps);
+                }
+            },
+            {
+                id: "af16_t13",
+                name: "13-Mavzu Namunasi: Gorner sxemasi jadvali",
+                shart: "f(x) = x^4 - 2x^3 + 4x^2 - 6x + 8 ni c = 2 ga bo'lish",
+                solve: () => {
+                    const P = Polynomial.parse("x^4 - 2x^3 + 4x^2 - 6x + 8");
+                    const res = PolynomialSolver.horner(P, 2);
+                    const steps = [
+                        `<b>16-Mavzu (13-Mavzu namunasi):</b> Gorner sxemasi jadvali ($c = 2$):`,
+                        ...res.steps,
+                        `<div class="result-badge">Qoldiq: $P(2) = 12$</div>`
+                    ];
+                    app.showSolution("16-Mavzu: 13-Mavzu namunasi", steps);
+                }
+            },
+            {
+                id: "af16_t14",
+                name: "14-Mavzu Namunasi: Sodda kasrlarga yoyish",
+                shart: "(2x + 5) / (x^2 - 5x + 6) ni sodda kasrlarga yoyish",
+                solve: () => {
+                    const P = Polynomial.parse("2x + 5");
+                    const res = RationalFractionSolver.decomposeSimple(P.coeffs, 2, 3);
+                    const steps = [
+                        `<b>16-Mavzu (14-Mavzu namunasi):</b> $\\frac{2x + 5}{x^2 - 5x + 6}$ ni sodda kasrlarga yoyish:`,
+                        ...res.steps,
+                        `<div class="result-badge">Natija: $-\\frac{9}{x - 2} + \\frac{11}{x - 3}$</div>`
+                    ];
+                    app.showSolution("16-Mavzu: 14-Mavzu namunasi", steps);
+                }
+            },
+            {
+                id: "af16_t15",
+                name: "15-Mavzu Namunasi: Kardano formulasi (x³ - 6x - 9 = 0)",
+                shart: "x^3 - 6x - 9 = 0 tenglamani Kardano formulasi bilan yeching.",
+                solve: () => {
+                    const res = HigherDegreeSolver.solveCubic(1, 0, -6, -9);
+                    const steps = [
+                        `<b>16-Mavzu (15-Mavzu namunasi):</b> $x^3 - 6x - 9 = 0$ Kardano formulasi:`,
+                        ...res.steps,
+                        `<div class="result-badge">Yagona haqiqiy ildiz: $x = 3$</div>`
+                    ];
+                    app.showSolution("16-Mavzu: 15-Mavzu namunasi", steps);
+                }
+            }
+        ]
+    },
 };
 
 if (typeof window !== 'undefined') {

@@ -174,15 +174,31 @@ async def cb_topics_menu(callback: CallbackQuery):
 async def cb_topic_item(callback: CallbackQuery):
     topic_num = callback.data.replace("t_", "")
     desc = TOPIC_DESCRIPTIONS.get(callback.data, "Mavzu ma'lumoti topilmadi.")
+    
+    try:
+        tid = int(topic_num)
+    except ValueError:
+        tid = 1
+
+    topic_data = AMALIY_DATA.get(tid, {})
+    tasks = topic_data.get("tasks", [])
+
+    task_lines = []
+    for idx, t in enumerate(tasks, 1):
+        task_lines.append(f"<b>{idx}. {t['name']}</b>\n   <i>Shart:</i> <code>{t['shart']}</code>")
+
+    tasks_text = "\n\n".join(task_lines) if task_lines else "Misollar tez orada qo'shiladi."
+
     text = (
         f"{desc}\n\n"
-        f"<i>Ushbu mavzu bo'yicha istalgan misolni qadamma-qadam yechish uchun "
-        f"pastdagi kalkulyator tugmasini bosing:</i>"
+        f"📋 <b>Ushbu mavzu bo'yicha fayllardagi misollar ({len(tasks)} ta):</b>\n\n"
+        f"{tasks_text}\n\n"
+        f"👇 <i>Quyidagi tugmalardan birini bosib misolning to'liq yechimini ko'ring yoki kalkulyatorni oching:</i>"
     )
     await callback.message.edit_text(
         text,
         parse_mode="HTML",
-        reply_markup=get_topic_detail_keyboard(topic_num, WEBAPP_URL)
+        reply_markup=get_topic_detail_keyboard(topic_num, tasks, WEBAPP_URL)
     )
     await callback.answer()
 

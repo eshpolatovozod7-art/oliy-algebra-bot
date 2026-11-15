@@ -41,6 +41,7 @@ const app = {
         }
 
         this.onAmaliyFileChange("1");
+        this.setupTopicPresets();
 
         // URL parametrlari bo'yicha rejimni tanlash (?mode=topics&topic=3)
         let modeParam = null;
@@ -199,6 +200,315 @@ const app = {
                 case 15: this.solveTopic15(); break;
             }
         }, 100);
+    },
+
+    setupTopicPresets() {
+        if (typeof AMALIY_DATABASE === 'undefined') return;
+        for (let i = 1; i <= 16; i++) {
+            const sel = document.getElementById(`topic-task-select-${i}`);
+            if (!sel) continue;
+            const data = AMALIY_DATABASE[i];
+            if (!data || !data.tasks) continue;
+
+            sel.innerHTML = `<option value="">-- Fayldagi misollardan tanlang (${data.tasks.length} ta misol) --</option>`;
+            data.tasks.forEach(t => {
+                const opt = document.createElement('option');
+                opt.value = t.id;
+                opt.innerText = t.name;
+                sel.appendChild(opt);
+            });
+        }
+    },
+
+    onTopicPresetChange(topicNum, taskId) {
+        if (!taskId || typeof AMALIY_DATABASE === 'undefined') return;
+        const num = parseInt(topicNum);
+        const data = AMALIY_DATABASE[num];
+        if (!data) return;
+        const task = data.tasks.find(t => t.id === taskId);
+        if (!task) return;
+
+        // Dropdowndagi qiymatni sinxronlashtirish
+        const sel = document.getElementById(`topic-task-select-${num}`);
+        if (sel && sel.value !== taskId) {
+            sel.value = taskId;
+        }
+
+        // Kalkulyator inputlarini to'ldirish
+        this.populateTopicInputs(num, taskId);
+
+        // Misolni yechish
+        if (task.solve) {
+            task.solve();
+        }
+    },
+
+    populateTopicInputs(topicNum, taskId) {
+        switch (topicNum) {
+            case 1:
+                if (taskId === 'af1_t1_a') {
+                    this.setMatrixValues('A', [[1, 2], [3, 4]]);
+                    this.setMatrixValues('B', [[-1, 3], [0, 2]]);
+                    document.getElementById('op-matrices').value = 'add';
+                } else if (taskId === 'af1_t1') {
+                    this.setMatrixValues('A', [[4, -3], [2, 3]]);
+                    this.setMatrixValues('B', [[1, 1], [1, 1]]);
+                    const kInp = document.getElementById('matrix-scalar-k');
+                    if (kInp) kInp.value = '3';
+                    document.getElementById('op-matrices').value = 'sub';
+                } else if (taskId === 'af1_t1_c') {
+                    this.setMatrixValues('A', [[1, 2], [2, 1]]);
+                    this.setMatrixValues('B', [[-1, -1], [3, 0]]);
+                    document.getElementById('op-matrices').value = 'add';
+                } else if (taskId === 'af1_t2_a') {
+                    this.setMatrixValues('A', [[2, 1], [3, 2]]);
+                    this.setMatrixValues('B', [[1, -1], [1, 1]]);
+                    document.getElementById('op-matrices').value = 'mul';
+                } else if (taskId === 'af1_t2_b') {
+                    this.setMatrixValues('A', [[3, -2], [5, -4]]);
+                    this.setMatrixValues('B', [[3, 4], [2, 5]]);
+                    document.getElementById('op-matrices').value = 'mul';
+                } else if (taskId === 'af1_t2_c') {
+                    this.setMatrixValues('A', [[1, -2, 3], [4, 5, -6]]);
+                    this.setMatrixValues('B', [[1, 2], [3, 4], [5, 6]]);
+                    document.getElementById('op-matrices').value = 'mul';
+                } else if (taskId === 'af1_t3') {
+                    this.setMatrixValues('A', [[1, 2, 1], [0, 1, 2], [3, 1, 1]]);
+                    this.setMatrixValues('B', [[1, 0, 1], [2, 1, 0], [1, 1, 2]]);
+                    document.getElementById('op-matrices').value = 'mul';
+                } else if (taskId === 'af1_t4') {
+                    this.setMatrixValues('A', [[3, 2, 1, 2], [4, 1, 1, 3]]);
+                    document.getElementById('op-matrices').value = 'transpose';
+                } else if (taskId === 'af1_t5') {
+                    this.setMatrixValues('A', [[1, 1], [0, 1]]);
+                    document.getElementById('op-matrices').value = 'mul';
+                } else if (taskId === 'af1_var5') {
+                    this.setMatrixValues('A', [[2, 4], [1, 3]]);
+                    this.setMatrixValues('B', [[3, -1], [2, 1]]);
+                    document.getElementById('op-matrices').value = 'mul';
+                }
+                this.onMatrixOpChange();
+                break;
+            case 2:
+                const permInp = document.getElementById('perm-input');
+                if (permInp) {
+                    if (taskId === 'af2_t1') permInp.value = "3 5 1 4 2";
+                    else if (taskId === 'af2_t2') permInp.value = "2 4 1 5 3";
+                    else if (taskId === 'af2_t3') permInp.value = "4 1 3 2";
+                    else if (taskId === 'af2_t4') permInp.value = "3 5 1 4 2";
+                    else if (taskId === 'af2_var5') permInp.value = "4 3 1 5 2";
+                }
+                break;
+            case 3:
+                if (taskId === 'af3_t1_a') this.setSquareMatrixValues([[5, 2], [7, 3]]);
+                else if (taskId === 'af3_t1_b') this.setSquareMatrixValues([[1, 2], [3, 4]]);
+                else if (taskId === 'af3_t1_c') this.setSquareMatrixValues([[3, 2], [8, 5]]);
+                else if (taskId === 'af3_t2') this.setSquareMatrixValues([[2, 1, 3], [5, 3, 2], [1, 4, 3]]);
+                else if (taskId === 'af3_t3') this.setSquareMatrixValues([[1, 1, 1, 1], [1, 2, 3, 4], [1, 3, 6, 10], [1, 4, 10, 20]]);
+                else if (taskId === 'af3_var5') this.setSquareMatrixValues([[3, 2, 1], [2, 5, 3], [3, 4, 2]]);
+                break;
+            case 4:
+                const lapType = document.getElementById('laplace-type');
+                const lapIdx = document.getElementById('laplace-idx');
+                if (taskId === 'af4_t1') {
+                    this.setLaplaceMatrixValues([[1, 2, 3], [0, 4, 5], [1, 0, 6]]);
+                    if (lapType) lapType.value = 'row';
+                    if (lapIdx) lapIdx.value = '1';
+                } else if (taskId === 'af4_t2') {
+                    this.setLaplaceMatrixValues([[2, 3, 1], [4, -2, 3], [3, 1, 4]]);
+                    if (lapType) lapType.value = 'col';
+                    if (lapIdx) lapIdx.value = '2';
+                } else if (taskId === 'af4_t3') {
+                    this.setLaplaceMatrixValues([[1, 2, 0, 0], [3, 4, 0, 0], [7, 6, 2, 1], [1, 5, 3, 4]]);
+                    if (lapType) lapType.value = 'row';
+                    if (lapIdx) lapIdx.value = '1';
+                } else if (taskId === 'af4_var5') {
+                    this.setLaplaceMatrixValues([[2, -1, 3], [1, 4, 2], [3, 1, 5]]);
+                    if (lapType) lapType.value = 'row';
+                    if (lapIdx) lapIdx.value = '1';
+                }
+                break;
+            case 5:
+                if (taskId === 'af5_t1_a') this.setInvMatrixValues([[1, 2], [3, 4]]);
+                else if (taskId === 'af5_t1_b') this.setInvMatrixValues([[3, 4], [5, 7]]);
+                else if (taskId === 'af5_t2') this.setInvMatrixValues([[1, 2, 3], [0, 1, 4], [5, 6, 0]]);
+                else if (taskId === 'af5_t3') this.setInvMatrixValues([[1, 2], [3, 4]]);
+                else if (taskId === 'af5_var5') this.setInvMatrixValues([[2, 1, 1], [1, 2, 1], [1, 1, 2]]);
+                break;
+            case 6:
+                if (taskId === 'af6_t1_a') this.setSLEValues([[2, 3], [3, -1]], [8, 1]);
+                else if (taskId === 'af6_t1_c') this.setSLEValues([[1, 1, -1], [2, -1, 1], [1, 2, -1]], [2, 1, 4]);
+                else if (taskId === 'af6_t2') this.setSLEValues([[2, 1, -1], [3, -2, 2], [1, 1, 1]], [1, 5, 6]);
+                else if (taskId === 'af6_t3') this.setSLEValues([[1, 2], [3, 4]], [5, 11]);
+                else if (taskId === 'af6_var5') this.setSLEValues([[2, 1, 1], [1, 2, 1], [1, 1, 2]], [4, 5, 5]);
+                break;
+            case 7:
+                if (taskId === 'af7_t1') this.setRankMatrixValues([[1, 2, 3, 4], [2, 4, 6, 8], [3, 6, 9, 12]]);
+                else if (taskId === 'af7_6a') this.setRankMatrixValues([[0, 4, 10, 1], [4, 8, 18, 7], [10, 18, 40, 17], [1, 7, 17, 3]]);
+                else if (taskId === 'af7_6b') this.setRankMatrixValues([[2, 1, 11, 2], [1, 0, 4, -1], [11, 4, 56, 5], [2, -1, 5, -6]]);
+                else if (taskId === 'af7_7a') this.setRankMatrixValues([[2, -1, 3, -2, 4], [4, -2, 5, 1, 7], [2, -1, 1, 8, 2]]);
+                else if (taskId === 'af7_var5') this.setRankMatrixValues([[1, 0, 1, 0, 0], [1, 1, 0, 0, 0], [0, 1, 1, 0, 0], [0, 0, 1, 1, 0], [0, 1, 0, 1, 1]]);
+                break;
+            case 8:
+                if (taskId === 'af8_1c') this.setHomogMatrixValues([[1, 3, 2], [2, -1, 3], [3, -5, 4], [1, 17, 4]]);
+                else if (taskId === 'af8_1d') this.setHomogMatrixValues([[3, 5, 2], [4, 7, 5], [1, 1, -4], [2, 9, 6]]);
+                else if (taskId === 'af8_2a') this.setHomogMatrixValues([[2, -4, 5, 3], [3, -6, 4, 2], [4, -8, 17, 11]]);
+                else if (taskId === 'af8_2b' || taskId === 'af8_var5') this.setHomogMatrixValues([[1, 2, 4, -3], [3, 5, 6, -4], [4, 5, -2, 3], [3, 8, 24, -19]]);
+                else if (taskId === 'af8_2c') this.setHomogMatrixValues([[6, -2, 2, 5, 7], [9, -3, 4, 8, 9], [6, -2, 6, 7, 1], [3, -1, 4, 4, -1]]);
+                else if (taskId === 'af8_2d') this.setHomogMatrixValues([[1, 0, -1, 0, 0, 0], [0, 1, 0, -1, 0, 0], [-1, 0, 1, 0, -1, 0], [0, -1, 0, 1, 0, -1], [0, 0, -1, 0, 1, 0], [0, 0, 0, -1, 0, 1]]);
+                else if (taskId === 'af8_2e') this.setHomogMatrixValues([[1, 0, -1, 0, 1, 0], [0, 1, 0, -1, 0, 1], [1, -1, 0, 0, 1, -1], [0, 1, -1, 0, 0, 1], [1, 0, 0, -1, 1, 0]]);
+                break;
+            case 9:
+                const c9z1 = document.getElementById('complex9-z1');
+                const c9z2 = document.getElementById('complex9-z2');
+                const c9op = document.getElementById('op-complex9');
+                if (taskId === 'af9_t1') {
+                    if (c9z1) c9z1.value = "2 + 3i";
+                    if (c9z2) c9z2.value = "1 - 2i";
+                    if (c9op) c9op.value = 'mul';
+                } else if (taskId === 'af9_t2') {
+                    if (c9z1) c9z1.value = "1 + 1.7320508i";
+                    if (c9op) c9op.value = 'trig';
+                } else if (taskId === 'af9_t3') {
+                    if (c9z1) c9z1.value = "-1 - i";
+                    if (c9op) c9op.value = 'trig';
+                } else if (taskId === 'af9_var5') {
+                    if (c9z1) c9z1.value = "4 + 3i";
+                    if (c9z2) c9z2.value = "2 - i";
+                    if (c9op) c9op.value = 'mul';
+                }
+                this.onComplex9OpChange();
+                break;
+            case 10:
+                const c10z = document.getElementById('complex10-z');
+                const c10n = document.getElementById('complex10-n');
+                if (taskId === 'af10_t1') {
+                    if (c10z) c10z.value = "1 + i";
+                    if (c10n) c10n.value = "25";
+                } else if (taskId === 'af10_t2') {
+                    if (c10z) c10z.value = "1 + 1.7320508i";
+                    if (c10n) c10n.value = "20";
+                } else if (taskId === 'af10_t3') {
+                    if (c10z) c10z.value = "1";
+                    if (c10n) c10n.value = "3";
+                } else if (taskId === 'af10_t4') {
+                    if (c10z) c10z.value = "1.7320508 - i";
+                    if (c10n) c10n.value = "10";
+                } else if (taskId === 'af10_var5') {
+                    if (c10z) c10z.value = "-16";
+                    if (c10n) c10n.value = "4";
+                }
+                break;
+            case 11:
+                const p11P = document.getElementById('poly11-P');
+                const p11Q = document.getElementById('poly11-Q');
+                if (taskId === 'af11_t1') {
+                    if (p11P) p11P.value = "2x^4 - 3x^3 + 4x^2 - 5x + 6";
+                    if (p11Q) p11Q.value = "x^2 - 3x + 1";
+                } else if (taskId === 'af11_t2') {
+                    if (p11P) p11P.value = "x^3 + px + q";
+                    if (p11Q) p11Q.value = "x^2 + mx - 1";
+                } else if (taskId === 'af11_t3') {
+                    if (p11P) p11P.value = "3x^3 - 6x + 3";
+                    if (p11Q) p11Q.value = "4x^3 + 2x^2 - 8x + 6";
+                } else if (taskId === 'af11_var5') {
+                    if (p11P) p11P.value = "3x^4 + 2x^3 - 5x^2 + 2x - 7";
+                    if (p11Q) p11Q.value = "x - 2";
+                }
+                break;
+            case 12:
+                const p12P = document.getElementById('poly12-P');
+                const p12Q = document.getElementById('poly12-Q');
+                if (taskId === 'af12_t1') {
+                    if (p12P) p12P.value = "x^4 + x^3 - 3x^2 - 4x - 1";
+                    if (p12Q) p12Q.value = "x^3 + x^2 - x - 1";
+                } else if (taskId === 'af12_t2') {
+                    if (p12P) p12P.value = "x^4 + 2x^3 - x - 2";
+                    if (p12Q) p12Q.value = "x^3 - x^2 + x - 1";
+                } else if (taskId === 'af12_t3') {
+                    if (p12P) p12P.value = "x^5 + 3x^4 + x^3 + x^2 + 3x + 1";
+                    if (p12Q) p12Q.value = "x^4 + 2x^3 + x + 2";
+                } else if (taskId === 'af12_var5') {
+                    if (p12P) p12P.value = "x^4 - 2x^3 + x^2 - x - 2";
+                    if (p12Q) p12Q.value = "x^3 - 3x^2 + 3x - 1";
+                }
+                break;
+            case 13:
+                const p13P = document.getElementById('poly13-P');
+                const p13c = document.getElementById('poly13-c');
+                if (taskId === 'af13_t1') {
+                    if (p13P) p13P.value = "x^4 - 2x^3 + 4x^2 - 6x + 8";
+                    if (p13c) p13c.value = "2";
+                } else if (taskId === 'af13_t2') {
+                    if (p13P) p13P.value = "x^4 - 3x^3 + 6x^2 - 10x + 16";
+                    if (p13c) p13c.value = "4";
+                } else if (taskId === 'af13_t3') {
+                    if (p13P) p13P.value = "x^3 - 4x^2 + 5x - 2";
+                    if (p13c) p13c.value = "1";
+                } else if (taskId === 'af13_var5') {
+                    if (p13P) p13P.value = "x^3 - 6x^2 + 15x - 14";
+                    if (p13c) p13c.value = "2";
+                }
+                break;
+            case 14:
+                const rfP = document.getElementById('rf-P');
+                const rfa = document.getElementById('rf-a');
+                const rfb = document.getElementById('rf-b');
+                if (taskId === 'af14_t1') {
+                    if (rfP) rfP.value = "x + 1";
+                    if (rfa) rfa.value = "1";
+                    if (rfb) rfb.value = "2";
+                } else if (taskId === 'af14_t2') {
+                    if (rfP) rfP.value = "2x + 5";
+                    if (rfa) rfa.value = "2";
+                    if (rfb) rfb.value = "3";
+                } else if (taskId === 'af14_t3') {
+                    if (rfP) rfP.value = "1";
+                    if (rfa) rfa.value = "-1";
+                    if (rfb) rfb.value = "-2";
+                } else if (taskId === 'af14_t4') {
+                    if (rfP) rfP.value = "x + 2";
+                    if (rfa) rfa.value = "1";
+                    if (rfb) rfb.value = "1";
+                } else if (taskId === 'af14_var5') {
+                    if (rfP) rfP.value = "3x - 1";
+                    if (rfa) rfa.value = "1";
+                    if (rfb) rfb.value = "3";
+                }
+                break;
+            case 15:
+                const ca = document.getElementById('cardano-a');
+                const cb = document.getElementById('cardano-b');
+                const cc = document.getElementById('cardano-c');
+                const cd = document.getElementById('cardano-d');
+                if (taskId === 'af15_t1') {
+                    if (ca) ca.value = "1";
+                    if (cb) cb.value = "0";
+                    if (cc) cc.value = "-6";
+                    if (cd) cd.value = "-9";
+                } else if (taskId === 'af15_t2') {
+                    if (ca) ca.value = "1";
+                    if (cb) cb.value = "0";
+                    if (cc) cc.value = "-9";
+                    if (cd) cd.value = "8";
+                } else if (taskId === 'af15_t3') {
+                    if (ca) ca.value = "1";
+                    if (cb) cb.value = "2";
+                    if (cc) cc.value = "-6";
+                    if (cd) cd.value = "-5";
+                } else if (taskId === 'af15_t4') {
+                    if (ca) ca.value = "1";
+                    if (cb) cb.value = "0";
+                    if (cc) cc.value = "3";
+                    if (cd) cd.value = "-4";
+                } else if (taskId === 'af15_var5') {
+                    if (ca) ca.value = "1";
+                    if (cb) cb.value = "-6";
+                    if (cc) cc.value = "11";
+                    if (cd) cd.value = "-6";
+                }
+                break;
+        }
     },
 
     // --- NAMUNA MISOLLARNI YUKLASH ---

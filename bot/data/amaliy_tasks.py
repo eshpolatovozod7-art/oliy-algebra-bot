@@ -568,4 +568,100 @@ AMALIY_DATA = {
             },
         ]
     },
+    16: {
+        "title": "16-Mavzu: Darslikdagi namunalar to'plami",
+        "file": "1-15 Mavzular asosiy darslik misollari",
+        "tasks": [
+            {
+                "id": 'af16_t1',
+                "name": "1-Mavzu Namunasi: 3x3 Matritsalar ko'paytmasi",
+                "shart": "[[1, 2, 1], [0, 1, 2], [3, 1, 1]] · [[1, 0, 1], [2, 1, 0], [1, 1, 2]]",
+                "solution": "📝 <b>16-Mavzu (1-Mavzu namunasi) yechimi:</b>\n\nA = [[1, 2, 1], [0, 1, 2], [3, 1, 1]], B = [[1, 0, 1], [2, 1, 0], [1, 1, 2]]\n\nSatrlarni ustunlarga ko'paytiramiz:\n• c11 = 1·1 + 2·2 + 1·1 = 6, c12 = 1·0 + 2·1 + 1·1 = 3, c13 = 1·1 + 2·0 + 1·2 = 3\n• c21 = 0·1 + 1·2 + 2·1 = 4, c22 = 0·0 + 1·1 + 2·1 = 3, c23 = 0·1 + 1·0 + 2·2 = 4\n• c31 = 3·1 + 1·2 + 1·1 = 6, c32 = 3·0 + 1·1 + 1·1 = 2, c33 = 3·1 + 1·0 + 1·2 = 5\n\n✅ <b>Javob:</b> <code>[[6, 3, 3], [4, 3, 4], [6, 2, 5]]</code>"
+            },
+            {
+                "id": 'af16_t2',
+                "name": "2-Mavzu Namunasi: O'rin almashtirish inversiyalari",
+                "shart": "p = (3, 5, 1, 4, 2) inversiyalari soni va juft/toqligi",
+                "solution": "📝 <b>16-Mavzu (2-Mavzu namunasi) yechimi:</b>\n\np = (3, 5, 1, 4, 2)\nInversiyalar (katta son kichik sondan oldin kelgan holatlar):\n• 3 uchun: (3, 1), (3, 2) -> 2 ta\n• 5 uchun: (5, 1), (5, 4), (5, 2) -> 3 ta\n• 1 uchun: 0 ta\n• 4 uchun: (4, 2) -> 1 ta\n• 2 uchun: 0 ta\n\nJami inversiyalar soni: I(p) = 2 + 3 + 0 + 1 + 0 = <b>6</b>\n6 - juft son bo'lgani uchun o'rin almashtirish <b>JUFT</b>.\n\n✅ <b>Javob:</b> Inversiyalar soni = 6 (Juft)"
+            },
+            {
+                "id": 'af16_t3',
+                "name": "3-Mavzu Namunasi: 3x3 Determinant (Sarryus)",
+                "shart": "det [[2, 1, 3], [5, 3, 2], [1, 4, 3]]",
+                "solution": "📝 <b>16-Mavzu (3-Mavzu namunasi) yechimi:</b>\n\nSarryus qoidasi bo'yicha:\n• Asosiy diagonallar yig'indisi: 2·3·3 + 1·2·1 + 3·5·4 = 18 + 2 + 60 = 80\n• Yordamchi diagonallar yig'indisi: 3·3·1 + 2·2·4 + 1·5·3 = 9 + 16 + 15 = 40\n• Determinant: Δ = 80 - 40 = <b>40</b>\n\n✅ <b>Javob:</b> det(A) = <b>40</b>"
+            },
+            {
+                "id": 'af16_t4',
+                "name": "4-Mavzu Namunasi: Satr bo'yicha Laplas yoyilmasi",
+                "shart": "A = [[1, 2, 3], [0, 4, 5], [1, 0, 6]] ni 1-satr bo'yicha yoyish",
+                "solution": "📝 <b>16-Mavzu (4-Mavzu namunasi) yechimi:</b>\n\n1-satr bo'yicha Laplas yoyilmasi: |A| = a11·A11 + a12·A12 + a13·A13\n• A11 = (-1)^(1+1) · |[4, 5], [0, 6]| = 24 - 0 = 24\n• A12 = (-1)^(1+2) · |[0, 5], [1, 6]| = -(0 - 5) = 5\n• A13 = (-1)^(1+3) · |[0, 4], [1, 0]| = 0 - 4 = -4\n\n|A| = 1·(24) + 2·(5) + 3·(-4) = 24 + 10 - 12 = <b>22</b>\n\n✅ <b>Javob:</b> |A| = <b>22</b>"
+            },
+            {
+                "id": 'af16_t5',
+                "name": "5-Mavzu Namunasi: 3x3 Teskari matritsa (A⁻¹)",
+                "shart": "A = [[1, 2, 3], [0, 1, 4], [5, 6, 0]] ning teskarisini topish",
+                "solution": "📝 <b>16-Mavzu (5-Mavzu namunasi) yechimi:</b>\n\n1-qadam: Determinant: |A| = 1·(0 - 24) - 2·(0 - 20) + 3·(0 - 5) = -24 + 40 - 15 = 1 ≠ 0\n2-qadam: Algebraik to'ldiruvchilar matritsasi:\n• A11 = -24, A12 = 20, A13 = -5\n• A21 = 18, A22 = -15, A23 = 4\n• A31 = 5, A32 = -4, A33 = 1\n\n3-qadam: A⁻¹ = (1/|A|) · A* = [[-24, 18, 5], [20, -15, -4], [-5, 4, 1]]\n\n✅ <b>Javob:</b> <code>[[-24, 18, 5], [20, -15, -4], [-5, 4, 1]]</code>"
+            },
+            {
+                "id": 'af16_t6',
+                "name": "6-Mavzu Namunasi: ChTS (Kramer va Gauss)",
+                "shart": "x + y - z = 2, 2x - y + z = 1, x + 2y - z = 4",
+                "solution": "📝 <b>16-Mavzu (6-Mavzu namunasi) yechimi:</b>\n\nKramer usuli:\n• Δ = |[1, 1, -1], [2, -1, 1], [1, 2, -1]| = -1\n• Δx = |[2, 1, -1], [1, -1, 1], [4, 2, -1]| = -1 => x = (-1)/(-1) = <b>1</b>\n• Δy = |[1, 2, -1], [2, 1, 1], [1, 4, -1]| = -2 => y = (-2)/(-1) = <b>2</b>\n• Δz = |[1, 1, 2], [2, -1, 1], [1, 2, 4]| = -1 => z = (-1)/(-1) = <b>1</b>\n\n✅ <b>Javob:</b> x = 1, y = 2, z = 1"
+            },
+            {
+                "id": 'af16_t7',
+                "name": "7-Mavzu Namunasi: 4x4 Matritsa rangi",
+                "shart": "A = [[0, 4, 10, 1], [4, 8, 18, 7], [10, 18, 40, 17], [1, 7, 17, 3]]",
+                "solution": "📝 <b>16-Mavzu (7-Mavzu namunasi) yechimi:</b>\n\nGauss usulida elementar almashtirishlar:\n1) Satrlar o'rnini almashtirib (S1 <-> S4):\n   1-satr: [1, 7, 17, 3]\n2) 1-ustun elementlarini nollaymiz.\n3) Pog'onasimon ko'rinishga keltirilganda aniq 2 ta chiziqli erkli satr qoladi.\n\n✅ <b>Javob:</b> rank(A) = <b>2</b>"
+            },
+            {
+                "id": 'af16_t8',
+                "name": "8-Mavzu Namunasi: Bir jinsli sistema va FYET",
+                "shart": "x1 + 3x2 + 2x3 = 0, 2x1 - x2 + 3x3 = 0, 3x1 - 5x2 + 4x3 = 0, x1 + 17x2 + 4x3 = 0",
+                "solution": "📝 <b>16-Mavzu (8-Mavzu namunasi) yechimi:</b>\n\nKoeffitsientlar matritsasi rangi: rank(A) = 2, noma'lumlar soni: n = 3.\nErkli parametrlar soni: k = n - r = 3 - 2 = 1.\n\nBoshlang'ich ikkita tenglamadan:\n• x1 = -11/7 · x3\n• x2 = -1/7 · x3\nx3 = 7 deb olsak:\n<b>FYET:</b> e1 = (-11, -1, 7)ᵀ\n<b>Umumiy yechim:</b> X = c · (-11, -1, 7)ᵀ, c ∈ ℝ\n\n✅ <b>Javob:</b> FYET: e1 = (-11, -1, 7)ᵀ"
+            },
+            {
+                "id": 'af16_t9',
+                "name": "9-Mavzu Namunasi: Kompleks son shakllari va Eyler",
+                "shart": "z = 1 + i√3 ning moduli, argumenti va trigonometrik shakli",
+                "solution": "📝 <b>16-Mavzu (9-Mavzu namunasi) yechimi:</b>\n\nz = 1 + i√3 (a = 1, b = √3)\n• Modul: r = √(1² + (√3)²) = √(1 + 3) = √4 = <b>2</b>\n• Argument: tg φ = √3/1 = √3, (I chorak) => φ = <b>π/3 (60°)</b>\n• Trigonometrik shakl: z = 2(cos(π/3) + i·sin(π/3))\n• Ko'rsatkichli shakl: z = 2·e^(i·π/3)\n\n✅ <b>Javob:</b> r = 2, φ = π/3, z = 2(cos(π/3) + i·sin(π/3))"
+            },
+            {
+                "id": 'af16_t10',
+                "name": "10-Mavzu Namunasi: Muavr formulasi bilan daraja",
+                "shart": "(1 + i)^25 ifodaning qiymati",
+                "solution": "📝 <b>16-Mavzu (10-Mavzu namunasi) yechimi:</b>\n\nz = 1 + i:\n• r = √2, φ = π/4 => z = √2(cos(π/4) + i·sin(π/4))\n\nMuavr formulasi: zⁿ = rⁿ(cos(nφ) + i·sin(nφ))\n• (√2)^25 = 2^(25/2) = 2^12 · √2 = 4096√2\n• 25 · (π/4) = 6π + π/4\n• cos(π/4) = √2/2, sin(π/4) = √2/2\n\n(1 + i)^25 = 4096√2 · (√2/2 + i·√2/2) = 4096 · (1 + i) = <b>4096 + 4096i</b>\n\n✅ <b>Javob:</b> <b>4096 + 4096i</b>"
+            },
+            {
+                "id": 'af16_t11',
+                "name": "11-Mavzu Namunasi: Ko'phadlarni qoldiqli bo'lish",
+                "shart": "f(x) = 2x^4 - 3x^3 + 4x^2 - 5x + 6 ni g(x) = x^2 - 3x + 1 ga bo'lish",
+                "solution": "📝 <b>16-Mavzu (11-Mavzu namunasi) yechimi:</b>\n\nBurchakli bo'lish algoritmi:\n1) 2x⁴ / x² = 2x²\n   2x⁴ - 3x³ + 4x² - 5x + 6 - 2x²(x² - 3x + 1) = 3x³ + 2x² - 5x + 6\n2) 3x³ / x² = 3x\n   3x³ + 2x² - 5x + 6 - 3x(x² - 3x + 1) = 11x² - 8x + 6\n3) 11x² / x² = 11\n   11x² - 8x + 6 - 11(x² - 3x + 1) = 25x - 5\n\n• <b>Bo'linma:</b> Q(x) = 2x² + 3x + 11\n• <b>Qoldiq:</b> R(x) = 25x - 5\n\n✅ <b>Javob:</b> Q(x) = 2x² + 3x + 11, R(x) = 25x - 5"
+            },
+            {
+                "id": 'af16_t12',
+                "name": "12-Mavzu Namunasi: Yevklid algoritmi bilan EKUB",
+                "shart": "f(x) = x^4 + x^3 - 3x^2 - 4x - 1 va g(x) = x^3 + x^2 - x - 1",
+                "solution": "📝 <b>16-Mavzu (12-Mavzu namunasi) yechimi:</b>\n\nYevklid algoritmi:\n1-qadam: f(x) ni g(x) ga bo'lamiz:\n• f(x) = x · g(x) + (-2x² - 3x - 1)\n• 1-qoldiq: r1(x) = -2x² - 3x - 1 (yoki 2x² + 3x + 1 = (2x+1)(x+1))\n\n2-qadam: g(x) ni r1(x) ga bo'lamiz:\n• x³ + x² - x - 1 = (1/2 x - 1/4)(2x² + 3x + 1) - 3/4(x + 1)\n• 2-qoldiq: r2(x) = x + 1\n\n3-qadam: r1(x) ni r2(x) ga bo'lamiz:\n• 2x² + 3x + 1 = (2x + 1)(x + 1) + 0 (Qoldiq 0!)\n\nOxirgi noldan farqli qoldiq normalashtirilgan holda:\n<b>EKUB(f, g) = x + 1</b>\n\n✅ <b>Javob:</b> EKUB = <b>x + 1</b>"
+            },
+            {
+                "id": 'af16_t13',
+                "name": "13-Mavzu Namunasi: Gorner sxemasi jadvali",
+                "shart": "f(x) = x^4 - 2x^3 + 4x^2 - 6x + 8 ni c = 2 ga bo'lish",
+                "solution": "📝 <b>16-Mavzu (13-Mavzu namunasi) yechimi:</b>\n\nGorner jadvali (c = 2):\nKoeffitsientlar: [1, -2, 4, -6, 8]\n• b3 = a4 = 1\n• b2 = 2 · 1 + (-2) = 0\n• b1 = 2 · 0 + 4 = 4\n• b0 = 2 · 4 + (-6) = 2\n• Qoldiq R = 2 · 2 + 8 = <b>12</b>\n\nBo'linma: Q(x) = x³ + 4x + 2, Qoldiq: P(2) = 12\n\n✅ <b>Javob:</b> Q(x) = x³ + 4x + 2, P(2) = 12"
+            },
+            {
+                "id": 'af16_t14',
+                "name": "14-Mavzu Namunasi: Sodda kasrlarga yoyish",
+                "shart": "(2x + 5) / (x^2 - 5x + 6) ni sodda kasrlarga yoyish",
+                "solution": "📝 <b>16-Mavzu (14-Mavzu namunasi) yechimi:</b>\n\nMaxraj: x² - 5x + 6 = (x - 2)(x - 3)\n(2x + 5) / ((x - 2)(x - 3)) = A / (x - 2) + B / (x - 3)\n\nUmumiy maxrajga keltiramiz:\n2x + 5 = A(x - 3) + B(x - 2)\n• x = 2 bo'lsa: 2(2) + 5 = A(2 - 3) => 9 = -A => <b>A = -9</b>\n• x = 3 bo'lsa: 2(3) + 5 = B(3 - 2) => 11 = B => <b>B = 11</b>\n\n✅ <b>Javob:</b> <code>-9 / (x - 2) + 11 / (x - 3)</code>"
+            },
+            {
+                "id": 'af16_t15',
+                "name": "15-Mavzu Namunasi: Kardano formulasi (x³ - 6x - 9 = 0)",
+                "shart": "x^3 - 6x - 9 = 0 tenglamani Kardano formulasi bilan yeching.",
+                "solution": "📝 <b>16-Mavzu (15-Mavzu namunasi) yechimi:</b>\n\nx³ - 6x - 9 = 0 (p = -6, q = -9)\n1) D = (q/2)² + (p/3)³ = (-4.5)² + (-2)³ = 20.25 - 8 = 12.25 > 0\n   √D = 3.5\n2) u = ∛(4.5 + 3.5) = ∛8 = 2\n   v = ∛(4.5 - 3.5) = ∛1 = 1\n3) x1 = u + v = 2 + 1 = <b>3</b>\n\nTekshirish: 3³ - 6(3) - 9 = 27 - 18 - 9 = 0 (to'g'ri)\n\n✅ <b>Javob:</b> Asosiy haqiqiy ildiz: <b>x = 3</b>"
+            }
+        ]
+    },
 }

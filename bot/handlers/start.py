@@ -111,19 +111,23 @@ async def cb_amaliy_file_item(callback: CallbackQuery):
         await callback.answer("Amaliy fayl ma'lumoti topilmadi.")
         return
 
-    # Hujjatdagi barcha misollar ro'yxatini shakllantiramiz
+    # Hujjatdagi barcha misollar ro'yxatini shakllantiramiz (Telegram 4096 belgi chegarasi xavfsizligi)
+    display_limit = 10
     task_lines = []
-    for idx, t in enumerate(data["tasks"], 1):
+    for idx, t in enumerate(data["tasks"][:display_limit], 1):
         task_lines.append(f"<b>{idx}. {t['name']}</b>\n   Shart: <code>{t['shart']}</code>")
+
+    if len(data["tasks"]) > display_limit:
+        task_lines.append(f"<i>...va yana {len(data['tasks']) - display_limit} ta misol (Barchasi quyidagi Mini Appda to'liq mavjud).</i>")
 
     tasks_text = "\n\n".join(task_lines)
 
     text = (
         f"📄 <b>{data['title']}</b>\n"
         f"📁 Fayl: <code>{data['file']}</code>\n\n"
-        f"📋 <b>Ushbu hujjatdagi topshiriqlar va misollar:</b>\n\n"
+        f"📋 <b>Ushbu hujjatdagi topshiriqlar va misollar ({len(data['tasks'])} ta):</b>\n\n"
         f"{tasks_text}\n\n"
-        f"👇 <i>Quyidagi tugmalardan birini bosib, misolning to'liq qadamma-qadam yechimini ko'ring:</i>"
+        f"👇 <i>Quyidagi tugmalardan birini bosib yechimni ko'ring yoki Mini Appda barchasini to'liq oching:</i>"
     )
 
     await callback.message.edit_text(
@@ -183,9 +187,12 @@ async def cb_topic_item(callback: CallbackQuery):
     topic_data = AMALIY_DATA.get(tid, {})
     tasks = topic_data.get("tasks", [])
 
+    display_limit = 10
     task_lines = []
-    for idx, t in enumerate(tasks, 1):
+    for idx, t in enumerate(tasks[:display_limit], 1):
         task_lines.append(f"<b>{idx}. {t['name']}</b>\n   <i>Shart:</i> <code>{t['shart']}</code>")
+    if len(tasks) > display_limit:
+        task_lines.append(f"<i>...va yana {len(tasks) - display_limit} ta misol (Barchasi quyidagi Mini Appda to'liq mavjud).</i>")
 
     tasks_text = "\n\n".join(task_lines) if task_lines else "Misollar tez orada qo'shiladi."
 

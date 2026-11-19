@@ -1187,3 +1187,11 @@ AMALIY_DATA = {
         ]
     }
 }
+
+# Support both int and str keys for seamless lookups
+for _k in list(AMALIY_DATA.keys()):
+    if isinstance(_k, str) and _k.isdigit():
+        AMALIY_DATA[int(_k)] = AMALIY_DATA[_k]
+    elif isinstance(_k, int):
+        AMALIY_DATA[str(_k)] = AMALIY_DATA[_k]
+

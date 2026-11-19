@@ -6,13 +6,22 @@ from aiogram.types import (
     WebAppInfo
 )
 
+def make_webapp_url(base_url: str, query: str = "") -> str:
+    url = base_url.rstrip("/")
+    if query:
+        query_clean = query.lstrip("?&")
+        sep = "&" if "?" in url else "?"
+        return f"{url}{sep}{query_clean}&v=v2_all_tasks"
+    sep = "&" if "?" in url else "?"
+    return f"{url}{sep}v=v2_all_tasks"
+
 def get_main_reply_keyboard(webapp_url: str) -> ReplyKeyboardMarkup:
     """Asosiy pastki klaviatura"""
     kb = [
         [
             KeyboardButton(
                 text="🚀 Mini Appni ochish (1-15 Amaliylar)",
-                web_app=WebAppInfo(url=webapp_url)
+                web_app=WebAppInfo(url=make_webapp_url(webapp_url))
             )
         ],
         [
@@ -31,7 +40,7 @@ def get_inline_webapp_keyboard(webapp_url: str) -> InlineKeyboardMarkup:
         [
             InlineKeyboardButton(
                 text="🧮 Amaliy Fayllar & Kalkulyator (Mini App)",
-                web_app=WebAppInfo(url=webapp_url)
+                web_app=WebAppInfo(url=make_webapp_url(webapp_url))
             )
         ],
         [
@@ -59,14 +68,23 @@ def get_amaliy_files_keyboard() -> InlineKeyboardMarkup:
 def get_amaliy_tasks_keyboard(file_id: int, tasks: list, webapp_url: str) -> InlineKeyboardMarkup:
     """Amaliy fayl ichidagi misollarni yechish tugmalari"""
     buttons = []
-    for t in tasks:
-        buttons.append([
-            InlineKeyboardButton(text=f"⚡ {t['name']}", callback_data=f"solvetask_{t['id']}")
-        ])
+    # Agar topshiriqlar ko'p bo'lsa (masalan 59 ta), dastlabki 16 tasini qulay 2 tadan joylashtiramiz
+    shown_tasks = tasks[:16]
+    row = []
+    for t in shown_tasks:
+        name_part = t['name'].split(":")[0] if ":" in t['name'] else t['name'][:22]
+        row.append(InlineKeyboardButton(text=f"⚡ {name_part}", callback_data=f"solvetask_{t['id']}"))
+        if len(row) == 2:
+            buttons.append(row)
+            row = []
+    if row:
+        buttons.append(row)
+
+    app_file_url = make_webapp_url(webapp_url, f"mode=files&file={file_id}")
     buttons.append([
         InlineKeyboardButton(
-            text="🚀 Mini Appda interaktiv yechish",
-            web_app=WebAppInfo(url=webapp_url)
+            text=f"🚀 Mini Appda barcha {len(tasks)} ta misolni ko'rish",
+            web_app=WebAppInfo(url=app_file_url)
         )
     ])
     buttons.append([
@@ -76,11 +94,12 @@ def get_amaliy_tasks_keyboard(file_id: int, tasks: list, webapp_url: str) -> Inl
 
 def get_task_solution_keyboard(file_id: int, webapp_url: str) -> InlineKeyboardMarkup:
     """Misol yechimi ostidagi navigatsiya tugmalari"""
+    app_topic_url = make_webapp_url(webapp_url, f"mode=topics&topic={file_id}")
     buttons = [
         [
             InlineKeyboardButton(
                 text="🚀 Mini Appda o'z misolingizni yechish",
-                web_app=WebAppInfo(url=f"{webapp_url}?mode=topics&topic={file_id}")
+                web_app=WebAppInfo(url=app_topic_url)
             )
         ],
         [
@@ -101,7 +120,7 @@ def get_topics_keyboard(webapp_url: str = "") -> InlineKeyboardMarkup:
         buttons.append([
             InlineKeyboardButton(
                 text="🧮 16 ta Mavzu Kalkulyatori (Mini App)",
-                web_app=WebAppInfo(url=f"{webapp_url}?mode=topics")
+                web_app=WebAppInfo(url=make_webapp_url(webapp_url, "mode=topics"))
             )
         ])
     buttons.extend([
@@ -146,14 +165,22 @@ def get_topics_keyboard(webapp_url: str = "") -> InlineKeyboardMarkup:
 def get_topic_detail_keyboard(topic_num: str, tasks: list, webapp_url: str) -> InlineKeyboardMarkup:
     """Alohida mavzu sahifasi ostidagi tugmalar va misollarni yechish"""
     buttons = []
-    for t in tasks:
-        buttons.append([
-            InlineKeyboardButton(text=f"⚡ {t['name']}", callback_data=f"solvetask_{t['id']}")
-        ])
+    shown_tasks = tasks[:16]
+    row = []
+    for t in shown_tasks:
+        name_part = t['name'].split(":")[0] if ":" in t['name'] else t['name'][:22]
+        row.append(InlineKeyboardButton(text=f"⚡ {name_part}", callback_data=f"solvetask_{t['id']}"))
+        if len(row) == 2:
+            buttons.append(row)
+            row = []
+    if row:
+        buttons.append(row)
+
+    app_topic_url = make_webapp_url(webapp_url, f"mode=topics&topic={topic_num}")
     buttons.append([
         InlineKeyboardButton(
-            text="🧮 Ushbu mavzu kalkulyatorini ochish (Mini App)",
-            web_app=WebAppInfo(url=f"{webapp_url}?mode=topics&topic={topic_num}")
+            text=f"🧮 Ushbu mavzu kalkulyatorini ochish (Mini App)",
+            web_app=WebAppInfo(url=app_topic_url)
         )
     ])
     buttons.append([

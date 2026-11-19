@@ -37,15 +37,20 @@ EXTRA_PARAM=""
 for arg in "$@"; do
     case "$arg" in
         --mode=topics)
-            EXTRA_PARAM="?mode=topics"
+            EXTRA_PARAM="mode=topics"
             ;;
         --mode=files)
-            EXTRA_PARAM="?mode=files"
+            EXTRA_PARAM="mode=files"
             ;;
     esac
 done
 
-FINAL_URL="${APP_URL}/${EXTRA_PARAM}"
+CACHE_BUSTER="v=v2_all_tasks"
+if [ -z "$EXTRA_PARAM" ]; then
+    FINAL_URL="${APP_URL}/?${CACHE_BUSTER}"
+else
+    FINAL_URL="${APP_URL}/?${EXTRA_PARAM}&${CACHE_BUSTER}"
+fi
 
 if command -v omarchy-launch-webapp >/dev/null 2>&1; then
     exec omarchy-launch-webapp "${FINAL_URL}"

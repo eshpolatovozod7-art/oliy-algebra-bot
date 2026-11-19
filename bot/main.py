@@ -49,13 +49,17 @@ async def start_health_server(port: int) -> web.AppRunner:
     app.router.add_get("/webapp/", handle_webapp_index)
     app.router.add_get("/health", handle_ping)
 
-    # WebApp statik fayllari: /css, /js, /vendor va /webapp/
+    # WebApp statik fayllari: /css, /js, /vendor, /amaliy_previews va /webapp/
     if (webapp_dir / "css").exists():
         app.router.add_static("/css", webapp_dir / "css")
     if (webapp_dir / "js").exists():
         app.router.add_static("/js", webapp_dir / "js")
     if (webapp_dir / "vendor").exists():
         app.router.add_static("/vendor", webapp_dir / "vendor")
+    if (webapp_dir / "amaliy_previews").exists():
+        app.router.add_static("/amaliy_previews", webapp_dir / "amaliy_previews")
+    if (webapp_dir / "amaliy_docs").exists():
+        app.router.add_static("/amaliy_docs", webapp_dir / "amaliy_docs")
     if webapp_dir.exists():
         app.router.add_static("/webapp", webapp_dir)
 

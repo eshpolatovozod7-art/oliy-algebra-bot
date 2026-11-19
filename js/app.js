@@ -106,13 +106,69 @@ const app = {
         }
     },
 
+    pdfPages: {
+        1: 4, 2: 2, 3: 4, 4: 4, 5: 4,
+        6: 4, 7: 4, 8: 4, 9: 3, 10: 4,
+        11: 4, 12: 3, 13: 4, 14: 4, 15: 4
+    },
+    currentPdfPage: 1,
+
+    togglePdfPreview() {
+        const wrap = document.getElementById('amaliy-preview-wrap');
+        const txt = document.getElementById('btn-toggle-preview-text');
+        if (!wrap) return;
+        const isHidden = wrap.style.display === 'none' || wrap.style.display === '';
+        wrap.style.display = isHidden ? 'block' : 'none';
+        if (txt) txt.innerText = isHidden ? "Yashirish" : "Ko'rsatish";
+    },
+
+    setPdfPage(fileId, pageNum) {
+        this.currentPdfPage = pageNum;
+        const img = document.getElementById('amaliy-preview-img');
+        if (img) {
+            img.src = `amaliy_previews/amaliy_${fileId}-${pageNum}.png`;
+        }
+        const tabs = document.getElementById('amaliy-page-tabs');
+        if (tabs) {
+            Array.from(tabs.children).forEach((btn, idx) => {
+                if (idx + 1 === pageNum) {
+                    btn.classList.add('active');
+                    btn.style.background = 'var(--link-color)';
+                    btn.style.color = '#fff';
+                } else {
+                    btn.classList.remove('active');
+                    btn.style.background = 'rgba(255,255,255,0.1)';
+                    btn.style.color = 'var(--text-color)';
+                }
+            });
+        }
+    },
+
     onAmaliyFileChange(fileId) {
         if (typeof AMALIY_DATABASE === 'undefined') return;
         const data = AMALIY_DATABASE[fileId];
         if (!data) return;
 
+        const fileNum = parseInt(fileId);
         const pdfEl = document.getElementById('amaliy-pdf-name');
         if (pdfEl) pdfEl.innerText = `📄 Fayl: ${data.file}`;
+
+        // Asl PDF CamScanner sahifasi previewini tayyorlash
+        const maxPages = this.pdfPages[fileNum] || 2;
+        const tabs = document.getElementById('amaliy-page-tabs');
+        if (tabs) {
+            tabs.innerHTML = '';
+            for (let p = 1; p <= maxPages; p++) {
+                const btn = document.createElement('button');
+                btn.className = 'btn-secondary';
+                btn.style.padding = '4px 10px';
+                btn.style.fontSize = '0.78rem';
+                btn.innerText = `${p}-sahifa`;
+                btn.onclick = () => this.setPdfPage(fileNum, p);
+                tabs.appendChild(btn);
+            }
+        }
+        this.setPdfPage(fileNum, 1);
 
         const taskSelect = document.getElementById('amaliy-task-select');
         if (!taskSelect) return;
@@ -125,14 +181,22 @@ const app = {
             taskSelect.appendChild(opt);
         });
 
-        // Barcha misollar ro'yxatini chiqarish
+        // Barcha misollar ro'yxatini chiqarish (Formulalari bilan xuddi darslikdek)
         const summaryEl = document.getElementById('amaliy-tasks-summary');
         if (summaryEl) {
-            let listHtml = `<div style="font-weight: 600; margin-bottom: 6px; color: var(--text-color);">📋 Hujjatdagi barcha misollar (${data.tasks.length} ta):</div><ul style="padding-left: 18px; margin: 0;">`;
+            let listHtml = `<div style="font-weight: 700; margin-bottom: 8px; color: var(--text-color); font-size: 0.95rem;">📋 Ushbu fayldagi barcha misollar (${data.tasks.length} ta):</div><div style="display: flex; flex-direction: column; gap: 8px;">`;
             data.tasks.forEach((t) => {
-                listHtml += `<li style="margin-bottom: 4px;"><b>${t.name}:</b> ${this.renderMathText(t.shart)}</li>`;
+                const mathHtml = this.formatTaskCondition(t.shart);
+                listHtml += `
+                <div style="padding: 10px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 8px; display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 220px;">
+                        <div style="font-weight: 600; font-size: 0.85rem; color: var(--link-color);">${t.name}</div>
+                        <div style="margin-top: 4px; overflow-x: auto;">${mathHtml}</div>
+                    </div>
+                    <button class="btn-secondary" style="padding: 6px 14px; font-size: 0.82rem; white-space: nowrap;" onclick="app.selectAndSolveTask('${t.id}')">⚡ Yechish</button>
+                </div>`;
             });
-            listHtml += '</ul>';
+            listHtml += '</div>';
             summaryEl.innerHTML = listHtml;
         }
 
@@ -150,10 +214,22 @@ const app = {
         const task = data.tasks.find(t => t.id === taskId);
         if (!task) return;
 
-        const shartEl = document.getElementById('amaliy-shart-text');
-        if (shartEl) {
-            shartEl.innerHTML = this.renderMathText(task.shart);
+        const nameBadge = document.getElementById('amaliy-task-name-badge');
+        if (nameBadge) {
+            nameBadge.innerText = task.name;
         }
+
+        const formulaEl = document.getElementById('amaliy-shart-formula');
+        if (formulaEl) {
+            formulaEl.innerHTML = this.formatTaskCondition(task.shart);
+        }
+    },
+
+    selectAndSolveTask(taskId) {
+        const sel = document.getElementById('amaliy-task-select');
+        if (sel) sel.value = taskId;
+        this.onAmaliyTaskChange(taskId);
+        this.solveAmaliyTask();
     },
 
     solveAmaliyTask() {
@@ -1198,14 +1274,94 @@ const app = {
     },
 
     renderMathText(str) {
-        if (!window.katex) return str;
-        return str.replace(/\$([^\$]+)\$/g, (match, formula) => {
+        if (!window.katex || !str) return str || "";
+        // Double dollar $$...$$ display math mode
+        let res = str.replace(/\$\$([^\$]+)\$\$/g, (match, formula) => {
             try {
-                return window.katex.renderToString(formula, { throwOnError: false });
+                return window.katex.renderToString(formula.trim(), { displayMode: true, throwOnError: false });
             } catch (e) {
                 return match;
             }
         });
+        // Single dollar $...$ inline mode
+        return res.replace(/\$([^\$]+)\$/g, (match, formula) => {
+            try {
+                return window.katex.renderToString(formula.trim(), { displayMode: false, throwOnError: false });
+            } catch (e) {
+                return match;
+            }
+        });
+    },
+
+    formatTaskCondition(text) {
+        if (!text) return "";
+        let s = text.trim();
+
+        // Agar allaqachon LaTeX display math bo'lsa
+        if (s.includes('$$')) {
+            return this.renderMathText(s);
+        }
+
+        // det [[...]] -> \begin{vmatrix} ... \end{vmatrix}
+        s = s.replace(/det\s*(\[\[[\s\S]*?\]\])/g, (match, p1) => {
+            try {
+                const arr = JSON.parse(p1);
+                const rows = arr.map(r => r.join(' & ')).join(' \\\\ ');
+                return `\\begin{vmatrix} ${rows} \\end{vmatrix}`;
+            } catch(e) { return match; }
+        });
+
+        // [[...]] -> \begin{pmatrix} ... \end{pmatrix}
+        s = s.replace(/\[\[[\s\S]*?\]\]/g, (match) => {
+            try {
+                const arr = JSON.parse(match);
+                if (Array.isArray(arr) && arr.length > 0 && Array.isArray(arr[0])) {
+                    const rows = arr.map(r => r.join(' & ')).join(' \\\\ ');
+                    return `\\begin{pmatrix} ${rows} \\end{pmatrix}`;
+                }
+            } catch(e) {}
+            return match;
+        });
+
+        // O'rin almashtirishlar: ((1, 2, 3), (2, 3, 1))
+        s = s.replace(/\(\(([\d,\s]+)\),\s*\(([\d,\s]+)\)\)/g, (match, r1, r2) => {
+            const row1 = r1.split(',').map(x => x.trim()).join(' & ');
+            const row2 = r2.split(',').map(x => x.trim()).join(' & ');
+            return `\\begin{pmatrix} ${row1} \\\\ ${row2} \\end{pmatrix}`;
+        });
+
+        // Tenglamalar sistemasi (agar yangi qator va = bo'lsa)
+        if (s.includes('\n') && s.includes('=')) {
+            const lines = s.split('\n').map(l => l.trim()).filter(l => l.includes('='));
+            if (lines.length > 1) {
+                s = `\\begin{cases} ${lines.join(' \\\\ ')} \\end{cases}`;
+            }
+        } else if (s.includes('= 0') && s.split('= 0').length > 2) {
+            const eqParts = s.split(/,\s*(?=[^,]*=)/);
+            if (eqParts.length > 1) {
+                s = `\\begin{cases} ${eqParts.join(' \\\\ ')} \\end{cases}`;
+            }
+        }
+
+        // Belgilar: · -> \cdot
+        s = s.replace(/·/g, ' \\cdot ');
+
+        // Agar matritsa, determinant yoki sistema bo'lsa
+        if (s.includes('\\begin{')) {
+            return this.renderMathText(`$$${s}$$`);
+        }
+
+        // Agar $ mavjud bo'lsa
+        if (s.includes('$')) {
+            return this.renderMathText(s);
+        }
+
+        // Agar algebraik ifoda bo'lsa (masalan f(x) = ...)
+        if (s.includes('=') || s.includes('^') || s.includes('+') || s.includes('-') || s.includes('/') || s.includes('∛') || s.includes('√')) {
+            return this.renderMathText(`$$${s}$$`);
+        }
+
+        return s;
     },
 
     toggleTheme() {

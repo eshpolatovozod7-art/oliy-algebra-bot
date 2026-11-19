@@ -44,7 +44,7 @@
             <div class="card" style="border: 2px solid var(--link-color);">
                 <div class="card-title">
                     <span class="badge-topic" style="background: rgba(56, 189, 248, 0.2); border-color: var(--link-color); color: var(--link-color);">📁 FAYLLARDAN YECHISH</span>
-                    <span>Amaliy Topshiriqlar</span>
+                    <span>1-15 Amaliy Mashg'ulot Fayllari</span>
                 </div>
                 <label class="badge-label">1. Amaliy mashg'ulot faylini tanlang:</label>
                 <select id="amaliy-file-select" class="topic-select" onchange="app.onAmaliyFileChange(this.value)">
@@ -65,23 +65,47 @@
                     <option value="15">15-Amaliy: 3- va 4-darajali tenglamalar</option>
                 </select>
 
-                <label class="badge-label" style="margin-top: 12px;">2. Ushbu fayldagi topshiriqni tanlang:</label>
+                <!-- ASL DARSLIK SAHIFASI PREVIEW KARTASI (CAMSCANNER SCAN) -->
+                <div id="amaliy-pdf-card" style="margin-top: 14px; border: 1px dashed var(--link-color); border-radius: 10px; padding: 10px; background: rgba(56, 189, 248, 0.05);">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-weight: 600; font-size: 0.9rem; color: var(--link-color); display: flex; align-items: center; gap: 6px;">
+                            📖 Darslikdagi asl sahifani ko'rish (PDF Fayl nusxasi)
+                        </span>
+                        <button class="btn-secondary" style="padding: 4px 10px; font-size: 0.8rem;" onclick="app.togglePdfPreview()">
+                            👁️ <span id="btn-toggle-preview-text">Ko'rsatish</span>
+                        </button>
+                    </div>
+                    <div id="amaliy-preview-wrap" style="display: none; margin-top: 12px; text-align: center;">
+                        <div id="amaliy-page-tabs" style="display: flex; gap: 6px; justify-content: center; margin-bottom: 8px; flex-wrap: wrap;"></div>
+                        <div style="max-height: 480px; overflow-y: auto; border: 1px solid var(--border-color); border-radius: 8px; background: #000; box-shadow: inset 0 2px 8px rgba(0,0,0,0.5);">
+                            <img id="amaliy-preview-img" src="" alt="Darslik sahifasi" style="max-width: 100%; height: auto; display: inline-block;">
+                        </div>
+                    </div>
+                </div>
+
+                <label class="badge-label" style="margin-top: 14px;">2. Ushbu fayldagi topshiriqni tanlang:</label>
                 <select id="amaliy-task-select" class="topic-select" onchange="app.onAmaliyTaskChange(this.value)">
                     <!-- JS orqali to'ldiriladi -->
                 </select>
 
-                <div id="amaliy-shart-box" style="margin-top: 12px; padding: 12px; background: rgba(0,0,0,0.25); border-radius: 10px; border-left: 3px solid var(--warning);">
-                    <div style="font-size: 0.75rem; color: var(--hint-color); margin-bottom: 4px;" id="amaliy-pdf-name">📄 Fayl: Amaliy 1.pdf</div>
-                    <div style="font-weight: 600; color: var(--text-color);" id="amaliy-shart-text">Shart yuklanmoqda...</div>
+                <!-- MISOLNING MATEMATIK SHARTI (DARSLIKDAGI FORMULA SHAKLIDA) -->
+                <div id="amaliy-shart-box" style="margin-top: 12px; padding: 14px; background: rgba(15, 23, 42, 0.7); border-radius: 12px; border: 1px solid var(--border-color); border-left: 4px solid var(--link-color);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                        <span id="amaliy-task-name-badge" style="font-weight: 700; color: var(--link-color); font-size: 0.95rem;">Topshiriq</span>
+                        <span style="font-size: 0.75rem; color: var(--hint-color);" id="amaliy-pdf-name">📄 Fayl: Amaliy 1.pdf</span>
+                    </div>
+                    <div id="amaliy-shart-formula" style="font-size: 1.15rem; margin: 10px 0; overflow-x: auto; text-align: center;">
+                        <!-- KaTeX bu yerda darslikdagi kabi ko'rsatadi -->
+                    </div>
                 </div>
 
                 <div style="display: flex; gap: 8px; margin-top: 14px;">
-                    <button class="btn-primary" style="flex: 1;" onclick="app.solveAmaliyTask()">
-                        ⚡ Tanlangan misolni yechish
+                    <button class="btn-primary" style="flex: 1; padding: 14px; font-size: 1rem;" onclick="app.solveAmaliyTask()">
+                        ⚡ Tanlangan misolni qadamma-qadam yechish
                     </button>
                 </div>
 
-                <div id="amaliy-tasks-summary" style="margin-top: 14px; font-size: 0.85rem; color: var(--hint-color);">
+                <div id="amaliy-tasks-summary" style="margin-top: 16px; font-size: 0.85rem; color: var(--hint-color);">
                     <!-- Barcha misollar ro'yxati chiqadi -->
                 </div>
             </div>

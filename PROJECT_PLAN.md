@@ -51,4 +51,7 @@ oliy-algebra-bot/
 - [x] 2. WebApp interfeysi va matematik hisoblash dvigateli to'liq yozildi va test qilindi.
 - [x] 3. Aiogram 3 bot arxitekturasi va WebApp hodisalari (`tg.sendData`) ulandi.
 - [x] 4. Barcha kodlar Git repozitoriyga commit qilindi.
-- [ ] 5. GitHub Pages ga WebApp ni yuklash va BotFather'ga WebApp havolasini ulash.
+- [x] 5. GitHub Pages ga WebApp yuklandi (`https://eshpolatovozod7-art.github.io/oliy-algebra-bot/`).
+- [x] 6. KaTeX va Telegram SDK to'liq oflayn yuklandi (Internetga bog'liqlik 0 ga tushirildi).
+- [x] 7. Noutbukka Linux Desktop ilova sifatida o'rnatildi (`oliy-algebra`, `.desktop` fayl, ikonka).
+- [x] 8. `oliy-algebra-bot.service` systemd servisi o'rnatildi va fonda doimiy ishlashi ta'minlandi.

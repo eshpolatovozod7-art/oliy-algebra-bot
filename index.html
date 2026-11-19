@@ -2,20 +2,30 @@
 <html lang="uz">
 <head>
     <meta charset="UTF-8">
-    <base href="webapp/">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Oliy Algebra Solver (16 ta Mavzu)</title>
-    <!-- Telegram WebApp SDK -->
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <!-- KaTeX CSS & JS for Math rendering -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <link rel="icon" type="image/svg+xml" href="icon.svg">
+    <!-- Telegram WebApp SDK (Oflayn va Onlayn) -->
+    <script src="vendor/telegram/telegram-web-app.js"></script>
+    <!-- KaTeX CSS & JS (To'liq oflayn mahalliy yuklanadi) -->
+    <link rel="stylesheet" href="vendor/katex/katex.min.css">
+    <script src="vendor/katex/katex.min.js"></script>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <header class="header">
-        <h1>📐 Oliy Algebra Solver</h1>
-        <p>16 ta amaliy va ma'ruza mavzulari bo'yicha to'liq yechuvchi</p>
+        <div class="header-top">
+            <div>
+                <h1>📐 Oliy Algebra Solver</h1>
+                <p>16 ta mavzu va 1-15 amaliy topshiriqlar yechuvchisi</p>
+            </div>
+            <div class="header-tools">
+                <span class="status-badge" title="Tizim to'liq oflayn ishlashga tayyor">
+                    <span class="status-dot"></span> Oflayn tayyor
+                </span>
+                <button id="theme-toggle-btn" class="btn-icon" onclick="app.toggleTheme()" title="Mavzuni almashtirish (Tun/Kun)">🌙</button>
+            </div>
+        </div>
     </header>
 
     <main class="container">
@@ -616,7 +626,11 @@
             <div class="card">
                 <div class="card-title">
                     <span>📝 Qadamma-qadam yechim</span>
-                    <button class="btn-secondary" onclick="app.copySolution()">📋 Nusxalash</button>
+                    <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                        <button class="btn-secondary" onclick="app.copySolution()" title="Yechim matnini nusxalash">📋 Nusxalash</button>
+                        <button class="btn-secondary" onclick="app.printSolution()" title="PDF qilib saqlash yoki printerdan chiqarish">🖨️ PDF / Chop etish</button>
+                        <button class="btn-secondary" onclick="app.clearSolution()" title="Yechimni tozalash">🗑️ Tozalash</button>
+                    </div>
                 </div>
                 <div id="solution-box" class="solution-box"></div>
                 <button id="btn-send-bot" class="btn-send-bot" onclick="app.sendToBot()">

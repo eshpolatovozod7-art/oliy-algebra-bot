@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+# Oliy Algebra Solver Desktop Launcher
+set -e
+
+PORT="${PORT:-8765}"
+APP_URL="http://127.0.0.1:${PORT}"
+PROJECT_DIR="/home/ozodbek/Projects/oliy-algebra-bot"
+
+check_server() {
+    curl -s --max-time 1 "${APP_URL}/health" >/dev/null 2>&1
+}
+
+# 1. Server ishlayotganini tekshirish
+if ! check_server; then
+    # Agar systemd servisi faol bo'lmasa, uni ko'tarish
+    if systemctl --user list-unit-files oliy-algebra-bot.service >/dev/null 2>&1; then
+        systemctl --user start oliy-algebra-bot.service 2>/dev/null || true
+    fi
+
+    # Server tayyor bo'lishini 3 soniyagacha kutish
+    for i in {1..15}; do
+        if check_server; then
+            break
+        fi
+        sleep 0.2
+    done
+
+    # Agar hali ham ishlamasa, mahalliy tezkor server ko'tarish
+    if ! check_server; then
+        nohup "${PROJECT_DIR}/venv/bin/python3" "${PROJECT_DIR}/bot/main.py" >/dev/null 2>&1 &
+        sleep 1
+    fi
+fi
+
+# 2. Qo'shimcha parametrlar
+EXTRA_PARAM=""
+for arg in "$@"; do
+    case "$arg" in
+        --mode=topics)
+            EXTRA_PARAM="?mode=topics"
+            ;;
+        --mode=files)
+            EXTRA_PARAM="?mode=files"
+            ;;
+    esac
+done
+
+FINAL_URL="${APP_URL}/${EXTRA_PARAM}"
+
+PROFILE_DIR="${HOME}/.config/oliy-algebra-profile"
+mkdir -p "${PROFILE_DIR}"
+
+if command -v uwsm-app >/dev/null 2>&1; then
+    exec uwsm-app -- chromium \
+        --app="${FINAL_URL}" \
+        --class="oliy-algebra" \
+        --name="oliy-algebra" \
+        --user-data-dir="${PROFILE_DIR}" \
+        --window-size=1240,860 \
+        --no-first-run \
+        --no-default-browser-check
+else
+    exec chromium \
+        --app="${FINAL_URL}" \
+        --class="oliy-algebra" \
+        --name="oliy-algebra" \
+        --user-data-dir="${PROFILE_DIR}" \
+        --window-size=1240,860 \
+        --no-first-run \
+        --no-default-browser-check
+fi

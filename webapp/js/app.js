@@ -25,6 +25,16 @@ const app = {
             if (tg.setHeaderColor) tg.setHeaderColor('#0f172a');
         }
 
+        // Saqlangan mavzuni (Tun / Kun) tiklash
+        try {
+            const savedTheme = localStorage.getItem('oa_theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-theme');
+                const btn = document.getElementById('theme-toggle-btn');
+                if (btn) btn.innerText = '☀️';
+            }
+        } catch (e) {}
+
         // Barcha gridlarni chizish
         this.renderGrid('A');
         this.renderGrid('B');
@@ -1198,24 +1208,65 @@ const app = {
         });
     },
 
+    toggleTheme() {
+        const isLight = document.body.classList.toggle('light-theme');
+        try {
+            localStorage.setItem('oa_theme', isLight ? 'light' : 'dark');
+        } catch (e) {}
+        const btn = document.getElementById('theme-toggle-btn');
+        if (btn) btn.innerText = isLight ? '☀️' : '🌙';
+    },
+
+    printSolution() {
+        if (!this.lastSolution) {
+            alert("Chop etish uchun avval biror misolni yeching!");
+            return;
+        }
+        window.print();
+    },
+
+    clearSolution() {
+        const container = document.getElementById('solution-container');
+        const box = document.getElementById('solution-box');
+        if (box) box.innerHTML = '';
+        if (container) container.style.display = 'none';
+        this.lastSolution = null;
+    },
+
     copySolution() {
         if (!this.lastSolution) return;
         const text = `${this.lastSolution.title}\n\n` + this.lastSolution.steps.join('\n');
         navigator.clipboard.writeText(text).then(() => {
-            alert("Yechim nusxalandi!");
+            alert("✅ Yechim buferga nusxalandi!");
+        }).catch(() => {
+            prompt("Yechimdan nusxa oling (Ctrl+C):", text);
         });
     },
 
     sendToBot() {
-        if (!this.lastSolution) return;
-        if (tg) {
+        if (!this.lastSolution) {
+            alert("Avval misolni yeching!");
+            return;
+        }
+        if (tg && tg.initData) {
             const payload = {
                 title: this.lastSolution.title,
                 steps: this.lastSolution.steps.slice(0, 15)
             };
             tg.sendData(JSON.stringify(payload));
         } else {
-            alert("Bu tugma Telegram ichidagi Mini App orqali ishlaydi!");
+            const text = `${this.lastSolution.title}\n\n` + this.lastSolution.steps.join('\n');
+            navigator.clipboard.writeText(text).then(() => {
+                const openBot = confirm(
+                    "✅ Yechim buferga nusxalandi!\n\n" +
+                    "Telegram botni ochishni xohlaysizmi? (@Misol_ishladim_bot)"
+                );
+                if (openBot) {
+                    window.open("https://t.me/Misol_ishladim_bot", "_blank");
+                }
+            }).catch(() => {
+                window.open("https://t.me/Misol_ishladim_bot", "_blank");
+            });
         }
     }
 };
@@ -1226,4 +1277,27 @@ if (typeof window !== 'undefined') {
 
 window.addEventListener('DOMContentLoaded', () => {
     app.init();
+
+    // Tezkor klaviatura tugmalari (Hotkeys)
+    window.addEventListener('keydown', (e) => {
+        // Ctrl + Enter -> Hozirgi tanlangan misolni yechish
+        if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+            e.preventDefault();
+            const btnFiles = document.getElementById('btn-mode-files');
+            if (btnFiles && btnFiles.classList.contains('active')) {
+                app.solveAmaliyTask();
+            } else {
+                const sel = document.getElementById('main-topic-select');
+                const tNum = sel ? parseInt(sel.value) : 1;
+                app.onTopicSelect(tNum);
+            }
+        }
+        // Ctrl + P -> Chop etish / PDF ga saqlash
+        if ((e.ctrlKey || e.metaKey) && (e.key === 'p' || e.key === 'P')) {
+            if (app.lastSolution) {
+                e.preventDefault();
+                app.printSolution();
+            }
+        }
+    });
 });

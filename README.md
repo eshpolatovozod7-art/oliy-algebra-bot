@@ -25,8 +25,36 @@ Telegram ichida ochiladigan qulay **Mini App** va **Aiogram 3** asosidagi kuchli
 
 ---
 
-## 🚀 Ishga Tushirish
+## 🚀 Ishga Tushirish va Foydalanish
 
+### 1. Noutbukda Desktop Ilova sifatida ishlatish (Linux Omarchy / Arch)
+Ilova to'liq o'rnatilgan. Uni quyidagi usullarda ochishingiz mumkin:
+- **Ilovalar menyusidan:** `Oliy Algebra Solver` ilovasini qidirib ochish.
+- **Terminaldan:**
+  ```bash
+  oliy-algebra
+  ```
+  yoki 16 ta mavzu kalkulyatorini to'g'ridan-to'g'ri ochish:
+  ```bash
+  oliy-algebra --mode=topics
+  ```
+
+### 2. Telegram Bot & Fon Xizmati (Systemd Service)
+Bot va uning mahalliy veb-serveri (`http://127.0.0.1:8765`) systemd servisi orqali doimiy fonda ishlaydi:
+- Holatni ko'rish:
+  ```bash
+  systemctl --user status oliy-algebra-bot.service
+  ```
+- Qayta ishga tushirish:
+  ```bash
+  systemctl --user restart oliy-algebra-bot.service
+  ```
+- Loglarni kuzatish:
+  ```bash
+  journalctl --user -u oliy-algebra-bot.service -f
+  ```
+
+### 3. Konsoldan qo'lda ishga tushirish
 ```bash
 cd /home/ozodbek/Projects/oliy-algebra-bot
 ./run.sh

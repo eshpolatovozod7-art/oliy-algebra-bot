@@ -26,28 +26,44 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 async def start_health_server(port: int) -> web.AppRunner:
-    """Render kabi bulut platformalari (Web Service) uchun port tekshiruvi (Health Check)."""
+    """Lokal va bulut platformalari uchun veb-server va health check."""
     app = web.Application()
+    webapp_dir = BASE_DIR / "webapp"
 
     async def handle_ping(request: web.Request) -> web.Response:
-        return web.Response(text="Oliy Algebra Solver Bot is running! 🚀\nStatus: Healthy", status=200)
+        return web.json_response({
+            "status": "Healthy",
+            "app": "Oliy Algebra Solver",
+            "bot": "Misol_ishladim_bot",
+            "offline_ready": True
+        })
 
-    async def handle_root(request: web.Request) -> web.Response:
-        return web.HTTPFound("/webapp/")
+    async def handle_webapp_index(request: web.Request) -> web.StreamResponse:
+        index_file = webapp_dir / "index.html"
+        if index_file.exists():
+            return web.FileResponse(index_file)
+        return web.Response(text="Oliy Algebra WebApp fayli topilmadi.", status=404)
 
-    app.router.add_get("/", handle_root)
+    app.router.add_get("/", handle_webapp_index)
+    app.router.add_get("/webapp", handle_webapp_index)
+    app.router.add_get("/webapp/", handle_webapp_index)
     app.router.add_get("/health", handle_ping)
 
-    # WebApp statik fayllarini ham serverdan ulash
-    webapp_dir = BASE_DIR / "webapp"
+    # WebApp statik fayllari: /css, /js, /vendor va /webapp/
+    if (webapp_dir / "css").exists():
+        app.router.add_static("/css", webapp_dir / "css")
+    if (webapp_dir / "js").exists():
+        app.router.add_static("/js", webapp_dir / "js")
+    if (webapp_dir / "vendor").exists():
+        app.router.add_static("/vendor", webapp_dir / "vendor")
     if webapp_dir.exists():
-        app.router.add_static("/webapp", webapp_dir, show_index=True)
+        app.router.add_static("/webapp", webapp_dir)
 
     runner = web.AppRunner(app)
     await runner.setup()
     site = web.TCPSite(runner, "0.0.0.0", port)
     await site.start()
-    logger.info("Health-check veb-serveri ishga tushdi: http://0.0.0.0:%d", port)
+    logger.info("Veb-server ishga tushdi: http://localhost:%d va http://0.0.0.0:%d", port, port)
     return runner
 
 async def start_keep_alive(app_url: str) -> None:
@@ -87,12 +103,15 @@ async def main():
     dp.include_router(webapp_data.router)
 
     # Buyruqlar menyusini o'rnatish
-    await set_bot_commands(bot)
+    try:
+        await set_bot_commands(bot)
+    except Exception as e:
+        logger.warning("Bot buyruqlarini o'rnatishda tarmoq xatosi (muhim emas): %s", e)
 
-    # Render Web Service uchun port tekshiruvi (agar mavjud bo'lsa)
+    # Render Web Service yoki lokal port uchun veb-server
     web_runner = None
     keep_alive_task = None
-    port_env = os.getenv("PORT")
+    port_env = os.getenv("PORT", "8765")
     if port_env and port_env.isdigit():
         try:
             web_runner = await start_health_server(int(port_env))
@@ -103,8 +122,11 @@ async def main():
     if render_url:
         keep_alive_task = asyncio.create_task(start_keep_alive(render_url))
 
-    # Eski kutilayotgan xabarlarni tozalash
-    await bot.delete_webhook(drop_pending_updates=True)
+    # Eski kutilayotgan xabarlarni tozalash (xatolik bo'lsa ham davom etish)
+    try:
+        await bot.delete_webhook(drop_pending_updates=True)
+    except Exception as e:
+        logger.warning("Webhookni o'chirishda tarmoq xatosi: %s", e)
 
     logger.info("Bot muvaffaqiyatli ishga tushdi va xabarlarni qabul qilmoqda!")
     try:

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e1b4b" />
+      <stop offset="50%" stop-color="#312e81" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#818cf8" />
+    </linearGradient>
+    <linearGradient id="matrixGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34d399" />
+      <stop offset="100%" stop-color="#10b981" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="12" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background Card -->
+  <rect x="24" y="24" width="464" height="464" rx="108" fill="url(#bgGrad)" stroke="#4338ca" stroke-width="6" />
+
+  <!-- Grid Pattern Overlay -->
+  <path d="M96 170 H416 M96 256 H416 M96 342 H416 M170 96 V416 M256 96 V416 M342 96 V416" stroke="#4f46e5" stroke-width="2" stroke-opacity="0.25" stroke-dasharray="4 6" />
+
+  <!-- Matrix Brackets -->
+  <!-- Left Bracket [ -->
+  <path d="M140 130 H100 V382 H140" fill="none" stroke="url(#accentGrad)" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)" />
+  <!-- Right Bracket ] -->
+  <path d="M372 130 H412 V382 H372" fill="none" stroke="url(#accentGrad)" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)" />
+
+  <!-- Center Math Elements -->
+  <!-- Big Sigma / Summation or Matrix Elements -->
+  <!-- Upper Row: a11, a12 -->
+  <circle cx="180" cy="190" r="14" fill="#38bdf8" />
+  <circle cx="332" cy="190" r="14" fill="#818cf8" />
+
+  <!-- Center Symbol: Alpha / Integral / Sigma stylized -->
+  <path d="M220 220 C220 200 240 185 265 185 C290 185 305 200 305 225 C305 255 210 270 210 305 C210 325 225 335 250 335 C275 335 295 320 305 305" fill="none" stroke="#f8fafc" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- Bottom Row: a21, a22 -->
+  <circle cx="180" cy="322" r="14" fill="#818cf8" />
+  <circle cx="332" cy="322" r="14" fill="#38bdf8" />
+
+  <!-- Sparkle Accent in top right -->
+  <polygon points="390,90 398,105 415,108 402,120 405,138 390,128 375,138 378,120 365,108 382,105" fill="url(#matrixGrad)" />
+</svg>

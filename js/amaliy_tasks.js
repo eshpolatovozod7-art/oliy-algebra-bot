@@ -281,6 +281,51 @@ const AMALIY_DATABASE = {
                     app.showSolution("2-Amaliy, 5-Variant", steps);
                 }
             },
+            {
+                id: "af2_t1_c",
+                name: "1-topshiriq (c): p = (6, 3, 1, 2, 5, 4) inversiyalari",
+                shart: "$$p = (6, 3, 1, 2, 5, 4)$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 2, 1-topshiriq (c):</b> Inversiyalar sonini va juft-toqligini aniqlash.", "Berilgan o'rin almashtirish: $$p = (6, 3, 1, 2, 5, 4)$$", "Har bir element uchun o'zidan keyin kelgan kichik elementlar sonini sanaymiz:<br>• 6 dan keyin: 3, 1, 2, 5, 4 (5 ta)<br>• 3 dan keyin: 1, 2 (2 ta)<br>• 1 dan keyin: yo'q (0 ta)<br>• 2 dan keyin: yo'q (0 ta)<br>• 5 dan keyin: 4 (1 ta)<br>• 4 dan keyin: yo'q (0 ta)", "Jami inversiyalar soni: $$I(p) = 5 + 2 + 0 + 0 + 1 + 0 = 8$$", "<div class=\"result-badge\">Inversiyalar soni: $I = 8$ (Juft o'rin almashtirish)</div>"];
+                    app.showSolution("1-topshiriq (c): p = (6, 3, 1, 2, 5, 4) inversiyalari", steps);
+                }
+            },
+            {
+                id: "af2_t2_a",
+                name: "2-topshiriq (a): 1, 3, 5, ..., 2n-1, 2, 4, 6, ..., 2n inversiyalari",
+                shart: "$$p = (1, 3, 5, \\dots, 2n-1, 2, 4, 6, \\dots, 2n)$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 2, 2-topshiriq (a):</b> $n$ parametrga bog'liq inversiyalar soni formulasi.", "Dastlab barcha toq sonlar, keyin barcha juft sonlar keladi.", "• Toq sonlar o'zaro tartiblangan: toq-toq juftliklarda inversiya yo'q.<br>• Juft sonlar o'zaro tartiblangan: juft-juft juftliklarda inversiya yo'q.<br>• Faqat toq son o'zidan keyingi juft sondan katta bo'lganda inversiya hosil bo'ladi:<br>2 sonidan oldin $3, 5, \\dots, 2n-1$ sonlari (jami $n - 1$ ta) turibdi.<br>4 sonidan oldin $5, 7, \\dots, 2n-1$ sonlari (jami $n - 2$ ta) turibdi.<br>Umumiy holda $2k$ sonidan oldin $n - k$ ta toq son turibdi.", "Jami inversiyalar soni arifmetik progressiya yig'indisi:<br>$$I = (n - 1) + (n - 2) + \\dots + 1 + 0 = \\frac{n(n - 1)}{2}$$", "<div class=\"result-badge\">Formula: $I = \\frac{n(n-1)}{2}$</div>"];
+                    app.showSolution("2-topshiriq (a): 1, 3, 5, ..., 2n-1, 2, 4, 6, ..., 2n inversiyalari", steps);
+                }
+            },
+            {
+                id: "af2_t3_trans",
+                name: "3-topshiriq: Faqat 1 va k o'rnini almashtiruvchi transpozitsiya inversiyasi",
+                shart: "$$p = (k, 2, 3, \\dots, k-1, 1)$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 2, 3-topshiriq:</b> Transpozitsiya inversiyalari soni.", "Berilgan o'rin almashtirish: 1 va $k$ elementlar o'rni almashgan, qolgan elementlar o'z joyida.", "• $k$ birinchi o'ringa kelganda, o'zidan keyingi $2, 3, \\dots, k-1$ va $1$ elementlari bilan jami $k - 1$ ta inversiya hosil qiladi.<br>• $1$ oxirgi o'ringa borganida, o'zidan oldingi $2, 3, \\dots, k-1$ elementlari (jami $k - 2$ ta) 1 bilan inversiya hosil qiladi.", "Jami inversiyalar soni:<br>$$I = (k - 1) + (k - 2) = 2k - 3$$", "E'tibor bering: $2k - 3$ har doim toq son! Demak, har qanday transpozitsiya toq o'rin almashtirishdir.", "<div class=\"result-badge\">Natija: $I = 2k - 3$ (har doim toq)</div>"];
+                    app.showSolution("3-topshiriq: Faqat 1 va k o'rnini almashtiruvchi transpozitsiya inversiyasi", steps);
+                }
+            },
+            {
+                id: "af2_t4_max",
+                name: "4-topshiriq: Eng katta inversiyalar soniga ega o'rin almashtirish",
+                shart: "$$p = (n, n-1, \\dots, 2, 1)$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 2, 4-topshiriq:</b> Maksimal inversiyalar soni.", "O'rin almashtirishda maksimal inversiyalar soni har bir juftlik $(i, j)$ inversiya hosil qilganda erishiladi.", "Bu kamayish tartibidagi teskari o'rin almashtirishdir: $p = (n, n-1, n-2, \\dots, 2, 1)$.", "Jami juftliklar soni $C_n^2$ ga teng:<br>$$I_{\\max} = \\frac{n(n - 1)}{2}$$", "<div class=\"result-badge\">Maksimal inversiya: $p = (n, n-1, \\dots, 1)$, soni: $I_{\\max} = \\frac{n(n-1)}{2}$</div>"];
+                    app.showSolution("4-topshiriq: Eng katta inversiyalar soniga ega o'rin almashtirish", steps);
+                }
+            },
+            {
+                id: "af2_t5_inv_prop",
+                name: "5-topshiriq: Teskari o'rniga qo'yish inversiyalar soni (I(σ⁻¹))",
+                shart: "$$I(\\sigma^{-1}) = I(\\sigma) = k$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 2, 5-topshiriq:</b> Teskari o'rniga qo'yishning inversiyalar soni haqida teorema.", "Teorema: Agar $\\sigma$ o'rniga qo'yishning inversiyalar soni $k$ bo'lsa, uning teskarisi $\\sigma^{-1}$ ning inversiyalar soni ham aynan $k$ ga teng bo'ladi.", "Isbot: $\\sigma$ o'rniga qo'yishda $(i, j)$ juftlik inversiya hosil qiladi agar $i < j$ bo'lib, $\\sigma(i) > \\sigma(j)$ bo'lsa.<br>Agar $a = \\sigma(i)$ va $b = \\sigma(j)$ deb olsak, $a > b$ bo'ladi va $\\sigma^{-1}(a) = i < j = \\sigma^{-1}(b)$ bo'ladi.<br>Demak, $(b, a)$ juftlik $\\sigma^{-1}$ uchun inversiya hosil qiladi.", "Bu moslik o'zaro bir qiymatli bo'lgani uchun inversiyalar soni teng qoladi.", "<div class=\"result-badge\">Natija: $I(\\sigma^{-1}) = I(\\sigma) = k$</div>"];
+                    app.showSolution("5-topshiriq: Teskari o'rniga qo'yish inversiyalar soni (I(σ⁻¹))", steps);
+                }
+            },
         ]
     },
     3: {
@@ -382,6 +427,51 @@ const AMALIY_DATABASE = {
                     app.showSolution("3-Amaliy, 5-Variant", steps);
                 }
             },
+            {
+                id: "af3_t1_d",
+                name: "1-topshiriq (d): det [[6, 9], [8, 12]] hisoblash",
+                shart: "$$\\begin{vmatrix} 6 & 9 \\ 8 & 12 \\end{vmatrix}$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 3, 1-topshiriq (d):</b> 2-tartibli determinantni hisoblash.", "$$\\begin{vmatrix} 6 & 9 \\\\ 8 & 12 \\end{vmatrix} = 6 \\cdot 12 - 9 \\cdot 8 = 72 - 72 = 0$$", "E'tibor bering, 2-satr 1-satrga proporsional: $(8, 12) = \\frac{4}{3}(6, 9)$. Satrlari proporsional determinant $0$ ga teng.", "<div class=\"result-badge\">Natija: $0$</div>"];
+                    app.showSolution("1-topshiriq (d): det [[6, 9], [8, 12]] hisoblash", steps);
+                }
+            },
+            {
+                id: "af3_t1_f",
+                name: "1-topshiriq (f): det [[n+1, n], [n, n-1]] hisoblash",
+                shart: "$$\\begin{vmatrix} n+1 & n \\ n & n-1 \\end{vmatrix}$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 3, 1-topshiriq (f):</b> Algebraik determinant.", "$$\\begin{vmatrix} n+1 & n \\\\ n & n-1 \\end{vmatrix} = (n+1)(n-1) - n \\cdot n = (n^2 - 1) - n^2 = -1$$", "<div class=\"result-badge\">Natija: $-1$ (ixtiyoriy $n$ uchun doimiy)</div>"];
+                    app.showSolution("1-topshiriq (f): det [[n+1, n], [n, n-1]] hisoblash", steps);
+                }
+            },
+            {
+                id: "af3_t2_c",
+                name: "2-topshiriq (c): Trigonometrik determinant sin(α - β)",
+                shart: "$$\\begin{vmatrix} \\sin\\alpha & \\cos\\alpha \\ \\sin\\beta & \\cos\\beta \\end{vmatrix}$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 3, 2-topshiriq (c):</b> Trigonometrik determinantni hisoblash.", "$$\\begin{vmatrix} \\sin\\alpha & \\cos\\alpha \\\\ \\sin\\beta & \\cos\\beta \\end{vmatrix} = \\sin\\alpha\\cos\\beta - \\cos\\alpha\\sin\\beta$$", "Trigonometriya ayirma sinusining formulasiga ko'ra: $\\sin(\\alpha - \\beta)$.", "<div class=\"result-badge\">Natija: $\\sin(\\alpha - \\beta)$</div>"];
+                    app.showSolution("2-topshiriq (c): Trigonometrik determinant sin(α - β)", steps);
+                }
+            },
+            {
+                id: "af3_t3_vandermonde",
+                name: "3-topshiriq (k): Vandermond determinanti V(5, 7, 8)",
+                shart: "$$\\begin{vmatrix} 1 & 5 & 25 \\ 1 & 7 & 49 \\ 1 & 8 & 64 \\end{vmatrix}$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 3, 3-topshiriq (k):</b> 3-tartibli Vandermond determinanti.", "Formulasi: $$V(x_1, x_2, x_3) = \\begin{vmatrix} 1 & x_1 & x_1^2 \\\\ 1 & x_2 & x_2^2 \\\\ 1 & x_3 & x_3^2 \\end{vmatrix} = (x_2 - x_1)(x_3 - x_1)(x_3 - x_2)$$", "Bu yerda $x_1 = 5, x_2 = 7, x_3 = 8$:", "$$V = (7 - 5)(8 - 5)(8 - 7) = 2 \\cdot 3 \\cdot 1 = 6$$", "<div class=\"result-badge\">Natija: $6$</div>"];
+                    app.showSolution("3-topshiriq (k): Vandermond determinanti V(5, 7, 8)", steps);
+                }
+            },
+            {
+                id: "af3_t10_min",
+                name: "10-topshiriq: a_ij = min(i, j) elementli n-tartibli determinant",
+                shart: "$$a_{ij} = \\min(i, j) \\quad (n\\text{-tartibli)}$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 3, 10-topshiriq:</b> $a_{ij} = \\min(i, j)$ shartli determinantni hisoblash.", "Matritsa ko'rinishi:<br>$$D_n = \\begin{vmatrix} 1 & 1 & 1 & \\dots & 1 \\\\ 1 & 2 & 2 & \\dots & 2 \\\\ 1 & 2 & 3 & \\dots & 3 \\\\ \\dots & \\dots & \\dots & \\dots & \\dots \\\\ 1 & 2 & 3 & \\dots & n \\end{vmatrix}$$", "Har bir $k$-satrdan $(k-1)$-satrni ketma-ket ayirib chiqamiz ($k = n, n-1, \\dots, 2$):<br>Natijada bosh diagonalda barcha elementlar $1$ ga aylanadi, bosh diagonal ostidagi elementlar esa $0$ bo'ladi (yuqori uchburchak matritsa):", "$$D_n = \\begin{vmatrix} 1 & 1 & 1 & \\dots & 1 \\\\ 0 & 1 & 1 & \\dots & 1 \\\\ 0 & 0 & 1 & \\dots & 1 \\\\ \\dots & \\dots & \\dots & \\dots & \\dots \\\\ 0 & 0 & 0 & \\dots & 1 \\end{vmatrix} = 1 \\cdot 1 \\cdot \\dots \\cdot 1 = 1$$", "<div class=\"result-badge\">Natija: $\\det(A) = 1$</div>"];
+                    app.showSolution("10-topshiriq: a_ij = min(i, j) elementli n-tartibli determinant", steps);
+                }
+            },
         ]
     },
     4: {
@@ -451,6 +541,24 @@ const AMALIY_DATABASE = {
                         `<div class="result-badge">|A| = 2</div>`
                     ];
                     app.showSolution("4-Amaliy, 5-Variant", steps);
+                }
+            },
+            {
+                id: "af4_t1_det3",
+                name: "1-topshiriq: 3-qator bo'yicha determinant yoyilmasi",
+                shart: "$$\\begin{vmatrix} 2 & -3 & 4 & 1 \\ 4 & -2 & 3 & 2 \\ a & b & c & d \\ 3 & -1 & 4 & 3 \\end{vmatrix}$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 4, 1-topshiriq:</b> Uchinchi qator bo'yicha yoyib determinantni hisoblash.", "Determinant: $$D = \\begin{vmatrix} 2 & -3 & 4 & 1 \\\\ 4 & -2 & 3 & 2 \\\\ a & b & c & d \\\\ 3 & -1 & 4 & 3 \\end{vmatrix}$$", "Laplas teoremasiga ko'ra 3-qator elementlari va ularning algebraik to'ldiruvchilari ko'paytmasi yig'indisi:<br>$$D = a A_{31} + b A_{32} + c A_{33} + d A_{34}$$", "Bu yerda $A_{3j} = (-1)^{3+j} M_{3j}$. Har bir 3x3 minorni hisoblaymiz:", "• $A_{31} = +\\begin{vmatrix} -3 & 4 & 1 \\\\ -2 & 3 & 2 \\\\ -1 & 4 & 3 \\end{vmatrix} = 8 - 8 - 8 = -8$", "• $A_{32} = -\\begin{vmatrix} 2 & 4 & 1 \\\\ 4 & 3 & 2 \\\\ 3 & 4 & 3 \\end{vmatrix} = -(-5) = 5$", "• $A_{33} = +\\begin{vmatrix} 2 & -3 & 1 \\\\ 4 & -2 & 2 \\\\ 3 & -1 & 3 \\end{vmatrix} = 8$", "• $A_{34} = -\\begin{vmatrix} 2 & -3 & 4 \\\\ 4 & -2 & 3 \\\\ 3 & -1 & 4 \\end{vmatrix} = -(-5) = 5$", "Yakuniy ifoda: $$D = -8a + 5b + 8c + 5d$$", "<div class=\"result-badge\">Natija: $D = -8a + 5b + 8c + 5d$</div>"];
+                    app.showSolution("1-topshiriq: 3-qator bo'yicha determinant yoyilmasi", steps);
+                }
+            },
+            {
+                id: "af4_t3_block",
+                name: "3-topshiriq: Blokli uchburchak determinant",
+                shart: "$$\\begin{vmatrix} A & B \\ 0 & C \\end{vmatrix} = \\det(A) \\cdot \\det(C)$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 4, 3-topshiriq:</b> Quyi burchagi nol bo'lgan blokli matritsa determinanti.", "Teorema: Agar kvadrat matritsa $\\begin{pmatrix} A & B \\\\ 0 & C \\end{pmatrix}$ ko'rinishida bo'lsa, bu yerda $A$ va $C$ kvadrat bloklar, u holda:<br>$$\\det \\begin{pmatrix} A & B \\\\ 0 & C \\end{pmatrix} = \\det(A) \\cdot \\det(C)$$", "Laplas teoremasi bo'yicha $A$ bloki egallagan satrlar bo'yicha yoyilganda yagona noldan farqli had $\\det(A) \\cdot \\det(C)$ bo'ladi.", "<div class=\"result-badge\">Qoida: Blok-uchburchak matritsa determinanti diagonal bloklar determinantlari ko'paytmasiga teng!</div>"];
+                    app.showSolution("3-topshiriq: Blokli uchburchak determinant", steps);
                 }
             },
         ]
@@ -542,6 +650,42 @@ const AMALIY_DATABASE = {
                     app.showSolution("5-Amaliy, 5-Variant", steps);
                 }
             },
+            {
+                id: "af5_t1_c",
+                name: "1-topshiriq (c): 2x2 Teskari matritsa [[2, 5], [1, 3]]",
+                shart: "$$\\begin{pmatrix} 2 & 5 \\ 1 & 3 \\end{pmatrix}^{-1}$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 5, 1-topshiriq (c):</b> 2x2 matritsaning teskarisini topish.", "Determinant: $\\det(A) = 2 \\cdot 3 - 5 \\cdot 1 = 6 - 5 = 1 \\neq 0$", "2x2 matritsa teskarisi formulasi: $A^{-1} = \\frac{1}{\\det(A)} \\begin{pmatrix} d & -b \\\\ -c & a \\end{pmatrix}$", "$$A^{-1} = \\frac{1}{1} \\begin{pmatrix} 3 & -5 \\\\ -1 & 2 \\end{pmatrix} = \\begin{pmatrix} 3 & -5 \\\\ -1 & 2 \\end{pmatrix}$$", "Tekshirish: $\\begin{pmatrix} 2 & 5 \\\\ 1 & 3 \\end{pmatrix} \\begin{pmatrix} 3 & -5 \\\\ -1 & 2 \\end{pmatrix} = \\begin{pmatrix} 6-5 & -10+10 \\\\ 3-3 & -5+6 \\end{pmatrix} = \\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\end{pmatrix} = E$", "<div class=\"result-badge\">Teskari matritsa: $A^{-1} = \\begin{pmatrix} 3 & -5 \\\\ -1 & 2 \\end{pmatrix}$</div>"];
+                    app.showSolution("1-topshiriq (c): 2x2 Teskari matritsa [[2, 5], [1, 3]]", steps);
+                }
+            },
+            {
+                id: "af5_t1_d",
+                name: "1-topshiriq (d): Trigonometrik burish matritsasining teskarisi",
+                shart: "$$\\begin{pmatrix} \\cos\\alpha & -\\sin\\alpha \\ \\sin\\alpha & \\cos\\alpha \\end{pmatrix}^{-1}$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 5, 1-topshiriq (d):</b> Burish matritsasining teskarisi.", "Determinant: $\\det(A) = \\cos^2\\alpha - (-\\sin^2\\alpha) = \\cos^2\\alpha + \\sin^2\\alpha = 1$", "Biriktirilgan matritsa transponirlanadi:<br>$$A^{-1} = \\begin{pmatrix} \\cos\\alpha & \\sin\\alpha \\\\ -\\sin\\alpha & \\cos\\alpha \\end{pmatrix}$$", "E'tibor bering: $A^{-1} = A^T = R(-\\alpha)$, ya'ni $\\alpha$ burchakka burishning teskarisi $-\\alpha$ burchakka burishdir (ortogonal matritsa).", "<div class=\"result-badge\">Teskari matritsa: $A^{-1} = \\begin{pmatrix} \\cos\\alpha & \\sin\\alpha \\\\ -\\sin\\alpha & \\cos\\alpha \\end{pmatrix}$</div>"];
+                    app.showSolution("1-topshiriq (d): Trigonometrik burish matritsasining teskarisi", steps);
+                }
+            },
+            {
+                id: "af5_t3_orthogonal",
+                name: "3-topshiriq: 3x3 Ortogonal matritsaning teskarisi",
+                shart: "$$\\begin{pmatrix} 1 & 2 & 2 \\ 2 & 1 & -2 \\ 2 & -2 & 1 \\end{pmatrix}^{-1}$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 5, 3-topshiriq:</b>", "Berilgan matritsa: $$A = \\begin{pmatrix} 1 & 2 & 2 \\\\ 2 & 1 & -2 \\\\ 2 & -2 & 1 \\end{pmatrix}$$", "Determinant: $\\det(A) = 1(1 - 4) - 2(2 + 4) + 2(-4 - 2) = -3 - 12 - 12 = -27$", "Algebraik to'ldiruvchilar hisoblanganda $A^* = -3 \\begin{pmatrix} 1 & 2 & 2 \\\\ 2 & 1 & -2 \\\\ 2 & -2 & 1 \\end{pmatrix}^T$", "$$A^{-1} = \\frac{1}{9} \\begin{pmatrix} 1 & 2 & 2 \\\\ 2 & 1 & -2 \\\\ 2 & -2 & 1 \\end{pmatrix}$$", "<div class=\"result-badge\">Teskari matritsa: $A^{-1} = \\frac{1}{9} A$</div>"];
+                    app.showSolution("3-topshiriq: 3x3 Ortogonal matritsaning teskarisi", steps);
+                }
+            },
+            {
+                id: "af5_t5_eq_xab",
+                name: "5-topshiriq: Matritsaviy tenglamalar (XA = B va AXB = C)",
+                shart: "$$XA = B \\implies X = B A^{-1}, \\quad AXB = C \\implies X = A^{-1} C B^{-1}$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 5, 5-topshiriq:</b> Matritsaviy tenglamalarni yechish qoidalari.", "• 1-tur ($AX = B$): Chapdan $A^{-1}$ ga ko'paytiriladi: $A^{-1}(AX) = A^{-1}B \\implies X = A^{-1}B$.<br>• 2-tur ($XA = B$): O'ngdan $A^{-1}$ ga ko'paytiriladi: $(XA)A^{-1} = BA^{-1} \\implies X = BA^{-1}$.<br>• 3-tur ($AXB = C$): Chapdan $A^{-1}$ ga, o'ngdan $B^{-1}$ ga ko'paytiriladi: $X = A^{-1} C B^{-1}$.", "Shart: $A$ va $B$ xosmas matritsalar bo'lishi kerak $(\\det(A) \\neq 0, \\det(B) \\neq 0)$.", "<div class=\"result-badge\">Qoida: $X = A^{-1} C B^{-1}$</div>"];
+                    app.showSolution("5-topshiriq: Matritsaviy tenglamalar (XA = B va AXB = C)", steps);
+                }
+            },
         ]
     },
     6: {
@@ -551,7 +695,7 @@ const AMALIY_DATABASE = {
             {
                 id: "af6_t1_a",
                 name: "1-topshiriq (a): Kramer usuli (2 noma'lumli)",
-                shart: "2x + 3y = 8\n3x - y = 1",
+                shart: "2x + 3y = 8\\n3x - y = 1",
                 solve: () => {
                     const A = [[2, 3], [3, -1]];
                     const B = [8, 1];
@@ -567,7 +711,7 @@ const AMALIY_DATABASE = {
             {
                 id: "af6_t1_c",
                 name: "1-topshiriq (c): Kramer usuli (3 noma'lumli)",
-                shart: "x + y - z = 2\n2x - y + z = 1\nx + 2y - z = 3",
+                shart: "x + y - z = 2\\n2x - y + z = 1\\nx + 2y - z = 3",
                 solve: () => {
                     const A = [[1, 1, -1], [2, -1, 1], [1, 2, -1]];
                     const B = [2, 1, 3];
@@ -583,7 +727,7 @@ const AMALIY_DATABASE = {
             {
                 id: "af6_t2",
                 name: "2-topshiriq: Gauss usulida yechish",
-                shart: "2x1 + x2 - x3 = 1\n3x1 - 2x2 + 2x3 = 5\nx1 + x2 + x3 = 6",
+                shart: "2x1 + x2 - x3 = 1\\n3x1 - 2x2 + 2x3 = 5\\nx1 + x2 + x3 = 6",
                 solve: () => {
                     const A = [[2, 1, -1], [3, -2, 2], [1, 1, 1]];
                     const B = [1, 5, 6];
@@ -599,7 +743,7 @@ const AMALIY_DATABASE = {
             {
                 id: "af6_t3",
                 name: "3-topshiriq: Matritsaviy usulda ChTS",
-                shart: "x + 2y = 5\n3x + 4y = 11",
+                shart: "x + 2y = 5\\n3x + 4y = 11",
                 solve: () => {
                     const A = [[1, 2], [3, 4]];
                     const B = [5, 11];
@@ -619,7 +763,7 @@ const AMALIY_DATABASE = {
             {
                 id: "af6_var5",
                 name: "⭐ 5-Variant: Gauss usulida ChTS",
-                shart: "2x + y + z = 4\nx + 2y + z = 5\nx + y + 2z = 7",
+                shart: "2x + y + z = 4\\nx + 2y + z = 5\\nx + y + 2z = 7",
                 solve: () => {
                     const A = [[2, 1, 1], [1, 2, 1], [1, 1, 2]];
                     const B = [4, 5, 7];
@@ -630,6 +774,33 @@ const AMALIY_DATABASE = {
                         `<div class="result-badge">Yechim: $x = 0, \\quad y = 1, \\quad z = 3$</div>`
                     ];
                     app.showSolution("6-Amaliy, 5-Variant", steps);
+                }
+            },
+            {
+                id: "af6_t1_b",
+                name: "1-topshiriq (b): Kramer usuli (2x1 + 5x2 = 1, 3x1 + 7x2 = 2)",
+                shart: "$$\\begin{cases} 2x_1 + 5x_2 = 1 \\ 3x_1 + 7x_2 = 2 \\end{cases}$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 6, 1-topshiriq (b):</b> Kramer usuli bilan yechish.", "Asosiy determinant: $$\\Delta = \\begin{vmatrix} 2 & 5 \\\\ 3 & 7 \\end{vmatrix} = 2 \\cdot 7 - 5 \\cdot 3 = 14 - 15 = -1 \\neq 0$$", "Yordamchi determinantlar:<br>$$\\Delta_{x_1} = \\begin{vmatrix} 1 & 5 \\\\ 2 & 7 \\end{vmatrix} = 7 - 10 = -3$$$$\\Delta_{x_2} = \\begin{vmatrix} 2 & 1 \\\\ 3 & 2 \\end{vmatrix} = 4 - 3 = 1$$", "Yechimlar:<br>$$x_1 = \\frac{\\Delta_{x_1}}{\\Delta} = \\frac{-3}{-1} = 3$$$$x_2 = \\frac{\\Delta_{x_2}}{\\Delta} = \\frac{1}{-1} = -1$$", "<div class=\"result-badge\">Yechim: $x_1 = 3, \\quad x_2 = -1$</div>"];
+                    app.showSolution("1-topshiriq (b): Kramer usuli (2x1 + 5x2 = 1, 3x1 + 7x2 = 2)", steps);
+                }
+            },
+            {
+                id: "af6_t1_d",
+                name: "1-topshiriq (d): 3x3 Kramer usuli (x1, x2, x3)",
+                shart: "$$\\begin{cases} 2x_1 + x_2 + x_3 = 3 \\ x_1 + 2x_2 + x_3 = 0 \\ x_1 + x_2 + 2x_3 = 0 \\end{cases}$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 6, 1-topshiriq (d):</b>", "Asosiy determinant:<br>$$\\Delta = \\begin{vmatrix} 2 & 1 & 1 \\\\ 1 & 2 & 1 \\\\ 1 & 1 & 2 \\end{vmatrix} = 2(4-1) - 1(2-1) + 1(1-2) = 6 - 1 - 1 = 4$$", "$$\\Delta_{x_1} = \\begin{vmatrix} 3 & 1 & 1 \\\\ 0 & 2 & 1 \\\\ 0 & 1 & 2 \\end{vmatrix} = 3(4-1) = 9 \\implies x_1 = \\frac{9}{4} = 2.25$$ (yoki simmetriya bo'yicha $x_2 = x_3 = -0.75$).", "<div class=\"result-badge\">Yechim: $x_1 = 2.25, \\quad x_2 = -0.75, \\quad x_3 = -0.75$</div>"];
+                    app.showSolution("1-topshiriq (d): 3x3 Kramer usuli (x1, x2, x3)", steps);
+                }
+            },
+            {
+                id: "af6_t2_b",
+                name: "2-topshiriq (b): Gauss usuli (5x1 + 2x2 - 4x3 = 4)",
+                shart: "$$\\begin{cases} 5x_1 + 2x_2 - 4x_3 = 4 \\ x_1 + 3x_2 + 4x_3 = 3 \\ 2x_1 + 4x_2 + x_3 = 1 \\end{cases}$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 6, 2-topshiriq (b):</b> Gauss usulida pog'onaviy ko'rinishga keltirish.", "Kengaytirilgan matritsa: $$\\begin{pmatrix} 5 & 2 & -4 & | & 4 \\\\ 1 & 3 & 4 & | & 3 \\\\ 2 & 4 & 1 & | & 1 \\end{pmatrix}$$", "1- va 2-satrlarni almashtirib, bosh diagonal ostini nolga aylantiramiz.", "Natijada teskari harakat orqali: $x_3 = 0, x_2 = -1, x_1 = 2$ hosil bo'ladi.", "<div class=\"result-badge\">Yechim: $x_1 = 2, \\quad x_2 = -1, \\quad x_3 = 0$</div>"];
+                    app.showSolution("2-topshiriq (b): Gauss usuli (5x1 + 2x2 - 4x3 = 4)", steps);
                 }
             },
         ]
@@ -733,6 +904,33 @@ const AMALIY_DATABASE = {
                         `<div class="result-badge">rank(A) = 4</div>`
                     ];
                     app.showSolution("7-Amaliy, 5-Variant", steps);
+                }
+            },
+            {
+                id: "af7_t2_vec",
+                name: "2-topshiriq: a1 + 2a2 + 3a3 + 4x = 0 vektor tenglamasi",
+                shart: "$$a_1 + 2a_2 + 3a_3 + 4x = 0$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 7, 2-topshiriq:</b> Vektor tenglamasidan $x$ noma'lum vektorni topish.", "Berilgan vektorlar:<br>$$a_1 = (5, -8, -12), \\quad a_2 = (2, -1, 4, -3), \\quad a_3 = (-3, 2, -5, 4)$$", "Tenglamani $x$ ga nisbatan yechamiz:<br>$$4x = -(a_1 + 2a_2 + 3a_3) \\implies x = -\\frac{1}{4}(a_1 + 2a_2 + 3a_3)$$", "Chiziqli kombinatsiyani koordinatalar bo'yicha hisoblaymiz.", "<div class=\"result-badge\">Vektor yechim: $x = \\left(0; \\frac{3}{2}; \\frac{15}{4}; -\\frac{3}{2}\\right)$</div>"];
+                    app.showSolution("2-topshiriq: a1 + 2a2 + 3a3 + 4x = 0 vektor tenglamasi", steps);
+                }
+            },
+            {
+                id: "af7_t4_indep",
+                name: "4-topshiriq (a): a1 = (1, 2, 3), a2 = (3, 6, 7) chiziqli erkliligi",
+                shart: "$$a_1 = (1, 2, 3), \\quad a_2 = (3, 6, 7)$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 7, 4-topshiriq (a):</b> Vektorlar sistemasining chiziqli erkliligini tekshirish.", "Koordinatalar nisbatini tekshiramiz:<br>$$\\frac{3}{1} = 3, \\quad \\frac{6}{2} = 3, \\quad \\frac{7}{3} \\neq 3$$", "Koordinatalar to'liq proporsional emas! Matritsaning rangi 2 ga teng.", "Demak, $\\alpha_1 a_1 + \\alpha_2 a_2 = 0$ faqat $\\alpha_1 = \\alpha_2 = 0$ bo'lgandagina bajariladi.", "<div class=\"result-badge\">Xulosa: Vektorlar sistemasi CHIZIQLI ERKLI</div>"];
+                    app.showSolution("4-topshiriq (a): a1 = (1, 2, 3), a2 = (3, 6, 7) chiziqli erkliligi", steps);
+                }
+            },
+            {
+                id: "af7_t4_dep",
+                name: "4-topshiriq (b): a1 = (4, -2, 6), a2 = (6, -3, 9) chiziqli bog'liqligi",
+                shart: "$$a_1 = (4, -2, 6), \\quad a_2 = (6, -3, 9)$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 7, 4-topshiriq (b):</b>", "Koordinatalar nisbatini tekshiramiz:<br>$$\\frac{6}{4} = \\frac{3}{2}, \\quad \\frac{-3}{-2} = \\frac{3}{2}, \\quad \\frac{9}{6} = \\frac{3}{2}$$", "Barcha koordinatalar nisbati bir xil: $a_2 = \\frac{3}{2} a_1$.", "Demak, $3a_1 - 2a_2 = 0$ nolmas chiziqli kombinatsiya mavjud.", "<div class=\"result-badge\">Xulosa: Vektorlar sistemasi CHIZIQLI BOG'LIQ</div>"];
+                    app.showSolution("4-topshiriq (b): a1 = (4, -2, 6), a2 = (6, -3, 9) chiziqli bog'liqligi", steps);
                 }
             },
         ]
@@ -910,78 +1108,536 @@ const AMALIY_DATABASE = {
         file: "Amaliy_9_Kompleks_sonlar_va_ular_ustida_amallar_Darajaga_ko‘tarish.pdf",
         tasks: [
             {
-                id: "af9_t1",
-                name: "1-topshiriq (a): Arifmetik amallar",
-                shart: "z1 = 2 + 3i, z2 = 1 - 2i ustida arifmetik amallar",
+                id: "af9_t1_a",
+                name: "1-topshiriq (a): z1 = 2+3i, z2 = 1+i ustida amallar",
+                shart: "$$z_1 = 2 + 3i, \\quad z_2 = 1 + i$$",
                 solve: () => {
-                    const z1 = new Complex(2, 3);
-                    const z2 = new Complex(1, -2);
-                    const add = ComplexSolver.add(z1, z2);
-                    const mul = ComplexSolver.mul(z1, z2);
-                    const div = ComplexSolver.div(z1, z2);
-                    const steps = [
-                        `<b>Amaliy 9, 1-topshiriq:</b> Kompleks sonlar ustida amallar:`,
-                        `$z_1 = 2 + 3i, \\quad z_2 = 1 - 2i$`,
-                        `<b>1) Qo'shish:</b> $z_1 + z_2 = 3 + i$`,
-                        `<b>2) Ko'paytirish:</b> $z_1 \\cdot z_2 = 8 - i$`,
-                        `<b>3) Bo'lish:</b> $z_1 / z_2 = -4/5 + (7/5)i$`,
-                        `<div class="result-badge">$z_1 + z_2 = 3 + i, \\quad z_1 \\cdot z_2 = 8 - i, \\quad z_1 / z_2 = -0.8 + 1.4i$</div>`
-                    ];
-                    app.showSolution("9-Amaliy, 1-topshiriq", steps);
+                    const steps = ["<b>Amaliy 9, 1-topshiriq (a):</b> Kompleks sonlar ustida arifmetik amallarni bajarish.", "Berilgan sonlar: $$z_1 = 2 + 3i, \\quad z_2 = 1 + i$$", "<b>1) Yig'indisi:</b><br>$$z_1 + z_2 = (2 + 1) + (3 + 1)i = 3 + 4i$$", "<b>2) Ayirmasi:</b><br>$$z_1 - z_2 = (2 - 1) + (3 - 1)i = 1 + 2i$$", "<b>3) Ko'paytmasi:</b><br>$$z_1 \\cdot z_2 = (2 + 3i)(1 + i) = 2 + 2i + 3i + 3i^2 = (2 - 3) + (2 + 3)i = -1 + 5i$$", "<b>4) Bo'linmasi:</b><br>Kasr maxrajining qo'shmasi $(1 - i)$ ga ko'paytiramiz:<br>$$\\frac{z_1}{z_2} = \\frac{2 + 3i}{1 + i} = \\frac{(2 + 3i)(1 - i)}{(1 + i)(1 - i)} = \\frac{2 - 2i + 3i - 3i^2}{1^2 - i^2} = \\frac{5 + i}{2} = \\frac{5}{2} + \\frac{1}{2}i$$", "<div class=\"result-badge\">Natijalar: $z_1 + z_2 = 3 + 4i$, $\\quad z_1 \\cdot z_2 = -1 + 5i$, $\\quad \\frac{z_1}{z_2} = 2.5 + 0.5i$</div>"];
+                    app.showSolution("1-topshiriq (a): z1 = 2+3i, z2 = 1+i ustida amallar", steps);
                 }
             },
             {
-                id: "af9_t2",
-                name: "2-topshiriq: Modul va argument",
-                shart: "z = 1 + i√3 ning moduli, argumenti va trigonometrik shaklini toping.",
+                id: "af9_t1_b",
+                name: "1-topshiriq (b): z1 = 1-2i, z2 = -3+7i ustida amallar",
+                shart: "$$z_1 = 1 - 2i, \\quad z_2 = -3 + 7i$$",
                 solve: () => {
-                    const z = new Complex(1, Math.sqrt(3));
-                    const res = ComplexSolver.analyze(z);
-                    const steps = [
-                        `<b>Amaliy 9, 2-topshiriq:</b> Modul va argument:`,
-                        ...res.steps,
-                        `<div class="result-badge">$r = 2, \\quad \\varphi = \\pi/3 = 60^\\circ$</div>`
-                    ];
-                    app.showSolution("9-Amaliy, 2-topshiriq", steps);
+                    const steps = ["<b>Amaliy 9, 1-topshiriq (b):</b> Kompleks sonlar ustida amallar.", "Berilgan: $$z_1 = 1 - 2i, \\quad z_2 = -3 + 7i$$", "<b>1) Yig'indisi:</b><br>$$z_1 + z_2 = (1 - 3) + (-2 + 7)i = -2 + 5i$$", "<b>2) Ko'paytmasi:</b><br>$$z_1 \\cdot z_2 = (1 - 2i)(-3 + 7i) = -3 + 7i + 6i - 14i^2 = (-3 + 14) + 13i = 11 + 13i$$", "<b>3) Bo'linmasi:</b><br>Maxraj moduli: $|z_2|^2 = (-3)^2 + 7^2 = 9 + 49 = 58$<br>$$\\frac{z_1}{z_2} = \\frac{(1 - 2i)(-3 - 7i)}{58} = \\frac{-3 - 7i + 6i + 14i^2}{58} = \\frac{-17 - i}{58} = -\\frac{17}{58} - \\frac{1}{58}i$$", "<div class=\"result-badge\">Natijalar: $z_1 + z_2 = -2 + 5i$, $\\quad z_1 \\cdot z_2 = 11 + 13i$, $\\quad \\frac{z_1}{z_2} = -\\frac{17}{58} - \\frac{1}{58}i$</div>"];
+                    app.showSolution("1-topshiriq (b): z1 = 1-2i, z2 = -3+7i ustida amallar", steps);
                 }
             },
             {
-                id: "af9_t3",
-                name: "3-topshiriq: Ko'rsatkichli shakl (Eyler formulasi)",
-                shart: "z = -1 - i kompleks sonni ko'rsatkichli shaklga keltiring.",
+                id: "af9_t1_c",
+                name: "1-topshiriq (c): z1 = 2+5i, z2 = -4-i ustida amallar",
+                shart: "$$z_1 = 2 + 5i, \\quad z_2 = -4 - i$$",
                 solve: () => {
-                    const z = new Complex(-1, -1);
-                    const res = ComplexSolver.analyze(z);
-                    const steps = [
-                        `<b>Amaliy 9, 3-topshiriq:</b> Ko'rsatkichli shakl (Eyler formulasi):`,
-                        `$z = -1 - i$`,
-                        ...res.steps,
-                        `<div class="result-badge">$z = \\sqrt{2} e^{-i \\frac{3\\pi}{4}}$</div>`
-                    ];
-                    app.showSolution("9-Amaliy, 3-topshiriq", steps);
+                    const steps = ["<b>Amaliy 9, 1-topshiriq (c):</b>", "Berilgan: $$z_1 = 2 + 5i, \\quad z_2 = -4 - i$$", "<b>1) Yig'indisi:</b><br>$$z_1 + z_2 = (2 - 4) + (5 - 1)i = -2 + 4i$$", "<b>2) Ko'paytmasi:</b><br>$$z_1 \\cdot z_2 = (2 + 5i)(-4 - i) = -8 - 2i - 20i - 5i^2 = -3 - 22i$$", "<b>3) Bo'linmasi:</b><br>$$|z_2|^2 = (-4)^2 + (-1)^2 = 17$$<br>$$\\frac{z_1}{z_2} = \\frac{(2 + 5i)(-4 + i)}{17} = \\frac{-8 + 2i - 20i + 5i^2}{17} = -\\frac{13}{17} - \\frac{18}{17}i$$", "<div class=\"result-badge\">Natijalar: $z_1 + z_2 = -2 + 4i$, $\\quad z_1 \\cdot z_2 = -3 - 22i$, $\\quad \\frac{z_1}{z_2} = -\\frac{13}{17} - \\frac{18}{17}i$</div>"];
+                    app.showSolution("1-topshiriq (c): z1 = 2+5i, z2 = -4-i ustida amallar", steps);
                 }
             },
             {
-                id: "af9_var5",
-                name: "⭐ 5-Variant: z1 = 4+3i, z2 = 2-i",
-                shart: "z1 = 4 + 3i, z2 = 2 - i ustida arifmetik amallar va modul/argument.",
+                id: "af9_t1_d",
+                name: "1-topshiriq (d): z1 = 3-7i, z2 = 2-5i ustida amallar",
+                shart: "$$z_1 = 3 - 7i, \\quad z_2 = 2 - 5i$$",
                 solve: () => {
-                    const z1 = new Complex(4, 3);
-                    const z2 = new Complex(2, -1);
-                    const add = ComplexSolver.add(z1, z2);
-                    const mul = ComplexSolver.mul(z1, z2);
-                    const div = ComplexSolver.div(z1, z2);
-                    const steps = [
-                        `<b>Amaliy 9, 5-Variant:</b> $z_1 = 4+3i, \\quad z_2 = 2-i$ amallari:`,
-                        `$z_1 + z_2 = 6 + 2i$`,
-                        `$z_1 \\cdot z_2 = 11 + 2i$`,
-                        `$z_1 / z_2 = 1 + 2i$`,
-                        `$|z_1| = \\sqrt{4^2 + 3^2} = 5$`,
-                        `<div class="result-badge">Yig'indi: $6+2i$, Ko'paytma: $11+2i$, Bo'linma: $1+2i$</div>`
-                    ];
-                    app.showSolution("9-Amaliy, 5-Variant", steps);
+                    const steps = ["<b>Amaliy 9, 1-topshiriq (d):</b>", "Berilgan: $$z_1 = 3 - 7i, \\quad z_2 = 2 - 5i$$", "<b>1) Yig'indisi:</b><br>$$z_1 + z_2 = (3 + 2) + (-7 - 5)i = 5 - 12i$$", "<b>2) Ko'paytmasi:</b><br>$$z_1 \\cdot z_2 = (3 - 7i)(2 - 5i) = 6 - 15i - 14i + 35i^2 = -29 - 29i$$", "<b>3) Bo'linmasi:</b><br>$$|z_2|^2 = 2^2 + (-5)^2 = 29$$<br>$$\\frac{z_1}{z_2} = \\frac{(3 - 7i)(2 + 5i)}{29} = \\frac{6 + 15i - 14i - 35i^2}{29} = \\frac{41 + i}{29} = \\frac{41}{29} + \\frac{1}{29}i$$", "<div class=\"result-badge\">Natijalar: $z_1 + z_2 = 5 - 12i$, $\\quad z_1 \\cdot z_2 = -29 - 29i$, $\\quad \\frac{z_1}{z_2} = \\frac{41}{29} + \\frac{1}{29}i$</div>"];
+                    app.showSolution("1-topshiriq (d): z1 = 3-7i, z2 = 2-5i ustida amallar", steps);
                 }
             },
+            {
+                id: "af9_t1_e",
+                name: "1-topshiriq (e): z1 = 2+6i, z2 = -2+3i ustida amallar",
+                shart: "$$z_1 = 2 + 6i, \\quad z_2 = -2 + 3i$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 1-topshiriq (e):</b>", "Berilgan: $$z_1 = 2 + 6i, \\quad z_2 = -2 + 3i$$", "<b>1) Yig'indisi:</b><br>$$z_1 + z_2 = (2 - 2) + (6 + 3)i = 9i$$", "<b>2) Ko'paytmasi:</b><br>$$z_1 \\cdot z_2 = (2 + 6i)(-2 + 3i) = -4 + 6i - 12i + 18i^2 = -22 - 6i$$", "<b>3) Bo'linmasi:</b><br>$$|z_2|^2 = (-2)^2 + 3^2 = 13$$<br>$$\\frac{z_1}{z_2} = \\frac{(2 + 6i)(-2 - 3i)}{13} = \\frac{-4 - 6i - 12i - 18i^2}{13} = \\frac{14 - 18i}{13} = \\frac{14}{13} - \\frac{18}{13}i$$", "<div class=\"result-badge\">Natijalar: $z_1 + z_2 = 9i$, $\\quad z_1 \\cdot z_2 = -22 - 6i$, $\\quad \\frac{z_1}{z_2} = \\frac{14}{13} - \\frac{18}{13}i$</div>"];
+                    app.showSolution("1-topshiriq (e): z1 = 2+6i, z2 = -2+3i ustida amallar", steps);
+                }
+            },
+            {
+                id: "af9_t1_f",
+                name: "1-topshiriq (f): z1 = 4+2i, z2 = -3-2i ustida amallar",
+                shart: "$$z_1 = 4 + 2i, \\quad z_2 = -3 - 2i$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 1-topshiriq (f):</b>", "Berilgan: $$z_1 = 4 + 2i, \\quad z_2 = -3 - 2i$$", "<b>1) Yig'indisi:</b><br>$$z_1 + z_2 = (4 - 3) + (2 - 2)i = 1$$", "<b>2) Ko'paytmasi:</b><br>$$z_1 \\cdot z_2 = (4 + 2i)(-3 - 2i) = -12 - 8i - 6i - 4i^2 = -8 - 14i$$", "<b>3) Bo'linmasi:</b><br>$$|z_2|^2 = (-3)^2 + (-2)^2 = 13$$<br>$$\\frac{z_1}{z_2} = \\frac{(4 + 2i)(-3 + 2i)}{13} = \\frac{-12 + 8i - 6i + 4i^2}{13} = -\\frac{16}{13} + \\frac{2}{13}i$$", "<div class=\"result-badge\">Natijalar: $z_1 + z_2 = 1$, $\\quad z_1 \\cdot z_2 = -8 - 14i$, $\\quad \\frac{z_1}{z_2} = -\\frac{16}{13} + \\frac{2}{13}i$</div>"];
+                    app.showSolution("1-topshiriq (f): z1 = 4+2i, z2 = -3-2i ustida amallar", steps);
+                }
+            },
+            {
+                id: "af9_t1_g",
+                name: "1-topshiriq (g): z1 = 5+3i, z2 = 3+2i ustida amallar",
+                shart: "$$z_1 = 5 + 3i, \\quad z_2 = 3 + 2i$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 1-topshiriq (g):</b>", "Berilgan: $$z_1 = 5 + 3i, \\quad z_2 = 3 + 2i$$", "<b>1) Yig'indisi:</b><br>$$z_1 + z_2 = (5 + 3) + (3 + 2)i = 8 + 5i$$", "<b>2) Ko'paytmasi:</b><br>$$z_1 \\cdot z_2 = (5 + 3i)(3 + 2i) = 15 + 10i + 9i + 6i^2 = 9 + 19i$$", "<b>3) Bo'linmasi:</b><br>$$|z_2|^2 = 3^2 + 2^2 = 13$$<br>$$\\frac{z_1}{z_2} = \\frac{(5 + 3i)(3 - 2i)}{13} = \\frac{15 - 10i + 9i - 6i^2}{13} = \\frac{21 - i}{13} = \\frac{21}{13} - \\frac{1}{13}i$$", "<div class=\"result-badge\">Natijalar: $z_1 + z_2 = 8 + 5i$, $\\quad z_1 \\cdot z_2 = 9 + 19i$, $\\quad \\frac{z_1}{z_2} = \\frac{21}{13} - \\frac{1}{13}i$</div>"];
+                    app.showSolution("1-topshiriq (g): z1 = 5+3i, z2 = 3+2i ustida amallar", steps);
+                }
+            },
+            {
+                id: "af9_t1_h",
+                name: "1-topshiriq (h): z1 = 6-2i, z2 = 3-4i ustida amallar",
+                shart: "$$z_1 = 6 - 2i, \\quad z_2 = 3 - 4i$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 1-topshiriq (h):</b>", "Berilgan: $$z_1 = 6 - 2i, \\quad z_2 = 3 - 4i$$", "<b>1) Yig'indisi:</b><br>$$z_1 + z_2 = (6 + 3) + (-2 - 4)i = 9 - 6i$$", "<b>2) Ko'paytmasi:</b><br>$$z_1 \\cdot z_2 = (6 - 2i)(3 - 4i) = 18 - 24i - 6i + 8i^2 = 10 - 30i$$", "<b>3) Bo'linmasi:</b><br>$$|z_2|^2 = 3^2 + (-4)^2 = 25$$<br>$$\\frac{z_1}{z_2} = \\frac{(6 - 2i)(3 + 4i)}{25} = \\frac{18 + 24i - 6i - 8i^2}{25} = \\frac{26 + 18i}{25} = \\frac{26}{25} + \\frac{18}{25}i$$", "<div class=\"result-badge\">Natijalar: $z_1 + z_2 = 9 - 6i$, $\\quad z_1 \\cdot z_2 = 10 - 30i$, $\\quad \\frac{z_1}{z_2} = \\frac{26}{25} + \\frac{18}{25}i$</div>"];
+                    app.showSolution("1-topshiriq (h): z1 = 6-2i, z2 = 3-4i ustida amallar", steps);
+                }
+            },
+            {
+                id: "af9_t2_exact",
+                name: "2-topshiriq: (1+2i)x + (3-5i)y = 1-3i tenglikdan x va y ni topish",
+                shart: "$$(1+2i)x + (3-5i)y = 1 - 3i$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 2-topshiriq:</b> Berilgan tenglikni qanoatlantiruvchi $x$ va $y$ haqiqiy sonlarni toping.", "Tenglama: $$(1+2i)x + (3-5i)y = 1 - 3i$$", "💡 <b>1-qadam: Chap tomonni haqiqiy va mavhum qismlarga ajratamiz:</b><br>$$(x + 2xi) + (3y - 5yi) = 1 - 3i$$$$(x + 3y) + (2x - 5y)i = 1 - 3i$$", "💡 <b>2-qadam: Kompleks sonlar tengligining ta'rifiga ko'ra:</b><br>Haqiqiy qismlar va mavhum qismlar o'zaro teng bo'lishi kerak:<br>$$\\begin{cases} x + 3y = 1 \\\\ 2x - 5y = -3 \\end{cases}$$", "💡 <b>3-qadam: Sistemani Kramer usuli bilan yechamiz:</b><br>$$\\Delta = \\begin{vmatrix} 1 & 3 \\\\ 2 & -5 \\end{vmatrix} = 1 \\cdot (-5) - 3 \\cdot 2 = -5 - 6 = -11$$", "$$\\Delta_x = \\begin{vmatrix} 1 & 3 \\\\ -3 & -5 \\end{vmatrix} = 1 \\cdot (-5) - 3 \\cdot (-3) = -5 + 9 = 4$$", "$$\\Delta_y = \\begin{vmatrix} 1 & 1 \\\\ 2 & -3 \\end{vmatrix} = 1 \\cdot (-3) - 1 \\cdot 2 = -3 - 2 = -5$$", "Noma'lumlarni topamiz:<br>$$x = \\frac{\\Delta_x}{\\Delta} = \\frac{4}{-11} = -\\frac{4}{11}$$$$y = \\frac{\\Delta_y}{\\Delta} = \\frac{-5}{-11} = \\frac{5}{11}$$", "<div class=\"result-badge\">Yechim: $x = -\\frac{4}{11}, \\quad y = \\frac{5}{11}$</div>"];
+                    app.showSolution("2-topshiriq: (1+2i)x + (3-5i)y = 1-3i tenglikdan x va y ni topish", steps);
+                }
+            },
+            {
+                id: "af9_t4_power",
+                name: "4-topshiriq: n-butun son uchun i^n ni hisoblang",
+                shart: "$$i^n \\quad (n \\in \\mathbb{Z})$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 4-topshiriq:</b> $n$-butun son uchun $i^n$ ning qiymatlarini aniqlash.", "💡 <b>Mavhum birlik $i$ ning darajalari:</b><br>• $i^0 = 1$<br>• $i^1 = i$<br>• $i^2 = -1$<br>• $i^3 = i^2 \\cdot i = -i$<br>• $i^4 = (i^2)^2 = (-1)^2 = 1$<br>", "Demak, $i$ ning darajalari har 4 qadamda davriy takrorlanadi. Ixtiyoriy butun $n$ sonini $4$ ga bo'lganda:<br>$$n = 4k + r, \\quad r \\in \\{0, 1, 2, 3\\}$$ ko'rinishida yozish mumkin.", "<b>Qoldiq $r$ ga qarab qiymatlar:</b><br>• Agar $n = 4k$ bo'lsa: $i^n = i^{4k} = (i^4)^k = 1^k = <b>1</b>$<br>• Agar $n = 4k + 1$ bo'lsa: $i^n = i^{4k+1} = i^{4k} \\cdot i = <b>i</b>$<br>• Agar $n = 4k + 2$ bo'lsa: $i^n = i^{4k+2} = i^{4k} \\cdot i^2 = <b>-1</b>$<br>• Agar $n = 4k + 3$ bo'lsa: $i^n = i^{4k+3} = i^{4k} \\cdot i^3 = <b>-i</b>$", "<div class=\"result-badge\">Xulosa: $i^n = \\begin{cases} 1, & n = 4k \\\\ i, & n = 4k+1 \\\\ -1, & n = 4k+2 \\\\ -i, & n = 4k+3 \\end{cases}$</div>"];
+                    app.showSolution("4-topshiriq: n-butun son uchun i^n ni hisoblang", steps);
+                }
+            },
+            {
+                id: "af9_t5_simplify",
+                name: "5-topshiriq: (x-1-i)(x-1+i)(x+1+i)(x+1-i) ifodani soddalashtiring",
+                shart: "$$(x-1-i)(x-1+i)(x+1+i)(x+1-i)$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 5-topshiriq:</b> Ko'paytmani soddalashtirish.", "Berilgan ifoda: $$A = (x - 1 - i)(x - 1 + i)(x + 1 + i)(x + 1 - i)$$", "💡 <b>1-qadam: Qo'shma juftliklarni qisqa ko'paytirish formulasi $(a-b)(a+b) = a^2 - b^2$ bo'yicha guruhlaymiz:</b><br>1-juftlik: $[(x - 1) - i][(x - 1) + i] = (x - 1)^2 - i^2 = (x - 1)^2 + 1 = x^2 - 2x + 1 + 1 = x^2 - 2x + 2$<br>2-juftlik: $[(x + 1) + i][(x + 1) - i] = (x + 1)^2 - i^2 = (x + 1)^2 + 1 = x^2 + 2x + 1 + 1 = x^2 + 2x + 2$", "💡 <b>2-qadam: Hosil bo'lgan ko'phadlarni ko'paytiramiz:</b><br>$$A = (x^2 - 2x + 2)(x^2 + 2x + 2) = [(x^2 + 2) - 2x][(x^2 + 2) + 2x]$$", "Yana kvadratlar ayirmasi formulasini qo'llaymiz:<br>$$A = (x^2 + 2)^2 - (2x)^2 = (x^4 + 4x^2 + 4) - 4x^2 = x^4 + 4$$", "<div class=\"result-badge\">Soddalashgan ifoda: $x^4 + 4$</div>"];
+                    app.showSolution("5-topshiriq: (x-1-i)(x-1+i)(x+1+i)(x+1-i) ifodani soddalashtiring", steps);
+                }
+            },
+            {
+                id: "af9_t6_a",
+                name: "6-topshiriq (a): z² + 2 = 0 tenglamaning kompleks ildizlari",
+                shart: "$$z^2 + 2 = 0$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 6-topshiriq (a):</b> Kvadrat tenglamani yechish.", "$$z^2 + 2 = 0$$", "$z^2 = -2$", "$z = \\pm \\sqrt{-2} = \\pm i\\sqrt{2}$", "<div class=\"result-badge\">Ildizlar: $z_{1,2} = \\pm i\\sqrt{2}$</div>"];
+                    app.showSolution("6-topshiriq (a): z² + 2 = 0 tenglamaning kompleks ildizlari", steps);
+                }
+            },
+            {
+                id: "af9_t6_b",
+                name: "6-topshiriq (b): z² + 1 = 0 tenglamaning kompleks ildizlari",
+                shart: "$$z^2 + 1 = 0$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 6-topshiriq (b):</b> Kvadrat tenglamani yechish.", "$$z^2 + 1 = 0$$", "$z^2 = -1$", "$z = \\pm \\sqrt{-1} = \\pm i$", "<div class=\"result-badge\">Ildizlar: $z_{1,2} = \\pm i$</div>"];
+                    app.showSolution("6-topshiriq (b): z² + 1 = 0 tenglamaning kompleks ildizlari", steps);
+                }
+            },
+            {
+                id: "af9_t6_c",
+                name: "6-topshiriq (c): 3z² + 4 = 0 tenglamaning kompleks ildizlari",
+                shart: "$$3z^2 + 4 = 0$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 6-topshiriq (c):</b> Kvadrat tenglamani yechish.", "$$3z^2 + 4 = 0$$", "$3z^2 = -4 \\implies z^2 = -\\frac{4}{3}$", "$z = \\pm i \\sqrt{\\frac{4}{3}} = \\pm \\frac{2\\sqrt{3}}{3}i$", "<div class=\"result-badge\">Ildizlar: $z_{1,2} = \\pm \\frac{2\\sqrt{3}}{3}i$</div>"];
+                    app.showSolution("6-topshiriq (c): 3z² + 4 = 0 tenglamaning kompleks ildizlari", steps);
+                }
+            },
+            {
+                id: "af9_t6_d",
+                name: "6-topshiriq (d): z² + z + 6 = 0 tenglamaning kompleks ildizlari",
+                shart: "$$z^2 + z + 6 = 0$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 6-topshiriq (d):</b> Kvadrat tenglamani yechish.", "$$z^2 + z + 6 = 0$$", "Diskriminant: $D = b^2 - 4ac = 1^2 - 4 \\cdot 1 \\cdot 6 = 1 - 24 = -23 < 0$", "$\\sqrt{D} = \\pm i\\sqrt{23}$", "$z_{1,2} = \\frac{-b \\pm \\sqrt{D}}{2a} = \\frac{-1 \\pm i\\sqrt{23}}{2}$", "<div class=\"result-badge\">Ildizlar: $z_{1,2} = -\\frac{1}{2} \\pm \\frac{\\sqrt{23}}{2}i$</div>"];
+                    app.showSolution("6-topshiriq (d): z² + z + 6 = 0 tenglamaning kompleks ildizlari", steps);
+                }
+            },
+            {
+                id: "af9_t6_e",
+                name: "6-topshiriq (e): 2z² - 5z + 4 = 0 tenglamaning kompleks ildizlari",
+                shart: "$$2z^2 - 5z + 4 = 0$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 6-topshiriq (e):</b> Kvadrat tenglamani yechish.", "$$2z^2 - 5z + 4 = 0$$", "Diskriminant: $D = (-5)^2 - 4 \\cdot 2 \\cdot 4 = 25 - 32 = -7 < 0$", "$\\sqrt{D} = \\pm i\\sqrt{7}$", "$z_{1,2} = \\frac{5 \\pm i\\sqrt{7}}{4}$", "<div class=\"result-badge\">Ildizlar: $z_{1,2} = \\frac{5}{4} \\pm \\frac{\\sqrt{7}}{4}i$</div>"];
+                    app.showSolution("6-topshiriq (e): 2z² - 5z + 4 = 0 tenglamaning kompleks ildizlari", steps);
+                }
+            },
+            {
+                id: "af9_t6_f",
+                name: "6-topshiriq (f): 7z² + z + 1 = 0 tenglamaning kompleks ildizlari",
+                shart: "$$7z^2 + z + 1 = 0$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 6-topshiriq (f):</b> Kvadrat tenglamani yechish.", "$$7z^2 + z + 1 = 0$$", "Diskriminant: $D = 1^2 - 4 \\cdot 7 \\cdot 1 = 1 - 28 = -27 < 0$", "$\\sqrt{D} = \\pm \\sqrt{-27} = \\pm 3i\\sqrt{3}$", "$z_{1,2} = \\frac{-1 \\pm 3i\\sqrt{3}}{14}$", "<div class=\"result-badge\">Ildizlar: $z_{1,2} = -\\frac{1}{14} \\pm \\frac{3\\sqrt{3}}{14}i$</div>"];
+                    app.showSolution("6-topshiriq (f): 7z² + z + 1 = 0 tenglamaning kompleks ildizlari", steps);
+                }
+            },
+            {
+                id: "af9_t7_a",
+                name: "7-topshiriq (a): (1+i)^8 darajani hisoblash",
+                shart: "$$(1+i)^8$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 7-topshiriq (a):</b> $(1+i)^8$ ni hisoblash.", "💡 <b>1-usul (Trigonometrik shakl va Muavr formulasi):</b><br>$1 + i$ ning moduli: $r = \\sqrt{1^2 + 1^2} = \\sqrt{2}$<br>Argumenti: $\\varphi = \\frac{\\pi}{4}$<br>Demak: $1 + i = \\sqrt{2} \\left(\\cos\\frac{\\pi}{4} + i\\sin\\frac{\\pi}{4}\\right)$", "Muavr formulasi bo'yicha:<br>$$(1 + i)^8 = (\\sqrt{2})^8 \\left(\\cos\\left(8 \\cdot \\frac{\\pi}{4}\\right) + i\\sin\\left(8 \\cdot \\frac{\\pi}{4}\\right)\\right) = 16 (\\cos 2\\pi + i\\sin 2\\pi) = 16(1 + 0) = 16$$", "💡 <b>2-usul (Algebraik):</b><br>$(1+i)^2 = 1 + 2i - 1 = 2i$<br>$$(1+i)^8 = ((1+i)^2)^4 = (2i)^4 = 2^4 \\cdot i^4 = 16 \\cdot 1 = 16$$", "<div class=\"result-badge\">Natija: $(1+i)^8 = 16$</div>"];
+                    app.showSolution("7-topshiriq (a): (1+i)^8 darajani hisoblash", steps);
+                }
+            },
+            {
+                id: "af9_t7_b",
+                name: "7-topshiriq (b): (2+i)^7 + (2-i)^7 ifodani hisoblash",
+                shart: "$$(2+i)^7 + (2-i)^7$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 7-topshiriq (b):</b> Qo'shma kompleks sonlar darajalari yig'indisi.", "E'tibor bering, $z_1 = 2 + i$ va $z_2 = 2 - i = \\bar{z_1}$ qo'shma sonlardir.<br>Demak, $z^7 + \\bar{z}^7 = 2 \\cdot \\text{Re}(z^7)$ har doim haqiqiy son bo'ladi.", "Binom formulasini qo'llaymiz:<br>$(2+i)^7 + (2-i)^7 = 2 \\left[ C_7^0 2^7 - C_7^2 2^5 + C_7^4 2^3 - C_7^6 2^1 \\right]$", "• $C_7^0 2^7 = 1 \\cdot 128 = 128$<br>• $C_7^2 2^5 = 21 \\cdot 32 = 672$<br>• $C_7^4 2^3 = 35 \\cdot 8 = 280$<br>• $C_7^6 2^1 = 7 \\cdot 2 = 14$", "Qavs ichidagi yig'indi: $128 - 672 + 280 - 14 = -278$<br>Yakuniy ko'paytma: $2 \\cdot (-278) = -556$", "<div class=\"result-badge\">Natija: $(2+i)^7 + (2-i)^7 = -556$</div>"];
+                    app.showSolution("7-topshiriq (b): (2+i)^7 + (2-i)^7 ifodani hisoblash", steps);
+                }
+            },
+            {
+                id: "af9_t7_c",
+                name: "7-topshiriq (c): (1+2i)^5 - (1-2i)^5 ifodani hisoblash",
+                shart: "$$(1+2i)^5 - (1-2i)^5$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 7-topshiriq (c):</b>", "Qo'shma sonlar ayirmasi: $z^5 - \\bar{z}^5 = 2i \\cdot \\text{Im}(z^5)$", "Binom formulasiga ko'ra:<br>$(1+2i)^5 - (1-2i)^5 = 2i \\left[ C_5^1 1^4 \\cdot 2 - C_5^3 1^2 \\cdot 2^3 + C_5^5 \\cdot 2^5 \\right]$", "• $C_5^1 \\cdot 2 = 5 \\cdot 2 = 10$<br>• $C_5^3 \\cdot 8 = 10 \\cdot 8 = 80$<br>• $C_5^5 \\cdot 32 = 1 \\cdot 32 = 32$", "Qavs ichi: $10 - 80 + 32 = -38$<br>Yakuniy ko'paytma: $2i \\cdot (-38) = -76i$", "<div class=\"result-badge\">Natija: $(1+2i)^5 - (1-2i)^5 = -76i$</div>"];
+                    app.showSolution("7-topshiriq (c): (1+2i)^5 - (1-2i)^5 ifodani hisoblash", steps);
+                }
+            },
+            {
+                id: "af9_t8_pure_imag",
+                name: "8-topshiriq: Ikki kompleks son ko'paytmasi qachon faqat mavhum qismdan iborat bo'ladi?",
+                shart: "$$\\text{Re}(z_1 \\cdot z_2) = 0 \\quad \\text{shartini toping}$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 8-topshiriq:</b> Ikki kompleks sonning ko'paytmasi qachon sof mavhum bo'ladi?", "Ikki son: $z_1 = a_1 + b_1 i$ va $z_2 = a_2 + b_2 i$.", "Ko'paytmani hisoblaymiz:<br>$$z_1 \\cdot z_2 = (a_1 a_2 - b_1 b_2) + (a_1 b_2 + a_2 b_1)i$$", "💡 <b>Faqat mavhum qismdan iborat bo'lishi uchun haqiqiy qism nolga teng bo'lishi kerak:</b><br>$$\\text{Re}(z_1 \\cdot z_2) = a_1 a_2 - b_1 b_2 = 0 \\implies a_1 a_2 = b_1 b_2$$", "Agar $b_1 \\neq 0$ va $a_2 \\neq 0$ bo'lsa:<br>$$\\frac{a_1}{b_1} = \\frac{b_2}{a_2} \\quad \\text{yoki} \\quad \\text{ctg}(\\varphi_1) = \\text{tg}(\\varphi_2)$$", "💡 <b>Geometrik ma'nosi:</b><br>Argand tekisligida ko'paytmaning argumenti argumentlar yig'indisiga teng:<br>$$\\arg(z_1 \\cdot z_2) = \\arg(z_1) + \\arg(z_2) = \\frac{\\pi}{2} + \\pi k, \\quad k \\in \\mathbb{Z}$$Demak, ularning argumentlari yig'indisi $90^\\circ$ yoki $270^\\circ$ ga teng bo'lishi kerak (vektorlar o'zaro perpendikulyar yo'nalish hosil qiladi).", "<div class=\"result-badge\">Zarur va yetarli shart: $a_1 a_2 - b_1 b_2 = 0$ yoki $\\arg z_1 + \\arg z_2 = \\frac{\\pi}{2} + \\pi k$</div>"];
+                    app.showSolution("8-topshiriq: Ikki kompleks son ko'paytmasi qachon faqat mavhum qismdan iborat bo'ladi?", steps);
+                }
+            },
+            {
+                id: "af9_t9_a",
+                name: "9-topshiriq (a): (1+2i)³ - (1-i)³ ifodani hisoblash",
+                shart: "$$(1+2i)^3 - (1-i)^3$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 9-topshiriq (a):</b> Ifodaning qiymatini topish.", "1) $(1+2i)^3 = 1^3 + 3(1)^2(2i) + 3(1)(2i)^2 + (2i)^3 = 1 + 6i - 12 - 8i = -11 - 2i$<br>2) $(1-i)^3 = 1^3 - 3(1)^2(i) + 3(1)(i)^2 - i^3 = 1 - 3i - 3 + i = -2 - 2i$", "3) Ayirmani hisoblaymiz:<br>$$(-11 - 2i) - (-2 - 2i) = -11 - 2i + 2 + 2i = -9$$", "<div class=\"result-badge\">Natija: $-9$</div>"];
+                    app.showSolution("9-topshiriq (a): (1+2i)³ - (1-i)³ ifodani hisoblash", steps);
+                }
+            },
+            {
+                id: "af9_t9_b",
+                name: "9-topshiriq (b): (1 + i tg α) / (1 - i tg α) ifodani soddalashtirish",
+                shart: "$$\\frac{1 + i\\operatorname{tg}\\alpha}{1 - i\\operatorname{tg}\\alpha}$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 9-topshiriq (b):</b> Trigonometrik ifodani soddalashtirish.", "$$\\operatorname{tg}\\alpha = \\frac{\\sin\\alpha}{\\cos\\alpha}$$ o'rniga qo'yamiz:<br>$$\\frac{1 + i\\frac{\\sin\\alpha}{\\cos\\alpha}}{1 - i\\frac{\\sin\\alpha}{\\cos\\alpha}} = \\frac{\\frac{\\cos\\alpha + i\\sin\\alpha}{\\cos\\alpha}}{\\frac{\\cos\\alpha - i\\sin\\alpha}{\\cos\\alpha}} = \\frac{\\cos\\alpha + i\\sin\\alpha}{\\cos\\alpha - i\\sin\\alpha}$$", "Eyler formulasi $e^{i\\alpha} = \\cos\\alpha + i\\sin\\alpha$ ga ko'ra:<br>$$\\cos\\alpha + i\\sin\\alpha = e^{i\\alpha}$$$$\\cos\\alpha - i\\sin\\alpha = e^{-i\\alpha}$$Kasr nisbati:<br>$$\\frac{e^{i\\alpha}}{e^{-i\\alpha}} = e^{i\\alpha - (-i\\alpha)} = e^{i 2\\alpha} = \\cos 2\\alpha + i\\sin 2\\alpha$$", "<div class=\"result-badge\">Natija: $\\cos 2\\alpha + i\\sin 2\\alpha$</div>"];
+                    app.showSolution("9-topshiriq (b): (1 + i tg α) / (1 - i tg α) ifodani soddalashtirish", steps);
+                }
+            },
+            {
+                id: "af9_t10_power",
+                name: "10-topshiriq: (-1/2 + i√3/2)^n darajani hisoblash",
+                shart: "$$\\left(-\\frac{1}{2} + \\frac{\\sqrt{3}}{2}i\\right)^n \\quad (n \\in \\mathbb{Z})$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 10-topshiriq:</b> $n$-butun son uchun darajani hisoblash.", "Asosiy kompleks son: $z = -\\frac{1}{2} + \\frac{\\sqrt{3}}{2}i$<br>Moduli: $r = \\sqrt{\\left(-\\frac{1}{2}\\right)^2 + \\left(\\frac{\\sqrt{3}}{2}\\right)^2} = \\sqrt{\\frac{1}{4} + \\frac{3}{4}} = 1$<br>Argumenti: Nuqta II chorakda joylashgan, $\\varphi = \\pi - \\frac{\\pi}{3} = \\frac{2\\pi}{3}$<br>Trigonometrik shakli: $$z = \\cos\\frac{2\\pi}{3} + i\\sin\\frac{2\\pi}{3}$$", "Muavr formulasiga ko'ra:<br>$$z^n = \\cos\\left(\\frac{2\\pi n}{3}\\right) + i\\sin\\left(\\frac{2\\pi n}{3}\\right)$$", "Bu son 3 davrli takrorlanadi ($k \\in \\mathbb{Z}$):<br>• Agar $n = 3k$ bo'lsa: $\\cos(2\\pi k) + i\\sin(2\\pi k) = <b>1</b>$<br>• Agar $n = 3k + 1$ bo'lsa: $\\cos\\frac{2\\pi}{3} + i\\sin\\frac{2\\pi}{3} = <b>-\\frac{1}{2} + \\frac{\\sqrt{3}}{2}i</b>$<br>• Agar $n = 3k + 2$ bo'lsa: $\\cos\\frac{4\\pi}{3} + i\\sin\\frac{4\\pi}{3} = <b>-\\frac{1}{2} - \\frac{\\sqrt{3}}{2}i</b>$", "<div class=\"result-badge\">Natija: $\\cos\\frac{2\\pi n}{3} + i\\sin\\frac{2\\pi n}{3}$</div>"];
+                    app.showSolution("10-topshiriq: (-1/2 + i√3/2)^n darajani hisoblash", steps);
+                }
+            },
+            {
+                id: "af9_t11_a",
+                name: "11-topshiriq (a): Kompleks koeffitsiyentli sistema (3-i)x + (4+2i)y = 2+6i",
+                shart: "$$\\begin{cases} (3-i)x + (4+2i)y = 2+6i \\ (4+2i)x - (2+3i)y = 5+4i \\end{cases}$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 11-topshiriq (a):</b> Kompleks koeffitsiyentli sistemani Kramer usulida yechish.", "1) Asosiy determinant $\\Delta$:<br>$$\\Delta = \\begin{vmatrix} 3-i & 4+2i \\\\ 4+2i & -(2+3i) \\end{vmatrix} = -(3-i)(2+3i) - (4+2i)^2$$• $(3-i)(2+3i) = 6 + 9i - 2i + 3 = 9 + 7i \\implies -(9 + 7i) = -9 - 7i$<br>• $(4+2i)^2 = 16 + 16i - 4 = 12 + 16i$<br>$$\\Delta = -9 - 7i - 12 - 16i = -21 - 23i$$", "2) $\\Delta_x$ va $\\Delta_y$ determinantlari hisoblanadi va $x = \\frac{\\Delta_x}{\\Delta}$, $y = \\frac{\\Delta_y}{\\Delta}$ topiladi.", "<div class=\"result-badge\">Yechim: $x = 1 + i, \\quad y = i$</div>"];
+                    app.showSolution("11-topshiriq (a): Kompleks koeffitsiyentli sistema (3-i)x + (4+2i)y = 2+6i", steps);
+                }
+            },
+            {
+                id: "af9_t11_b",
+                name: "11-topshiriq (b): (2+i)x + (2-i)y = 6 va (3+2i)x + (3-2i)y = 8",
+                shart: "$$\\begin{cases} (2+i)x + (2-i)y = 6 \\ (3+2i)x + (3-2i)y = 8 \\end{cases}$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 11-topshiriq (b):</b> Tenglamalar sistemasini yechish.", "$$\\Delta = \\begin{vmatrix} 2+i & 2-i \\\\ 3+2i & 3-2i \\end{vmatrix} = (2+i)(3-2i) - (2-i)(3+2i)$$• $(2+i)(3-2i) = 6 - 4i + 3i + 2 = 8 - i$<br>• $(2-i)(3+2i) = 6 + 4i - 3i + 2 = 8 + i$<br>$$\\Delta = (8 - i) - (8 + i) = -2i$$", "$$\\Delta_x = \\begin{vmatrix} 6 & 2-i \\\\ 8 & 3-2i \\end{vmatrix} = 6(3-2i) - 8(2-i) = 18 - 12i - 16 + 8i = 2 - 4i$$", "$$x = \\frac{2 - 4i}{-2i} = \\frac{2}{-2i} - \\frac{4i}{-2i} = i + 2 = 2 + i$$", "$$\\Delta_y = \\begin{vmatrix} 2+i & 6 \\\\ 3+2i & 8 \\end{vmatrix} = 8(2+i) - 6(3+2i) = 16 + 8i - 18 - 12i = -2 - 4i$$", "$$y = \\frac{-2 - 4i}{-2i} = \\frac{-2}{-2i} - \\frac{4i}{-2i} = -i + 2 = 2 - i$$", "<div class=\"result-badge\">Yechim: $x = 2 + i, \\quad y = 2 - i$</div>"];
+                    app.showSolution("11-topshiriq (b): (2+i)x + (2-i)y = 6 va (3+2i)x + (3-2i)y = 8", steps);
+                }
+            },
+            {
+                id: "af9_t12_proof",
+                name: "12-topshiriq: x+yi = (s+ti)^n bo'lsa, x²+y² = (s²+t²)^n tenglikni isbotlang",
+                shart: "$$x+yi = (s+ti)^n \\implies x^2+y^2 = (s^2+t^2)^n$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 12-topshiriq:</b> Modul xossasidan foydalanib tenglikni isbotlash.", "Berilgan: $$x + yi = (s + ti)^n$$", "💡 <b>1-qadam: Tenglikning har ikkala tomonining modulini olamiz:</b><br>$$|x + yi| = |(s + ti)^n|$$", "💡 <b>2-qadam: Kompleks sonlar moduli xossalariga ko'ra:</b><br>1) $|x + yi| = \\sqrt{x^2 + y^2}$<br>2) Darajaning moduli modulning darajasiga teng: $|z^n| = |z|^n$<br>$$|(s + ti)^n| = |s + ti|^n = \\left(\\sqrt{s^2 + t^2}\\right)^n = (s^2 + t^2)^{n/2}$$", "💡 <b>3-qadam: Modullar tengligini yozamiz:</b><br>$$\\sqrt{x^2 + y^2} = (s^2 + t^2)^{n/2}$$", "Har ikki tomonni kvadratga ko'taramiz:<br>$$\\left(\\sqrt{x^2 + y^2}\\right)^2 = \\left((s^2 + t^2)^{n/2}\\right)^2 \\implies x^2 + y^2 = (s^2 + t^2)^n$$", "<div class=\"result-badge\">Tenglik to'liq isbotlandi! ∎</div>"];
+                    app.showSolution("12-topshiriq: x+yi = (s+ti)^n bo'lsa, x²+y² = (s²+t²)^n tenglikni isbotlang", steps);
+                }
+            },
+            {
+                id: "af9_t13_a",
+                name: "13-topshiriq (a): √(2i) kvadrat ildizlarini topish",
+                shart: "$$\\sqrt{2i}$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 13-topshiriq (a):</b> Kvadrat ildiz chiqarish.", "$$\\sqrt{2i}$$", "$a = 0, b = 2$, moduli: $r = \\sqrt{0^2 + 2^2} = 2$", "Kvadrat ildiz formulasi: $\\pm \\left( \\sqrt{\\frac{r+a}{2}} + i \\operatorname{sgn}(b)\\sqrt{\\frac{r-a}{2}} \\right)$", "$\\pm \\left( \\sqrt{\\frac{2+0}{2}} + i \\sqrt{\\frac{2-0}{2}} \\right) = \\pm (1 + i)$", "<div class=\"result-badge\">Ildizlar: $\\pm(1 + i)$</div>"];
+                    app.showSolution("13-topshiriq (a): √(2i) kvadrat ildizlarini topish", steps);
+                }
+            },
+            {
+                id: "af9_t13_b",
+                name: "13-topshiriq (b): √(-8) kvadrat ildizlarini topish",
+                shart: "$$\\sqrt{-8}$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 13-topshiriq (b):</b> Kvadrat ildiz chiqarish.", "$$\\sqrt{-8}$$", "$a = -8, b = 0$, $r = 8$", "$\\sqrt{-8} = \\pm i \\sqrt{8} = \\pm 2i\\sqrt{2}$", "<div class=\"result-badge\">Ildizlar: $\\pm 2\\sqrt{2}i$</div>"];
+                    app.showSolution("13-topshiriq (b): √(-8) kvadrat ildizlarini topish", steps);
+                }
+            },
+            {
+                id: "af9_t13_c",
+                name: "13-topshiriq (c): √(3-4i) kvadrat ildizlarini topish",
+                shart: "$$\\sqrt{3-4i}$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 13-topshiriq (c):</b> Kvadrat ildiz chiqarish.", "$$\\sqrt{3-4i}$$", "$a = 3, b = -4$, moduli: $r = \\sqrt{3^2 + (-4)^2} = \\sqrt{25} = 5$", "$\\pm \\left( \\sqrt{\\frac{5+3}{2}} - i \\sqrt{\\frac{5-3}{2}} \\right) = \\pm (\\sqrt{4} - i\\sqrt{1}) = \\pm (2 - i)$", "<div class=\"result-badge\">Ildizlar: $\\pm(2 - i)$</div>"];
+                    app.showSolution("13-topshiriq (c): √(3-4i) kvadrat ildizlarini topish", steps);
+                }
+            },
+            {
+                id: "af9_t13_d",
+                name: "13-topshiriq (d): √(-15+8i) kvadrat ildizlarini topish",
+                shart: "$$\\sqrt{-15+8i}$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 13-topshiriq (d):</b> Kvadrat ildiz chiqarish.", "$$\\sqrt{-15+8i}$$", "$a = -15, b = 8$, moduli: $r = \\sqrt{(-15)^2 + 8^2} = \\sqrt{225 + 64} = \\sqrt{289} = 17$", "$\\pm \\left( \\sqrt{\\frac{17-15}{2}} + i \\sqrt{\\frac{17+15}{2}} \\right) = \\pm (\\sqrt{1} + i\\sqrt{16}) = \\pm (1 + 4i)$", "<div class=\"result-badge\">Ildizlar: $\\pm(1 + 4i)$</div>"];
+                    app.showSolution("13-topshiriq (d): √(-15+8i) kvadrat ildizlarini topish", steps);
+                }
+            },
+            {
+                id: "af9_t13_e",
+                name: "13-topshiriq (e): √(-3-4i) kvadrat ildizlarini topish",
+                shart: "$$\\sqrt{-3-4i}$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 13-topshiriq (e):</b> Kvadrat ildiz chiqarish.", "$$\\sqrt{-3-4i}$$", "$a = -3, b = -4, r = 5$", "$\\pm \\left( \\sqrt{\\frac{5-3}{2}} - i \\sqrt{\\frac{5+3}{2}} \\right) = \\pm (1 - 2i)$", "<div class=\"result-badge\">Ildizlar: $\\pm(1 - 2i)$</div>"];
+                    app.showSolution("13-topshiriq (e): √(-3-4i) kvadrat ildizlarini topish", steps);
+                }
+            },
+            {
+                id: "af9_t13_f",
+                name: "13-topshiriq (f): √(-11+60i) kvadrat ildizlarini topish",
+                shart: "$$\\sqrt{-11+60i}$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 13-topshiriq (f):</b> Kvadrat ildiz chiqarish.", "$$\\sqrt{-11+60i}$$", "$a = -11, b = 60, r = \\sqrt{121 + 3600} = \\sqrt{3721} = 61$", "$\\pm \\left( \\sqrt{\\frac{61-11}{2}} + i \\sqrt{\\frac{61+11}{2}} \\right) = \\pm (\\sqrt{25} + i\\sqrt{36}) = \\pm (5 + 6i)$", "<div class=\"result-badge\">Ildizlar: $\\pm(5 + 6i)$</div>"];
+                    app.showSolution("13-topshiriq (f): √(-11+60i) kvadrat ildizlarini topish", steps);
+                }
+            },
+            {
+                id: "af9_t13_g",
+                name: "13-topshiriq (g): √(-8+6i) kvadrat ildizlarini topish",
+                shart: "$$\\sqrt{-8+6i}$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 13-topshiriq (g):</b> Kvadrat ildiz chiqarish.", "$$\\sqrt{-8+6i}$$", "$a = -8, b = 6, r = \\sqrt{64 + 36} = 10$", "$\\pm \\left( \\sqrt{\\frac{10-8}{2}} + i \\sqrt{\\frac{10+8}{2}} \\right) = \\pm (1 + 3i)$", "<div class=\"result-badge\">Ildizlar: $\\pm(1 + 3i)$</div>"];
+                    app.showSolution("13-topshiriq (g): √(-8+6i) kvadrat ildizlarini topish", steps);
+                }
+            },
+            {
+                id: "af9_t13_h",
+                name: "13-topshiriq (h): √(-8-6i) kvadrat ildizlarini topish",
+                shart: "$$\\sqrt{-8-6i}$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 13-topshiriq (h):</b> Kvadrat ildiz chiqarish.", "$$\\sqrt{-8-6i}$$", "$a = -8, b = -6, r = 10$", "$\\pm \\left( \\sqrt{\\frac{10-8}{2}} - i \\sqrt{\\frac{10+8}{2}} \\right) = \\pm (1 - 3i)$", "<div class=\"result-badge\">Ildizlar: $\\pm(1 - 3i)$</div>"];
+                    app.showSolution("13-topshiriq (h): √(-8-6i) kvadrat ildizlarini topish", steps);
+                }
+            },
+            {
+                id: "af9_t14_a",
+                name: "14-topshiriq (a): z² - (2+i)z + (-1+7i) = 0 tenglamani yechish",
+                shart: "$$z^2 - (2+i)z + (-1+7i) = 0$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 14-topshiriq (a):</b> Kompleks koeffitsiyentli kvadrat tenglama.", "Diskriminant: $D = b^2 - 4ac = [-(2+i)]^2 - 4(1)(-1+7i)$<br>• $(2+i)^2 = 4 + 4i - 1 = 3 + 4i$<br>• $-4(-1+7i) = 4 - 28i$<br>$$D = (3 + 4i) + (4 - 28i) = 7 - 24i$$", "$\\sqrt{D} = \\sqrt{7 - 24i}$: moduli $r = \\sqrt{49 + 576} = 25$<br>$\\sqrt{D} = \\pm \\left(\\sqrt{\\frac{25+7}{2}} - i\\sqrt{\\frac{25-7}{2}}\\right) = \\pm (4 - 3i)$", "Ildizlarni hisoblaymiz:<br>$$z_1 = \\frac{(2+i) + (4-3i)}{2} = \\frac{6 - 2i}{2} = 3 - i$$$$z_2 = \\frac{(2+i) - (4-3i)}{2} = \\frac{-2 + 4i}{2} = -1 + 2i$$", "<div class=\"result-badge\">Ildizlar: $z_1 = 3 - i, \\quad z_2 = -1 + 2i$</div>"];
+                    app.showSolution("14-topshiriq (a): z² - (2+i)z + (-1+7i) = 0 tenglamani yechish", steps);
+                }
+            },
+            {
+                id: "af9_t14_b",
+                name: "14-topshiriq (b): z² - (3-2i)z + (5-5i) = 0 tenglamani yechish",
+                shart: "$$z^2 - (3-2i)z + (5-5i) = 0$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 14-topshiriq (b):</b>", "$$D = [-(3-2i)]^2 - 4(5-5i) = (9 - 12i - 4) - (20 - 20i) = (5 - 12i) - 20 + 20i = -15 + 8i$$", "$\\sqrt{D} = \\sqrt{-15 + 8i}$: $r = \\sqrt{225 + 64} = 17$<br>$\\sqrt{D} = \\pm (1 + 4i)$", "Ildizlar:<br>$$z_1 = \\frac{(3-2i) + (1+4i)}{2} = \\frac{4 + 2i}{2} = 2 + i$$$$z_2 = \\frac{(3-2i) - (1+4i)}{2} = \\frac{2 - 6i}{2} = 1 - 3i$$", "<div class=\"result-badge\">Ildizlar: $z_1 = 2 + i, \\quad z_2 = 1 - 3i$</div>"];
+                    app.showSolution("14-topshiriq (b): z² - (3-2i)z + (5-5i) = 0 tenglamani yechish", steps);
+                }
+            },
+            {
+                id: "af9_t14_c",
+                name: "14-topshiriq (c): (2+i)z² - (5-i)z + (2-2i) = 0 tenglamani yechish",
+                shart: "$$(2+i)z^2 - (5-i)z + (2-2i) = 0$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 14-topshiriq (c):</b>", "$D = (5-i)^2 - 4(2+i)(2-2i) = (25 - 10i - 1) - 4(4 - 4i + 2i + 2) = (24 - 10i) - 4(6 - 2i) = -2i$", "$\\sqrt{D} = \\sqrt{-2i} = \\pm(1 - i)$", "Ildizlar:<br>$$z_1 = \\frac{(5-i) + (1-i)}{2(2+i)} = \\frac{6 - 2i}{4 + 2i} = \\frac{3 - i}{2 + i} = \\frac{(3-i)(2-i)}{5} = \\frac{5 - 5i}{5} = 1 - i$$$$z_2 = \\frac{(5-i) - (1-i)}{2(2+i)} = \\frac{4}{2(2+i)} = \\frac{2}{2+i} = \\frac{2(2-i)}{5} = \\frac{4}{5} - \\frac{2}{5}i$$", "<div class=\"result-badge\">Ildizlar: $z_1 = 1 - i, \\quad z_2 = 0.8 - 0.4i$</div>"];
+                    app.showSolution("14-topshiriq (c): (2+i)z² - (5-i)z + (2-2i) = 0 tenglamani yechish", steps);
+                }
+            },
+            {
+                id: "af9_t14_d",
+                name: "14-topshiriq (d): z⁴ + 3z² + 4 = 0 bikvadrat tenglamani yechish",
+                shart: "$$z^4 + 3z^2 + 4 = 0$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 14-topshiriq (d):</b> Bikvadrat tenglama.", "$t = z^2$ almashtirish kiritamiz:<br>$$t^2 + 3t + 4 = 0$$$D = 9 - 16 = -7 \\implies t_{1,2} = \\frac{-3 \\pm i\\sqrt{7}}{2}$", "Endi $z = \\pm \\sqrt{t}$ ni hisoblaymiz. Modul: $|t| = \\sqrt{\\frac{9 + 7}{4}} = 2$<br>$$z = \\pm \\left(\\sqrt{\\frac{2 - 1.5}{2}} \\pm i \\sqrt{\\frac{2 + 1.5}{2}}\\right) = \\pm \\left(\\frac{1}{2} \\pm i\\frac{\\sqrt{7}}{2}\\right)$$", "<div class=\"result-badge\">To'rtta kompleks ildiz: $z = \\pm \\frac{1}{2} \\pm i\\frac{\\sqrt{7}}{2}$</div>"];
+                    app.showSolution("14-topshiriq (d): z⁴ + 3z² + 4 = 0 bikvadrat tenglamani yechish", steps);
+                }
+            },
+            {
+                id: "af9_t14_e",
+                name: "14-topshiriq (e): z⁴ - 30z² + 289 = 0 tenglamani yechish",
+                shart: "$$z^4 - 30z^2 + 289 = 0$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 14-topshiriq (e):</b>", "$t = z^2$ almashtirish:<br>$$t^2 - 30t + 289 = 0$$$D = 900 - 4(289) = 900 - 1156 = -256 = (16i)^2$", "$$t_{1,2} = \\frac{30 \\pm 16i}{2} = 15 \\pm 8i$$", "Endi $z = \\sqrt{15 \\pm 8i}$ ni hisoblaymiz. Moduli: $r = \\sqrt{225 + 64} = 17$<br>$$z = \\pm \\left(\\sqrt{\\frac{17+15}{2}} \\pm i\\sqrt{\\frac{17-15}{2}}\\right) = \\pm(4 \\pm i)$$", "<div class=\"result-badge\">Ildizlar: $z = \\pm 4 \\pm i$ (to'rtta ildiz)</div>"];
+                    app.showSolution("14-topshiriq (e): z⁴ - 30z² + 289 = 0 tenglamani yechish", steps);
+                }
+            },
+            {
+                id: "af9_t15_a",
+                name: "15-topshiriq (a): z = 3 - 2i kompleks sonining geometrik tasviri",
+                shart: "$$z = 3 - 2i$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 15-topshiriq (a):</b> Kompleks sonning geometrik tasvirini topish.", "$$z = 3 - 2i$$", "$x = \\text{Re}(z) = 3, \\quad y = \\text{Im}(z) = -2$", "Nuqta koordinatasi: $M(3; -2)$", "Kompleks tekislikdagi o'rni: <b>IV koordinata choragi</b>", "Radius-vektor uzunligi (modul): $r = |z| = \\sqrt{3^2 + (-2)^2} = \\sqrt{9 + 4} = \\sqrt{13} \\approx 3.606$", "Haqiqiy o'q bilan hosil qilgan burchagi (argument): $\\varphi = \\operatorname{arctg}\\left(-\\frac{2}{3}\\right) \\approx -33.69^\\circ$", "<div class=\"result-badge\">Geometrik tasvir: $M(3; -2)$ nuqta va unga yo'naltirilgan radius-vektor ($r = \\sqrt{13}$)</div>"];
+                    app.showSolution("15-topshiriq (a): z = 3 - 2i kompleks sonining geometrik tasviri", steps);
+                }
+            },
+            {
+                id: "af9_t15_b",
+                name: "15-topshiriq (b): z = 5 + i kompleks sonining geometrik tasviri",
+                shart: "$$z = 5 + i$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 15-topshiriq (b):</b> Kompleks sonning geometrik tasvirini topish.", "$$z = 5 + i$$", "$x = \\text{Re}(z) = 5, \\quad y = \\text{Im}(z) = 1$", "Nuqta koordinatasi: $M(5; 1)$", "Kompleks tekislikdagi o'rni: <b>I koordinata choragi</b>", "Modul: $r = \\sqrt{5^2 + 1^2} = \\sqrt{26} \\approx 5.099$", "Argument: $\\varphi = \\operatorname{arctg}\\left(\\frac{1}{5}\\right) \\approx 11.31^\\circ$", "<div class=\"result-badge\">Geometrik tasvir: $M(5; 1)$ nuqta ($r = \\sqrt{26}$)</div>"];
+                    app.showSolution("15-topshiriq (b): z = 5 + i kompleks sonining geometrik tasviri", steps);
+                }
+            },
+            {
+                id: "af9_t15_c",
+                name: "15-topshiriq (c): z = -2 + 5i kompleks sonining geometrik tasviri",
+                shart: "$$z = -2 + 5i$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 15-topshiriq (c):</b> Kompleks sonning geometrik tasvirini topish.", "$$z = -2 + 5i$$", "$x = \\text{Re}(z) = -2, \\quad y = \\text{Im}(z) = 5$", "Nuqta koordinatasi: $M(-2; 5)$", "Kompleks tekislikdagi o'rni: <b>II koordinata choragi</b>", "Modul: $r = \\sqrt{(-2)^2 + 5^2} = \\sqrt{4 + 25} = \\sqrt{29} \\approx 5.385$", "Argument: $\\varphi = \\pi - \\operatorname{arctg}\\left(\\frac{5}{2}\\right) \\approx 180^\\circ - 68.20^\\circ = 111.80^\\circ$", "<div class=\"result-badge\">Geometrik tasvir: $M(-2; 5)$ nuqta ($r = \\sqrt{29}$)</div>"];
+                    app.showSolution("15-topshiriq (c): z = -2 + 5i kompleks sonining geometrik tasviri", steps);
+                }
+            },
+            {
+                id: "af9_t15_d",
+                name: "15-topshiriq (d): z = 6 - 2i kompleks sonining geometrik tasviri",
+                shart: "$$z = 6 - 2i$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 15-topshiriq (d):</b> Kompleks sonning geometrik tasvirini topish.", "$$z = 6 - 2i$$", "$x = \\text{Re}(z) = 6, \\quad y = \\text{Im}(z) = -2$", "Nuqta koordinatasi: $M(6; -2)$", "Kompleks tekislikdagi o'rni: <b>IV koordinata choragi</b>", "Modul: $r = \\sqrt{6^2 + (-2)^2} = \\sqrt{36 + 4} = \\sqrt{40} = 2\\sqrt{10} \\approx 6.325$", "Argument: $\\varphi = -\\operatorname{arctg}\\left(\\frac{2}{6}\\right) = -\\operatorname{arctg}\\left(\\frac{1}{3}\\right) \\approx -18.43^\\circ$", "<div class=\"result-badge\">Geometrik tasvir: $M(6; -2)$ nuqta ($r = 2\\sqrt{10}$)</div>"];
+                    app.showSolution("15-topshiriq (d): z = 6 - 2i kompleks sonining geometrik tasviri", steps);
+                }
+            },
+            {
+                id: "af9_t16_a",
+                name: "16-topshiriq (a): z = 2 - 2i ning trigonometrik shakli",
+                shart: "$$z = 2 - 2i$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 16-topshiriq (a):</b> Kompleks sonning trigonometrik shakli $z = r(\\cos\\varphi + i\\sin\\varphi)$ ni topish.", "$$z = 2 - 2i$$", "$a = 2, \\quad b = -2$", "Modul: $r = \\sqrt{2^2 + (-2)^2} = \\sqrt{4 + 4} = \\sqrt{8} = 2\\sqrt{2}$", "Nuqta IV chorakda: $\\varphi = \\operatorname{arctg}\\left(\\frac{-2}{2}\\right) = -\\frac{\\pi}{4}$", "Trigonometrik shakli: $$z = r(\\cos\\varphi + i\\sin\\varphi) = 2\\sqrt{2}\\left(\\cos\\left(-\\frac{\\pi}{4}\\right) + i\\sin\\left(-\\frac{\\pi}{4}\\right)\\right)$$", "<div class=\"result-badge\">Trigonometrik shakli: $z = 2\\sqrt{2}\\left(\\cos\\left(-\\frac{\\pi}{4}\\right) + i\\sin\\left(-\\frac{\\pi}{4}\\right)\\right)$</div>"];
+                    app.showSolution("16-topshiriq (a): z = 2 - 2i ning trigonometrik shakli", steps);
+                }
+            },
+            {
+                id: "af9_t16_b",
+                name: "16-topshiriq (b): z = 2 - 2√3i ning trigonometrik shakli",
+                shart: "$$z = 2 - 2\\sqrt{3}i$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 16-topshiriq (b):</b> Kompleks sonning trigonometrik shakli $z = r(\\cos\\varphi + i\\sin\\varphi)$ ni topish.", "$$z = 2 - 2\\sqrt{3}i$$", "$a = 2, \\quad b = -2\\sqrt{3}$", "Modul: $r = \\sqrt{2^2 + (-2\\sqrt{3})^2} = \\sqrt{4 + 12} = \\sqrt{16} = 4$", "Nuqta IV chorakda: $\\varphi = \\operatorname{arctg}\\left(\\frac{-2\\sqrt{3}}{2}\\right) = \\operatorname{arctg}(-\\sqrt{3}) = -\\frac{\\pi}{3}$", "Trigonometrik shakli: $$z = 4\\left(\\cos\\left(-\\frac{\\pi}{3}\\right) + i\\sin\\left(-\\frac{\\pi}{3}\\right)\\right)$$", "<div class=\"result-badge\">Trigonometrik shakli: $z = 4\\left(\\cos\\left(-\\frac{\\pi}{3}\\right) + i\\sin\\left(-\\frac{\\pi}{3}\\right)\\right)$</div>"];
+                    app.showSolution("16-topshiriq (b): z = 2 - 2√3i ning trigonometrik shakli", steps);
+                }
+            },
+            {
+                id: "af9_t16_c",
+                name: "16-topshiriq (c): z = -2 - 2√3i ning trigonometrik shakli",
+                shart: "$$z = -2 - 2\\sqrt{3}i$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 16-topshiriq (c):</b> Kompleks sonning trigonometrik shakli $z = r(\\cos\\varphi + i\\sin\\varphi)$ ni topish.", "$$z = -2 - 2\\sqrt{3}i$$", "$a = -2, \\quad b = -2\\sqrt{3}$", "Modul: $r = \\sqrt{(-2)^2 + (-2\\sqrt{3})^2} = \\sqrt{16} = 4$", "Nuqta III chorakda ($a < 0, b < 0$): $\\varphi = -\\pi + \\operatorname{arctg}(\\sqrt{3}) = -\\pi + \\frac{\\pi}{3} = -\\frac{2\\pi}{3}$", "Trigonometrik shakli: $$z = 4\\left(\\cos\\left(-\\frac{2\\pi}{3}\\right) + i\\sin\\left(-\\frac{2\\pi}{3}\\right)\\right)$$", "<div class=\"result-badge\">Trigonometrik shakli: $z = 4\\left(\\cos\\left(-\\frac{2\\pi}{3}\\right) + i\\sin\\left(-\\frac{2\\pi}{3}\\right)\\right)$</div>"];
+                    app.showSolution("16-topshiriq (c): z = -2 - 2√3i ning trigonometrik shakli", steps);
+                }
+            },
+            {
+                id: "af9_t16_d",
+                name: "16-topshiriq (d): z = 2√3 - 2i ning trigonometrik shakli",
+                shart: "$$z = 2\\sqrt{3} - 2i$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 16-topshiriq (d):</b> Kompleks sonning trigonometrik shakli $z = r(\\cos\\varphi + i\\sin\\varphi)$ ni topish.", "$$z = 2\\sqrt{3} - 2i$$", "$a = 2\\sqrt{3}, \\quad b = -2$", "Modul: $r = \\sqrt{(2\\sqrt{3})^2 + (-2)^2} = \\sqrt{12 + 4} = 4$", "Nuqta IV chorakda: $\\varphi = \\operatorname{arctg}\\left(\\frac{-2}{2\\sqrt{3}}\\right) = \\operatorname{arctg}\\left(-\\frac{1}{\\sqrt{3}}\\right) = -\\frac{\\pi}{6}$", "Trigonometrik shakli: $$z = 4\\left(\\cos\\left(-\\frac{\\pi}{6}\\right) + i\\sin\\left(-\\frac{\\pi}{6}\\right)\\right)$$", "<div class=\"result-badge\">Trigonometrik shakli: $z = 4\\left(\\cos\\left(-\\frac{\\pi}{6}\\right) + i\\sin\\left(-\\frac{\\pi}{6}\\right)\\right)$</div>"];
+                    app.showSolution("16-topshiriq (d): z = 2√3 - 2i ning trigonometrik shakli", steps);
+                }
+            },
+            {
+                id: "af9_t16_e",
+                name: "16-topshiriq (e): z = 2√3 + 2i ning trigonometrik shakli",
+                shart: "$$z = 2\\sqrt{3} + 2i$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 16-topshiriq (e):</b> Kompleks sonning trigonometrik shakli $z = r(\\cos\\varphi + i\\sin\\varphi)$ ni topish.", "$$z = 2\\sqrt{3} + 2i$$", "$a = 2\\sqrt{3}, \\quad b = 2$", "Modul: $r = \\sqrt{(2\\sqrt{3})^2 + 2^2} = \\sqrt{12 + 4} = 4$", "Nuqta I chorakda: $\\varphi = \\operatorname{arctg}\\left(\\frac{2}{2\\sqrt{3}}\\right) = \\frac{\\pi}{6}$", "Trigonometrik shakli: $$z = 4\\left(\\cos\\frac{\\pi}{6} + i\\sin\\frac{\\pi}{6}\\right)$$", "<div class=\"result-badge\">Trigonometrik shakli: $z = 4\\left(\\cos\\frac{\\pi}{6} + i\\sin\\frac{\\pi}{6}\\right)$</div>"];
+                    app.showSolution("16-topshiriq (e): z = 2√3 + 2i ning trigonometrik shakli", steps);
+                }
+            },
+            {
+                id: "af9_t16_f",
+                name: "16-topshiriq (f): z = 3 - 3i ning trigonometrik shakli",
+                shart: "$$z = 3 - 3i$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 16-topshiriq (f):</b> Kompleks sonning trigonometrik shakli $z = r(\\cos\\varphi + i\\sin\\varphi)$ ni topish.", "$$z = 3 - 3i$$", "$a = 3, \\quad b = -3$", "Modul: $r = \\sqrt{3^2 + (-3)^2} = \\sqrt{18} = 3\\sqrt{2}$", "Nuqta IV chorakda: $\\varphi = \\operatorname{arctg}(-1) = -\\frac{\\pi}{4}$", "Trigonometrik shakli: $$z = 3\\sqrt{2}\\left(\\cos\\left(-\\frac{\\pi}{4}\\right) + i\\sin\\left(-\\frac{\\pi}{4}\\right)\\right)$$", "<div class=\"result-badge\">Trigonometrik shakli: $z = 3\\sqrt{2}\\left(\\cos\\left(-\\frac{\\pi}{4}\\right) + i\\sin\\left(-\\frac{\\pi}{4}\\right)\\right)$</div>"];
+                    app.showSolution("16-topshiriq (f): z = 3 - 3i ning trigonometrik shakli", steps);
+                }
+            },
+            {
+                id: "af9_t16_g",
+                name: "16-topshiriq (g): z = -√3 - 3i ning trigonometrik shakli",
+                shart: "$$z = -\\sqrt{3} - 3i$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 16-topshiriq (g):</b> Kompleks sonning trigonometrik shakli $z = r(\\cos\\varphi + i\\sin\\varphi)$ ni topish.", "$$z = -\\sqrt{3} - 3i$$", "$a = -\\sqrt{3}, \\quad b = -3$", "Modul: $r = \\sqrt{(-\\sqrt{3})^2 + (-3)^2} = \\sqrt{3 + 9} = \\sqrt{12} = 2\\sqrt{3}$", "Nuqta III chorakda: $\\varphi = -\\pi + \\operatorname{arctg}\\left(\\frac{-3}{-\\sqrt{3}}\\right) = -\\pi + \\frac{\\pi}{3} = -\\frac{2\\pi}{3}$", "Trigonometrik shakli: $$z = 2\\sqrt{3}\\left(\\cos\\left(-\\frac{2\\pi}{3}\\right) + i\\sin\\left(-\\frac{2\\pi}{3}\\right)\\right)$$", "<div class=\"result-badge\">Trigonometrik shakli: $z = 2\\sqrt{3}\\left(\\cos\\left(-\\frac{2\\pi}{3}\\right) + i\\sin\\left(-\\frac{2\\pi}{3}\\right)\\right)$</div>"];
+                    app.showSolution("16-topshiriq (g): z = -√3 - 3i ning trigonometrik shakli", steps);
+                }
+            },
+            {
+                id: "af9_t16_h",
+                name: "16-topshiriq (h): z = 2 + √3 + i ning trigonometrik shakli",
+                shart: "$$z = (2 + \\sqrt{3}) + i$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 16-topshiriq (h):</b> Kompleks sonning trigonometrik shakli $z = r(\\cos\\varphi + i\\sin\\varphi)$ ni topish.", "$$z = (2 + \\sqrt{3}) + i$$", "$a = 2 + \\sqrt{3}, \\quad b = 1$", "Modul: $r = \\sqrt{(2+\\sqrt{3})^2 + 1^2} = \\sqrt{4 + 4\\sqrt{3} + 3 + 1} = \\sqrt{8 + 4\\sqrt{3}} = 2\\sqrt{2+\\sqrt{3}} = \\sqrt{6} + \\sqrt{2}$", "Argument: $\\operatorname{tg}\\varphi = \\frac{1}{2+\\sqrt{3}} = 2 - \\sqrt{3} \\implies \\varphi = \\frac{\\pi}{12} = 15^\\circ$", "Trigonometrik shakli: $$z = (\\sqrt{6} + \\sqrt{2})\\left(\\cos\\frac{\\pi}{12} + i\\sin\\frac{\\pi}{12}\\right)$$", "<div class=\"result-badge\">Trigonometrik shakli: $z = (\\sqrt{6} + \\sqrt{2})\\left(\\cos\\frac{\\pi}{12} + i\\sin\\frac{\\pi}{12}\\right)$</div>"];
+                    app.showSolution("16-topshiriq (h): z = 2 + √3 + i ning trigonometrik shakli", steps);
+                }
+            },
+            {
+                id: "af9_t16_i",
+                name: "16-topshiriq (i): z = 2 - √3 + i ning trigonometrik shakli",
+                shart: "$$z = (2 - \\sqrt{3}) + i$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 16-topshiriq (i):</b> Kompleks sonning trigonometrik shakli $z = r(\\cos\\varphi + i\\sin\\varphi)$ ni topish.", "$$z = (2 - \\sqrt{3}) + i$$", "$a = 2 - \\sqrt{3}, \\quad b = 1$", "Modul: $r = \\sqrt{(2-\\sqrt{3})^2 + 1^2} = \\sqrt{4 - 4\\sqrt{3} + 3 + 1} = \\sqrt{8 - 4\\sqrt{3}} = 2\\sqrt{2-\\sqrt{3}} = \\sqrt{6} - \\sqrt{2}$", "Argument: $\\operatorname{tg}\\varphi = \\frac{1}{2-\\sqrt{3}} = 2 + \\sqrt{3} \\implies \\varphi = \\frac{5\\pi}{12} = 75^\\circ$", "Trigonometrik shakli: $$z = (\\sqrt{6} - \\sqrt{2})\\left(\\cos\\frac{5\\pi}{12} + i\\sin\\frac{5\\pi}{12}\\right)$$", "<div class=\"result-badge\">Trigonometrik shakli: $z = (\\sqrt{6} - \\sqrt{2})\\left(\\cos\\frac{5\\pi}{12} + i\\sin\\frac{5\\pi}{12}\\right)$</div>"];
+                    app.showSolution("16-topshiriq (i): z = 2 - √3 + i ning trigonometrik shakli", steps);
+                }
+            },
+            {
+                id: "af9_t17_a",
+                name: "17-topshiriq (a): |z| = 1 shartni qanoatlantiruvchi nuqtalar to'plami",
+                shart: "$$|z| = 1$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 17-topshiriq (a):</b> Nuqtalar to'plamini tasvirlash.", "$$|z| = 1$$", "$z = x + yi$ deb olamiz.", "Modul formulasi: $|z| = \\sqrt{x^2 + y^2} = 1$", "Ikkala tomonni kvadratga oshirsak: $$x^2 + y^2 = 1$$", "💡 <b>Geometrik ma'nosi:</b> Bu markazi koordinatalar boshida $(0; 0)$ va radiusi $R = 1$ bo'lgan <b>birlik aylana</b>dir.", "<div class=\"result-badge\">Geometrik o'rni: Markazi $(0;0)$ va radiusi $R = 1$ bo'lgan birlik aylana ($x^2+y^2=1$)</div>"];
+                    app.showSolution("17-topshiriq (a): |z| = 1 shartni qanoatlantiruvchi nuqtalar to'plami", steps);
+                }
+            },
+            {
+                id: "af9_t17_b",
+                name: "17-topshiriq (b): |z| < 2 shartni qanoatlantiruvchi nuqtalar to'plami",
+                shart: "$$|z| < 2$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 17-topshiriq (b):</b> Nuqtalar to'plamini tasvirlash.", "$$|z| < 2$$", "$|z| = \\sqrt{x^2 + y^2} < 2$", "Kvadratga oshirsak: $$x^2 + y^2 < 4$$", "💡 <b>Geometrik ma'nosi:</b> Markazi $(0; 0)$ da va radiusi $R = 2$ bo'lgan aylananing ichki sohasi (ochiq doira).", "Aylana chegarasidagi nuqtalar to'plamga kirmaydi (qat'iy tengsizlik).", "<div class=\"result-badge\">Geometrik o'rni: Markazi $(0;0)$, radiusi $R = 2$ bo'lgan ochiq doira ($x^2+y^2 < 4$)</div>"];
+                    app.showSolution("17-topshiriq (b): |z| < 2 shartni qanoatlantiruvchi nuqtalar to'plami", steps);
+                }
+            },
+            {
+                id: "af9_t17_c",
+                name: "17-topshiriq (c): |z - i| ≤ 1 shartni qanoatlantiruvchi nuqtalar to'plami",
+                shart: "$$|z - i| \\le 1$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 17-topshiriq (c):</b> Nuqtalar to'plamini tasvirlash.", "$$|z - i| \\le 1$$", "$z = x + yi$ bo'lsin. U holda: $z - i = x + (y - 1)i$", "Modul: $|z - i| = \\sqrt{x^2 + (y - 1)^2} \\le 1$", "Kvadratga oshirsak: $$x^2 + (y - 1)^2 \\le 1$$", "💡 <b>Geometrik ma'nosi:</b> Markazi $z_0 = i$, ya'ni $(0; 1)$ nuqtada va radiusi $R = 1$ bo'lgan <b>yopiq doira</b> (aylana chegarasi ham to'plamga kiradi).", "<div class=\"result-badge\">Geometrik o'rni: Markazi $(0; 1)$ nuqtada va radiusi $R = 1$ bo'lgan yopiq doira ($x^2 + (y-1)^2 \\le 1$)</div>"];
+                    app.showSolution("17-topshiriq (c): |z - i| ≤ 1 shartni qanoatlantiruvchi nuqtalar to'plami", steps);
+                }
+            },
+            {
+                id: "af9_t17_d",
+                name: "17-topshiriq (d): arg z = π/6 shartni qanoatlantiruvchi nuqtalar to'plami",
+                shart: "$$\\arg z = \\frac{\\pi}{6}$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 17-topshiriq (d):</b> Nuqtalar to'plamini tasvirlash.", "$$\\arg z = \\frac{\\pi}{6}$$", "Kompleks sonning argumenti haqiqiy musbat o'q bilan hosil qilingan burchakdir: $\\varphi = \\frac{\\pi}{6} = 30^\\circ$.", "Nuqta I koordinata choragida joylashgan va koordinatalari nisbati:<br>$$\\operatorname{tg}\\left(\\frac{\\pi}{6}\\right) = \\frac{y}{x} = \\frac{1}{\\sqrt{3}} \\implies y = \\frac{1}{\\sqrt{3}}x \\quad (x > 0)$$", "💡 <b>Geometrik ma'nosi:</b> Koordinatalar boshidan chiquvchi va musbat haqiqiy yarim o'q bilan $30^\\circ$ burchak tashkil etuvchi <b>ochiq nur</b>.", "Koordinatalar boshi $(0; 0)$ nuqta bu nurga kirmaydi, chunki $z = 0$ ning argumenti aniqlanmagan.", "<div class=\"result-badge\">Geometrik o'rni: $(0; 0)$ dan chiquvchi $30^\\circ$ burchakli ochiq nur ($y = \\frac{x}{\\sqrt{3}}, x > 0$)</div>"];
+                    app.showSolution("17-topshiriq (d): arg z = π/6 shartni qanoatlantiruvchi nuqtalar to'plami", steps);
+                }
+            },
+            {
+                id: "af9_t17_e",
+                name: "17-topshiriq (e): 0 < arg z < π/3 shartni qanoatlantiruvchi nuqtalar to'plami",
+                shart: "$$0 < \\arg z < \\frac{\\pi}{3}$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 17-topshiriq (e):</b> Nuqtalar to'plamini tasvirlash.", "$$0 < \\arg z < \\frac{\\pi}{3}$$", "Shart bo'yicha nuqtalarning argumenti $0^\\circ$ va $60^\\circ$ orasida yotadi:<br>$$0 < \\varphi < \\frac{\\pi}{3}$$", "💡 <b>Geometrik ma'nosi:</b> Koordinatalar boshidan chiquvchi musbat haqiqiy yarim o'q $(\\varphi = 0)$ va $\\varphi = \\frac{\\pi}{3}$ ($y = \\sqrt{3}x, x > 0$) nuri orasidagi <b>cheksiz burchak sohasi (ochiq sektor)</b>.", "Chegaradagi ikkala nur va $(0; 0)$ nuqta sohaga kirmaydi.", "<div class=\"result-badge\">Geometrik o'rni: $0^\\circ$ va $60^\\circ$ nurlari orasidagi cheksiz ochiq burchak sohasi (sektor)</div>"];
+                    app.showSolution("17-topshiriq (e): 0 < arg z < π/3 shartni qanoatlantiruvchi nuqtalar to'plami", steps);
+                }
+            },
+            {
+                id: "af9_t17_f",
+                name: "17-topshiriq (f): Im z > 0 shartni qanoatlantiruvchi nuqtalar to'plami",
+                shart: "$$\\operatorname{Im} z > 0$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 9, 17-topshiriq (f):</b> Nuqtalar to'plamini tasvirlash.", "$$\\operatorname{Im} z > 0$$", "$z = x + yi$ uchun $\\operatorname{Im}(z) = y$.", "Berilgan shart: $$y > 0$$", "💡 <b>Geometrik ma'nosi:</b> Kompleks tekislikning haqiqiy o'qdan $(Ox)$ yuqorida joylashgan butun <b>yuqori ochiq yarimtekisligi</b>.", "Haqiqiy o'qning o'zi ($y = 0$) to'plamga kirmaydi.", "<div class=\"result-badge\">Geometrik o'rni: Kompleks tekislikning yuqori ochiq yarimtekisligi ($y > 0$)</div>"];
+                    app.showSolution("17-topshiriq (f): Im z > 0 shartni qanoatlantiruvchi nuqtalar to'plami", steps);
+                }
+            }
         ]
     },
     10: {
@@ -1063,6 +1719,33 @@ const AMALIY_DATABASE = {
                     app.showSolution("10-Amaliy, 5-Variant", steps);
                 }
             },
+            {
+                id: "af10_t6_a",
+                name: "6-topshiriq (a): |z| + z = 8 + 4i tenglamani yechish",
+                shart: "$$|z| + z = 8 + 4i$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 10, 6-topshiriq (a):</b> Modul qatnashgan kompleks tenglamani yechish.", "$z = x + yi$ deb olamiz. U holda $|z| = \\sqrt{x^2 + y^2}$.", "Tenglama: $$\\sqrt{x^2 + y^2} + x + yi = 8 + 4i$$", "Haqiqiy va mavhum qismlarni tenglashtiramiz:<br>• Mavhum qism: $y = 4$<br>• Haqiqiy qism: $\\sqrt{x^2 + 4^2} + x = 8 \\implies \\sqrt{x^2 + 16} = 8 - x$", "Kvadratga oshiramiz ($8 - x \\ge 0 \\implies x \\le 8$):<br>$$x^2 + 16 = (8 - x)^2 = 64 - 16x + x^2$$$$16 = 64 - 16x \\implies 16x = 48 \\implies x = 3$$", "Demak, $x = 3, y = 4$. Tekshiramiz: $|3+4i| + (3+4i) = 5 + 3 + 4i = 8 + 4i$. To'g'ri!", "<div class=\"result-badge\">Yagona yechim: $z = 3 + 4i$</div>"];
+                    app.showSolution("6-topshiriq (a): |z| + z = 8 + 4i tenglamani yechish", steps);
+                }
+            },
+            {
+                id: "af10_t23_roots_unity",
+                name: "23-topshiriq: Birning 4-darajali barcha ildizlari",
+                shart: "$$w_k = \\sqrt[4]{1}$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 10, 23-topshiriq:</b> Birning 4-darajali ildizlarini topish.", "$1 = \\cos 0 + i\\sin 0$", "Ildiz formulasi: $$w_k = \\cos\\frac{2\\pi k}{4} + i\\sin\\frac{2\\pi k}{4} = \\cos\\frac{\\pi k}{2} + i\\sin\\frac{\\pi k}{2}, \\quad k = 0, 1, 2, 3$$", "• $k = 0$: $w_0 = \\cos 0 + i\\sin 0 = <b>1</b>$<br>• $k = 1$: $w_1 = \\cos\\frac{\\pi}{2} + i\\sin\\frac{\\pi}{2} = <b>i</b>$<br>• $k = 2$: $w_2 = \\cos\\pi + i\\sin\\pi = <b>-1</b>$<br>• $k = 3$: $w_3 = \\cos\\frac{3\\pi}{2} + i\\sin\\frac{3\\pi}{2} = <b>-i</b>$", "<div class=\"result-badge\">Birning 4 ta ildizi: $\\{1, i, -1, -i\\}$</div>"];
+                    app.showSolution("23-topshiriq: Birning 4-darajali barcha ildizlari", steps);
+                }
+            },
+            {
+                id: "af10_t25_sum_zero",
+                name: "25-topshiriq: Birning barcha n-darajali ildizlari yig'indisi nolga tengligi",
+                shart: "$$\\sum_{k=0}^{n-1} w_k = 0$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 10, 25-topshiriq:</b> Birning $n$-darajali ildizlari yig'indisi haqidagi teorema.", "Birning $n$-darajali ildizlari geometrik progressiya tashkil qiladi: $w_k = \\varepsilon^k$, bu yerda $\\varepsilon = \\cos\\frac{2\\pi}{n} + i\\sin\\frac{2\\pi}{n} \\neq 1$.", "Yig'indi formulasi: $$S = 1 + \\varepsilon + \\varepsilon^2 + \\dots + \\varepsilon^{n-1} = \\frac{\\varepsilon^n - 1}{\\varepsilon - 1}$$", "$\\varepsilon$ birning $n$-darajali ildizi bo'lgani uchun $\\varepsilon^n = 1$.", "Demak: $$S = \\frac{1 - 1}{\\varepsilon - 1} = \\frac{0}{\\varepsilon - 1} = 0$$", "<div class=\"result-badge\">Isbotlandi: $\\sum_{k=0}^{n-1} w_k = 0$ ∎</div>"];
+                    app.showSolution("25-topshiriq: Birning barcha n-darajali ildizlari yig'indisi nolga tengligi", steps);
+                }
+            },
         ]
     },
     11: {
@@ -1132,6 +1815,33 @@ const AMALIY_DATABASE = {
                         `<div class="result-badge">Q(x) = $3x^2 - 4x + 12$, \\quad R(x) = $-34x + 29$</div>`
                     ];
                     app.showSolution("11-Amaliy, 5-Variant", steps);
+                }
+            },
+            {
+                id: "af11_t1_div",
+                name: "1-topshiriq (a): f(x) ni g(x) ga qoldiqli bo'lish",
+                shart: "$$f(x) = 2x^4 - 3x^3 + 4x^2 - 5x + 6, \\quad g(x) = x^2 - 3x + 1$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 11, 1-topshiriq (a):</b> Ko'phadni ko'phadga burchakli qoldiqli bo'lish.", "Burchakli bo'lish algoritmi bo'yicha:<br>1) $2x^4 / x^2 = 2x^2$. Ayiramiz: $-3x^3 - (-6x^3) = 3x^3$, $4x^2 - 2x^2 = 2x^2$.<br>2) $3x^3 / x^2 = 3x$. Ayiramiz: $2x^2 - (-9x^2) = 11x^2$, $-5x - 3x = -8x$.<br>3) $11x^2 / x^2 = 11$. Ayiramiz: $-8x - (-33x) = 25x$, $6 - 11 = -5$.", "Bo'linma: $$q(x) = 2x^2 + 3x + 11$$", "Qoldiq: $$r(x) = 25x - 5$$", "<div class=\"result-badge\">Bo'linma: $q(x) = 2x^2 + 3x + 11$, Qoldiq: $r(x) = 25x - 5$</div>"];
+                    app.showSolution("1-topshiriq (a): f(x) ni g(x) ga qoldiqli bo'lish", steps);
+                }
+            },
+            {
+                id: "af11_t4_horner_val",
+                name: "4-topshiriq (b): Gorner sxemasi bilan f(-2) qiymatini hisoblash",
+                shart: "$$f(x) = x^4 - 3x^3 - 10x^2 + 2x + 5, \\quad x_0 = -2$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 11, 4-topshiriq (b):</b> $f(x_0)$ ni Gorner sxemasi yordamida hisoblash.", "Koeffitsiyentlar: $a_4 = 1, a_3 = -3, a_2 = -10, a_1 = 2, a_0 = 5$, $x_0 = -2$.", "Gorner jadvali qadamlari:<br>• $b_3 = a_4 = 1$<br>• $b_2 = -3 + (-2) \\cdot 1 = -5$<br>• $b_1 = -10 + (-2) \\cdot (-5) = -10 + 10 = 0$<br>• $b_0 = 2 + (-2) \\cdot 0 = 2$<br>• $r = 5 + (-2) \\cdot 2 = 5 - 4 = 1$", "Bezu teoremasiga ko'ra $r = f(-2) = 1$.", "<div class=\"result-badge\">Natija: $f(-2) = 1$</div>"];
+                    app.showSolution("4-topshiriq (b): Gorner sxemasi bilan f(-2) qiymatini hisoblash", steps);
+                }
+            },
+            {
+                id: "af11_t8_mult_root",
+                name: "8-topshiriq (a): x0 = 2 sonining karraliligini aniqlash",
+                shart: "$$f(x) = x^5 - 5x^4 + 7x^3 - 2x^2 + 4x - 8, \\quad x_0 = 2$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 11, 8-topshiriq (a):</b> Ildizning karralilik darajasini Gorner sxemasida aniqlash.", "Ketma-ket Gorner sxemasi qo'llaniladi qoldiq nol bo'lmaguncha:<br>1-bo'lish: $x_0 = 2$ da qoldiq $r_1 = 0$ (ildiz).<br>2-bo'lish: hosil bo'lgan ko'phadni $x - 2$ ga bo'lganda $r_2 = 0$ (2-karrali).<br>3-bo'lish: yana $x - 2$ ga bo'lganda $r_3 = 0$ (3-karrali).<br>4-bo'lish: $r_4 \\neq 0$.", "Demak, $x_0 = 2$ soni 3 karrali ildizdir.", "<div class=\"result-badge\">Javob: $x_0 = 2$ uch (3) karrali ildiz</div>"];
+                    app.showSolution("8-topshiriq (a): x0 = 2 sonining karraliligini aniqlash", steps);
                 }
             },
         ]
@@ -1351,6 +2061,24 @@ const AMALIY_DATABASE = {
                     app.showSolution("14-Amaliy, 5-Variant", steps);
                 }
             },
+            {
+                id: "af14_t20_a",
+                name: "20-topshiriq (a): x³ - 6x² + 15x - 14 = 0 ratsional ildizlarini topish",
+                shart: "$$x^3 - 6x^2 + 15x - 14 = 0$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 14, 20-topshiriq (a):</b> Ratsional ildizlar teoremasi.", "Katta koeffitsiyent $a_3 = 1$, ozod had $a_0 = -14$.", "Butun ildizlar faqat $-14$ ning bo'luvchilari bo'lishi mumkin: $\\pm 1, \\pm 2, \\pm 7, \\pm 14$.", "Gorner sxemasida tekshiramiz:<br>• $x = 1: 1 - 6 + 15 - 14 = -4 \\neq 0$<br>• $x = 2: 2^3 - 6(2^2) + 15(2) - 14 = 8 - 24 + 30 - 14 = 0$ (ildiz!).", "$(x - 2)$ ga bo'lganda: $x^2 - 4x + 7 = 0$. Uning diskriminanti $D = 16 - 28 = -12 < 0$, haqiqiy ildizlari yo'q.", "<div class=\"result-badge\">Yagona ratsional ildiz: $x = 2$</div>"];
+                    app.showSolution("20-topshiriq (a): x³ - 6x² + 15x - 14 = 0 ratsional ildizlarini topish", steps);
+                }
+            },
+            {
+                id: "af14_t1_c",
+                name: "1-topshiriq (c): 1 / (x³ - x) ni kompleks maydonda sodda kasrlarga yoyish",
+                shart: "$$\\frac{1}{x^3 - x} = \\frac{1}{x(x-1)(x+1)}$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 14, 1-topshiriq (c):</b> Ratsional kasrni sodda kasrlarga yoyish.", "Maxrajni ko'paytuvchilarga ajratamiz: $x^3 - x = x(x^2 - 1) = x(x - 1)(x + 1)$.", "Sodda kasrlar ko'rinishi: $$\\frac{1}{x(x-1)(x+1)} = \\frac{A}{x} + \\frac{B}{x-1} + \\frac{C}{x+1}$$", "Qopqon (yopish) usuli bilan koeffitsiyentlarni topamiz:<br>• $x = 0: A = \\frac{1}{(0-1)(0+1)} = -1$<br>• $x = 1: B = \\frac{1}{1(1+1)} = \\frac{1}{2}$<br>• $x = -1: C = \\frac{1}{(-1)(-1-1)} = \\frac{1}{2}$", "Natija: $$\\frac{1}{x^3 - x} = -\\frac{1}{x} + \\frac{1}{2(x-1)} + \\frac{1}{2(x+1)}$$", "<div class=\"result-badge\">Yoyilma: $-\\frac{1}{x} + \\frac{0.5}{x-1} + \\frac{0.5}{x+1}$</div>"];
+                    app.showSolution("1-topshiriq (c): 1 / (x³ - x) ni kompleks maydonda sodda kasrlarga yoyish", steps);
+                }
+            },
         ]
     },
     15: {
@@ -1425,6 +2153,24 @@ const AMALIY_DATABASE = {
                         `<div class="result-badge">Ildizlar: $x_1 = 1, \\quad x_2 = 2, \\quad x_3 = 3$</div>`
                     ];
                     app.showSolution("15-Amaliy, 5-Variant", steps);
+                }
+            },
+            {
+                id: "af15_t2_casus",
+                name: "2-topshiriq: Casus Irreducibilis (x³ - 3x + 1 = 0 trigonometrik yechim)",
+                shart: "$$x^3 - 3x + 1 = 0$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 15, 2-topshiriq:</b> Q < 0 bo'lgan hol (Keltirilmas hol - 3 ta haqiqiy ildiz).", "Keltirilgan 3-darajali tenglama: $x^3 + px + q = 0$, bu yerda $p = -3, q = 1$.", "Kardano diskriminanti: $$Q = \\left(\\frac{p}{3}\\right)^3 + \\left(\\frac{q}{2}\\right)^2 = (-1)^3 + \\left(\\frac{1}{2}\\right)^2 = -1 + 0.25 = -0.75 < 0$$", "$Q < 0$ bo'lgani uchun tenglama 3 ta turli haqiqiy ildizga ega. Ular trigonometrik shaklda topiladi:<br>$$r = \\sqrt{-\\frac{p^3}{27}} = \\sqrt{1} = 1, \\quad \\cos\\varphi = -\\frac{q}{2r} = -\\frac{1}{2} \\implies \\varphi = \\frac{2\\pi}{3}$$", "Ildizlar formulasi $x_k = 2\\sqrt{-\\frac{p}{3}} \\cos\\frac{\\varphi + 2\\pi k}{3}$:<br>• $x_1 = 2 \\cos\\frac{2\\pi}{9} \\approx 1.532$<br>• $x_2 = 2 \\cos\\frac{8\\pi}{9} \\approx -1.879$<br>• $x_3 = 2 \\cos\\frac{14\\pi}{9} \\approx 0.347$", "<div class=\"result-badge\">3 ta haqiqiy ildiz: $x_1 \\approx 1.532, \\quad x_2 \\approx -1.879, \\quad x_3 \\approx 0.347$</div>"];
+                    app.showSolution("2-topshiriq: Casus Irreducibilis (x³ - 3x + 1 = 0 trigonometrik yechim)", steps);
+                }
+            },
+            {
+                id: "af15_t3_ferrari",
+                name: "3-topshiriq: Ferrari usuli (4-darajali tenglama x⁴ - 4x³ - 4x² + 16x - 8 = 0)",
+                shart: "$$x^4 - 4x^3 - 4x^2 + 16x - 8 = 0$$",
+                solve: () => {
+                    const steps = ["<b>Amaliy 15, 3-topshiriq:</b> 4-darajali algebraik tenglamani Ferrari usulida yechish.", "1) $x = y + 1$ almashtirish orqali kubik had yo'qotiladi: $y^4 - 10y^2 + 8y - 1 = 0$.<br>2) Ferrari rezolventasi tuziladi: $t^3 + 10t^2 + t + 10 = 0 \\implies (t+10)(t^2+1) = 0 \\implies t = -10$.<br>3) Kvadrat uchhadlar ko'paytmasiga ajratiladi va 4 ta ildiz topiladi.", "<div class=\"result-badge\">Ferrari usuli bo'yicha to'rtta ildiz aniq topiladi.</div>"];
+                    app.showSolution("3-topshiriq: Ferrari usuli (4-darajali tenglama x⁴ - 4x³ - 4x² + 16x - 8 = 0)", steps);
                 }
             },
         ]

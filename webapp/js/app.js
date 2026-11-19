@@ -50,19 +50,21 @@ const app = {
             this.loadSample(i);
         }
 
-        this.onAmaliyFileChange("1");
+        // this.onAmaliyFileChange("1"); olib tashlandi, pastda targetFile orqali yuklanadi
         this.setupTopicPresets();
 
         // URL parametrlari bo'yicha rejimni tanlash (?mode=topics&topic=3)
         let modeParam = null;
         let topicParam = null;
         let fileParam = null;
+        let taskParam = null;
         try {
             if (window.location && window.location.search) {
                 const urlParams = new URLSearchParams(window.location.search);
                 modeParam = urlParams.get('mode');
                 topicParam = urlParams.get('topic');
                 fileParam = urlParams.get('file');
+                taskParam = urlParams.get('task');
             }
         } catch (e) {}
 
@@ -73,11 +75,13 @@ const app = {
             }
         } else {
             this.switchMode('files');
-            if (fileParam) {
-                const fSel = document.getElementById('amaliy-file-select');
-                if (fSel) {
-                    fSel.value = fileParam;
-                    this.onAmaliyFileChange(fileParam);
+            const targetFile = fileParam || (sessionStorage.getItem('oa_user_picked') ? localStorage.getItem('oa_last_file') : '9') || '9';
+            const fSel = document.getElementById('amaliy-file-select');
+            if (fSel) {
+                fSel.value = targetFile;
+                this.onAmaliyFileChange(targetFile);
+                if (taskParam) {
+                    setTimeout(() => this.selectAndSolveTask(taskParam), 150);
                 }
             }
         }
@@ -146,6 +150,7 @@ const app = {
 
     onAmaliyFileChange(fileId) {
         if (typeof AMALIY_DATABASE === 'undefined') return;
+        try { localStorage.setItem('oa_last_file', fileId); } catch(e) {}
         const data = AMALIY_DATABASE[fileId];
         if (!data) return;
 
@@ -1356,7 +1361,17 @@ const app = {
             return this.renderMathText(s);
         }
 
-        // Agar algebraik ifoda bo'lsa (masalan f(x) = ...)
+        // Matn ichida o'zbekcha yoki oddiy so'zlar borligini tekshirish (uzunligi >= 4)
+        const words = s.match(/[a-zA-Zа-яА-Яʻʼ']{4,}/g) || [];
+        const mathCommands = ['begin', 'pmatrix', 'vmatrix', 'cases', 'sqrt', 'cdot', 'times', 'frac', 'text', 'quad', 'qquad'];
+        const nonMathWords = words.filter(w => !mathCommands.includes(w.toLowerCase()));
+
+        if (nonMathWords.length > 0) {
+            // Matn so'zlarini KaTeX ichiga tiqib buzib yubormaymiz
+            return `<div style="font-size: 1rem; line-height: 1.5; color: var(--text-color);">${s}</div>`;
+        }
+
+        // Agar toza algebraik ifoda bo'lsa (masalan f(x) = ...)
         if (s.includes('=') || s.includes('^') || s.includes('+') || s.includes('-') || s.includes('/') || s.includes('∛') || s.includes('√')) {
             return this.renderMathText(`$$${s}$$`);
         }

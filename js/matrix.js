@@ -43,6 +43,26 @@ class MatrixSolver {
         return html;
     }
 
+    // Matritsani LaTeX pmatrix ko'rinishida chiqarish
+    static toLatex(mat) {
+        if (!mat || mat.length === 0) return "";
+        const rows = mat.map(row => row.map(cell => {
+            if (cell && typeof cell.toString === 'function') return cell.toString();
+            return cell !== undefined ? cell : '0';
+        }).join(' & ')).join(' \\\\ ');
+        return `\\begin{pmatrix} ${rows} \\end{pmatrix}`;
+    }
+
+    // Matritsani LaTeX vmatrix (determinant) ko'rinishida chiqarish
+    static toLatexDet(mat) {
+        if (!mat || mat.length === 0) return "";
+        const rows = mat.map(row => row.map(cell => {
+            if (cell && typeof cell.toString === 'function') return cell.toString();
+            return cell !== undefined ? cell : '0';
+        }).join(' & ')).join(' \\\\ ');
+        return `\\begin{vmatrix} ${rows} \\end{vmatrix}`;
+    }
+
     // 1. Matritsalar qo'shish (A + B)
     static add(A, B) {
         const rows = A.length, cols = A[0].length;
@@ -50,19 +70,29 @@ class MatrixSolver {
             throw new Error("Matritsalar o'lchami bir xil bo'lishi shart!");
         }
         const steps = [];
-        steps.push(`<b>Matritsalarni qo'shish qoidasi:</b> Mos elementlar bir-biriga qo'shiladi: $c_{ij} = a_{ij} + b_{ij}$`);
-        
+        steps.push(`<b>Dastlabki berilgan matritsalar:</b>`);
+        steps.push(`$$A = ${MatrixSolver.toLatex(A)}, \\quad B = ${MatrixSolver.toLatex(B)}$$`);
+        steps.push(`💡 <b>Qoida:</b> Ikki matritsani qo'shishda ularning bir xil o'rindagi (mos) elementlari o'zaro qo'shiladi: $c_{ij} = a_{ij} + b_{ij}$.`);
+
         const C = [];
+        const formulaRows = [];
         for (let i = 0; i < rows; i++) {
             C[i] = [];
+            const fRow = [];
             for (let j = 0; j < cols; j++) {
                 const a = Fraction.parse(A[i][j]);
                 const b = Fraction.parse(B[i][j]);
                 const res = a.add(b);
                 C[i][j] = res;
-                steps.push(`c_{${i+1}${j+1}} = ${a.toString()} + (${b.toString()}) = <b>${res.toString()}</b>`);
+                fRow.push(`${a.toString()} + (${b.toString()})`);
+                steps.push(`• <b>${i+1}-satr, ${j+1}-ustun elementlari:</b> $c_{${i+1}${j+1}} = a_{${i+1}${j+1}} + b_{${i+1}${j+1}} = ${a.toString()} + (${b.toString()}) = <b>${res.toString()}</b>$`);
             }
+            formulaRows.push(fRow.join(' & '));
         }
+
+        steps.push(`<b>Umumiy amallar ko'rinishi:</b>`);
+        steps.push(`$$A + B = \\begin{pmatrix} ${formulaRows.join(' \\\\ ')} \\end{pmatrix} = ${MatrixSolver.toLatex(C)}$$`);
+        steps.push(`<div class="result-badge">Yakuniy natija: $A + B = ${MatrixSolver.toLatex(C)}$</div>`);
         return { result: C, steps };
     }
 
@@ -73,19 +103,29 @@ class MatrixSolver {
             throw new Error("Matritsalar o'lchami bir xil bo'lishi shart!");
         }
         const steps = [];
-        steps.push(`<b>Matritsalarni ayirish qoidasi:</b> Mos elementlar ayiriladi: $c_{ij} = a_{ij} - b_{ij}$`);
-        
+        steps.push(`<b>Dastlabki berilgan matritsalar:</b>`);
+        steps.push(`$$A = ${MatrixSolver.toLatex(A)}, \\quad B = ${MatrixSolver.toLatex(B)}$$`);
+        steps.push(`💡 <b>Qoida:</b> Matritsalarni ayirishda mos elementlar ayiriladi: $c_{ij} = a_{ij} - b_{ij}$.`);
+
         const C = [];
+        const formulaRows = [];
         for (let i = 0; i < rows; i++) {
             C[i] = [];
+            const fRow = [];
             for (let j = 0; j < cols; j++) {
                 const a = Fraction.parse(A[i][j]);
                 const b = Fraction.parse(B[i][j]);
                 const res = a.sub(b);
                 C[i][j] = res;
-                steps.push(`c_{${i+1}${j+1}} = ${a.toString()} - (${b.toString()}) = <b>${res.toString()}</b>`);
+                fRow.push(`${a.toString()} - (${b.toString()})`);
+                steps.push(`• <b>${i+1}-satr, ${j+1}-ustun elementlari:</b> $c_{${i+1}${j+1}} = a_{${i+1}${j+1}} - b_{${i+1}${j+1}} = ${a.toString()} - (${b.toString()}) = <b>${res.toString()}</b>$`);
             }
+            formulaRows.push(fRow.join(' & '));
         }
+
+        steps.push(`<b>Umumiy ayirish ko'rinishi:</b>`);
+        steps.push(`$$A - B = \\begin{pmatrix} ${formulaRows.join(' \\\\ ')} \\end{pmatrix} = ${MatrixSolver.toLatex(C)}$$`);
+        steps.push(`<div class="result-badge">Yakuniy natija: $A - B = ${MatrixSolver.toLatex(C)}$</div>`);
         return { result: C, steps };
     }
 
@@ -93,18 +133,26 @@ class MatrixSolver {
     static multiplyScalar(k, A) {
         const kFrac = Fraction.parse(k);
         const steps = [];
-        steps.push(`Matritsaning har bir elementi $k = ${kFrac.toString()}$ soniga ko'paytiriladi:`);
-        
+        steps.push(`<b>Berilgan parametrlar:</b> Skalyar son $k = ${kFrac.toString()}$, Matritsa $A = ${MatrixSolver.toLatex(A)}$`);
+        steps.push(`💡 <b>Qoida:</b> Matritsani songa ko'paytirish uchun uning har bir elementini ushbu songa ko'paytirish kerak: $(k \\cdot A)_{ij} = k \\cdot a_{ij}$.`);
+
         const C = [];
+        const formulaRows = [];
         for (let i = 0; i < A.length; i++) {
             C[i] = [];
+            const fRow = [];
             for (let j = 0; j < A[i].length; j++) {
                 const a = Fraction.parse(A[i][j]);
                 const res = a.mul(kFrac);
                 C[i][j] = res;
-                steps.push(`(${kFrac.toString()}) \\times ${a.toString()} = <b>${res.toString()}</b>`);
+                fRow.push(`${kFrac.toString()} \\cdot (${a.toString()})`);
+                steps.push(`• <b>${i+1}-satr, ${j+1}-ustun:</b> $${kFrac.toString()} \\cdot (${a.toString()}) = <b>${res.toString()}</b>$`);
             }
+            formulaRows.push(fRow.join(' & '));
         }
+
+        steps.push(`$$k \\cdot A = \\begin{pmatrix} ${formulaRows.join(' \\\\ ')} \\end{pmatrix} = ${MatrixSolver.toLatex(C)}$$`);
+        steps.push(`<div class="result-badge">Natija: $k \\cdot A = ${MatrixSolver.toLatex(C)}$</div>`);
         return { result: C, steps };
     }
 
@@ -116,8 +164,11 @@ class MatrixSolver {
             throw new Error(`Ko'paytirish mumkin emas: A ning ustunlari soni (${cA}) B ning satrlari soniga (${rB}) teng bo'lishi shart!`);
         }
         const steps = [];
-        steps.push(`Natijaviy matritsa o'lchami: $${rA} \\times ${cB}$ bo'ladi.`);
-        
+        steps.push(`<b>Berilgan matritsalar:</b>`);
+        steps.push(`$$A = ${MatrixSolver.toLatex(A)} \\quad (${rA} \\times ${cA}), \\qquad B = ${MatrixSolver.toLatex(B)} \\quad (${rB} \\times ${cB})$$`);
+        steps.push(`💡 <b>Qoida (Satrni ustunga ko'paytirish):</b> Natijaviy $C = A \\cdot B$ matritsaning o'lchami $${rA} \\times ${cB}$ bo'ladi. Har bir $c_{ij}$ elementi $A$ ning $i$-satrini $B$ ning $j$-ustuniga mos elementlar ko'paytmalarining yig'indisi sifatida topiladi:`);
+        steps.push(`$$c_{ij} = \\sum_{k=1}^{${cA}} a_{ik} \\cdot b_{kj}$$`);
+
         const C = [];
         for (let i = 0; i < rA; i++) {
             C[i] = [];
@@ -129,12 +180,17 @@ class MatrixSolver {
                     const b = Fraction.parse(B[k][j]);
                     const prod = a.mul(b);
                     sum = sum.add(prod);
-                    terms.push(`(${a.toString()} \\cdot ${b.toString()})`);
+                    terms.push(`${a.toString()} \\cdot (${b.toString()})`);
                 }
                 C[i][j] = sum;
-                steps.push(`c_{${i+1}${j+1}} = ${terms.join(' + ')} = <b>${sum.toString()}</b>`);
+                steps.push(`• <b>$c_{${i+1}${j+1}}$ ($A$ ning ${i+1}-satrini $B$ ning ${j+1}-ustuniga ko'paytirish):</b><br>` +
+                           `$$c_{${i+1}${j+1}} = ${terms.join(' + ')} = <b>${sum.toString()}</b>$$`);
             }
         }
+
+        steps.push(`<b>Yakuniy ko'paytma matritsa:</b>`);
+        steps.push(`$$A \\cdot B = ${MatrixSolver.toLatex(C)}$$`);
+        steps.push(`<div class="result-badge">Natija: $A \\cdot B = ${MatrixSolver.toLatex(C)}$</div>`);
         return { result: C, steps };
     }
 
@@ -142,13 +198,19 @@ class MatrixSolver {
     static transpose(A) {
         const r = A.length, c = A[0].length;
         const T = [];
-        const steps = [`Satrlar mos ravishda ustunlarga aylantiriladi (${r}x${c} -> ${c}x${r}):`];
+        const steps = [
+            `<b>Dastlabki matritsa:</b> $$A = ${MatrixSolver.toLatex(A)}$$`,
+            `💡 <b>Qoida:</b> Matritsani transponirlashda uning satrlari mos ravishda ustunlarga aylantiriladi (${r}x${c} o'lcham ${c}x${r} ga aylanadi).`
+        ];
         for (let j = 0; j < c; j++) {
             T[j] = [];
             for (let i = 0; i < r; i++) {
                 T[j][i] = Fraction.parse(A[i][j]);
             }
+            steps.push(`• $A$ ning ${j+1}-ustuni $A^T$ ning ${j+1}-satriga aylanadi: $[${T[j].map(x => x.toString()).join(', ')}]$`);
         }
+        steps.push(`$$A^T = ${MatrixSolver.toLatex(T)}$$`);
+        steps.push(`<div class="result-badge">Natija: $A^T = ${MatrixSolver.toLatex(T)}$</div>`);
         return { result: T, steps };
     }
 
@@ -174,14 +236,25 @@ class MatrixSolver {
             const p1 = a.mul(d);
             const p2 = b.mul(c);
             const det = p1.sub(p2);
-            steps.push(`2x2 formula: $|A| = a_{11}a_{22} - a_{12}a_{21}$`);
-            steps.push(`$|A| = (${a.toString()})(${d.toString()}) - (${b.toString()})(${c.toString()}) = ${p1.toString()} - (${p2.toString()}) = <b>${det.toString()}</b>$`);
+            steps.push(`<b>Dastlabki 2x2 determinant:</b>`);
+            steps.push(`$$|A| = ${MatrixSolver.toLatexDet(A)}$$`);
+            steps.push(`💡 <b>Qoida:</b> 2-tartibli determinant asosiy diagonal elementlari ko'paytmasidan yordamchi diagonal elementlari ko'paytmasini ayirish orqali hisoblanadi:`);
+            steps.push(`$$|A| = a_{11} \\cdot a_{22} - a_{12} \\cdot a_{21}$$`);
+            steps.push(`• <b>Asosiy diagonal ($a_{11} \\cdot a_{22}$):</b> $(${a.toString()}) \\cdot (${d.toString()}) = <b>${p1.toString()}</b>$`);
+            steps.push(`• <b>Yordamchi diagonal ($a_{12} \\cdot a_{21}$):</b> $(${b.toString()}) \\cdot (${c.toString()}) = <b>${p2.toString()}</b>$`);
+            steps.push(`• <b>Determinant qiymati:</b>`);
+            steps.push(`$$|A| = ${p1.toString()} - (${p2.toString()}) = <b>${det.toString()}</b>$$`);
+            steps.push(`<div class="result-badge">Yakuniy natija: $|A| = ${det.toString()}$</div>`);
             return { result: det, steps };
         }
 
-        // 3x3 Sarryus usuli bilan chiroyli tushuntirish
+        // 3x3 Sarryus usuli
         if (n === 3) {
-            steps.push(`<b>3x3 Sarryus (uchburchaklar) qoidasi:</b>`);
+            steps.push(`<b>Dastlabki 3x3 determinant:</b>`);
+            steps.push(`$$|A| = ${MatrixSolver.toLatexDet(A)}$$`);
+            steps.push(`💡 <b>3x3 Sarryus (uchburchaklar) qoidasi:</b> Uchburchaklar qoidasiga ko'ra asosiy diagonal va unga parallel uchburchak elementlari ko'paytmasi yig'indisidan yordamchi diagonal va unga parallel uchburchak elementlari ko'paytmasi yig'indisi ayiriladi:`);
+            steps.push(`$$|A| = (a_{11}a_{22}a_{33} + a_{12}a_{23}a_{31} + a_{13}a_{21}a_{32}) - (a_{13}a_{22}a_{31} + a_{11}a_{23}a_{32} + a_{12}a_{21}a_{33})$$`);
+
             const a11 = Fraction.parse(A[0][0]), a12 = Fraction.parse(A[0][1]), a13 = Fraction.parse(A[0][2]);
             const a21 = Fraction.parse(A[1][0]), a22 = Fraction.parse(A[1][1]), a23 = Fraction.parse(A[1][2]);
             const a31 = Fraction.parse(A[2][0]), a32 = Fraction.parse(A[2][1]), a33 = Fraction.parse(A[2][2]);
@@ -200,11 +273,21 @@ class MatrixSolver {
 
             const det = sumP.sub(sumM);
 
-            steps.push(`+ Asosiy diagonal bo'yicha:`);
-            steps.push(`(${a11} · ${a22} · ${a33}) + (${a12} · ${a23} · ${a31}) + (${a13} · ${a21} · ${a32}) = ${p1} + ${p2} + ${p3} = <b>${sumP}</b>`);
-            steps.push(`- Yordamchi diagonal bo'yicha:`);
-            steps.push(`(${a13} · ${a22} · ${a31}) + (${a11} · ${a23} · ${a32}) + (${a12} · ${a21} · ${a33}) = ${m1} + ${m2} + ${m3} = <b>${sumM}</b>`);
-            steps.push(`$|A| = (${sumP}) - (${sumM}) = <b>${det.toString()}</b>$`);
+            steps.push(`<b>1. Musbat ishorali hadlar (Asosiy diagonal va uning uchburchaklari):</b><br>` +
+                       `• Asosiy diagonal: $(${a11}) \\cdot (${a22}) \\cdot (${a33}) = ${p1}$<br>` +
+                       `• 1-uchburchak: $(${a12}) \\cdot (${a23}) \\cdot (${a31}) = ${p2}$<br>` +
+                       `• 2-uchburchak: $(${a13}) \\cdot (${a21}) \\cdot (${a32}) = ${p3}$<br>` +
+                       `$$\\text{Yig'indi } P = ${p1} + (${p2}) + (${p3}) = <b>${sumP}</b>$$`);
+
+            steps.push(`<b>2. Manfiy ishorali hadlar (Yordamchi diagonal va uning uchburchaklari):</b><br>` +
+                       `• Yordamchi diagonal: $(${a13}) \\cdot (${a22}) \\cdot (${a31}) = ${m1}$<br>` +
+                       `• 1-uchburchak: $(${a11}) \\cdot (${a23}) \\cdot (${a32}) = ${m2}$<br>` +
+                       `• 2-uchburchak: $(${a12}) \\cdot (${a21}) \\cdot (${a33}) = ${m3}$<br>` +
+                       `$$\\text{Yig'indi } M = ${m1} + (${m2}) + (${m3}) = <b>${sumM}</b>$$`);
+
+            steps.push(`<b>3. Determinant qiymati ($P - M$):</b>`);
+            steps.push(`$$|A| = P - M = (${sumP}) - (${sumM}) = <b>${det.toString()}</b>$$`);
+            steps.push(`<div class="result-badge">Yakuniy natija: $|A| = ${det.toString()}$</div>`);
             return { result: det, steps };
         }
 
@@ -270,25 +353,29 @@ class MatrixSolver {
         }
 
         const steps = [];
-        steps.push(`<b>Teskari matritsani topish: $A^{-1} = \\frac{1}{|A|} \\cdot A^*$</b>`);
+        steps.push(`<b>Dastlabki matritsa:</b> $$A = ${MatrixSolver.toLatex(A)}$$`);
+        steps.push(`💡 <b>Qoida (Teskari matritsa formulasi):</b>`);
+        steps.push(`$$A^{-1} = \\frac{1}{|A|} \\cdot A^*$$`);
+        steps.push(`bu yerda $|A|$ — matritsa determinanti, $A^* = (A_{ij})^T$ — algebraik to'ldiruvchilar matritsasining transponirlangani (biriktirilgan matritsa).`);
 
         // 1-qadam: Determinant
         const detObj = MatrixSolver.determinant(A);
         const det = detObj.result;
-        steps.push(`1-qadam: Matritsa determinanti hisoblanadi: $|A| = ${det.toString()}$`);
+        steps.push(`<b>1-qadam: Matritsa determinantini hisoblaymiz:</b>`);
+        steps.push(`$$|A| = ${MatrixSolver.toLatexDet(A)} = <b>${det.toString()}</b>$$`);
         if (det.isZero()) {
-            steps.push(`$|A| = 0$ bo'lgani uchun bu matritsa maxsus (xos) matritsa hisoblanadi va unga <b>teskari matritsa mavjud emas!</b>`);
+            steps.push(`⚠️ $|A| = 0$ bo'lgani uchun bu maxsus (xos) matritsa hisoblanadi va unga <b>teskari matritsa mavjud emas!</b>`);
             return { result: null, steps };
         }
 
         if (n === 1) {
             const inv = [ [ det.inv() ] ];
-            steps.push(`$A^{-1} = [${det.inv().toString()}]$`);
+            steps.push(`$$A^{-1} = [${det.inv().toString()}]$$`);
             return { result: inv, steps };
         }
 
         // 2-qadam: Minorlar va Algebraik to'ldiruvchilar
-        steps.push(`2-qadam: Har bir element uchun algebraik to'ldiruvchilar ($A_{ij} = (-1)^{i+j} M_{ij}$) hisoblanadi:`);
+        steps.push(`<b>2-qadam: Barcha algebraik to'ldiruvchilar ($A_{ij} = (-1)^{i+j} M_{ij}$) hisoblanadi:</b>`);
         const adj = [];
         for (let i = 0; i < n; i++) {
             adj[i] = [];
@@ -308,12 +395,12 @@ class MatrixSolver {
                 const sign = ((i + j) % 2 === 0) ? 1n : -1n;
                 const cofactor = subDet.mul(new Fraction(sign, 1n));
                 adj[i][j] = cofactor;
-                steps.push(`$A_{${i+1}${j+1}} = (-1)^{${i+1}+${j+1}} \\cdot M_{${i+1}${j+1}} = (${sign > 0n ? '+' : '-'}${subDet.toString()}) = <b>${cofactor.toString()}</b>$`);
+                steps.push(`• $A_{${i+1}${j+1}} = (-1)^{${i+1}+${j+1}} \\cdot M_{${i+1}${j+1}} = (${sign > 0n ? '+' : '-'}${subDet.toString()}) = <b>${cofactor.toString()}</b>$`);
             }
         }
 
         // 3-qadam: Biriktirilgan (Adjugate) matritsa: A* = (A_ij)^T
-        steps.push(`3-qadam: Algebraik to'ldiruvchilar matritsasi transponirlanadi ($A^* = C^T$):`);
+        steps.push(`<b>3-qadam: Biriktirilgan matritsa $A^* = C^T$ (algebraik to'ldiruvchilar transponirlanadi):</b>`);
         const adjT = [];
         for (let i = 0; i < n; i++) {
             adjT[i] = [];
@@ -321,10 +408,10 @@ class MatrixSolver {
                 adjT[i][j] = adj[j][i];
             }
         }
-        steps.push(MatrixSolver.toHTML(adjT));
+        steps.push(`$$A^* = ${MatrixSolver.toLatex(adjT)}$$`);
 
         // 4-qadam: A^{-1} = (1 / det) * adjT
-        steps.push(`4-qadam: $A^*$ matritsaning har bir elementi $|A| = ${det.toString()}$ ga bo'linadi:`);
+        steps.push(`<b>4-qadam: $A^*$ matritsaning har bir elementi $|A| = ${det.toString()}$ ga bo'linadi:</b>`);
         const inv = [];
         for (let i = 0; i < n; i++) {
             inv[i] = [];
@@ -332,7 +419,8 @@ class MatrixSolver {
                 inv[i][j] = adjT[i][j].div(det);
             }
         }
-
+        steps.push(`$$A^{-1} = \\frac{1}{${det.toString()}} ${MatrixSolver.toLatex(adjT)} = ${MatrixSolver.toLatex(inv)}$$`);
+        steps.push(`<div class="result-badge">Teskari matritsa: $A^{-1} = ${MatrixSolver.toLatex(inv)}$</div>`);
         return { result: inv, steps };
     }
 
@@ -408,21 +496,27 @@ class MatrixSolver {
 
         const steps = [];
         steps.push(`<b>Chiziqli tenglamalar sistemasini Kramer usuli bilan yechish:</b>`);
+        steps.push(`💡 <b>Qoida (Kramer formulalari):</b> Agar sistemaning asosiy determinanti $\\Delta \\neq 0$ bo'lsa, sistema yagona yechimga ega va noma'lumlar quyidagi formula bilan topiladi:`);
+        steps.push(`$$x_i = \\frac{\\Delta_{x_i}}{\\Delta}, \\quad i = 1, 2, \\dots, n$$`);
+        steps.push(`bu yerda $\\Delta_{x_i}$ — asosiy determinantning $i$-ustunini ozod sonlar ustuni $B$ bilan almashtirishdan hosil bo'lgan determinant.`);
 
         // Asosiy determinant Delta
         const detMainObj = MatrixSolver.determinant(A);
         const delta = detMainObj.result;
-        steps.push(`1. Asosiy determinant: $\\Delta = <b>${delta.toString()}</b>$`);
+        steps.push(`<b>1-qadam: Asosiy determinant $\\Delta$ hisoblanadi:</b>`);
+        steps.push(`$$\\Delta = ${MatrixSolver.toLatexDet(A)} = <b>${delta.toString()}</b>$$`);
 
         if (delta.isZero()) {
-            steps.push(`$\\Delta = 0$ bo'lganligi sababli Kramer usulini qo'llab bo'lmaydi (sistema cheksiz ko'p yechimga ega yoki yechimga ega emas). Gauss usulidan foydalaning.`);
+            steps.push(`⚠️ $\\Delta = 0$ bo'lganligi sababli Kramer usulini qo'llab bo'lmaydi (sistema yagona yechimga ega emas). Gauss usulidan foydalaning.`);
             return { result: null, steps };
         }
 
         const solutions = [];
+        const varNames = (n === 2) ? ['x', 'y'] : (n === 3) ? ['x', 'y', 'z'] : Array.from({length: n}, (_, i) => `x_${i+1}`);
+
         // Har bir noma'lum uchun Delta_i
         for (let i = 0; i < n; i++) {
-            // A ning i-ustunini B bilan almashtirish
+            const vName = varNames[i];
             const Ai = MatrixSolver.clone(A);
             for (let r = 0; r < n; r++) {
                 Ai[r][i] = Fraction.parse(B[r]);
@@ -430,10 +524,15 @@ class MatrixSolver {
             const detAi = MatrixSolver.determinant(Ai).result;
             const xi = detAi.div(delta);
             solutions.push(xi);
-            steps.push(`$\\Delta_{x_{${i+1}}} = ${detAi.toString()}$`);
-            steps.push(`$x_{${i+1}} = \\frac{\\Delta_{x_{${i+1}}}}{\\Delta} = \\frac{${detAi.toString()}}{${delta.toString()}} = <b>${xi.toString()}</b>$`);
+
+            steps.push(`<b>${i+2}-qadam: $${vName}$ noma'lum uchun yordamchi determinant $\\Delta_{${vName}}$ hisoblanadi (${i+1}-ustunga ozod hadlar qo'yiladi):</b>`);
+            steps.push(`$$\\Delta_{${vName}} = ${MatrixSolver.toLatexDet(Ai)} = <b>${detAi.toString()}</b>$$`);
+            steps.push(`Noma'lum qiymati hisoblanadi:`);
+            steps.push(`$$${vName} = \\frac{\\Delta_{${vName}}}{\\Delta} = \\frac{${detAi.toString()}}{${delta.toString()}} = <b>${xi.toString()}</b>$$`);
         }
 
+        const solText = varNames.map((v, i) => `${v} = ${solutions[i].toString()}`).join(', \\quad ');
+        steps.push(`<div class="result-badge">Yakuniy yechim: $${solText}$</div>`);
         return { result: solutions, steps };
     }
 

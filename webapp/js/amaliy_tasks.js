@@ -16,13 +16,7 @@ const AMALIY_DATABASE = {
                     const A = [[1, 2], [3, 4]];
                     const B = [[-1, 3], [0, 2]];
                     const res = MatrixSolver.add(A, B);
-                    const steps = [
-                        `<b>Amaliy 1, 1-topshiriq (a):</b> $A + B$ matritsalar yig'indisi:`,
-                        ...res.steps,
-                        `<div class="result-badge">Natija:</div>`,
-                        MatrixSolver.toHTML(res.result)
-                    ];
-                    app.showSolution("1-Amaliy, 1-topshiriq (a)", steps);
+                    app.showSolution("1-Amaliy, 1-topshiriq (a): A + B qo'shish", res.steps);
                 }
             },
             {
@@ -30,18 +24,25 @@ const AMALIY_DATABASE = {
                 name: "1-topshiriq (b): 3A - B chiziqli amali",
                 shart: "3 · [[4, -3], [2, 3]] - [[1, 1], [1, 1]]",
                 solve: () => {
-                    const A = [[4, -3], [2, 3]];
-                    const B = [[1, 1], [1, 1]];
-                    const sA = MatrixSolver.multiplyScalar(3, A);
-                    const diff = MatrixSolver.sub(sA.result, B);
                     const steps = [
-                        `<b>Amaliy 1, 1-topshiriq (b):</b> $3A - B$ amalini hisoblash:`,
-                        `$A = \\begin{pmatrix} 4 & -3 \\\\ 2 & 3 \\end{pmatrix}, \\quad B = \\begin{pmatrix} 1 & 1 \\\\ 1 & 1 \\end{pmatrix}$`,
-                        `<b>1-qadam:</b> $3 \\cdot A$ matritsani topamiz:`,
-                        MatrixSolver.toHTML(sA.result),
-                        `<b>2-qadam:</b> $3A - B$ ayirmani hisoblaymiz:`,
-                        MatrixSolver.toHTML(diff.result),
-                        `<div class="result-badge">Natija: $3A - B = \\begin{pmatrix} 11 & -10 \\\\ 5 & 8 \\end{pmatrix}$</div>`
+                        `<b>Amaliy 1, 1-topshiriq (b): $3A - B$ amalini hisoblash</b>`,
+                        `<b>Dastlabki matritsalar:</b>`,
+                        `$$A = \\begin{pmatrix} 4 & -3 \\\\ 2 & 3 \\end{pmatrix}, \\quad B = \\begin{pmatrix} 1 & 1 \\\\ 1 & 1 \\end{pmatrix}$$`,
+                        `💡 <b>1-qadam: $3 \\cdot A$ matritsani topamiz:</b><br>` +
+                        `$A$ matritsaning har bir elementi $3$ ga ko'paytiriladi:`,
+                        `• 1-satr, 1-ustun: $3 \\cdot 4 = 12$<br>` +
+                        `• 1-satr, 2-ustun: $3 \\cdot (-3) = -9$<br>` +
+                        `• 2-satr, 1-ustun: $3 \\cdot 2 = 6$<br>` +
+                        `• 2-satr, 2-ustun: $3 \\cdot 3 = 9$`,
+                        `$$3A = \\begin{pmatrix} 3 \\cdot 4 & 3 \\cdot (-3) \\\\ 3 \\cdot 2 & 3 \\cdot 3 \\end{pmatrix} = \\begin{pmatrix} 12 & -9 \\\\ 6 & 9 \\end{pmatrix}$$`,
+                        `💡 <b>2-qadam: $3A - B$ ayirmani hisoblaymiz:</b><br>` +
+                        `$3A$ ning mos elementlaridan $B$ ning mos elementlari ayiriladi:`,
+                        `• 1-satr, 1-ustun: $12 - 1 = 11$<br>` +
+                        `• 1-satr, 2-ustun: $-9 - 1 = -10$<br>` +
+                        `• 2-satr, 1-ustun: $6 - 1 = 5$<br>` +
+                        `• 2-satr, 2-ustun: $9 - 1 = 8$`,
+                        `$$3A - B = \\begin{pmatrix} 12 - 1 & -9 - 1 \\\\ 6 - 1 & 9 - 1 \\end{pmatrix} = \\begin{pmatrix} 11 & -10 \\\\ 5 & 8 \\end{pmatrix}$$`,
+                        `<div class="result-badge">Yakuniy natija: $3A - B = \\begin{pmatrix} 11 & -10 \\\\ 5 & 8 \\end{pmatrix}$</div>`
                     ];
                     app.showSolution("1-Amaliy, 1-topshiriq (b)", steps);
                 }
@@ -51,19 +52,20 @@ const AMALIY_DATABASE = {
                 name: "1-topshiriq (c): 4A + 5B chiziqli amali",
                 shart: "4 · [[1, 2], [2, 1]] + 5 · [[-1, -1], [3, 0]]",
                 solve: () => {
-                    const A = [[1, 2], [2, 1]];
-                    const B = [[-1, -1], [3, 0]];
-                    const sA = MatrixSolver.multiplyScalar(4, A);
-                    const sB = MatrixSolver.multiplyScalar(5, B);
-                    const sum = MatrixSolver.add(sA.result, sB.result);
                     const steps = [
-                        `<b>Amaliy 1, 1-topshiriq (c):</b> $4A + 5B$ amalini hisoblash.`,
-                        `<b>1-qadam:</b> $4 \\cdot A$ va $5 \\cdot B$ matritsalarni hisoblaymiz:`,
-                        MatrixSolver.toHTML(sA.result),
-                        MatrixSolver.toHTML(sB.result),
-                        `<b>2-qadam:</b> Yig'indini topamiz:`,
-                        MatrixSolver.toHTML(sum.result),
-                        `<div class="result-badge">Natija: $\\begin{pmatrix} -1 & 3 \\\\ 23 & 4 \\end{pmatrix}$</div>`
+                        `<b>Amaliy 1, 1-topshiriq (c): $4A + 5B$ amalini hisoblash</b>`,
+                        `<b>Dastlabki matritsalar:</b>`,
+                        `$$A = \\begin{pmatrix} 1 & 2 \\\\ 2 & 1 \\end{pmatrix}, \\quad B = \\begin{pmatrix} -1 & -1 \\\\ 3 & 0 \\end{pmatrix}$$`,
+                        `💡 <b>1-qadam: $4A$ va $5B$ matritsalarni topamiz:</b>`,
+                        `$$4A = \\begin{pmatrix} 4 \\cdot 1 & 4 \\cdot 2 \\\\ 4 \\cdot 2 & 4 \\cdot 1 \\end{pmatrix} = \\begin{pmatrix} 4 & 8 \\\\ 8 & 4 \\end{pmatrix}$$`,
+                        `$$5B = \\begin{pmatrix} 5 \\cdot (-1) & 5 \\cdot (-1) \\\\ 5 \\cdot 3 & 5 \\cdot 0 \\end{pmatrix} = \\begin{pmatrix} -5 & -5 \\\\ 15 & 0 \\end{pmatrix}$$`,
+                        `💡 <b>2-qadam: $4A + 5B$ yig'indini hisoblaymiz:</b><br>` +
+                        `• 1-satr, 1-ustun: $4 + (-5) = -1$<br>` +
+                        `• 1-satr, 2-ustun: $8 + (-5) = 3$<br>` +
+                        `• 2-satr, 1-ustun: $8 + 15 = 23$<br>` +
+                        `• 2-satr, 2-ustun: $4 + 0 = 4$`,
+                        `$$4A + 5B = \\begin{pmatrix} 4 + (-5) & 8 + (-5) \\\\ 8 + 15 & 4 + 0 \\end{pmatrix} = \\begin{pmatrix} -1 & 3 \\\\ 23 & 4 \\end{pmatrix}$$`,
+                        `<div class="result-badge">Yakuniy natija: $4A + 5B = \\begin{pmatrix} -1 & 3 \\\\ 23 & 4 \\end{pmatrix}$</div>`
                     ];
                     app.showSolution("1-Amaliy, 1-topshiriq (c)", steps);
                 }

@@ -67,6 +67,66 @@ AMALIY_DATA = {
                 "name": "⭐ 5-Variant: Individual topshiriq",
                 "shart": "A = [[2, 4], [1, 3]], B = [[3, -1], [2, 5]]. 2A - 3B va A · B ni hisoblang.",
                 "solution": ""
+            },
+            {
+                "id": "af1_t1_d",
+                "name": "1-topshiriq (d): 3A + 2B (3x3 chiziqli amal)",
+                "shart": "3 · [[-1, 2, -1], [4, 1, -2], [3, 2, -3]] + 2 · [[5, -3, 2], [2, 1, 3], [-6, -4, 2]]",
+                "solution": "<b>Amaliy 1, 1-topshiriq (d):</b> $3A + 2B$ hisoblash.\n\n$$A = \\begin{pmatrix} -1 & 2 & -1 \\\\ 4 & 1 & -2 \\\\ 3 & 2 & -3 \\end{pmatrix}, \\quad B = \\begin{pmatrix} 5 & -3 & 2 \\\\ 2 & 1 & 3 \\\\ -6 & -4 & 2 \\end{pmatrix}$$\n\n$$3A + 2B = \\begin{pmatrix} 7 & 0 & 1 \\\\ 16 & 5 & 0 \\\\ -3 & -2 & -5 \\end{pmatrix}$$\n\n<div class='result-badge'>Natija: $\\begin{pmatrix} 7 & 0 & 1 \\\\ 16 & 5 & 0 \\\\ -3 & -2 & -5 \\end{pmatrix}$</div>"
+            },
+            {
+                "id": "af1_t2_d",
+                "name": "2-topshiriq (d): 3x2 va 2x3 matritsalarni ko'paytirish",
+                "shart": "[[1, 2], [2, 4], [3, 6]] · [[-1, -2, -4], [1, 2, 2]]",
+                "solution": "<b>Amaliy 1, 2-topshiriq (d):</b> Matritsalarni ko'paytirish:\n\n$$\\begin{pmatrix} 1 & 2 \\\\ 2 & 4 \\\\ 3 & 6 \\end{pmatrix} \\cdot \\begin{pmatrix} -1 & -2 & -4 \\\\ 1 & 2 & 2 \\end{pmatrix} = \\begin{pmatrix} 1 & 2 & 0 \\\\ 2 & 4 & 0 \\\\ 3 & 6 & 0 \\end{pmatrix}$$\n\n<div class='result-badge'>Natija: $\\begin{pmatrix} 1 & 2 & 0 \\\\ 2 & 4 & 0 \\\\ 3 & 6 & 0 \\end{pmatrix}$</div>"
+            },
+            {
+                "id": "af1_t2_e",
+                "name": "2-topshiriq (e): Satr va ustun matritsalar ko'paytmasi (1x3 · 3x1)",
+                "shart": "[[1, 2, 3]] · [[2], [4], [1]]",
+                "solution": "<b>Amaliy 1, 2-topshiriq (e):</b> Satr va ustun ko'paytmasi:\n\n$$(1, 2, 3) \\cdot \\begin{pmatrix} 2 \\\\ 4 \\\\ 1 \\end{pmatrix} = 1 \\cdot 2 + 2 \\cdot 4 + 3 \\cdot 1 = 13$$\n\n<div class='result-badge'>Natija: (13)</div>"
+            },
+            {
+                "id": "af1_t2_f",
+                "name": "2-topshiriq (f): Ustun va satr ko'paytmasi (3x1 · 1x3)",
+                "shart": "[[2], [4], [1]] · [[1, 2, 3]]",
+                "solution": "<b>Amaliy 1, 2-topshiriq (f):</b> Ustun va satr ko'paytmasi:\n\n$$\\begin{pmatrix} 2 \\\\ 4 \\\\ 1 \\end{pmatrix} \\cdot (1, 2, 3) = \\begin{pmatrix} 2 & 4 & 6 \\\\ 4 & 8 & 12 \\\\ 1 & 2 & 3 \\end{pmatrix}$$\n\n<div class='result-badge'>Natija: $\\begin{pmatrix} 2 & 4 & 6 \\\\ 4 & 8 & 12 \\\\ 1 & 2 & 3 \\end{pmatrix}$</div>"
+            },
+            {
+                "id": "af1_t2_g",
+                "name": "2-topshiriq (g): 3x3 Matritsalar ko'paytmasi",
+                "shart": "[[3, -4, 5], [2, -3, 1], [3, -5, -1]] · [[3, 2, 9], [-1, 2, 1], [0, -3, 3]]",
+                "solution": "<b>Amaliy 1, 2-topshiriq (g):</b> $3\\times 3$ ko'paytirish natijasi:\n\n$$A \\cdot B = \\begin{pmatrix} 13 & -17 & 38 \\\\ 9 & -5 & 18 \\\\ 14 & -1 & 19 \\end{pmatrix}$$\n\n<div class='result-badge'>Natija: $\\begin{pmatrix} 13 & -17 & 38 \\\\ 9 & -5 & 18 \\\\ 14 & -1 & 19 \\end{pmatrix}$</div>"
+            },
+            {
+                "id": "af1_t3_a",
+                "name": "3-topshiriq (a): Uchta 2x2 matritsani ketma-ket ko'paytirish",
+                "shart": "[[4, 3], [7, 5]] · [[-2, 8], [3, -1]] · [[7, 3], [2, 1]]",
+                "solution": "<b>Amaliy 1, 3-topshiriq (a):</b> Uchta matritsa ko'paytmasi $A \\cdot B \\cdot C$:\n\n$$AB = \\begin{pmatrix} 1 & 29 \\\\ 1 & 51 \\end{pmatrix}, \\quad (AB)C = \\begin{pmatrix} 65 & 32 \\\\ 109 & 54 \\end{pmatrix}$$\n\n<div class='result-badge'>Natija: $\\begin{pmatrix} 65 & 32 \\\\ 109 & 54 \\end{pmatrix}$</div>"
+            },
+            {
+                "id": "af1_t5_a",
+                "name": "5-topshiriq (a): A² - 3A + 5E ko'phadli matritsa amali",
+                "shart": "A = [[2, 1], [1, 3]] uchun A² - 3A + 5E ni hisoblang",
+                "solution": "<b>Amaliy 1, 5-topshiriq (a):</b> $A^2 - 3A + 5E$:\n\n$$A = \\begin{pmatrix} 2 & 1 \\\\ 1 & 3 \\end{pmatrix} \\implies A^2 = \\begin{pmatrix} 5 & 5 \\\\ 5 & 10 \\end{pmatrix}$$\n\n$$A^2 - 3A + 5E = \\begin{pmatrix} 4 & 2 \\\\ 2 & 6 \\end{pmatrix}$$\n\n<div class='result-badge'>Natija: $\\begin{pmatrix} 4 & 2 \\\\ 2 & 6 \\end{pmatrix}$</div>"
+            },
+            {
+                "id": "af1_t6_a",
+                "name": "6-topshiriq (a): [[2, -1], [3, -2]] ning n-darajasini topish",
+                "shart": "A = [[2, -1], [3, -2]] bo'lsa, A^n ni aniqlang",
+                "solution": "<b>Amaliy 1, 6-topshiriq (a):</b> $A^n$ darajani topish:\n\n$$A^2 = \\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\end{pmatrix} = E$$\n\n<div class='result-badge'>$A^n = E$ (agar n juft), $A^n = A$ (agar n toq)</div>"
+            },
+            {
+                "id": "af1_t6_b",
+                "name": "6-topshiriq (b): [[1, 1], [0, 1]] ning n-darajasi",
+                "shart": "A = [[1, 1], [0, 1]] bo'lsa, A^n ni toping",
+                "solution": "<b>Amaliy 1, 6-topshiriq (b):</b>\n\n$$A^n = \\begin{pmatrix} 1 & n \\\\ 0 & 1 \\end{pmatrix}$$\n\n<div class='result-badge'>Natija: $\\begin{pmatrix} 1 & n \\\\ 0 & 1 \\end{pmatrix}$</div>"
+            },
+            {
+                "id": "af1_t9_a",
+                "name": "9-topshiriq (a): f(A) matritsaviy ko'phad (f(x) = x² - 2x + 1)",
+                "shart": "f(x) = x^2 - 2x + 1, A = [[2, 1, 0], [0, 2, 0], [1, 1, 1]] uchun f(A) ni toping",
+                "solution": "<b>Amaliy 1, 9-topshiriq (a):</b> $f(A) = A^2 - 2A + E$:\n\n$$f(A) = \\begin{pmatrix} 1 & 2 & 0 \\\\ 0 & 1 & 0 \\\\ 1 & 2 & 0 \\end{pmatrix}$$\n\n<div class='result-badge'>Natija: $\\begin{pmatrix} 1 & 2 & 0 \\\\ 0 & 1 & 0 \\\\ 1 & 2 & 0 \\end{pmatrix}$</div>"
             }
         ]
     },
@@ -133,6 +193,24 @@ AMALIY_DATA = {
                 "name": "5-topshiriq: Teskari o'rniga qo'yish inversiyalar soni (I(σ⁻¹))",
                 "shart": "$$I(\\sigma^{-1}) = I(\\sigma) = k$$",
                 "solution": "<b>Amaliy 2, 5-topshiriq:</b> Teskari o'rniga qo'yishning inversiyalar soni haqida teorema.\n\nTeorema: Agar $\\sigma$ o'rniga qo'yishning inversiyalar soni $k$ bo'lsa, uning teskarisi $\\sigma^{-1}$ ning inversiyalar soni ham aynan $k$ ga teng bo'ladi.\n\nIsbot: $\\sigma$ o'rniga qo'yishda $(i, j)$ juftlik inversiya hosil qiladi agar $i < j$ bo'lib, $\\sigma(i) > \\sigma(j)$ bo'lsa.<br>Agar $a = \\sigma(i)$ va $b = \\sigma(j)$ deb olsak, $a > b$ bo'ladi va $\\sigma^{-1}(a) = i < j = \\sigma^{-1}(b)$ bo'ladi.<br>Demak, $(b, a)$ juftlik $\\sigma^{-1}$ uchun inversiya hosil qiladi.\n\nBu moslik o'zaro bir qiymatli bo'lgani uchun inversiyalar soni teng qoladi.\n\n<div class=\"result-badge\">Natija: $I(\\sigma^{-1}) = I(\\sigma) = k$</div>"
+            },
+            {
+                "id": "af2_t1_b",
+                "name": "1-topshiriq (b): (6, 3, 1, 2, 5, 4) o'rniga qo'yish inversiyalari",
+                "shart": r"\sigma = (6, 3, 1, 2, 5, 4) inversiyalar sonini va juftligini toping",
+                "solution": "<b>Amaliy 2, 1-topshiriq (b):</b> $\\sigma = (6, 3, 1, 2, 5, 4)$\nInversiyalar juftliklari: (6,3), (6,1), (6,2), (6,5), (6,4), (3,1), (3,2), (5,4) -> Jami 8 ta inversiya.\n\n<div class='result-badge'>Inversiyalar soni: 8 (juft o'rin almashtirish)</div>"
+            },
+            {
+                "id": "af2_t1_d",
+                "name": "1-topshiriq (d): (4, 9, 6, 3, 2, 8, 1, 7, 5) inversiyalar soni",
+                "shart": r"\sigma = (4, 9, 6, 3, 2, 8, 1, 7, 5) inversiyalar soni",
+                "solution": "<b>Amaliy 2, 1-topshiriq (d):</b> (4, 9, 6, 3, 2, 8, 1, 7, 5)\nInversiyalar soni: 20 ta (juft).\n\n<div class='result-badge'>Inversiyalar soni: 20 (juft)</div>"
+            },
+            {
+                "id": "af2_t6_b",
+                "name": "6-topshiriq (b): O'rniga qo'yishlar ko'paytmasi (5 ta element)",
+                "shart": r"\sigma = (2, 3, 1, 5, 4), \quad \tau = (5, 3, 4, 1, 2) bo'lsa, \sigma \circ \tau ni toping",
+                "solution": "<b>Amaliy 2, 6-topshiriq (b):</b> $\\sigma \\circ \\tau = (4, 1, 5, 2, 3)$\n\n<div class='result-badge'>Natija: (4, 1, 5, 2, 3)</div>"
             }
         ]
     },
@@ -205,6 +283,48 @@ AMALIY_DATA = {
                 "name": "10-topshiriq: a_ij = min(i, j) elementli n-tartibli determinant",
                 "shart": "$$a_{ij} = \\min(i, j) \\quad (n\\text{-tartibli)}$$",
                 "solution": "<b>Amaliy 3, 10-topshiriq:</b> $a_{ij} = \\min(i, j)$ shartli determinantni hisoblash.\n\nMatritsa ko'rinishi:<br>$$D_n = \\begin{vmatrix} 1 & 1 & 1 & \\dots & 1 \\\\ 1 & 2 & 2 & \\dots & 2 \\\\ 1 & 2 & 3 & \\dots & 3 \\\\ \\dots & \\dots & \\dots & \\dots & \\dots \\\\ 1 & 2 & 3 & \\dots & n \\end{vmatrix}$$\n\nHar bir $k$-satrdan $(k-1)$-satrni ketma-ket ayirib chiqamiz ($k = n, n-1, \\dots, 2$):<br>Natijada bosh diagonalda barcha elementlar $1$ ga aylanadi, bosh diagonal ostidagi elementlar esa $0$ bo'ladi (yuqori uchburchak matritsa):\n\n$$D_n = \\begin{vmatrix} 1 & 1 & 1 & \\dots & 1 \\\\ 0 & 1 & 1 & \\dots & 1 \\\\ 0 & 0 & 1 & \\dots & 1 \\\\ \\dots & \\dots & \\dots & \\dots & \\dots \\\\ 0 & 0 & 0 & \\dots & 1 \\end{vmatrix} = 1 \\cdot 1 \\cdot \\dots \\cdot 1 = 1$$\n\n<div class=\"result-badge\">Natija: $\\det(A) = 1$</div>"
+            },
+            {
+                "id": "af3_t2_a",
+                "name": "2-topshiriq (a): [[a+b, a-b], [a-b, a+b]] determinanti",
+                "shart": r"\begin{vmatrix} a+b & a-b \\ a-b & a+b \end{vmatrix} ni soddalashtiring",
+                "solution": "<b>Amaliy 3, 2-topshiriq (a):</b>\n\n$$(a+b)^2 - (a-b)^2 = 4ab$$\n\n<div class='result-badge'>Natija: 4ab</div>"
+            },
+            {
+                "id": "af3_t3_c",
+                "name": "3-topshiriq (c): 3-tartibli determinant (Sarryus usuli)",
+                "shart": r"\begin{vmatrix} 4 & -3 & 5 \\ 3 & -2 & 8 \\ 1 & -7 & -5 \end{vmatrix}",
+                "solution": "<b>Amaliy 3, 3-topshiriq (c):</b>\n\n$$\\begin{vmatrix} 4 & -3 & 5 \\\\ 3 & -2 & 8 \\\\ 1 & -7 & -5 \\end{vmatrix} = 100$$\n\n<div class='result-badge'>Natija: 100</div>"
+            },
+            {
+                "id": "af3_t9_a",
+                "name": "9-topshiriq (a): 4-tartibli determinantni Gauss usulida hisoblash",
+                "shart": r"\begin{vmatrix} 1 & 1 & 1 & 1 \\ 1 & 2 & 3 & 4 \\ 1 & 3 & 6 & 10 \\ 1 & 4 & 10 & 20 \end{vmatrix}",
+                "solution": "<b>Amaliy 3, 9-topshiriq (a):</b> 4-tartibli determinant:\n\n$$|A| = 1$$\n\n<div class='result-badge'>Natija: 1</div>"
+            },
+            {
+                "id": "af3_t3_d",
+                "name": "3-topshiriq (d): 3-tartibli determinant |A| = 1",
+                "shart": r"\begin{vmatrix} 3 & 2 & -4 \\ 4 & 1 & -2 \\ 5 & 2 & -3 \end{vmatrix}",
+                "solution": "<b>Amaliy 3, 3-topshiriq (d):</b>\n\n$$\\begin{vmatrix} 3 & 2 & -4 \\\\ 4 & 1 & -2 \\\\ 5 & 2 & -3 \\end{vmatrix} = -1$$\n\n<div class='result-badge'>Natija: -1</div>"
+            },
+            {
+                "id": "af3_t3_e",
+                "name": "3-topshiriq (e): 3-tartibli determinant",
+                "shart": r"\begin{vmatrix} 3 & 4 & -5 \\ 8 & 7 & -2 \\ 2 & -1 & 8 \end{vmatrix}",
+                "solution": "<b>Amaliy 3, 3-topshiriq (e):</b> $|A| = 0$ (satrlar chiziqli bog'liq).\n\n<div class='result-badge'>Natija: 0</div>"
+            },
+            {
+                "id": "af3_t3_g",
+                "name": "3-topshiriq (g): Birliklar bilan 3-tartibli determinant",
+                "shart": r"\begin{vmatrix} 1 & 1 & 1 \\ 1 & 2 & 3 \\ 1 & 3 & 6 \end{vmatrix}",
+                "solution": "<b>Amaliy 3, 3-topshiriq (g):</b>\n\n$$\\begin{vmatrix} 1 & 1 & 1 \\\\ 1 & 2 & 3 \\\\ 1 & 3 & 6 \\end{vmatrix} = 1$$\n\n<div class='result-badge'>Natija: 1</div>"
+            },
+            {
+                "id": "af3_t3_h",
+                "name": "3-topshiriq (h): Nolli simmetrik 3-tartibli determinant",
+                "shart": r"\begin{vmatrix} 0 & 1 & 1 \\ 1 & 0 & 1 \\ 1 & 1 & 0 \end{vmatrix}",
+                "solution": "<b>Amaliy 3, 3-topshiriq (h):</b>\n\n$$\\begin{vmatrix} 0 & 1 & 1 \\\\ 1 & 0 & 1 \\\\ 1 & 1 & 0 \\end{vmatrix} = 2$$\n\n<div class='result-badge'>Natija: 2</div>"
             }
         ]
     },
@@ -247,6 +367,12 @@ AMALIY_DATA = {
                 "name": "3-topshiriq: Blokli uchburchak determinant",
                 "shart": "$$\\begin{vmatrix} A & B \\ 0 & C \\end{vmatrix} = \\det(A) \\cdot \\det(C)$$",
                 "solution": "<b>Amaliy 4, 3-topshiriq:</b> Quyi burchagi nol bo'lgan blokli matritsa determinanti.\n\nTeorema: Agar kvadrat matritsa $\\begin{pmatrix} A & B \\\\ 0 & C \\end{pmatrix}$ ko'rinishida bo'lsa, bu yerda $A$ va $C$ kvadrat bloklar, u holda:<br>$$\\det \\begin{pmatrix} A & B \\\\ 0 & C \\end{pmatrix} = \\det(A) \\cdot \\det(C)$$\n\nLaplas teoremasi bo'yicha $A$ bloki egallagan satrlar bo'yicha yoyilganda yagona noldan farqli had $\\det(A) \\cdot \\det(C)$ bo'ladi.\n\n<div class=\"result-badge\">Qoida: Blok-uchburchak matritsa determinanti diagonal bloklar determinantlari ko'paytmasiga teng!</div>"
+            },
+            {
+                "id": "af4_t5_a",
+                "name": "5-topshiriq (a): Laplas teoremasi bo'yicha 2x2 minorlar yoyilmasi",
+                "shart": r"\begin{vmatrix} 2 & 1 & 4 & 3 \\ 3 & 4 & 0 & 5 \\ 3 & 4 & 5 & 2 \\ 1 & 5 & 2 & 4 \end{vmatrix}",
+                "solution": "<b>Amaliy 4, 5-topshiriq (a):</b> Laplas teoremasi bo'yicha hisoblash:\n\n$$|A| = 90$$\n\n<div class='result-badge'>Natija: 90</div>"
             }
         ]
     },
@@ -307,6 +433,24 @@ AMALIY_DATA = {
                 "name": "5-topshiriq: Matritsaviy tenglamalar (XA = B va AXB = C)",
                 "shart": "$$XA = B \\implies X = B A^{-1}, \\quad AXB = C \\implies X = A^{-1} C B^{-1}$$",
                 "solution": "<b>Amaliy 5, 5-topshiriq:</b> Matritsaviy tenglamalarni yechish qoidalari.\n\n• 1-tur ($AX = B$): Chapdan $A^{-1}$ ga ko'paytiriladi: $A^{-1}(AX) = A^{-1}B \\implies X = A^{-1}B$.<br>• 2-tur ($XA = B$): O'ngdan $A^{-1}$ ga ko'paytiriladi: $(XA)A^{-1} = BA^{-1} \\implies X = BA^{-1}$.<br>• 3-tur ($AXB = C$): Chapdan $A^{-1}$ ga, o'ngdan $B^{-1}$ ga ko'paytiriladi: $X = A^{-1} C B^{-1}$.\n\nShart: $A$ va $B$ xosmas matritsalar bo'lishi kerak $(\\det(A) \\neq 0, \\det(B) \\neq 0)$.\n\n<div class=\"result-badge\">Qoida: $X = A^{-1} C B^{-1}$</div>"
+            },
+            {
+                "id": "af5_t3_a",
+                "name": "3-topshiriq (a): Gauss-Jordan usuli bilan teskari matritsa [A|E]",
+                "shart": "A = [[1, 2, -3], [0, 1, 2], [0, 0, 1]] uchun A⁻¹ ni toping",
+                "solution": "<b>Amaliy 5, 3-topshiriq (a):</b> Gauss-Jordan:\n\n$$A^{-1} = \\begin{pmatrix} 1 & -2 & 7 \\\\ 0 & 1 & -2 \\\\ 0 & 0 & 1 \\end{pmatrix}$$\n\n<div class='result-badge'>Natija: $\\begin{pmatrix} 1 & -2 & 7 \\\\ 0 & 1 & -2 \\\\ 0 & 0 & 1 \\end{pmatrix}$</div>"
+            },
+            {
+                "id": "af5_t2_b",
+                "name": "2-topshiriq (b): 3x3 teskari matritsa (qo'shma matritsa usuli)",
+                "shart": "A = [[1, 2, 2], [2, 1, -2], [2, -2, 1]] uchun A⁻¹ ni toping",
+                "solution": "<b>Amaliy 5, 2-topshiriq (b):</b>\n\n$$A^{-1} = \\frac{1}{9} \\begin{pmatrix} 1 & 2 & 2 \\\\ 2 & 1 & -2 \\\\ 2 & -2 & 1 \\end{pmatrix}$$\n\n<div class='result-badge'>Natija: $A^{-1} = \\frac{1}{9} A^T$</div>"
+            },
+            {
+                "id": "af5_t5_b",
+                "name": "5-topshiriq (b): Matritsaviy tenglama (X · A = B)",
+                "shart": "X · [[2, 5], [1, 3]] = [[4, -6], [2, 1]] tenglamadan X ni toping",
+                "solution": "<b>Amaliy 5, 5-topshiriq (b):</b> $X = B \\cdot A^{-1}$:\n\n$$X = \\begin{pmatrix} 18 & -32 \\\\ 5 & -8 \\end{pmatrix}$$\n\n<div class='result-badge'>X = [[18, -32], [5, -8]]</div>"
             }
         ]
     },
@@ -361,6 +505,12 @@ AMALIY_DATA = {
                 "name": "2-topshiriq (b): Gauss usuli (5x1 + 2x2 - 4x3 = 4)",
                 "shart": "$$\\begin{cases} 5x_1 + 2x_2 - 4x_3 = 4 \\ x_1 + 3x_2 + 4x_3 = 3 \\ 2x_1 + 4x_2 + x_3 = 1 \\end{cases}$$",
                 "solution": "<b>Amaliy 6, 2-topshiriq (b):</b> Gauss usulida pog'onaviy ko'rinishga keltirish.\n\nKengaytirilgan matritsa: $$\\begin{pmatrix} 5 & 2 & -4 & | & 4 \\\\ 1 & 3 & 4 & | & 3 \\\\ 2 & 4 & 1 & | & 1 \\end{pmatrix}$$\n\n1- va 2-satrlarni almashtirib, bosh diagonal ostini nolga aylantiramiz.\n\nNatijada teskari harakat orqali: $x_3 = 0, x_2 = -1, x_1 = 2$ hosil bo'ladi.\n\n<div class=\"result-badge\">Yechim: $x_1 = 2, \\quad x_2 = -1, \\quad x_3 = 0$</div>"
+            },
+            {
+                "id": "af6_t3_a",
+                "name": "3-topshiriq (a): Matritsa usulida yechish (X = A⁻¹ · B)",
+                "shart": "2x - y + z = 2, \quad 3x + 2y + 2z = -2, \quad x - 2y + z = 1",
+                "solution": "<b>Amaliy 6, 3-topshiriq (a):</b> Matritsa usuli: $x = -1, \\quad y = -1, \\quad z = 3$.\n\n<div class='result-badge'>Yechim: (-1, -1, 3)</div>"
             }
         ]
     },
@@ -415,6 +565,18 @@ AMALIY_DATA = {
                 "name": "4-topshiriq (b): a1 = (4, -2, 6), a2 = (6, -3, 9) chiziqli bog'liqligi",
                 "shart": "$$a_1 = (4, -2, 6), \\quad a_2 = (6, -3, 9)$$",
                 "solution": "<b>Amaliy 7, 4-topshiriq (b):</b>\n\nKoordinatalar nisbatini tekshiramiz:<br>$$\\frac{6}{4} = \\frac{3}{2}, \\quad \\frac{-3}{-2} = \\frac{3}{2}, \\quad \\frac{9}{6} = \\frac{3}{2}$$\n\nBarcha koordinatalar nisbati bir xil: $a_2 = \\frac{3}{2} a_1$.\n\nDemak, $3a_1 - 2a_2 = 0$ nolmas chiziqli kombinatsiya mavjud.\n\n<div class=\"result-badge\">Xulosa: Vektorlar sistemasi CHIZIQLI BOG'LIQ</div>"
+            },
+            {
+                "id": "af7_t4_a",
+                "name": "4-topshiriq (a): Vektorlar sistemasining chiziqli erkli yoki bog'liqligi",
+                "shart": "a1=(1, 2, 3), a2=(2, 5, 7), a3=(3, 7, 10) vektorlar sistemasini tekshiring",
+                "solution": "<b>Amaliy 7, 4-topshiriq (a):</b> Vektorlar determinant qiymati $|A| = 0$ -> Chiziqli bog'liq.\n\n<div class='result-badge'>Chiziqli bog'liq</div>"
+            },
+            {
+                "id": "af7_t6_b",
+                "name": "6-topshiriq (b): 3x4 Matritsa rangini Gauss usulida topish",
+                "shart": "A = [[2, -1, 3, 5], [4, -3, 1, 3], [3, -2, 3, 4]] ning rangini aniqlang",
+                "solution": "<b>Amaliy 7, 6-topshiriq (b):</b> Matritsa rangi:\n\n$$\\operatorname{rang}(A) = 3$$\n\n<div class='result-badge'>rang = 3</div>"
             }
         ]
     },
@@ -469,6 +631,12 @@ AMALIY_DATA = {
                 "name": "⭐ 5-Variant: 2.b topshiriq bo'yicha FYET",
                 "shart": "x1 + 2x2 + 4x3 - 3x4 = 0, 3x1 + 5x2 + 6x3 - 4x4 = 0, 4x1 + 5x2 - 2x3 + 3x4 = 0, 3x1 + 8x2 + 24x3 - 19x4 = 0",
                 "solution": ""
+            },
+            {
+                "id": "af8_t1_b",
+                "name": "1-topshiriq (b): Bir jinsli sistemani yechish va FYET topish",
+                "shart": "x1 + 2x2 + 4x3 - 3x4 = 0, \quad 3x1 + 5x2 + 6x3 - 4x4 = 0, \quad 4x1 + 5x2 - 2x3 + 3x4 = 0",
+                "solution": "<b>Amaliy 8, 1-topshiriq (b):</b> Bir jinsli sistema FYET:\n\n$$e_1 = (8, -6, 1, 0)^T, \\quad e_2 = (-7, 5, 0, 1)^T$$\n\n<div class='result-badge'>Umumiy yechim: $X = c_1 e_1 + c_2 e_2$</div>"
             }
         ]
     },
@@ -883,6 +1051,36 @@ AMALIY_DATA = {
                 "name": "25-topshiriq: Birning barcha n-darajali ildizlari yig'indisi nolga tengligi",
                 "shart": "$$\\sum_{k=0}^{n-1} w_k = 0$$",
                 "solution": "<b>Amaliy 10, 25-topshiriq:</b> Birning $n$-darajali ildizlari yig'indisi haqidagi teorema.\n\nBirning $n$-darajali ildizlari geometrik progressiya tashkil qiladi: $w_k = \\varepsilon^k$, bu yerda $\\varepsilon = \\cos\\frac{2\\pi}{n} + i\\sin\\frac{2\\pi}{n} \\neq 1$.\n\nYig'indi formulasi: $$S = 1 + \\varepsilon + \\varepsilon^2 + \\dots + \\varepsilon^{n-1} = \\frac{\\varepsilon^n - 1}{\\varepsilon - 1}$$\n\n$\\varepsilon$ birning $n$-darajali ildizi bo'lgani uchun $\\varepsilon^n = 1$.\n\nDemak: $$S = \\frac{1 - 1}{\\varepsilon - 1} = \\frac{0}{\\varepsilon - 1} = 0$$\n\n<div class=\"result-badge\">Isbotlandi: $\\sum_{k=0}^{n-1} w_k = 0$ ∎</div>"
+            },
+            {
+                "id": "af10_t1_a",
+                "name": "1-topshiriq (a): z = 1 + i ni trigonometrik shaklga keltirish",
+                "shart": "z = 1 + i kompleks sonini r(cos φ + i sin φ) shaklga keltiring",
+                "solution": "<b>Amaliy 10, 1-topshiriq (a):</b> $z = 1 + i$\n\n$$z = \\sqrt{2} \\left( \\cos\\frac{\\pi}{4} + i\\sin\\frac{\\pi}{4} \\right)$$\n\n<div class='result-badge'>$z = \\sqrt{2}(\\cos(\\pi/4) + i\\sin(\\pi/4))$</div>"
+            },
+            {
+                "id": "af10_t2_b",
+                "name": "2-topshiriq (b): (1 + i)¹⁰ ni Muavr formulasi bilan hisoblash",
+                "shart": "(1 + i)^10 ni Muavr formulasi z^n = r^n(cos nφ + i sin nφ) bilan hisoblang",
+                "solution": "<b>Amaliy 10, 2-topshiriq (b):</b>\n\n$$(1+i)^{10} = 32i$$\n\n<div class='result-badge'>Natija: 32i</div>"
+            },
+            {
+                "id": "af10_t3_b",
+                "name": "3-topshiriq (b): ∛(-8) ning barcha 3 ta kompleks ildizlari",
+                "shart": "w = ∛(-8) ning barcha ildizlarini toping",
+                "solution": "<b>Amaliy 10, 3-topshiriq (b):</b> $\\sqrt[3]{-8}$ ildizlari:\n\n$$w_0 = 1 + i\\sqrt{3}, \\quad w_1 = -2, \\quad w_2 = 1 - i\\sqrt{3}$$\n\n<div class='result-badge'>$w = \\{1 + i\\sqrt{3}, -2, 1 - i\\sqrt{3}\\}$</div>"
+            },
+            {
+                "id": "af10_t1_b",
+                "name": "1-topshiriq (b): z = -√3 + i ni trigonometrik shaklga keltirish",
+                "shart": "z = -\sqrt{3} + i kompleks sonini r(cos φ + i sin φ) shaklga keltiring",
+                "solution": "<b>Amaliy 10, 1-topshiriq (b):</b> $z = -\\sqrt{3} + i$\n\n$$z = 2\\left(\\cos\\frac{5\\pi}{6} + i\\sin\\frac{5\\pi}{6}\\right)$$\n\n<div class='result-badge'>z = 2(cos(5π/6) + i sin(5π/6))</div>"
+            },
+            {
+                "id": "af10_t3_c",
+                "name": "3-topshiriq (c): ⁴√(1) birlikning 4-darajali ildizlari",
+                "shart": "w = ⁴√(1) barcha 4 ta kompleks ildizlarini toping",
+                "solution": "<b>Amaliy 10, 3-topshiriq (c):</b> $\\sqrt[4]{1} = \\{1, i, -1, -i\\}$.\n\n<div class='result-badge'>w = {1, i, -1, -i}</div>"
             }
         ]
     },
@@ -931,6 +1129,24 @@ AMALIY_DATA = {
                 "name": "8-topshiriq (a): x0 = 2 sonining karraliligini aniqlash",
                 "shart": "$$f(x) = x^5 - 5x^4 + 7x^3 - 2x^2 + 4x - 8, \\quad x_0 = 2$$",
                 "solution": "<b>Amaliy 11, 8-topshiriq (a):</b> Ildizning karralilik darajasini Gorner sxemasida aniqlash.\n\nKetma-ket Gorner sxemasi qo'llaniladi qoldiq nol bo'lmaguncha:<br>1-bo'lish: $x_0 = 2$ da qoldiq $r_1 = 0$ (ildiz).<br>2-bo'lish: hosil bo'lgan ko'phadni $x - 2$ ga bo'lganda $r_2 = 0$ (2-karrali).<br>3-bo'lish: yana $x - 2$ ga bo'lganda $r_3 = 0$ (3-karrali).<br>4-bo'lish: $r_4 \\neq 0$.\n\nDemak, $x_0 = 2$ soni 3 karrali ildizdir.\n\n<div class=\"result-badge\">Javob: $x_0 = 2$ uch (3) karrali ildiz</div>"
+            },
+            {
+                "id": "af11_t1_a",
+                "name": "1-topshiriq (a): Ko'phadlarni qo'shish va ko'paytirish",
+                "shart": "f(x) = 2x^4 - 3x^3 + 5x - 2, \quad g(x) = x^3 - 2x^2 + 4",
+                "solution": "<b>Amaliy 11, 1-topshiriq (a):</b>\n\n$$f(x) + g(x) = 2x^4 - 2x^3 - 2x^2 + 5x + 2$$\n\n<div class='result-badge'>Natija: $2x^4 - 2x^3 - 2x^2 + 5x + 2$</div>"
+            },
+            {
+                "id": "af11_t2_b",
+                "name": "2-topshiriq (b): Ko'phadlarni burchakli qoldiqli bo'lish",
+                "shart": "f(x) = 2x^4 - 3x^3 + 4x^2 - 5x + 6 ni g(x) = x^2 - 3x + 1 ga bo'ling",
+                "solution": "<b>Amaliy 11, 2-topshiriq (b):</b> Burchakli bo'lish:\n\n$$q(x) = 2x^2 + 3x + 11, \\quad r(x) = 25x - 5$$\n\n<div class='result-badge'>q(x)=2x²+3x+11, r(x)=25x-5</div>"
+            },
+            {
+                "id": "af11_t1_b",
+                "name": "1-topshiriq (b): Ko'phadlarni ko'paytirish P(x) · Q(x)",
+                "shart": "P(x) = x^2 - 2x + 3, \quad Q(x) = 2x^2 + x - 1 ni ko'paytiring",
+                "solution": "<b>Amaliy 11, 1-topshiriq (b):</b>\n\n$$P(x) \\cdot Q(x) = 2x^4 - 3x^3 + 3x^2 + 5x - 3$$\n\n<div class='result-badge'>Natija: $2x^4 - 3x^3 + 3x^2 + 5x - 3$</div>"
             }
         ]
     },
@@ -961,6 +1177,18 @@ AMALIY_DATA = {
                 "name": "⭐ 5-Variant: EKUB(f, g)",
                 "shart": "f(x) = x^4 - 2x^3 + x^2 - x - 2, g(x) = x^3 - x^2 - x - 2 ning EKUBini toping.",
                 "solution": ""
+            },
+            {
+                "id": "af12_t1_b",
+                "name": "1-topshiriq (b): EKUB(f, g) Yevklid algoritmi",
+                "shart": "f(x) = x^4 + x^3 - 3x^2 - 4x - 1, \quad g(x) = x^3 + x^2 - x - 1 ning EKUBini toping",
+                "solution": "<b>Amaliy 12, 1-topshiriq (b):</b> Yevklid algoritmi:\n\n$$\\text{EKUB}(f, g) = x + 1$$\n\n<div class='result-badge'>EKUB = x + 1</div>"
+            },
+            {
+                "id": "af12_t2_a",
+                "name": "2-topshiriq (a): Yevklid algoritmi bo'yicha chiziqli ifodalash u·f + v·g = d",
+                "shart": "f(x) = x^3 - 2, g(x) = x^2 - 1 uchun u(x)f(x) + v(x)g(x) = 1 ko'rinishda yozing",
+                "solution": "<b>Amaliy 12, 2-topshiriq (a):</b> Bezu ayniyati:\n\n$$-\\frac{x+2}{3} f(x) + \\frac{(x+1)^2}{3} g(x) = 1$$\n\n<div class='result-badge'>u(x)=-(x+2)/3, v(x)=(x+1)²/3</div>"
             }
         ]
     },
@@ -991,6 +1219,24 @@ AMALIY_DATA = {
                 "name": "⭐ 5-Variant: Ratsional ildizlarni topish",
                 "shart": "f(x) = x^3 - 6x^2 + 15x - 14 ko'phadning ratsional ildizlarini toping.",
                 "solution": ""
+            },
+            {
+                "id": "af13_t1_a",
+                "name": "1-topshiriq (a): Bezu teoremasi bo'yicha qoldiqni hisoblash",
+                "shart": "f(x) = x^4 - 3x^3 + 6x^2 - 10x + 16 ni (x - 2) ga bo'lgandagi qoldiqni toping",
+                "solution": "<b>Amaliy 13, 1-topshiriq (a):</b> Bezu teoremasi: $R = f(2) = 12$.\n\n<div class='result-badge'>Qoldiq: 12</div>"
+            },
+            {
+                "id": "af13_t4_b",
+                "name": "4-topshiriq (b): Ko'phadning barcha ratsional ildizlarini topish",
+                "shart": "f(x) = x^4 - 2x^3 - 8x^2 + 13x - 24 ning barcha ratsional ildizlarini toping",
+                "solution": "<b>Amaliy 13, 4-topshiriq (b):</b> Ratsional ildizlar: $x = -3, \\quad x = 4$.\n\n<div class='result-badge'>Ildizlar: -3, 4</div>"
+            },
+            {
+                "id": "af13_t3_a",
+                "name": "3-topshiriq (a): f(x) ni (x - 1) darajalari bo'yicha Gorner sxemasi bilan yoyish",
+                "shart": "f(x) = x^4 + 2x^3 - 3x^2 - 4x + 1 ni (x - 1) darajalari bo'yicha yoying",
+                "solution": "<b>Amaliy 13, 3-topshiriq (a):</b>\n\n$$f(x) = (x - 1)^4 + 6(x - 1)^3 + 9(x - 1)^2 + 3(x - 1) - 3$$\n\n<div class='result-badge'>Yoyilma: $(x-1)^4 + 6(x-1)^3 + 9(x-1)^2 + 3(x-1) - 3$</div>"
             }
         ]
     },
@@ -1039,6 +1285,18 @@ AMALIY_DATA = {
                 "name": "1-topshiriq (c): 1 / (x³ - x) ni kompleks maydonda sodda kasrlarga yoyish",
                 "shart": "$$\\frac{1}{x^3 - x} = \\frac{1}{x(x-1)(x+1)}$$",
                 "solution": "<b>Amaliy 14, 1-topshiriq (c):</b> Ratsional kasrni sodda kasrlarga yoyish.\n\nMaxrajni ko'paytuvchilarga ajratamiz: $x^3 - x = x(x^2 - 1) = x(x - 1)(x + 1)$.\n\nSodda kasrlar ko'rinishi: $$\\frac{1}{x(x-1)(x+1)} = \\frac{A}{x} + \\frac{B}{x-1} + \\frac{C}{x+1}$$\n\nQopqon (yopish) usuli bilan koeffitsiyentlarni topamiz:<br>• $x = 0: A = \\frac{1}{(0-1)(0+1)} = -1$<br>• $x = 1: B = \\frac{1}{1(1+1)} = \\frac{1}{2}$<br>• $x = -1: C = \\frac{1}{(-1)(-1-1)} = \\frac{1}{2}$\n\nNatija: $$\\frac{1}{x^3 - x} = -\\frac{1}{x} + \\frac{1}{2(x-1)} + \\frac{1}{2(x+1)}$$\n\n<div class=\"result-badge\">Yoyilma: $-\\frac{1}{x} + \\frac{0.5}{x-1} + \\frac{0.5}{x+1}$</div>"
+            },
+            {
+                "id": "af14_t2_b",
+                "name": "2-topshiriq (b): Sodda kasrlarga yoyish (1 / (x³ - x))",
+                "shart": "f(x) = 1 / (x³ - x) ni haqiqiy sonlar maydonida sodda kasrlarga yoying",
+                "solution": "<b>Amaliy 14, 2-topshiriq (b):</b>\n\n$$\\frac{1}{x^3 - x} = -\\frac{1}{x} + \\frac{1}{2(x-1)} + \\frac{1}{2(x+1)}$$\n\n<div class='result-badge'>Natija: $-\\frac{1}{x} + \\frac{1}{2(x-1)} + \\frac{1}{2(x+1)}$</div>"
+            },
+            {
+                "id": "af14_t3_a",
+                "name": "3-topshiriq (a): Karrali maxraj bo'yicha sodda kasrlarga yoyish",
+                "shart": "f(x) = x / (x - 1)²(x + 1) ni sodda kasrlarga yoying",
+                "solution": "<b>Amaliy 14, 3-topshiriq (a):</b>\n\n$$\\frac{x}{(x-1)^2(x+1)} = \\frac{1}{4(x-1)} + \\frac{1}{2(x-1)^2} - \\frac{1}{4(x+1)}$$\n\n<div class='result-badge'>Natija: $\\frac{1}{4(x-1)} + \\frac{1}{2(x-1)^2} - \\frac{1}{4(x+1)}$</div>"
             }
         ]
     },
@@ -1087,6 +1345,24 @@ AMALIY_DATA = {
                 "name": "3-topshiriq: Ferrari usuli (4-darajali tenglama x⁴ - 4x³ - 4x² + 16x - 8 = 0)",
                 "shart": "$$x^4 - 4x^3 - 4x^2 + 16x - 8 = 0$$",
                 "solution": "<b>Amaliy 15, 3-topshiriq:</b> 4-darajali algebraik tenglamani Ferrari usulida yechish.\n\n1) $x = y + 1$ almashtirish orqali kubik had yo'qotiladi: $y^4 - 10y^2 + 8y - 1 = 0$.<br>2) Ferrari rezolventasi tuziladi: $t^3 + 10t^2 + t + 10 = 0 \\implies (t+10)(t^2+1) = 0 \\implies t = -10$.<br>3) Kvadrat uchhadlar ko'paytmasiga ajratiladi va 4 ta ildiz topiladi.\n\n<div class=\"result-badge\">Ferrari usuli bo'yicha to'rtta ildiz aniq topiladi.</div>"
+            },
+            {
+                "id": "af15_t1_b",
+                "name": "1-topshiriq (b): Kardano formulasi (y³ - 3y - 2 = 0)",
+                "shart": "y^3 - 3y - 2 = 0 tenglamani Kardano formulasi bilan yeching",
+                "solution": "<b>Amaliy 15, 1-topshiriq (b):</b> Kardano formulasi ($D = 0$):\n\n$$y_1 = 2, \\quad y_2 = -1, \\quad y_3 = -1$$\n\n<div class='result-badge'>Ildizlar: 2, -1, -1</div>"
+            },
+            {
+                "id": "af15_t4_a",
+                "name": "4-topshiriq (a): Bikvadrat tenglama (x⁴ - 5x² + 4 = 0)",
+                "shart": "x^4 - 5x^2 + 4 = 0 tenglamani yeching",
+                "solution": "<b>Amaliy 15, 4-topshiriq (a):</b>\n\n$$x = \\pm 1, \\quad x = \\pm 2$$\n\n<div class='result-badge'>Ildizlar: -2, -1, 1, 2</div>"
+            },
+            {
+                "id": "af15_t1_c",
+                "name": "1-topshiriq (c): Kardano formulasi (y³ + 6y + 2 = 0)",
+                "shart": "y^3 + 6y + 2 = 0 tenglamani Kardano formulasi bilan yeching",
+                "solution": "<b>Amaliy 15, 1-topshiriq (c):</b> $D = 9 > 0$\n\n$$y_1 = \\sqrt[3]{2} - \\sqrt[3]{4} \\approx -0.327$$\n\n<div class='result-badge'>Haqiqiy ildiz: $y_1 = \\sqrt[3]{2} - \\sqrt[3]{4}$</div>"
             }
         ]
     },

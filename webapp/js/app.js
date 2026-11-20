@@ -158,6 +158,11 @@ const app = {
         const pdfEl = document.getElementById('amaliy-pdf-name');
         if (pdfEl) pdfEl.innerText = `📄 Fayl: ${data.file}`;
 
+        const countLabel = document.getElementById('amaliy-tasks-count-label');
+        if (countLabel) {
+            countLabel.innerHTML = `2. Ushbu fayldagi topshiriqni tanlang: <span style="color: var(--link-color); font-weight: bold;">(Jami: ${data.tasks.length} ta misol)</span>`;
+        }
+
         // Asl PDF CamScanner sahifasi previewini tayyorlash
         const maxPages = this.pdfPages[fileNum] || 2;
         const tabs = document.getElementById('amaliy-page-tabs');

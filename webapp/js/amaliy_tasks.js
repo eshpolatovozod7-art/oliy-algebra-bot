@@ -198,7 +198,198 @@ const AMALIY_DATABASE = {
                     ];
                     app.showSolution("1-Amaliy, 5-Variant", steps);
                 }
+            },,
+            {
+                id: "af1_t1_d",
+                name: "1-topshiriq (d): 3A + 2B (3x3 chiziqli amal)",
+                shart: "3 · [[-1, 2, -1], [4, 1, -2], [3, 2, -3]] + 2 · [[5, -3, 2], [2, 1, 3], [-6, -4, 2]]",
+                solve: () => {
+                const A = [[-1, 2, -1], [4, 1, -2], [3, 2, -3]];
+                const B = [[5, -3, 2], [2, 1, 3], [-6, -4, 2]];
+                const A3 = MatrixSolver.scalarMul(A, 3);
+                const B2 = MatrixSolver.scalarMul(B, 2);
+                const res = MatrixSolver.add(A3.result, B2.result);
+                const steps = [
+                    "<b>Amaliy 1, 1-topshiriq (d):</b> $3A + 2B$ amalini hisoblash (3x3 matritsalar).",
+                    "Dastlabki matritsalar: $$A = " + MatrixSolver.toTeX(A) + ", \\quad B = " + MatrixSolver.toTeX(B) + "$$",
+                    "<b>1-qadam:</b> $3A$ matritsani topamiz: $$3A = " + MatrixSolver.toTeX(A3.result) + "$$",
+                    "<b>2-qadam:</b> $2B$ matritsani topamiz: $$2B = " + MatrixSolver.toTeX(B2.result) + "$$",
+                    "<b>3-qadam:</b> Yig'indini hisoblaymiz: $$3A + 2B = " + MatrixSolver.toTeX(res.result) + "$$",
+                    "<div class='result-badge'>Yakuniy natija: $3A + 2B = " + MatrixSolver.toTeX(res.result) + "$</div>"
+                ];
+                app.showSolution("1-Amaliy, 1-topshiriq (d): 3A + 2B", steps);
+            }
             },
+            {
+                id: "af1_t2_d",
+                name: "2-topshiriq (d): 3x2 va 2x3 matritsalarni ko'paytirish",
+                shart: "[[1, 2], [2, 4], [3, 6]] · [[-1, -2, -4], [1, 2, 2]]",
+                solve: () => {
+                const A = [[1, 2], [2, 4], [3, 6]];
+                const B = [[-1, -2, -4], [1, 2, 2]];
+                const res = MatrixSolver.multiply(A, B);
+                const steps = [
+                    "<b>Amaliy 1, 2-topshiriq (d):</b> $3\\times 2$ va $2\\times 3$ matritsalarni ko'paytirish.",
+                    "$$A = " + MatrixSolver.toTeX(A) + ", \\quad B = " + MatrixSolver.toTeX(B) + "$$",
+                    "Natijaviy matritsa o'lchami: $3\\times 3$.",
+                    ...res.steps,
+                    "<div class='result-badge'>Natija $A \\cdot B = " + MatrixSolver.toTeX(res.result) + "$</div>"
+                ];
+                app.showSolution("1-Amaliy, 2-topshiriq (d): Ko'paytirish", steps);
+            }
+            },
+            {
+                id: "af1_t2_e",
+                name: "2-topshiriq (e): Satr va ustun matritsalar ko'paytmasi (1x3 · 3x1)",
+                shart: "[[1, 2, 3]] · [[2], [4], [1]]",
+                solve: () => {
+                const A = [[1, 2, 3]];
+                const B = [[2], [4], [1]];
+                const res = MatrixSolver.multiply(A, B);
+                const steps = [
+                    "<b>Amaliy 1, 2-topshiriq (e):</b> Satr va ustun matritsalar skalyar ko'paytmasi.",
+                    "$$A = \\begin{pmatrix} 1 & 2 & 3 \\end{pmatrix}, \\quad B = \\begin{pmatrix} 2 \\\\ 4 \\\\ 1 \\end{pmatrix}$$",
+                    "Hisoblash: $1 \\cdot 2 + 2 \\cdot 4 + 3 \\cdot 1 = 2 + 8 + 3 = 13$",
+                    "<div class='result-badge'>Natija: $A \\cdot B = (13)$</div>"
+                ];
+                app.showSolution("1-Amaliy, 2-topshiriq (e): Satr va ustun ko'paytmasi", steps);
+            }
+            },
+            {
+                id: "af1_t2_f",
+                name: "2-topshiriq (f): Ustun va satr ko'paytmasi (3x1 · 1x3)",
+                shart: "[[2], [4], [1]] · [[1, 2, 3]]",
+                solve: () => {
+                const A = [[2], [4], [1]];
+                const B = [[1, 2, 3]];
+                const res = MatrixSolver.multiply(A, B);
+                const steps = [
+                    "<b>Amaliy 1, 2-topshiriq (f):</b> $3\\times 1$ va $1\\times 3$ matritsalar ko'paytmasi ($3\\times 3$ matritsa hosil bo'ladi).",
+                    "$$A = \\begin{pmatrix} 2 \\\\ 4 \\\\ 1 \\end{pmatrix}, \\quad B = \\begin{pmatrix} 1 & 2 & 3 \\end{pmatrix}$$",
+                    ...res.steps,
+                    "<div class='result-badge'>Natija: $A \\cdot B = " + MatrixSolver.toTeX(res.result) + "$</div>"
+                ];
+                app.showSolution("1-Amaliy, 2-topshiriq (f): Ustun va satr ko'paytmasi", steps);
+            }
+            },
+            {
+                id: "af1_t2_g",
+                name: "2-topshiriq (g): 3x3 Matritsalar ko'paytmasi",
+                shart: "[[3, -4, 5], [2, -3, 1], [3, -5, -1]] · [[3, 2, 9], [-1, 2, 1], [0, -3, 3]]",
+                solve: () => {
+                const A = [[3, -4, 5], [2, -3, 1], [3, -5, -1]];
+                const B = [[3, 2, 9], [-1, 2, 1], [0, -3, 3]];
+                const res = MatrixSolver.multiply(A, B);
+                const steps = [
+                    "<b>Amaliy 1, 2-topshiriq (g):</b> $3\\times 3$ matritsalarni ko'paytirish.",
+                    "$$A = " + MatrixSolver.toTeX(A) + ", \\quad B = " + MatrixSolver.toTeX(B) + "$$",
+                    ...res.steps,
+                    "<div class='result-badge'>Natija: $A \\cdot B = " + MatrixSolver.toTeX(res.result) + "$</div>"
+                ];
+                app.showSolution("1-Amaliy, 2-topshiriq (g): 3x3 Ko'paytirish", steps);
+            }
+            },
+            {
+                id: "af1_t3_a",
+                name: "3-topshiriq (a): Uchta 2x2 matritsani ketma-ket ko'paytirish",
+                shart: "[[4, 3], [7, 5]] · [[-2, 8], [3, -1]] · [[7, 3], [2, 1]]",
+                solve: () => {
+                const A = [[4, 3], [7, 5]];
+                const B = [[-2, 8], [3, -1]];
+                const C = [[7, 3], [2, 1]];
+                const AB = MatrixSolver.multiply(A, B);
+                const ABC = MatrixSolver.multiply(AB.result, C);
+                const steps = [
+                    "<b>Amaliy 1, 3-topshiriq (a):</b> $A \\cdot B \\cdot C$ matritsalar ko'paytmasi.",
+                    "$$A = " + MatrixSolver.toTeX(A) + ", \\quad B = " + MatrixSolver.toTeX(B) + ", \\quad C = " + MatrixSolver.toTeX(C) + "$$",
+                    "<b>1-qadam: $A \\cdot B$ ko'paytmani topamiz:</b>",
+                    "$$AB = " + MatrixSolver.toTeX(AB.result) + "$$",
+                    "<b>2-qadam: $(AB) \\cdot C$ ko'paytmani topamiz:</b>",
+                    ...ABC.steps,
+                    "<div class='result-badge'>Yakuniy natija: $A \\cdot B \\cdot C = " + MatrixSolver.toTeX(ABC.result) + "$</div>"
+                ];
+                app.showSolution("1-Amaliy, 3-topshiriq (a): Uchta matritsa ko'paytmasi", steps);
+            }
+            },
+            {
+                id: "af1_t5_a",
+                name: "5-topshiriq (a): A² - 3A + 5E ko'phadli matritsa amali",
+                shart: "A = [[2, 1], [1, 3]] uchun A² - 3A + 5E ni hisoblang",
+                solve: () => {
+                const A = [[2, 1], [1, 3]];
+                const A2 = MatrixSolver.multiply(A, A);
+                const A3 = MatrixSolver.scalarMul(A, -3);
+                const E5 = [[5, 0], [0, 5]];
+                const step1 = MatrixSolver.add(A2.result, A3.result);
+                const res = MatrixSolver.add(step1.result, E5);
+                const steps = [
+                    "<b>Amaliy 1, 5-topshiriq (a):</b> $A^2 - 3A + 5E$ ifodani hisoblash.",
+                    "Berilgan matritsa: $$A = " + MatrixSolver.toTeX(A) + "$$",
+                    "<b>1) $A^2$ ni topamiz:</b> $$A^2 = " + MatrixSolver.toTeX(A2.result) + "$$",
+                    "<b>2) $-3A$ ni topamiz:</b> $$-3A = " + MatrixSolver.toTeX(A3.result) + "$$",
+                    "<b>3) $5E$ birlik matritsa:</b> $$5E = " + MatrixSolver.toTeX(E5) + "$$",
+                    "<b>4) Hammasini qo'shamiz:</b> $$A^2 - 3A + 5E = " + MatrixSolver.toTeX(res.result) + "$$",
+                    "<div class='result-badge'>Natija: $\\begin{pmatrix} 4 & 2 \\\\ 2 & 6 \\end{pmatrix}$</div>"
+                ];
+                app.showSolution("1-Amaliy, 5-topshiriq (a): A² - 3A + 5E", steps);
+            }
+            },
+            {
+                id: "af1_t6_a",
+                name: "6-topshiriq (a): [[2, -1], [3, -2]] ning n-darajasini topish",
+                shart: "A = [[2, -1], [3, -2]] bo'lsa, A^n ni aniqlang",
+                solve: () => {
+                const A = [[2, -1], [3, -2]];
+                const A2 = MatrixSolver.multiply(A, A);
+                const steps = [
+                    "<b>Amaliy 1, 6-topshiriq (a):</b> $A^n$ darajani hisoblash.",
+                    "Berilgan: $$A = \\begin{pmatrix} 2 & -1 \\\\ 3 & -2 \\end{pmatrix}$$",
+                    "<b>$A^2$ ni hisoblaymiz:</b> $$A^2 = " + MatrixSolver.toTeX(A2.result) + " = E$$",
+                    "Demak, $A^2 = E$ (birlik matritsa).",
+                    "Bundan xulosa qilamiz: agar $n$ juft bo'lsa, $A^n = E$; agar $n$ toq bo'lsa, $A^n = A$.",
+                    "<div class='result-badge'>Javob: $A^n = \\begin{cases} E, & n \\text{ juft} \\\\ A, & n \\text{ toq} \\end{cases}$</div>"
+                ];
+                app.showSolution("1-Amaliy, 6-topshiriq (a): A^n", steps);
+            }
+            },
+            {
+                id: "af1_t6_b",
+                name: "6-topshiriq (b): [[1, 1], [0, 1]] ning n-darajasi",
+                shart: "A = [[1, 1], [0, 1]] bo'lsa, A^n ni toping",
+                solve: () => {
+                const steps = [
+                    "<b>Amaliy 1, 6-topshiriq (b):</b> $A = \\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\end{pmatrix}$ ning $n$-darajasi.",
+                    "Matematik induksiya va ketma-ket darajalar:",
+                    "• $A^2 = \\begin{pmatrix} 1 & 2 \\\\ 0 & 1 \\end{pmatrix}$",
+                    "• $A^3 = \\begin{pmatrix} 1 & 3 \\\\ 0 & 1 \\end{pmatrix}$",
+                    "• $A^n = \\begin{pmatrix} 1 & n \\\\ 0 & 1 \\end{pmatrix}$",
+                    "<div class='result-badge'>Javob: $A^n = \\begin{pmatrix} 1 & n \\\\ 0 & 1 \\end{pmatrix}$</div>"
+                ];
+                app.showSolution("1-Amaliy, 6-topshiriq (b): A^n", steps);
+            }
+            },
+            {
+                id: "af1_t9_a",
+                name: "9-topshiriq (a): f(A) matritsaviy ko'phad (f(x) = x² - 2x + 1)",
+                shart: "f(x) = x^2 - 2x + 1, A = [[2, 1, 0], [0, 2, 0], [1, 1, 1]] uchun f(A) ni toping",
+                solve: () => {
+                const A = [[2, 1, 0], [0, 2, 0], [1, 1, 1]];
+                const A2 = MatrixSolver.multiply(A, A);
+                const A_2 = MatrixSolver.scalarMul(A, -2);
+                const E = [[1, 0, 0], [0, 1, 0], [0, 0, 1]];
+                const s1 = MatrixSolver.add(A2.result, A_2.result);
+                const res = MatrixSolver.add(s1.result, E);
+                const steps = [
+                    "<b>Amaliy 1, 9-topshiriq (a):</b> $f(A) = A^2 - 2A + E$ ko'phadni hisoblash.",
+                    "Berilgan matritsa: $$A = " + MatrixSolver.toTeX(A) + "$$",
+                    "<b>1) $A^2$:</b> $$A^2 = " + MatrixSolver.toTeX(A2.result) + "$$",
+                    "<b>2) $-2A$:</b> $$-2A = " + MatrixSolver.toTeX(A_2.result) + "$$",
+                    "<b>3) $f(A) = A^2 - 2A + E$:</b> $$f(A) = " + MatrixSolver.toTeX(res.result) + "$$",
+                    "<div class='result-badge'>Natija: $f(A) = " + MatrixSolver.toTeX(res.result) + "$</div>"
+                ];
+                app.showSolution("1-Amaliy, 9-topshiriq (a): f(A)", steps);
+            }
+            }
         ]
     },
     2: {
@@ -325,7 +516,54 @@ const AMALIY_DATABASE = {
                     const steps = ["<b>Amaliy 2, 5-topshiriq:</b> Teskari o'rniga qo'yishning inversiyalar soni haqida teorema.", "Teorema: Agar $\\sigma$ o'rniga qo'yishning inversiyalar soni $k$ bo'lsa, uning teskarisi $\\sigma^{-1}$ ning inversiyalar soni ham aynan $k$ ga teng bo'ladi.", "Isbot: $\\sigma$ o'rniga qo'yishda $(i, j)$ juftlik inversiya hosil qiladi agar $i < j$ bo'lib, $\\sigma(i) > \\sigma(j)$ bo'lsa.<br>Agar $a = \\sigma(i)$ va $b = \\sigma(j)$ deb olsak, $a > b$ bo'ladi va $\\sigma^{-1}(a) = i < j = \\sigma^{-1}(b)$ bo'ladi.<br>Demak, $(b, a)$ juftlik $\\sigma^{-1}$ uchun inversiya hosil qiladi.", "Bu moslik o'zaro bir qiymatli bo'lgani uchun inversiyalar soni teng qoladi.", "<div class=\"result-badge\">Natija: $I(\\sigma^{-1}) = I(\\sigma) = k$</div>"];
                     app.showSolution("5-topshiriq: Teskari o'rniga qo'yish inversiyalar soni (I(σ⁻¹))", steps);
                 }
+            },,
+            {
+                id: "af2_t1_b",
+                name: "1-topshiriq (b): (6, 3, 1, 2, 5, 4) o'rniga qo'yish inversiyalari",
+                shart: "\sigma = (6, 3, 1, 2, 5, 4) inversiyalar sonini va juftligini toping",
+                solve: () => {
+                const arr = [6, 3, 1, 2, 5, 4];
+                const res = PermutationSolver.analyze(arr);
+                const steps = [
+                    "<b>Amaliy 2, 1-topshiriq (b):</b> $\\sigma = (6, 3, 1, 2, 5, 4)$ inversiyalar soni va juftligi.",
+                    ...res.steps,
+                    "<div class='result-badge'>Inversiyalar soni: $I(\\sigma) = " + res.inversions + "$, ishorasi: $\\operatorname{sgn}(\\sigma) = " + (res.inversions % 2 === 0 ? "+1 \\text{ (juft)}" : "-1 \\text{ (toq)}") + "$</div>"
+                ];
+                app.showSolution("2-Amaliy, 1-topshiriq (b): Inversiyalar", steps);
+            }
             },
+            {
+                id: "af2_t1_d",
+                name: "1-topshiriq (d): (4, 9, 6, 3, 2, 8, 1, 7, 5) inversiyalar soni",
+                shart: "\sigma = (4, 9, 6, 3, 2, 8, 1, 7, 5) inversiyalar soni",
+                solve: () => {
+                const arr = [4, 9, 6, 3, 2, 8, 1, 7, 5];
+                const res = PermutationSolver.analyze(arr);
+                const steps = [
+                    "<b>Amaliy 2, 1-topshiriq (d):</b> $\\sigma = (4, 9, 6, 3, 2, 8, 1, 7, 5)$ inversiyalar tahlili.",
+                    ...res.steps,
+                    "<div class='result-badge'>Inversiyalar soni: $I(\\sigma) = " + res.inversions + "$ (" + (res.inversions % 2 === 0 ? "juft" : "toq") + ")</div>"
+                ];
+                app.showSolution("2-Amaliy, 1-topshiriq (d): Inversiyalar", steps);
+            }
+            },
+            {
+                id: "af2_t6_b",
+                name: "6-topshiriq (b): O'rniga qo'yishlar ko'paytmasi (5 ta element)",
+                shart: "\sigma = (2, 3, 1, 5, 4), \quad \tau = (5, 3, 4, 1, 2) bo'lsa, \sigma \circ \tau ni toping",
+                solve: () => {
+                const p1 = [2, 3, 1, 5, 4];
+                const p2 = [5, 3, 4, 1, 2];
+                const res = PermutationSolver.multiply(p1, p2);
+                const steps = [
+                    "<b>Amaliy 2, 6-topshiriq (b):</b> $\\sigma \\circ \\tau$ ko'paytmani topish.",
+                    "$$\\sigma = \\begin{pmatrix} 1 & 2 & 3 & 4 & 5 \\\\ 2 & 3 & 1 & 5 & 4 \\end{pmatrix}, \\quad \\tau = \\begin{pmatrix} 1 & 2 & 3 & 4 & 5 \\\\ 5 & 3 & 4 & 1 & 2 \\end{pmatrix}$$",
+                    ...res.steps,
+                    "<div class='result-badge'>Natija: $\\sigma \\circ \\tau = (" + res.result.join(', ') + ")$</div>"
+                ];
+                app.showSolution("2-Amaliy, 6-topshiriq (b): Ko'paytirish", steps);
+            }
+            }
         ]
     },
     3: {
@@ -471,7 +709,123 @@ const AMALIY_DATABASE = {
                     const steps = ["<b>Amaliy 3, 10-topshiriq:</b> $a_{ij} = \\min(i, j)$ shartli determinantni hisoblash.", "Matritsa ko'rinishi:<br>$$D_n = \\begin{vmatrix} 1 & 1 & 1 & \\dots & 1 \\\\ 1 & 2 & 2 & \\dots & 2 \\\\ 1 & 2 & 3 & \\dots & 3 \\\\ \\dots & \\dots & \\dots & \\dots & \\dots \\\\ 1 & 2 & 3 & \\dots & n \\end{vmatrix}$$", "Har bir $k$-satrdan $(k-1)$-satrni ketma-ket ayirib chiqamiz ($k = n, n-1, \\dots, 2$):<br>Natijada bosh diagonalda barcha elementlar $1$ ga aylanadi, bosh diagonal ostidagi elementlar esa $0$ bo'ladi (yuqori uchburchak matritsa):", "$$D_n = \\begin{vmatrix} 1 & 1 & 1 & \\dots & 1 \\\\ 0 & 1 & 1 & \\dots & 1 \\\\ 0 & 0 & 1 & \\dots & 1 \\\\ \\dots & \\dots & \\dots & \\dots & \\dots \\\\ 0 & 0 & 0 & \\dots & 1 \\end{vmatrix} = 1 \\cdot 1 \\cdot \\dots \\cdot 1 = 1$$", "<div class=\"result-badge\">Natija: $\\det(A) = 1$</div>"];
                     app.showSolution("10-topshiriq: a_ij = min(i, j) elementli n-tartibli determinant", steps);
                 }
+            },,
+            {
+                id: "af3_t2_a",
+                name: "2-topshiriq (a): [[a+b, a-b], [a-b, a+b]] determinanti",
+                shart: "\begin{vmatrix} a+b & a-b \\ a-b & a+b \end{vmatrix} ni soddalashtiring",
+                solve: () => {
+                const steps = [
+                    "<b>Amaliy 3, 2-topshiriq (a):</b> 2-tartibli algebraik determinant.",
+                    "$$\\Delta = \\begin{vmatrix} a+b & a-b \\\\ a-b & a+b \\end{vmatrix}$$",
+                    "$$\\Delta = (a+b)^2 - (a-b)^2$$",
+                    "Qisqa ko'paytirish formulasi: $$(a^2 + 2ab + b^2) - (a^2 - 2ab + b^2) = 4ab$$",
+                    "<div class='result-badge'>Natija: $\\Delta = 4ab$</div>"
+                ];
+                app.showSolution("3-Amaliy, 2-topshiriq (a): Determinant", steps);
+            }
             },
+            {
+                id: "af3_t3_c",
+                name: "3-topshiriq (c): 3-tartibli determinant (Sarryus usuli)",
+                shart: "\begin{vmatrix} 4 & -3 & 5 \\ 3 & -2 & 8 \\ 1 & -7 & -5 \end{vmatrix}",
+                solve: () => {
+                const mat = [[4, -3, 5], [3, -2, 8], [1, -7, -5]];
+                const res = MatrixSolver.determinant(mat);
+                const steps = [
+                    "<b>Amaliy 3, 3-topshiriq (c):</b> 3-tartibli determinantni Sarryus usulida hisoblash.",
+                    "$$A = " + MatrixSolver.toTeX(mat) + "$$",
+                    ...res.steps,
+                    "<div class='result-badge'>Natija: $|A| = " + res.result.toString() + "$</div>"
+                ];
+                app.showSolution("3-Amaliy, 3-topshiriq (c): Sarryus usuli", steps);
+            }
+            },
+            {
+                id: "af3_t9_a",
+                name: "9-topshiriq (a): 4-tartibli determinantni Gauss usulida hisoblash",
+                shart: "\begin{vmatrix} 1 & 1 & 1 & 1 \\ 1 & 2 & 3 & 4 \\ 1 & 3 & 6 & 10 \\ 1 & 4 & 10 & 20 \end{vmatrix}",
+                solve: () => {
+                const mat = [
+                    [1, 1, 1, 1],
+                    [1, 2, 3, 4],
+                    [1, 3, 6, 10],
+                    [1, 4, 10, 20]
+                ];
+                const res = MatrixSolver.determinant(mat);
+                const steps = [
+                    "<b>Amaliy 3, 9-topshiriq (a):</b> 4-tartibli Paskal determinanti (Gauss usulida uchburchak ko'rinishga keltirish).",
+                    "$$A = " + MatrixSolver.toTeX(mat) + "$$",
+                    ...res.steps,
+                    "<div class='result-badge'>Natija: $|A| = " + res.result.toString() + "$</div>"
+                ];
+                app.showSolution("3-Amaliy, 9-topshiriq (a): 4-tartibli determinant", steps);
+            }
+            },
+            {
+                id: "af3_t3_d",
+                name: "3-topshiriq (d): 3-tartibli determinant |A| = 1",
+                shart: "\begin{vmatrix} 3 & 2 & -4 \\ 4 & 1 & -2 \\ 5 & 2 & -3 \end{vmatrix}",
+                solve: () => {
+                const mat = [[3, 2, -4], [4, 1, -2], [5, 2, -3]];
+                const res = MatrixSolver.determinant(mat);
+                const steps = [
+                    "<b>Amaliy 3, 3-topshiriq (d):</b> 3-tartibli determinantni hisoblash.",
+                    "$$A = " + MatrixSolver.toTeX(mat) + "$$",
+                    ...res.steps,
+                    "<div class='result-badge'>Natija: $|A| = -1$</div>"
+                ];
+                app.showSolution("3-Amaliy, 3-topshiriq (d): Sarryus", steps);
+            }
+            },
+            {
+                id: "af3_t3_e",
+                name: "3-topshiriq (e): 3-tartibli determinant",
+                shart: "\begin{vmatrix} 3 & 4 & -5 \\ 8 & 7 & -2 \\ 2 & -1 & 8 \end{vmatrix}",
+                solve: () => {
+                const mat = [[3, 4, -5], [8, 7, -2], [2, -1, 8]];
+                const res = MatrixSolver.determinant(mat);
+                const steps = [
+                    "<b>Amaliy 3, 3-topshiriq (e):</b> 3-tartibli determinantni hisoblash.",
+                    "$$A = " + MatrixSolver.toTeX(mat) + "$$",
+                    ...res.steps,
+                    "<div class='result-badge'>Natija: $|A| = 0$</div>"
+                ];
+                app.showSolution("3-Amaliy, 3-topshiriq (e): Sarryus", steps);
+            }
+            },
+            {
+                id: "af3_t3_g",
+                name: "3-topshiriq (g): Birliklar bilan 3-tartibli determinant",
+                shart: "\begin{vmatrix} 1 & 1 & 1 \\ 1 & 2 & 3 \\ 1 & 3 & 6 \end{vmatrix}",
+                solve: () => {
+                const mat = [[1, 1, 1], [1, 2, 3], [1, 3, 6]];
+                const res = MatrixSolver.determinant(mat);
+                const steps = [
+                    "<b>Amaliy 3, 3-topshiriq (g):</b> 3-tartibli determinantni hisoblash.",
+                    "$$A = " + MatrixSolver.toTeX(mat) + "$$",
+                    ...res.steps,
+                    "<div class='result-badge'>Natija: $|A| = 1$</div>"
+                ];
+                app.showSolution("3-Amaliy, 3-topshiriq (g): Determinant", steps);
+            }
+            },
+            {
+                id: "af3_t3_h",
+                name: "3-topshiriq (h): Nolli simmetrik 3-tartibli determinant",
+                shart: "\begin{vmatrix} 0 & 1 & 1 \\ 1 & 0 & 1 \\ 1 & 1 & 0 \end{vmatrix}",
+                solve: () => {
+                const mat = [[0, 1, 1], [1, 0, 1], [1, 1, 0]];
+                const res = MatrixSolver.determinant(mat);
+                const steps = [
+                    "<b>Amaliy 3, 3-topshiriq (h):</b> Simmetrik determinantni hisoblash.",
+                    "$$A = " + MatrixSolver.toTeX(mat) + "$$",
+                    ...res.steps,
+                    "<div class='result-badge'>Natija: $|A| = 2$</div>"
+                ];
+                app.showSolution("3-Amaliy, 3-topshiriq (h): Determinant", steps);
+            }
+            }
         ]
     },
     4: {
@@ -560,7 +914,29 @@ const AMALIY_DATABASE = {
                     const steps = ["<b>Amaliy 4, 3-topshiriq:</b> Quyi burchagi nol bo'lgan blokli matritsa determinanti.", "Teorema: Agar kvadrat matritsa $\\begin{pmatrix} A & B \\\\ 0 & C \\end{pmatrix}$ ko'rinishida bo'lsa, bu yerda $A$ va $C$ kvadrat bloklar, u holda:<br>$$\\det \\begin{pmatrix} A & B \\\\ 0 & C \\end{pmatrix} = \\det(A) \\cdot \\det(C)$$", "Laplas teoremasi bo'yicha $A$ bloki egallagan satrlar bo'yicha yoyilganda yagona noldan farqli had $\\det(A) \\cdot \\det(C)$ bo'ladi.", "<div class=\"result-badge\">Qoida: Blok-uchburchak matritsa determinanti diagonal bloklar determinantlari ko'paytmasiga teng!</div>"];
                     app.showSolution("3-topshiriq: Blokli uchburchak determinant", steps);
                 }
-            },
+            },,
+            {
+                id: "af4_t5_a",
+                name: "5-topshiriq (a): Laplas teoremasi bo'yicha 2x2 minorlar yoyilmasi",
+                shart: "\begin{vmatrix} 2 & 1 & 4 & 3 \\ 3 & 4 & 0 & 5 \\ 3 & 4 & 5 & 2 \\ 1 & 5 & 2 & 4 \end{vmatrix}",
+                solve: () => {
+                const mat = [
+                    [2, 1, 4, 3],
+                    [3, 4, 0, 5],
+                    [3, 4, 5, 2],
+                    [1, 5, 2, 4]
+                ];
+                const res = MatrixSolver.determinant(mat);
+                const steps = [
+                    "<b>Amaliy 4, 5-topshiriq (a):</b> Laplas teoremasidan foydalanib dastlabki 2 ta satr minorlari bo'yicha hisoblash.",
+                    "$$A = " + MatrixSolver.toTeX(mat) + "$$",
+                    "$$\\det(A) = \\sum_{j_1 < j_2} M_{12, j_1 j_2} \\cdot A_{12, j_1 j_2}$$",
+                    ...res.steps,
+                    "<div class='result-badge'>Natija: $|A| = " + res.result.toString() + "$</div>"
+                ];
+                app.showSolution("4-Amaliy, 5-topshiriq (a): Laplas teoremasi", steps);
+            }
+            }
         ]
     },
     5: {
@@ -685,7 +1061,59 @@ const AMALIY_DATABASE = {
                     const steps = ["<b>Amaliy 5, 5-topshiriq:</b> Matritsaviy tenglamalarni yechish qoidalari.", "• 1-tur ($AX = B$): Chapdan $A^{-1}$ ga ko'paytiriladi: $A^{-1}(AX) = A^{-1}B \\implies X = A^{-1}B$.<br>• 2-tur ($XA = B$): O'ngdan $A^{-1}$ ga ko'paytiriladi: $(XA)A^{-1} = BA^{-1} \\implies X = BA^{-1}$.<br>• 3-tur ($AXB = C$): Chapdan $A^{-1}$ ga, o'ngdan $B^{-1}$ ga ko'paytiriladi: $X = A^{-1} C B^{-1}$.", "Shart: $A$ va $B$ xosmas matritsalar bo'lishi kerak $(\\det(A) \\neq 0, \\det(B) \\neq 0)$.", "<div class=\"result-badge\">Qoida: $X = A^{-1} C B^{-1}$</div>"];
                     app.showSolution("5-topshiriq: Matritsaviy tenglamalar (XA = B va AXB = C)", steps);
                 }
+            },,
+            {
+                id: "af5_t3_a",
+                name: "3-topshiriq (a): Gauss-Jordan usuli bilan teskari matritsa [A|E]",
+                shart: "A = [[1, 2, -3], [0, 1, 2], [0, 0, 1]] uchun A⁻¹ ni toping",
+                solve: () => {
+                const A = [[1, 2, -3], [0, 1, 2], [0, 0, 1]];
+                const res = MatrixSolver.inverse(A);
+                const steps = [
+                    "<b>Amaliy 5, 3-topshiriq (a):</b> Gauss-Jordan usuli yordamida $[A \\mid E] \\to [E \\mid A^{-1}]$.",
+                    "$$A = " + MatrixSolver.toTeX(A) + "$$",
+                    ...res.steps,
+                    "<div class='result-badge'>Natija: $A^{-1} = " + MatrixSolver.toTeX(res.result) + "$</div>"
+                ];
+                app.showSolution("5-Amaliy, 3-topshiriq (a): Gauss-Jordan teskari matritsa", steps);
+            }
             },
+            {
+                id: "af5_t2_b",
+                name: "2-topshiriq (b): 3x3 teskari matritsa (qo'shma matritsa usuli)",
+                shart: "A = [[1, 2, 2], [2, 1, -2], [2, -2, 1]] uchun A⁻¹ ni toping",
+                solve: () => {
+                const A = [[1, 2, 2], [2, 1, -2], [2, -2, 1]];
+                const res = MatrixSolver.inverse(A);
+                const steps = [
+                    "<b>Amaliy 5, 2-topshiriq (b):</b> 3x3 ortogonal matritsaning teskarisini topish.",
+                    "$$A = " + MatrixSolver.toTeX(A) + "$$",
+                    "Determinant: $|A| = -27 \\neq 0$.",
+                    ...res.steps,
+                    "<div class='result-badge'>Natija: $A^{-1} = " + MatrixSolver.toTeX(res.result) + "$</div>"
+                ];
+                app.showSolution("5-Amaliy, 2-topshiriq (b): Teskari matritsa", steps);
+            }
+            },
+            {
+                id: "af5_t5_b",
+                name: "5-topshiriq (b): Matritsaviy tenglama (X · A = B)",
+                shart: "X · [[2, 5], [1, 3]] = [[4, -6], [2, 1]] tenglamadan X ni toping",
+                solve: () => {
+                const A = [[2, 5], [1, 3]];
+                const B = [[4, -6], [2, 1]];
+                const invA = MatrixSolver.inverse(A);
+                const res = MatrixSolver.multiply(B, invA.result);
+                const steps = [
+                    "<b>Amaliy 5, 5-topshiriq (b):</b> $X \\cdot A = B \\implies X = B \\cdot A^{-1}$ tenglamani yechish.",
+                    "$$A = " + MatrixSolver.toTeX(A) + ", \\quad B = " + MatrixSolver.toTeX(B) + "$$",
+                    "1) $A^{-1}$ ni topamiz: $$A^{-1} = " + MatrixSolver.toTeX(invA.result) + "$$",
+                    "2) $X = B \\cdot A^{-1}$ ko'paytmani hisoblaymiz: $$X = " + MatrixSolver.toTeX(res.result) + "$$",
+                    "<div class='result-badge'>Natija: $X = " + MatrixSolver.toTeX(res.result) + "$</div>"
+                ];
+                app.showSolution("5-Amaliy, 5-topshiriq (b): Matritsaviy tenglama", steps);
+            }
+            }
         ]
     },
     6: {
@@ -802,7 +1230,27 @@ const AMALIY_DATABASE = {
                     const steps = ["<b>Amaliy 6, 2-topshiriq (b):</b> Gauss usulida pog'onaviy ko'rinishga keltirish.", "Kengaytirilgan matritsa: $$\\begin{pmatrix} 5 & 2 & -4 & | & 4 \\\\ 1 & 3 & 4 & | & 3 \\\\ 2 & 4 & 1 & | & 1 \\end{pmatrix}$$", "1- va 2-satrlarni almashtirib, bosh diagonal ostini nolga aylantiramiz.", "Natijada teskari harakat orqali: $x_3 = 0, x_2 = -1, x_1 = 2$ hosil bo'ladi.", "<div class=\"result-badge\">Yechim: $x_1 = 2, \\quad x_2 = -1, \\quad x_3 = 0$</div>"];
                     app.showSolution("2-topshiriq (b): Gauss usuli (5x1 + 2x2 - 4x3 = 4)", steps);
                 }
-            },
+            },,
+            {
+                id: "af6_t3_a",
+                name: "3-topshiriq (a): Matritsa usulida yechish (X = A⁻¹ · B)",
+                shart: "2x - y + z = 2, \quad 3x + 2y + 2z = -2, \quad x - 2y + z = 1",
+                solve: () => {
+                const A = [[2, -1, 1], [3, 2, 2], [1, -2, 1]];
+                const B = [2, -2, 1];
+                const invA = MatrixSolver.inverse(A);
+                const res = MatrixSolver.solveGauss(A, B);
+                const steps = [
+                    "<b>Amaliy 6, 3-topshiriq (a):</b> Matritsa usulida $X = A^{-1} B$ yechish.",
+                    "Asosiy matritsa: $$A = " + MatrixSolver.toTeX(A) + ", \\quad B = " + MatrixSolver.toTeX(B.map(v => [v])) + "$$",
+                    "1) $A^{-1}$ teskari matritsa: $$A^{-1} = " + MatrixSolver.toTeX(invA.result) + "$$",
+                    "2) $X = A^{-1} \\cdot B$ ko'paytma yechimi:",
+                    ...res.steps,
+                    "<div class='result-badge'>Yechim: $x = -1, \\quad y = -1, \\quad z = 3$</div>"
+                ];
+                app.showSolution("6-Amaliy, 3-topshiriq (a): Matritsa usuli", steps);
+            }
+            }
         ]
     },
     7: {
@@ -932,7 +1380,40 @@ const AMALIY_DATABASE = {
                     const steps = ["<b>Amaliy 7, 4-topshiriq (b):</b>", "Koordinatalar nisbatini tekshiramiz:<br>$$\\frac{6}{4} = \\frac{3}{2}, \\quad \\frac{-3}{-2} = \\frac{3}{2}, \\quad \\frac{9}{6} = \\frac{3}{2}$$", "Barcha koordinatalar nisbati bir xil: $a_2 = \\frac{3}{2} a_1$.", "Demak, $3a_1 - 2a_2 = 0$ nolmas chiziqli kombinatsiya mavjud.", "<div class=\"result-badge\">Xulosa: Vektorlar sistemasi CHIZIQLI BOG'LIQ</div>"];
                     app.showSolution("4-topshiriq (b): a1 = (4, -2, 6), a2 = (6, -3, 9) chiziqli bog'liqligi", steps);
                 }
+            },,
+            {
+                id: "af7_t4_a",
+                name: "4-topshiriq (a): Vektorlar sistemasining chiziqli erkli yoki bog'liqligi",
+                shart: "a1=(1, 2, 3), a2=(2, 5, 7), a3=(3, 7, 10) vektorlar sistemasini tekshiring",
+                solve: () => {
+                const mat = [[1, 2, 3], [2, 5, 7], [3, 7, 10]];
+                const res = MatrixSolver.determinant(mat);
+                const steps = [
+                    "<b>Amaliy 7, 4-topshiriq (a):</b> Vektorlar sistemasini chiziqli erkli yoki bog'liqligini tekshirish.",
+                    "Vektorlardan tuzilgan determinantni hisoblaymiz: $$|A| = " + MatrixSolver.toTeX(mat) + "$$",
+                    ...res.steps,
+                    "Determinant $|A| = 0$ bo'lgani sababli, vektorlar sistemasi <b>chiziqli bog'liq</b> (chunki $a_3 = a_1 + a_2$).",
+                    "<div class='result-badge'>Xulosa: Chiziqli bog'liq (rang = 2 < 3)</div>"
+                ];
+                app.showSolution("7-Amaliy, 4-topshiriq (a): Vektorlar bog'liqligi", steps);
+            }
             },
+            {
+                id: "af7_t6_b",
+                name: "6-topshiriq (b): 3x4 Matritsa rangini Gauss usulida topish",
+                shart: "A = [[2, -1, 3, 5], [4, -3, 1, 3], [3, -2, 3, 4]] ning rangini aniqlang",
+                solve: () => {
+                const mat = [[2, -1, 3, 5], [4, -3, 1, 3], [3, -2, 3, 4]];
+                const res = MatrixSolver.rank(mat);
+                const steps = [
+                    "<b>Amaliy 7, 6-topshiriq (b):</b> Gauss elementar almashtirishlari orqali pog'onaviy ko'rinishga keltirish.",
+                    "$$A = " + MatrixSolver.toTeX(mat) + "$$",
+                    ...res.steps,
+                    "<div class='result-badge'>Natija: $\\operatorname{rang}(A) = " + res.result + "$</div>"
+                ];
+                app.showSolution("7-Amaliy, 6-topshiriq (b): Matritsa rangi", steps);
+            }
+            }
         ]
     },
     8: {
@@ -1100,7 +1581,27 @@ const AMALIY_DATABASE = {
                     ];
                     app.showSolution("8-Amaliy, 5-Variant", steps);
                 }
-            },
+            },,
+            {
+                id: "af8_t1_b",
+                name: "1-topshiriq (b): Bir jinsli sistemani yechish va FYET topish",
+                shart: "x1 + 2x2 + 4x3 - 3x4 = 0, \quad 3x1 + 5x2 + 6x3 - 4x4 = 0, \quad 4x1 + 5x2 - 2x3 + 3x4 = 0",
+                solve: () => {
+                const mat = [
+                    [1, 2, 4, -3],
+                    [3, 5, 6, -4],
+                    [4, 5, -2, 3]
+                ];
+                const res = MatrixSolver.solveHomogeneous(mat);
+                const steps = [
+                    "<b>Amaliy 8, 1-topshiriq (b):</b> Bir jinsli tenglamalar sistemasi uchun Fundamental Yechimlar Tizimi (FYET).",
+                    "Sistema matritsasi: $$A = " + MatrixSolver.toTeX(mat) + "$$",
+                    ...res.steps,
+                    "<div class='result-badge'>Umumiy yechim: $X = c_1 e_1 + c_2 e_2$</div>"
+                ];
+                app.showSolution("8-Amaliy, 1-topshiriq (b): FYET", steps);
+            }
+            }
         ]
     },
     9: {
@@ -1745,7 +2246,89 @@ const AMALIY_DATABASE = {
                     const steps = ["<b>Amaliy 10, 25-topshiriq:</b> Birning $n$-darajali ildizlari yig'indisi haqidagi teorema.", "Birning $n$-darajali ildizlari geometrik progressiya tashkil qiladi: $w_k = \\varepsilon^k$, bu yerda $\\varepsilon = \\cos\\frac{2\\pi}{n} + i\\sin\\frac{2\\pi}{n} \\neq 1$.", "Yig'indi formulasi: $$S = 1 + \\varepsilon + \\varepsilon^2 + \\dots + \\varepsilon^{n-1} = \\frac{\\varepsilon^n - 1}{\\varepsilon - 1}$$", "$\\varepsilon$ birning $n$-darajali ildizi bo'lgani uchun $\\varepsilon^n = 1$.", "Demak: $$S = \\frac{1 - 1}{\\varepsilon - 1} = \\frac{0}{\\varepsilon - 1} = 0$$", "<div class=\"result-badge\">Isbotlandi: $\\sum_{k=0}^{n-1} w_k = 0$ ∎</div>"];
                     app.showSolution("25-topshiriq: Birning barcha n-darajali ildizlari yig'indisi nolga tengligi", steps);
                 }
+            },,
+            {
+                id: "af10_t1_a",
+                name: "1-topshiriq (a): z = 1 + i ni trigonometrik shaklga keltirish",
+                shart: "z = 1 + i kompleks sonini r(cos φ + i sin φ) shaklga keltiring",
+                solve: () => {
+                const z = new Complex(1, 1);
+                const res = z.toTrig();
+                const steps = [
+                    "<b>Amaliy 10, 1-topshiriq (a):</b> Trigonometrik shaklga keltirish.",
+                    "Berilgan: $z = 1 + i$",
+                    "1) Modul: $r = |z| = \\sqrt{1^2 + 1^2} = \\sqrt{2}$",
+                    "2) Argument: $\\varphi = \\arctan(1/1) = \\frac{\\pi}{4}$",
+                    "<div class='result-badge'>Trigonometrik shakl: $z = \\sqrt{2} \\left( \\cos\\frac{\\pi}{4} + i\\sin\\frac{\\pi}{4} \\right)$</div>"
+                ];
+                app.showSolution("10-Amaliy, 1-topshiriq (a): Trigonometrik shakl", steps);
+            }
             },
+            {
+                id: "af10_t2_b",
+                name: "2-topshiriq (b): (1 + i)¹⁰ ni Muavr formulasi bilan hisoblash",
+                shart: "(1 + i)^10 ni Muavr formulasi z^n = r^n(cos nφ + i sin nφ) bilan hisoblang",
+                solve: () => {
+                const steps = [
+                    "<b>Amaliy 10, 2-topshiriq (b):</b> $(1+i)^{10}$ ni hisoblash.",
+                    "$1 + i = \\sqrt{2} \\left( \\cos\\frac{\\pi}{4} + i\\sin\\frac{\\pi}{4} \\right)$",
+                    "Muavr formulasi: $$(1+i)^{10} = (\\sqrt{2})^{10} \\left( \\cos\\frac{10\\pi}{4} + i\\sin\\frac{10\\pi}{4} \\right)$$",
+                    "$$= 32 \\left( \\cos\\frac{5\\pi}{2} + i\\sin\\frac{5\\pi}{2} \\right) = 32(0 + i) = 32i$$",
+                    "<div class='result-badge'>Javob: $(1+i)^{10} = 32i$</div>"
+                ];
+                app.showSolution("10-Amaliy, 2-topshiriq (b): Muavr formulasi", steps);
+            }
+            },
+            {
+                id: "af10_t3_b",
+                name: "3-topshiriq (b): ∛(-8) ning barcha 3 ta kompleks ildizlari",
+                shart: "w = ∛(-8) ning barcha ildizlarini toping",
+                solve: () => {
+                const steps = [
+                    "<b>Amaliy 10, 3-topshiriq (b):</b> $\\sqrt[3]{-8}$ barcha kompleks ildizlari.",
+                    "$-8 = 8(\\cos\\pi + i\\sin\\pi)$",
+                    "Ildizlar formulasi: $w_k = 2 \\left( \\cos\\frac{\\pi + 2\\pi k}{3} + i\\sin\\frac{\\pi + 2\\pi k}{3} \\right), \\quad k = 0, 1, 2$",
+                    "• $k = 0$: $w_0 = 2(\\cos\\frac{\\pi}{3} + i\\sin\\frac{\\pi}{3}) = 1 + i\\sqrt{3}$",
+                    "• $k = 1$: $w_1 = 2(\\cos\\pi + i\\sin\\pi) = -2$",
+                    "• $k = 2$: $w_2 = 2(\\cos\\frac{5\\pi}{3} + i\\sin\\frac{5\\pi}{3}) = 1 - i\\sqrt{3}$",
+                    "<div class='result-badge'>Ildizlar: $w_0 = 1 + i\\sqrt{3}, \\quad w_1 = -2, \\quad w_2 = 1 - i\\sqrt{3}$</div>"
+                ];
+                app.showSolution("10-Amaliy, 3-topshiriq (b): 3-darajali ildizlar", steps);
+            }
+            },
+            {
+                id: "af10_t1_b",
+                name: "1-topshiriq (b): z = -√3 + i ni trigonometrik shaklga keltirish",
+                shart: "z = -\sqrt{3} + i kompleks sonini r(cos φ + i sin φ) shaklga keltiring",
+                solve: () => {
+                const steps = [
+                    "<b>Amaliy 10, 1-topshiriq (b):</b> $z = -\\sqrt{3} + i$ trigonometrik shakl.",
+                    "1) Modul: $r = \\sqrt{(-\\sqrt{3})^2 + 1^2} = \\sqrt{3 + 1} = 2$",
+                    "2) Argument: Nuqta 2-chorakda joylashgan: $a < 0, b > 0$.",
+                    "$$\\varphi = \\pi - \\arctan\\frac{1}{\\sqrt{3}} = \\pi - \\frac{\\pi}{6} = \\frac{5\\pi}{6}$$",
+                    "<div class='result-badge'>Trigonometrik shakl: $z = 2 \\left( \\cos\\frac{5\\pi}{6} + i\\sin\\frac{5\\pi}{6} \\right)$</div>"
+                ];
+                app.showSolution("10-Amaliy, 1-topshiriq (b): Trigonometrik shakl", steps);
+            }
+            },
+            {
+                id: "af10_t3_c",
+                name: "3-topshiriq (c): ⁴√(1) birlikning 4-darajali ildizlari",
+                shart: "w = ⁴√(1) barcha 4 ta kompleks ildizlarini toping",
+                solve: () => {
+                const steps = [
+                    "<b>Amaliy 10, 3-topshiriq (c):</b> $\\sqrt[4]{1}$ barcha kompleks ildizlari.",
+                    "$1 = \\cos 0 + i\\sin 0$",
+                    "$w_k = \\cos\\frac{2\\pi k}{4} + i\\sin\\frac{2\\pi k}{4} = \\cos\\frac{\\pi k}{2} + i\\sin\\frac{\\pi k}{2}, \\quad k = 0, 1, 2, 3$",
+                    "• $k = 0$: $w_0 = 1$",
+                    "• $k = 1$: $w_1 = i$",
+                    "• $k = 2$: $w_2 = -1$",
+                    "• $k = 3$: $w_3 = -i$",
+                    "<div class='result-badge'>Ildizlar: $\\pm 1, \\quad \\pm i$</div>"
+                ];
+                app.showSolution("10-Amaliy, 3-topshiriq (c): 4-darajali ildizlar", steps);
+            }
+            }
         ]
     },
     11: {
@@ -1843,7 +2426,56 @@ const AMALIY_DATABASE = {
                     const steps = ["<b>Amaliy 11, 8-topshiriq (a):</b> Ildizning karralilik darajasini Gorner sxemasida aniqlash.", "Ketma-ket Gorner sxemasi qo'llaniladi qoldiq nol bo'lmaguncha:<br>1-bo'lish: $x_0 = 2$ da qoldiq $r_1 = 0$ (ildiz).<br>2-bo'lish: hosil bo'lgan ko'phadni $x - 2$ ga bo'lganda $r_2 = 0$ (2-karrali).<br>3-bo'lish: yana $x - 2$ ga bo'lganda $r_3 = 0$ (3-karrali).<br>4-bo'lish: $r_4 \\neq 0$.", "Demak, $x_0 = 2$ soni 3 karrali ildizdir.", "<div class=\"result-badge\">Javob: $x_0 = 2$ uch (3) karrali ildiz</div>"];
                     app.showSolution("8-topshiriq (a): x0 = 2 sonining karraliligini aniqlash", steps);
                 }
+            },,
+            {
+                id: "af11_t1_a",
+                name: "1-topshiriq (a): Ko'phadlarni qo'shish va ko'paytirish",
+                shart: "f(x) = 2x^4 - 3x^3 + 5x - 2, \quad g(x) = x^3 - 2x^2 + 4",
+                solve: () => {
+                const P = Polynomial.parse("2x^4 - 3x^3 + 5x - 2");
+                const Q = Polynomial.parse("x^3 - 2x^2 + 4");
+                const addRes = Polynomial.add(P, Q);
+                const steps = [
+                    "<b>Amaliy 11, 1-topshiriq (a):</b> Ko'phadlarni qo'shish.",
+                    "$$f(x) = 2x^4 - 3x^3 + 5x - 2, \\quad g(x) = x^3 - 2x^2 + 4$$",
+                    ...addRes.steps,
+                    "<div class='result-badge'>Yig'indi: $f(x) + g(x) = 2x^4 - 2x^3 - 2x^2 + 5x + 2$</div>"
+                ];
+                app.showSolution("11-Amaliy, 1-topshiriq (a): Ko'phadlar amallari", steps);
+            }
             },
+            {
+                id: "af11_t2_b",
+                name: "2-topshiriq (b): Ko'phadlarni burchakli qoldiqli bo'lish",
+                shart: "f(x) = 2x^4 - 3x^3 + 4x^2 - 5x + 6 ni g(x) = x^2 - 3x + 1 ga bo'ling",
+                solve: () => {
+                const P = Polynomial.parse("2x^4 - 3x^3 + 4x^2 - 5x + 6");
+                const Q = Polynomial.parse("x^2 - 3x + 1");
+                const res = Polynomial.divide(P, Q);
+                const steps = [
+                    "<b>Amaliy 11, 2-topshiriq (b):</b> Burchakli qoldiqli bo'lish.",
+                    ...res.steps,
+                    "<div class='result-badge'>Bo'linma: $q(x) = 2x^2 + 3x + 11$, Qoldiq: $r(x) = 25x - 5$</div>"
+                ];
+                app.showSolution("11-Amaliy, 2-topshiriq (b): Qoldiqli bo'lish", steps);
+            }
+            },
+            {
+                id: "af11_t1_b",
+                name: "1-topshiriq (b): Ko'phadlarni ko'paytirish P(x) · Q(x)",
+                shart: "P(x) = x^2 - 2x + 3, \quad Q(x) = 2x^2 + x - 1 ni ko'paytiring",
+                solve: () => {
+                const P = Polynomial.parse("x^2 - 2x + 3");
+                const Q = Polynomial.parse("2x^2 + x - 1");
+                const res = Polynomial.multiply(P, Q);
+                const steps = [
+                    "<b>Amaliy 11, 1-topshiriq (b):</b> Ko'phadlar ko'paytmasi $P(x) \\cdot Q(x)$.",
+                    ...res.steps,
+                    "<div class='result-badge'>Ko'paytma: $2x^4 - 3x^3 + 3x^2 + 5x - 3$</div>"
+                ];
+                app.showSolution("11-Amaliy, 1-topshiriq (b): Ko'phadlarni ko'paytirish", steps);
+            }
+            }
         ]
     },
     12: {
@@ -1914,7 +2546,40 @@ const AMALIY_DATABASE = {
                     ];
                     app.showSolution("12-Amaliy, 5-Variant", steps);
                 }
+            },,
+            {
+                id: "af12_t1_b",
+                name: "1-topshiriq (b): EKUB(f, g) Yevklid algoritmi",
+                shart: "f(x) = x^4 + x^3 - 3x^2 - 4x - 1, \quad g(x) = x^3 + x^2 - x - 1 ning EKUBini toping",
+                solve: () => {
+                const P = Polynomial.parse("x^4 + x^3 - 3x^2 - 4x - 1");
+                const Q = Polynomial.parse("x^3 + x^2 - x - 1");
+                const res = Polynomial.gcd(P, Q);
+                const steps = [
+                    "<b>Amaliy 12, 1-topshiriq (b):</b> Ko'phadlar EKUBi (Yevklid algoritmi).",
+                    ...res.steps,
+                    "<div class='result-badge'>EKUB$(f, g) = x + 1$</div>"
+                ];
+                app.showSolution("12-Amaliy, 1-topshiriq (b): Yevklid algoritmi", steps);
+            }
             },
+            {
+                id: "af12_t2_a",
+                name: "2-topshiriq (a): Yevklid algoritmi bo'yicha chiziqli ifodalash u·f + v·g = d",
+                shart: "f(x) = x^3 - 2, g(x) = x^2 - 1 uchun u(x)f(x) + v(x)g(x) = 1 ko'rinishda yozing",
+                solve: () => {
+                const steps = [
+                    "<b>Amaliy 12, 2-topshiriq (a):</b> Yevklid algoritmi bo'yicha chiziqli ifodalash.",
+                    "1) $x^3 - 2 = x(x^2 - 1) + (x - 2)$",
+                    "2) $x^2 - 1 = (x + 2)(x - 2) + 3$",
+                    "Qoldiq $3$ ni teskari yurish bilan ifodalaymiz:",
+                    "$$3 = (x^2 - 1) - (x + 2)(x - 2) = (x^2 - 1) - (x + 2)[(x^3 - 2) - x(x^2 - 1)]$$",
+                    "$$3 = -(x + 2)(x^3 - 2) + (x^2 + 2x + 1)(x^2 - 1)$$",
+                    "<div class='result-badge'>Chiziqli ifoda: $-\frac{x+2}{3} f(x) + \frac{(x+1)^2}{3} g(x) = 1$</div>"
+                ];
+                app.showSolution("12-Amaliy, 2-topshiriq (a): Yevklid chiziqli ifoda", steps);
+            }
+            }
         ]
     },
     13: {
@@ -1980,7 +2645,54 @@ const AMALIY_DATABASE = {
                     ];
                     app.showSolution("13-Amaliy, 5-Variant", steps);
                 }
+            },,
+            {
+                id: "af13_t1_a",
+                name: "1-topshiriq (a): Bezu teoremasi bo'yicha qoldiqni hisoblash",
+                shart: "f(x) = x^4 - 3x^3 + 6x^2 - 10x + 16 ni (x - 2) ga bo'lgandagi qoldiqni toping",
+                solve: () => {
+                const P = Polynomial.parse("x^4 - 3x^3 + 6x^2 - 10x + 16");
+                const res = Polynomial.horner(P, 2);
+                const steps = [
+                    "<b>Amaliy 13, 1-topshiriq (a):</b> Bezu teoremasi: $f(x)$ ni $(x - c)$ ga bo'lgandagi qoldiq $R = f(c)$ ga teng.",
+                    "Bu yerda $c = 2$. $f(2)$ ni hisoblaymiz:",
+                    "$$f(2) = 2^4 - 3 \\cdot 2^3 + 6 \\cdot 2^2 - 10 \\cdot 2 + 16 = 16 - 24 + 24 - 20 + 16 = 12$$",
+                    ...res.steps,
+                    "<div class='result-badge'>Qoldiq: $R = 12$</div>"
+                ];
+                app.showSolution("13-Amaliy, 1-topshiriq (a): Bezu teoremasi", steps);
+            }
             },
+            {
+                id: "af13_t4_b",
+                name: "4-topshiriq (b): Ko'phadning barcha ratsional ildizlarini topish",
+                shart: "f(x) = x^4 - 2x^3 - 8x^2 + 13x - 24 ning barcha ratsional ildizlarini toping",
+                solve: () => {
+                const P = Polynomial.parse("x^4 - 2x^3 - 8x^2 + 13x - 24");
+                const res = Polynomial.findRationalRoots(P);
+                const steps = [
+                    "<b>Amaliy 13, 4-topshiriq (b):</b> Butun koeffitsiyentli ko'phadning ratsional ildizlarini $p/q$ nomzodlar bilan topish.",
+                    ...res.steps,
+                    "<div class='result-badge'>Ratsional ildizlar: $\\pm 1, \\dots$ tekshirilganda $x = -3, x = 4$ topiladi.</div>"
+                ];
+                app.showSolution("13-Amaliy, 4-topshiriq (b): Ratsional ildizlar", steps);
+            }
+            },
+            {
+                id: "af13_t3_a",
+                name: "3-topshiriq (a): f(x) ni (x - 1) darajalari bo'yicha Gorner sxemasi bilan yoyish",
+                shart: "f(x) = x^4 + 2x^3 - 3x^2 - 4x + 1 ni (x - 1) darajalari bo'yicha yoying",
+                solve: () => {
+                const steps = [
+                    "<b>Amaliy 13, 3-topshiriq (a):</b> $f(x)$ ni $(x - 1)$ darajalari bo'yicha Teylor-Gorner yoyilmasi.",
+                    "Ketma-ket Gorner sxemasini $c = 1$ uchun qo'llaymiz:",
+                    "Koeffitsiyentlar: $b_0 = -3, b_1 = 3, b_2 = 9, b_3 = 6, b_4 = 1$",
+                    "$$f(x) = (x - 1)^4 + 6(x - 1)^3 + 9(x - 1)^2 + 3(x - 1) - 3$$",
+                    "<div class='result-badge'>Yoyilma: $(x - 1)^4 + 6(x - 1)^3 + 9(x - 1)^2 + 3(x - 1) - 3$</div>"
+                ];
+                app.showSolution("13-Amaliy, 3-topshiriq (a): Gorner yoyilmasi", steps);
+            }
+            }
         ]
     },
     14: {
@@ -2078,7 +2790,42 @@ const AMALIY_DATABASE = {
                     const steps = ["<b>Amaliy 14, 1-topshiriq (c):</b> Ratsional kasrni sodda kasrlarga yoyish.", "Maxrajni ko'paytuvchilarga ajratamiz: $x^3 - x = x(x^2 - 1) = x(x - 1)(x + 1)$.", "Sodda kasrlar ko'rinishi: $$\\frac{1}{x(x-1)(x+1)} = \\frac{A}{x} + \\frac{B}{x-1} + \\frac{C}{x+1}$$", "Qopqon (yopish) usuli bilan koeffitsiyentlarni topamiz:<br>• $x = 0: A = \\frac{1}{(0-1)(0+1)} = -1$<br>• $x = 1: B = \\frac{1}{1(1+1)} = \\frac{1}{2}$<br>• $x = -1: C = \\frac{1}{(-1)(-1-1)} = \\frac{1}{2}$", "Natija: $$\\frac{1}{x^3 - x} = -\\frac{1}{x} + \\frac{1}{2(x-1)} + \\frac{1}{2(x+1)}$$", "<div class=\"result-badge\">Yoyilma: $-\\frac{1}{x} + \\frac{0.5}{x-1} + \\frac{0.5}{x+1}$</div>"];
                     app.showSolution("1-topshiriq (c): 1 / (x³ - x) ni kompleks maydonda sodda kasrlarga yoyish", steps);
                 }
+            },,
+            {
+                id: "af14_t2_b",
+                name: "2-topshiriq (b): Sodda kasrlarga yoyish (1 / (x³ - x))",
+                shart: "f(x) = 1 / (x³ - x) ni haqiqiy sonlar maydonida sodda kasrlarga yoying",
+                solve: () => {
+                const steps = [
+                    "<b>Amaliy 14, 2-topshiriq (b):</b> $\\frac{1}{x^3 - x}$ ni sodda kasrlarga yoyish.",
+                    "Maxrajni ko'paytuvchilarga ajratamiz: $$x^3 - x = x(x^2 - 1) = x(x - 1)(x + 1)$$",
+                    "Sodda kasrlar ko'rinishida yozamiz: $$\\frac{1}{x(x-1)(x+1)} = \\frac{A}{x} + \\frac{B}{x-1} + \\frac{C}{x+1}$$",
+                    "Umumiy maxrajga keltiramiz: $1 = A(x^2-1) + Bx(x+1) + Cx(x-1)$",
+                    "• $x = 0 \\implies 1 = -A \\implies A = -1$",
+                    "• $x = 1 \\implies 1 = 2B \\implies B = \\frac{1}{2}$",
+                    "• $x = -1 \\implies 1 = 2C \\implies C = \\frac{1}{2}$",
+                    "<div class='result-badge'>Natija: $-\\frac{1}{x} + \\frac{1}{2(x-1)} + \\frac{1}{2(x+1)}$</div>"
+                ];
+                app.showSolution("14-Amaliy, 2-topshiriq (b): Sodda kasrlarga yoyish", steps);
+            }
             },
+            {
+                id: "af14_t3_a",
+                name: "3-topshiriq (a): Karrali maxraj bo'yicha sodda kasrlarga yoyish",
+                shart: "f(x) = x / (x - 1)²(x + 1) ni sodda kasrlarga yoying",
+                solve: () => {
+                const steps = [
+                    "<b>Amaliy 14, 3-topshiriq (a):</b> Karrali chiziqli ko'paytuvchilar bo'yicha yoyish.",
+                    "$$\\frac{x}{(x-1)^2(x+1)} = \\frac{A}{x-1} + \\frac{B}{(x-1)^2} + \\frac{C}{x+1}$$",
+                    "Umumiy maxrajdan so'ng: $x = A(x-1)(x+1) + B(x+1) + C(x-1)^2$",
+                    "• $x = 1 \\implies 1 = 2B \\implies B = 1/2$",
+                    "• $x = -1 \\implies -1 = 4C \\implies C = -1/4$",
+                    "• $x = 0 \\implies 0 = -A + B + C \\implies A = 1/4$",
+                    "<div class='result-badge'>Natija: $\\frac{1}{4(x-1)} + \\frac{1}{2(x-1)^2} - \\frac{1}{4(x+1)}$</div>"
+                ];
+                app.showSolution("14-Amaliy, 3-topshiriq (a): Sodda kasrlar", steps);
+            }
+            }
         ]
     },
     15: {
@@ -2172,7 +2919,61 @@ const AMALIY_DATABASE = {
                     const steps = ["<b>Amaliy 15, 3-topshiriq:</b> 4-darajali algebraik tenglamani Ferrari usulida yechish.", "1) $x = y + 1$ almashtirish orqali kubik had yo'qotiladi: $y^4 - 10y^2 + 8y - 1 = 0$.<br>2) Ferrari rezolventasi tuziladi: $t^3 + 10t^2 + t + 10 = 0 \\implies (t+10)(t^2+1) = 0 \\implies t = -10$.<br>3) Kvadrat uchhadlar ko'paytmasiga ajratiladi va 4 ta ildiz topiladi.", "<div class=\"result-badge\">Ferrari usuli bo'yicha to'rtta ildiz aniq topiladi.</div>"];
                     app.showSolution("3-topshiriq: Ferrari usuli (4-darajali tenglama x⁴ - 4x³ - 4x² + 16x - 8 = 0)", steps);
                 }
+            },,
+            {
+                id: "af15_t1_b",
+                name: "1-topshiriq (b): Kardano formulasi (y³ - 3y - 2 = 0)",
+                shart: "y^3 - 3y - 2 = 0 tenglamani Kardano formulasi bilan yeching",
+                solve: () => {
+                const res = HigherDegreeSolver.solveCubic(1, 0, -3, -2);
+                const steps = [
+                    "<b>Amaliy 15, 1-topshiriq (b):</b> $y^3 - 3y - 2 = 0$ Kardano formulasi.",
+                    "Parametrlar: $p = -3, \\quad q = -2$.",
+                    "Diskriminant: $D = \\left(\\frac{q}{2}\\right)^2 + \\left(\\frac{p}{3}\\right)^3 = (-1)^2 + (-1)^3 = 1 - 1 = 0$.",
+                    "$D = 0$ bo'lgani uchun karrali haqiqiy ildizlar mavjud:",
+                    "• $u = v = \\sqrt[3]{-\\frac{q}{2}} = \\sqrt[3]{1} = 1$",
+                    "• $y_1 = 2u = 2$",
+                    "• $y_2 = y_3 = -u = -1$",
+                    "<div class='result-badge'>Ildizlar: $y_1 = 2, \\quad y_2 = y_3 = -1$</div>"
+                ];
+                app.showSolution("15-Amaliy, 1-topshiriq (b): Kardano formulasi", steps);
+            }
             },
+            {
+                id: "af15_t4_a",
+                name: "4-topshiriq (a): Bikvadrat tenglama (x⁴ - 5x² + 4 = 0)",
+                shart: "x^4 - 5x^2 + 4 = 0 tenglamani yeching",
+                solve: () => {
+                const steps = [
+                    "<b>Amaliy 15, 4-topshiriq (a):</b> $x^4 - 5x^2 + 4 = 0$ bikvadrat tenglama.",
+                    "$t = x^2 \\ge 0$ almashtirish kiritamiz: $$t^2 - 5t + 4 = 0$$",
+                    "Viyet teoremasi bo'yicha: $t_1 = 1, \\quad t_2 = 4$.",
+                    "1) $x^2 = 1 \\implies x = \\pm 1$",
+                    "2) $x^2 = 4 \\implies x = \\pm 2$",
+                    "<div class='result-badge'>Ildizlar: $x \\in \\{-2, -1, 1, 2\\}$</div>"
+                ];
+                app.showSolution("15-Amaliy, 4-topshiriq (a): Bikvadrat tenglama", steps);
+            }
+            },
+            {
+                id: "af15_t1_c",
+                name: "1-topshiriq (c): Kardano formulasi (y³ + 6y + 2 = 0)",
+                shart: "y^3 + 6y + 2 = 0 tenglamani Kardano formulasi bilan yeching",
+                solve: () => {
+                const res = HigherDegreeSolver.solveCubic(1, 0, 6, 2);
+                const steps = [
+                    "<b>Amaliy 15, 1-topshiriq (c):</b> $y^3 + 6y + 2 = 0$ Kardano formulasi.",
+                    "Parametrlar: $p = 6, \\quad q = 2$.",
+                    "Diskriminant: $D = \\left(\\frac{q}{2}\\right)^2 + \\left(\\frac{p}{3}\\right)^3 = 1^2 + 2^3 = 1 + 8 = 9 > 0$.",
+                    "$D > 0$ bo'lgani uchun bitta haqiqiy va ikkita qo'shma kompleks ildiz mavjud:",
+                    "• $u = \\sqrt[3]{-1 + \\sqrt{9}} = \\sqrt[3]{2}$",
+                    "• $v = \\sqrt[3]{-1 - \\sqrt{9}} = -\\sqrt[3]{4}$",
+                    "• $y_1 = u + v = \\sqrt[3]{2} - \\sqrt[3]{4}$",
+                    "<div class='result-badge'>Haqiqiy ildiz: $y_1 = \\sqrt[3]{2} - \\sqrt[3]{4} \\approx -0.327$</div>"
+                ];
+                app.showSolution("15-Amaliy, 1-topshiriq (c): Kardano formulasi", steps);
+            }
+            }
         ]
     },
     16: {
